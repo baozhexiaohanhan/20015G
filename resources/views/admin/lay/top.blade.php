@@ -17,7 +17,6 @@
     <script type="text/javascript" src="/admin/js/xadmin.js"></script>
 
 </head>
-@section('tops')
 <body>
     <!-- 顶部开始 -->
     <div class="container">
@@ -48,3 +47,5 @@
         </ul>
         
     </div>
+@section('tops')
+    

@@ -79,9 +79,15 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="html/admin-list.html">
+                        <a _href="/list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite>
+                        </a>
+                    </li >
+                      <li>
+                        <a _href="/addlist">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>管理员添加</cite>
                         </a>
                     </li >
                     <li>
