@@ -22,7 +22,7 @@
                   </label>
                   @if (session('msg'))
                   <div class="alert alert-success">
-                      <h5 style="color:black">{{ session('msg') }}</h5>
+                      <h5 style="color:red">{{ session('msg') }}</h5>
                   </div>
                   @endif
               </div>
@@ -30,7 +30,7 @@
                     <label class="beg-login-icon">
                         <i class="layui-icon">&#xe612;</i>
                     </label>
-                    <input type="text" lay-verify="required" name="admin_user" autocomplete="off" placeholder="这里输入管理员名称" class="layui-input" lay-verType="tips">
+                    <input type="text" lay-verify="required" name="admin_name" autocomplete="off" placeholder="这里输入管理员名称" class="layui-input" lay-verType="tips">
                 </div>
                 <div class="layui-form-item">
                     <label class="beg-login-icon">
@@ -44,6 +44,7 @@
                             登　　录
                         </button>
                     </div>
+
                 </div>
             </form>
         </div>
