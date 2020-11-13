@@ -22,7 +22,7 @@
                   </label>
                   @if (session('msg'))
                   <div class="alert alert-success">
-                      <h5 style="color:black">{{ session('msg') }}</h5>
+                      <h5 style="color:red">{{ session('msg') }}</h5>
                   </div>
                   @endif
               </div>
@@ -44,6 +44,7 @@
                             登　　录
                         </button>
                     </div>
+
                 </div>
             </form>
         </div>
