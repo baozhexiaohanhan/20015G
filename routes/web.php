@@ -19,6 +19,7 @@ Route::get('/','Index\IndexController@index');//首页
 Route::get('/reg','admin\LoginController@reg');//首页
 
 Route::get('/login','admin\LoginController@login');//首页
+
 //广告管理
 Route::prefix("/ad")->group(function(){
 	//广告位
@@ -32,3 +33,4 @@ Route::prefix("/ad")->group(function(){
     Route::get("/position/{position_id}","Admin\PositionController@showads");
     Route::get("/position/createhtml/{position_id}","Admin\PositionController@createhtml");
 });
+Route::any('/admin','admin\HomeController@admin');//首页
