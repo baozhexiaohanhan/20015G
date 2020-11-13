@@ -19,3 +19,4 @@ Route::get('/','Index\IndexController@index');//首页
 Route::get('/reg','admin\LoginController@reg');//首页
 
 Route::get('/login','admin\LoginController@login');//首页
+Route::any('/index','admin\HomeController@index');//首页
