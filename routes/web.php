@@ -33,4 +33,4 @@ Route::prefix("/ad")->group(function(){
     Route::get("/position/{position_id}","Admin\PositionController@showads");
     Route::get("/position/createhtml/{position_id}","Admin\PositionController@createhtml");
 });
-Route::any('/admin','admin\HomeController@admin');//首页
+Route::any('/admins','Admin\HomeController@admins');//首页
