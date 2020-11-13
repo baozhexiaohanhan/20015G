@@ -18,12 +18,10 @@ Route::get('/','Index\IndexController@index');//首页
 
 Route::get('/reg','admin\LoginController@reg');//注册
 
-<<<<<<< HEAD
 Route::any('/login','admin\LoginController@login');//登录  logindo
 
 
 Route::any('/logindo','admin\LoginController@logindo');//登录操作
-=======
 Route::get('/login','admin\LoginController@login');//首页
 
 //广告管理
@@ -40,4 +38,3 @@ Route::prefix("/ad")->group(function(){
     Route::get("/position/createhtml/{position_id}","Admin\PositionController@createhtml");
 });
 Route::any('/admin','admin\HomeController@admin');//首页
->>>>>>> d753d8a76279bda0393ff7899136817fc8400a04
