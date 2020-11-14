@@ -15,7 +15,7 @@
     <script type="text/javascript" src="/admin/js/xadmin.js"></script>
 </head>
     <div class="x-body">
-        <form class="layui-form" action="/create" method="post">
+        <form class="layui-form" action="/admin/create" method="post">
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>登录名
