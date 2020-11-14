@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdModel extends Model
+class Juri extends Model
 {
     //
 }
