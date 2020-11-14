@@ -10,4 +10,5 @@ class AdModel extends Model
     protected $primaryKey="ad_id";
     public $timestamps=false;
     protected $guarded=[];
+    
 }
