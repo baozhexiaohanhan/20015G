@@ -91,9 +91,15 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="html/admin-role.html">
+                        <a _href="/role/create">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>角色管理</cite>
+                            <cite>角色添加</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="/role/index">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>角色列表</cite>
                         </a>
                     </li >
                     <li>
