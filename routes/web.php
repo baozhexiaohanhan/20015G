@@ -37,4 +37,18 @@ Route::prefix("/ad")->group(function(){
     Route::get("/position/{position_id}","Admin\PositionController@showads");
     Route::get("/position/createhtml/{position_id}","Admin\PositionController@createhtml");
 });
-Route::any('/admins','Admin\HomeController@admins');//首页
+Route::any('/admins','Admin\HomeController@admins');//后台首页
+
+Route::prefix("/")->group(function(){
+    Route::any('/sku','Admin\SkuController@sku');
+    Route::any('goods/uploads','Admin\SkuController@uploads');
+    Route::any('goods/goods_imgdo','Admin\SkuController@goods_imgdo');
+    Route::any('goods/store','Admin\SkuController@store');
+    Route::any('/type','Admin\TypeController@type');
+    Route::any('/type_add','Admin\TypeController@type_add');
+    Route::any('/type_index','Admin\TypeController@type_index');
+    Route::any('/type_del','Admin\TypeController@type_del');
+
+
+
+});

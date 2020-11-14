@@ -35,11 +35,11 @@
             
             
             <li>
-                <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>组件页面</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
+                <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>商品 sku</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                 <ul class="sub-menu">
-                    <li><a _href="html/upload.html"><i class="iconfont">&#xe6a7;</i><cite>文件上传</cite></a></li>
-                    <li><a _href="html/page.html"><i class="iconfont">&#xe6a7;</i><cite>分页</cite></a></li>
-                    <li><a _href="html/cate.html"><i class="iconfont">&#xe6a7;</i><cite>多级分类</cite></a></li>
+                    <li><a _href="{{url('/sku')}}"><i class="iconfont">&#xe6a7;</i><cite>添加商品</cite></a></li>
+                    <li><a _href="{{url('/type')}}"><i class="iconfont">&#xe6a7;</i><cite>商品类型添加</cite></a></li>
+                    <li><a _href="{{url('/type_index')}}"><i class="iconfont">&#xe6a7;</i><cite>商品分类展示</cite></a></li>
                     <li><a _href="html/carousel.html"><i class="iconfont">&#xe6a7;</i><cite>轮播图</cite></a></li>
                     <li><a _href="html/city.html"><i class="iconfont">&#xe6a7;</i><cite>城市三级联动</cite></a></li>
                 </ul>
