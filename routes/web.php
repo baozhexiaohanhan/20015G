@@ -39,6 +39,6 @@ Route::prefix("/ad")->group(function(){
 });
 Route::any('/admins','Admin\HomeController@admins');//首页
 
-Route::any('/list','Admin\RoleController@list');//管理员列表
-Route::any('/addlist','Admin\RoleController@addlist');//管理员添加   
-Route::any('/create','Admin\RoleController@create');//管理员添加方法
+Route::any('/list','Admin\AdminController@list');//管理员列表
+Route::any('/addlist','Admin\AdminController@addlist');//管理员添加   
+Route::any('/create','Admin\AdminController@create');//管理员添加方法
