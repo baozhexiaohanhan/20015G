@@ -42,24 +42,14 @@
                             <tr>
                                 <td>
                             @foreach($res as $k=>$v)
-                                    <input type="checkbox" name="juri_name" value="{{$v->juri_id}}" lay-skin="primary">{{$v->juri_name}}
+                                    <input type="checkbox" name="" value="{{$v->juri_id}}" lay-skin="primary">{{$v->juri_name}}
                             @endforeach
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="layui-form-item">
-                    <label for="name" class="layui-form-label">
-                        <span class="x-red">*</span>是否展示
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="radio" id="name" name="is_show" value="1" lay-verify="required"
-                        autocomplete="off" class="layui-input" checked>是
-                        <input type="radio" id="name" name="is_show" value="2" lay-verify="required"
-                        autocomplete="off" class="layui-input">否
-                    </div>
-                </div>
+                
                 <div class="layui-form-item layui-form-text">
                     <label for="desc" class="layui-form-label">
                         描述

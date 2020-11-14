@@ -21,7 +21,12 @@ class RoleController extends Controller
     }
     public function store(Request $request){
         $data = $request->except('_token');
-        dd($data);
+        $res = Role::create($data);
+        $a = time();
+        dd($a);die;
+        if($res){
+            return view("/admin/role/index");
+        }
     }
 
 
@@ -45,6 +50,5 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-
 
 }
