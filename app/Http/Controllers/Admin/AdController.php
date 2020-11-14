@@ -44,7 +44,7 @@ class AdController extends Controller
                 $photo=$request->file;
                 $store_result = $photo->store('photo');
                 // return $this->success('上传成功',env('IMG_URL').$store_result);
-                return json_encode(['code'=>0,'msg'=>'上传成功','data'=>env('IMG_URL').$store_result]);
+                return json_encode(['code'=>0,'msg'=>'上传成功','data'=>env('UPLOAD_URL')."/".$store_result]);
                 }
                 // return $this->error('上传失败');
                 return json_encode(['code'=>2,'msg'=>'上传失败']);
