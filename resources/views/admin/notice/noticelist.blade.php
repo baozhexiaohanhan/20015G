@@ -23,7 +23,7 @@
           </form>
       </div>
       <xblock>
-        <button class="layui-btn" ><a href="/admin/addlist">添加</a></button>
+        <button class="layui-btn" ><a href="/admin/notice">添加</a></button>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -31,10 +31,10 @@
             <th>
             </th>
             <th>ID</th>
-            <th>登录名</th>
-            <th>手机</th>
-            <th>邮箱</th>
-            <th>加入时间</th>
+            <th>公告内容</th>
+            <th>添加人手机号</th>
+            <th>添加人</th>
+            <th>添加时间</th>
             <th>操作</th>
         </tr></thead>
         <tbody>
@@ -42,11 +42,11 @@
           <tr>
             <td>
             </td>
-            <td>{{$v->admin_id}}</td>
-            <td>{{$v->admin_name}}</td>
-            <td>{{$v->admin_tel}}</td>
-            <td>{{$v->email}}</td>
-            <td>{{date("Y-m-d H:i:s",$v->admin_time)}}</td>
+            <td>{{$v->notice_id}}</td>
+            <td>{{$v->notice_name}}</td>
+            <td>{{$v->notice_tel}}</td>
+            <td>{{$v->notice_fullname}}</td>
+            <td>{{date("Y-m-d H:i:s",$v->notice_time)}}</td>
             <td class="td-manage">
             <button class="layui-btn">编辑</button>
             <a href="javascript:void(0);" id="{{$v->admin_id}}" type="button" class="layui-btn layui-btn-danger">删除</a>
@@ -57,7 +57,6 @@
       </table>
       <div class="page">
         <div>
-         <tr><td colspan="6">{{ $data->links()}}</td></tr>
         </div>
       </div>
 
