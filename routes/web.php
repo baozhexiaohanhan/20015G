@@ -72,15 +72,12 @@ Route::any('/addlist','Admin\AdminController@addlist');//管理员添加
 Route::any('/create','Admin\AdminController@create');//管理员添加方法
 
 
-
-
 //角色管理
 Route::prefix("/role")->group(function(){
     Route::get('/create','Admin\RoleController@create');//角色添加
     Route::post('/store','Admin\RoleController@store');//角色列表
     Route::get('/index','Admin\RoleController@index');//角色列表
 });
-
 
 
 Route::prefix("/admin")->group(function(){
