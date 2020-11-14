@@ -26,4 +26,7 @@ class TypeController extends Controller
             return json_encode(['code'=>100,"msg"=>"成功"]);
         }
     }
+    public function ajaxjdjd(){
+        
+    }
 }
