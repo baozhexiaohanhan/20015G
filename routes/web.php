@@ -66,12 +66,6 @@ Route::prefix("/")->group(function(){
 
 });
 Route::any('/admins','Admin\HomeController@admins');//首页
-
-Route::any('/list','Admin\AdminController@list');//管理员列表
-Route::any('/addlist','Admin\AdminController@addlist');//管理员添加   
-Route::any('/create','Admin\AdminController@create');//管理员添加方法
-
-
 //角色管理
 Route::prefix("/role")->group(function(){
     Route::get('/create','Admin\RoleController@create');//角色添加
@@ -90,7 +84,6 @@ Route::any('/noticelist','Admin\AdminController@noticelist');//公告列表
 Route::any('/createlist','Admin\AdminController@createlist');//公告添加方法
 Route::get('/destr/{id}','Admin\AdminController@destr');//公告删除
 
-
 });
 
 
@@ -98,6 +91,7 @@ Route::prefix("/birthday")->group(function(){
 
 Route::get('/create','Admin\BirthdayController@create');//生日添加
 Route::get('/list','Admin\BirthdayController@list');//生日列表
+Route::post('/store','Admin\BirthdayController@store');
 
     });
 
