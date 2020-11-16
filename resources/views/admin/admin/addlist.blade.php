@@ -14,8 +14,13 @@
     <script src="/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/admin/js/xadmin.js"></script>
 </head>
+        @if (session('msg'))
+          <div class="alert alert-success">
+           <h5 style="color:red">{{ session('msg') }}</h5>
+            </div>
+          @endif
     <div class="x-body">
-        <form class="layui-form" action="/create" method="post">
+        <form class="layui-form" action="/admin/create" method="post">
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>登录名

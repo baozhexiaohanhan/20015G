@@ -5,17 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Model\Role;
+use App\Model\Juri;
+
+
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    public function index(){
+        return view("/admin/role/index");
 
     /**
      * Store a newly created resource in storage.
@@ -28,27 +25,21 @@ class RoleController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function create(){
+        $res = Juri::get();
+        // dd($res);
+        return view("/admin/role/create",['res'=>$res]);
+    }
+    public function store(Request $request){
+        $data = $request->except('_token');
+        $res = Role::create($data);
+        $a = time();
+        dd($a);die;
+        if($res){
+            return view("/admin/role/index");
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -106,5 +97,6 @@ class RoleController extends Controller
          if($res){
              return redirect('/list');
          }
+
     }
 }

@@ -16,71 +16,62 @@
 
 </head>
 <div class="x-body">
-      <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start" lay-key="1">
-          <input class="layui-input" placeholder="截止日" name="end" id="end" lay-key="2">
-          <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon"></i></button>
-        </form>
+      <div class="layui-form layui-col-md12 x-so">
+       <form>
+            <input type="text" name="name" placeholder="请输入管理员名称" autocomplete="off" class="layui-input" value="{{$query['name']??''}}">
+           <button class="layui-btn layui-btn-normal">搜索</button>
+          </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" ><a href="/addlist">添加</a></button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <button class="layui-btn" ><a href="/admin/addlist">添加</a></button>
       </xblock>
       <table class="layui-table">
         <thead>
           <tr>
             <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon"></i></div>
             </th>
             <th>ID</th>
             <th>登录名</th>
             <th>手机</th>
             <th>邮箱</th>
-            <th>角色</th>
             <th>加入时间</th>
-            <th>状态</th>
             <th>操作</th>
         </tr></thead>
         <tbody>
+          @foreach($data as $k=>$v)
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="2"><i class="layui-icon"></i></div>
             </td>
-            <td>1</td>
-            <td>admin</td>
-            <td>18925139194</td>
-            <td>113664000@qq.com</td>
-            <td>超级管理员</td>
-            <td>2017-01-01 11:11:42</td>
-            <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+            <td>{{$v->admin_id}}</td>
+            <td>{{$v->admin_name}}</td>
+            <td>{{$v->admin_tel}}</td>
+            <td>{{$v->email}}</td>
+            <td>{{date("Y-m-d H:i:s",$v->admin_time)}}</td>
             <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">
-                <i class="layui-icon"></i>
-              </a>
-              <a title="编辑" onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
-                <i class="layui-icon"></i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon"></i>
-              </a>
+            <button class="layui-btn">编辑</button>
+            <a href="javascript:void(0);" id="{{$v->admin_id}}" type="button" class="layui-btn layui-btn-danger">删除</a>
             </td>
           </tr>
+          @endforeach
         </tbody>
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+         <tr><td colspan="6" >{{ $data->links()}}</td></tr>
         </div>
       </div>
 
     </div>
-
+    <script type="text/javascript">
+      $('.layui-btn-danger').click(function(){
+            var id = $(this).attr('id');
+            var isdel = confirm('确认删除此管理员？');
+            if(isdel == true){
+                $.get('/admin/destroy/'+id,function(rest){
+                    if(rest.error_no == '1'){
+                        location.reload();
+                    }
+                },'json');
+            }
+        });
+    </script>

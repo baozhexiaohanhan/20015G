@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Login;
+use App\Model\Admin;
 class LoginController extends Controller
 {
    public function reg(){
@@ -24,7 +24,7 @@ class LoginController extends Controller
 	  if(empty($admin_name) || empty($admin_pwd)){
           return redirect('login')->with('msg','用户名或密码不能为空');die;
       }
-      $ret = Login::where('admin_name',$admin_name)->first();
+      $ret = Admin::where('admin_name',$admin_name)->first();
       if(!$ret){
           return redirect('login')->with('msg','账号或密码错误');die;
       }

@@ -10,6 +10,5 @@ class Admin extends Model
 		    protected $guarded = []; 
 		    protected $primaryKey = "admin_id";
 			  
-			    // protected $fillable = ['cat_name','enabled','attr_group'];
 			public $timestamps = false;
 }
