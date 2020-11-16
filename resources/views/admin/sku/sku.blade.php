@@ -35,12 +35,12 @@
                             <div class="layui-form-item">
                                     <label class="layui-form-label">商品名称</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="goods_name" lay-verify="title" autocomplete="off"  class="layui-input">
+                                    <input type="text" name="goods_name" lay-verify="title" style="width: 300px;" autocomplete="off"  class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">商品图片</label>
-                                <div class="layui-input-block">
+                                <div class="layui-input-block" style="width: 200px;">
                                     <div class="layui-upload-drag" id="test8">
                                         <i class="layui-icon"></i>
                                         <p>点击上传，或将文件拖拽到此处</p>
@@ -56,14 +56,14 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">商品号</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="goods_sn" lay-verify="title" autocomplete="off"  class="layui-input">
+                                    <input type="text" name="goods_sn" lay-verify="title" style="width: 300px;" autocomplete="off"  class="layui-input">
                                 </div>
                             </div>
 
                             <div class="layui-form-item">
                                 <label class="layui-form-label">商品分类</label>
                                 <div class="layui-input-block">
-                                    <select name="cate_id" lay-filter="aihao">
+                                    <select name="cate_id" lay-filter="aihao" style="width: 200px;">
                                         <option value=""selected=""></option>
                                     @foreach($data as $k=>$v)
                                         <option value="{{$v['cate_id']}}">{{str_repeat('—',$v['level']*3)}}{{$v['cate_name']}}</option>
@@ -76,7 +76,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">品牌</label>
                                 <div class="layui-input-block">
-                                    <select name="brand_id" lay-filter="aihao">
+                                    <select name="brand_id" lay-filter="aihao" style="width: 200px;">
                                         <option value=""selected=""></option>
                                         @foreach($brand_data as $k=>$v)
                                             <option value="{{$v->brand_id}}">{{$v->brand_name}}</option>
@@ -86,15 +86,15 @@
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">商品价格</label>
+                                <label class="layui-form-label">商品价格</label >
                                 <div class="layui-input-block">
-                                    <input type="text" name="goods_price" lay-verify="title" autocomplete="off"  class="layui-input">
+                                    <input type="text" name="goods_price" style="width: 300px;" lay-verify="title" autocomplete="off"  class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">商品数量</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="goods_store" lay-verify="title" autocomplete="off"  class="layui-input">
+                                    <input type="text" name="goods_store" style="width: 300px;" lay-verify="title" autocomplete="off"  class="layui-input">
                                 </div>
                             </div>
                             
@@ -176,7 +176,16 @@
                     </body>
                     </html>
                     </div>
-                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item">
+                    商品类型： <select id="cat_id" name="cat_id"  class="layui-input-block" style="width: 200px;">
+                            <option value="">请选择商品类型</option>
+                            @foreach($type as $k=>$v)
+                            <option value="{{$v->cat_id}}">{{$v->cat_name}}</option>
+                            @endforeach                  
+                            </select>
+                            <br>
+                        <div class="add"></div>
+                    </div>
                     <div class="layui-tab-item"></div>
                     <div class="layui-tab-item"> </div>
                     </div>
@@ -189,6 +198,39 @@
         <script src="/admin/jquery.js"></script> -->
         <script type="text/javascript" src="/admin/lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="/admin/login/layui/lay/modules/jquery.js" charset="utf-8"></script>
+        <script>
+            $(document).on("change","select[name='cat_id']",function(){
+                var cat_id = $(this).val();
+                $.get("{{url('/goods/type_attr')}}",{"cat_id":cat_id},function(res){
+                    // console.log(res);
+                    $(".add").html(res);
+                })
+            })
+            
+            function add_attr_product(obj){
+            var newobj = $(obj).parent().parent().clone();
+            newobj.find('.button').html(' - ');
+            newobj.find('.button').attr("onclick","rescSpec(this)");
+            $(obj).parent().parent().after(newobj);
+            // console.log(newobj);
+            }
+            function rescSpec(obj){
+            $(obj).parent().parent().remove();
+            }
+
+            function addSpec(obj){
+            var newobj = $(obj).parent().parent().clone();
+            newobj.find('a').html('-');
+            newobj.find('a').attr("onclick","descSpec(this)");
+            $(obj).parent().parent().after(newobj);
+            // console.log(newobj);
+            }
+            function descSpec(obj){
+            $(obj).parent().parent().remove();
+            }
+        
+        </script>
+        
         <script>
                         layui.use('upload', function(){
                         var $ = layui.jquery

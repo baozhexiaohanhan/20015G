@@ -42,6 +42,7 @@
             <th>类型</th>
             <th>开始时间</th>
             <th>结束时间</th>
+            <th>广告图片</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -54,8 +55,11 @@
                 <td>{{$v->media_type}}</td>
                 <td>{{date('Y-m-d H:i:s'),$v->start_time}}</td>
                 <td>{{date('Y-m-d H:i:s'),$v->end_time}}</td>
+                <td>@if($v->ad_imgs)
+                  <img src="{{$v->ad_imgs}}">
+                  @endif</td>
                 <td> 
-                    <a href="{{url('/admin/ad/position/edit/'.$v->position_id)}}" class="layui-btn layui-btn-warm">修改</a>
+                    <a href="{{url('/ad/edit/'.$v->ad_id)}}" class="layui-btn layui-btn-warm">修改</a>
                     <!-- <a href="javascript:void(0)" onclick="if(confirm('确定删除此记录吗')){ location.href='{{url('/admin/ad_position/destroy/'.$v->position_id)}}" class="layui-btn layui-btn-danger">删除</a> -->
                     <a href="javascript:void(0)" onclick="deleteById({{$v->ad_id}})" class="layui-btn layui-btn-danger moredel">删除</a>
                 </td>
