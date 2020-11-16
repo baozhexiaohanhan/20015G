@@ -67,7 +67,7 @@
             <td>{{date("Y-m-d H:i:s",$v->role_time)}}</td>
 
             <td class="td-manage">
-            <button class="layui-btn">编辑</button>
+            <button class="layui-btn"><a href="{{url('/role/roedit/'.$v->role_id)}}">编辑</a></button>
               <a href="javascript:void(0);" id="{{$v->role_id}}" type="button" class="layui-btn layui-btn-danger">删除</a>
               <button type="button" class="layui-btn"><a href="/role/right/{{$v->role_id}}">权限添加</a></button>
             </td>

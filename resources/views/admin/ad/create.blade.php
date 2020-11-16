@@ -24,6 +24,16 @@
       <a><cite>添加广告</cite></a>
       </span></legend>
     </fieldset>
+    <div style="padding: 15px;">
+      @if ($errors->any())
+        <div class="alert alert-danger" style="padding-bottom: 20px;padding-left: 20px">
+        <ul>
+        @foreach ($errors->all() as $error)
+        <li style="margin-top: 10px;color: #ff0000;">{{ $error }}</li>
+        @endforeach
+        </ul>
+        </div>
+      @endif
     <a style="float:right;" href="{{url('ad')}}" class="layui-btn layui-btn-warm">广告列表</a>
 <form class="layui-form" action="{{url('ad/store')}}" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
 @csrf()
@@ -31,7 +41,8 @@
             <label class="layui-form-label">广告名称</label>
             <div class="layui-input-block">
                 <input type="text" name="ad_name" lay-verify="title" autocomplete="off"  class="layui-input">
-                <br><span class="notice-span" style="display:block" id="NameNotic">广告名称只是作为辨别多个广告条目之用，并不显示在广告中</span>
+                
+                <b style="color:red">{{$errors->first('ad_name')}}</b>
             </div>
         </div>
 
@@ -72,7 +83,7 @@
 
         <div class="layui-form-item">
             <div class="layui-inline">
-            <label class="layui-form-label">日期时间选择器</label>
+            <label class="layui-form-label">结束日期</label>
             <div class="layui-input-inline">
               <input type="text" name="end_time" class="layui-input" id="test6" placeholder="yyyy-MM-dd HH:mm:ss">
             </div>
@@ -172,4 +183,59 @@ layui.use('upload', function(){
     }
   });
   });
+
+
+
+  $('input[name="ad_name"]').blur(function(){
+    // alert(123);
+    $(this).next().empty();
+    var ad_name=$(this).val();
+    var reg=/^[\u4e00-\u9fa5\w-.]{2,50}$/;
+    if(!reg.test(ad_name)){
+      $(this).next().text('广告名称需由中文、字母、下划线、-或者.组成长度为2-50位！');
+      return;
+    }
+    var obj=$(this);
+    //唯一性验证
+    $.ajax({
+      url:"/ad/checkOnly",
+      data:{ad_name:ad_name},
+      //async:true,
+      dataType:'json',
+      success:function(result){
+        if(result.count>0){
+          //alert(123);
+          obj.next().text('广告名称已经存在！');
+        }
+      }
+    });
+  });
+
+  $('button').click(function(){
+    var nameflag=true;
+    var ad_name=$('input[name="ad_name"]').val();
+    var reg=/^[\u4e00-\u9fa5\w-.]{2,50}$/;
+    if(!reg.test(ad_name)){
+      $('input[name="ad_name"]').next().text('广告名称需由中文、字母、下划线、-或者.组成长度为2-50位！');
+      return;
+    }
+    //唯一性验证
+    $.ajax({
+      url:"/ad/checkOnly",
+      data:{ad_name:ad_name},
+      async:false,
+      dataType:'json',
+      success:function(result){
+        if(result.count>0){
+          $('input[name="ad_name"]').next().text('广告名称已经存在！');
+          nameflag=false;
+        }
+      }
+    });
+    if(! nameflag){
+      return;
+    }
+    $('form').submit();
+  });
+
 </script>

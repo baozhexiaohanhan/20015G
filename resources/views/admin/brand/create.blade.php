@@ -48,6 +48,7 @@
         <label class="layui-form-label">品牌名称:</label>
         <div class="layui-input-block">
           <input type="text" name="brand_name" lay-verify="title" autocomplete="off" placeholder="请输入品牌名称" class="layui-input">
+          <b style="color:red">{{$errors->first('brand_name')}}</b>
         </div>
       </div>
       <div class="layui-form-item">
@@ -77,7 +78,7 @@
         </div>
       </div>
       <div class="layui-form-item" align="center">
-        <button type="submit" class="layui-btn layui-btn-normal">添加</button>
+        <button type="button" class="layui-btn layui-btn-normal">添加</button>
         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
       </div>
     </form>
@@ -114,5 +115,58 @@ layui.use('upload', function(){
       layui.$('input[name="brand_logo"]').attr('value',res.data);
     }
   });
+  });
+
+
+  $('input[name="brand_name"]').blur(function(){
+    // alert(123);
+    $(this).next().empty();
+    var brand_name=$(this).val();
+    var reg=/^[\u4e00-\u9fa5\w-.]{2,50}$/;
+    if(!reg.test(brand_name)){
+      $(this).next().text('品牌名称需由中文、字母、下划线、或者.组成长度为2-50位！');
+      return;
+    }
+    var obj=$(this);
+    //唯一性验证
+    $.ajax({
+      url:"/brand/checkOnly",
+      data:{brand_name:brand_name},
+      //async:true,
+      dataType:'json',
+      success:function(result){
+        if(result.count>0){
+          //alert(123);
+          obj.next().text('品牌名称已经存在！');
+        }
+      }
+    });
+  });
+
+  $('button').click(function(){
+    var nameflag=true;
+    var brand_name=$('input[name="brand_name"]').val();
+    var reg=/^[\u4e00-\u9fa5\w-.]{2,50}$/;
+    if(!reg.test(brand_name)){
+      $('input[name="brand_name"]').next().text('品牌名称需由中文、字母、下划线、-或者.组成长度为2-50位！');
+      return;
+    }
+    //唯一性验证
+    $.ajax({
+      url:"/brand/checkOnly",
+      data:{brand_name:brand_name},
+      async:false,
+      dataType:'json',
+      success:function(result){
+        if(result.count>0){
+          $('input[name="brand_name"]').next().text('品牌名称已经存在！');
+          nameflag=false;
+        }
+      }
+    });
+    if(! nameflag){
+      return;
+    }
+    $('form').submit();
   });
 </script>

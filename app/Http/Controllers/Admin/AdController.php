@@ -27,6 +27,17 @@ class AdController extends Controller
      public function store(Request $request){
     	$post=$request->except('_token');
     	// dd($post);
+        $request->validate([
+            'ad_name' => 'required|unique:ad',
+            'link_phone'=>'digits_between:10,11',
+            'link_email' => 'required',
+            ],[
+                'ad_name.required'=>'广告名称不能为空',
+                'ad_name.unique'=>'广告名称已存在',
+                'link_phone.required'=>'联系电话不能为空',
+                'link_email.required'=>'管理员邮箱不能为空',
+                'link_phone.digits_between'=>'联系电话11位',
+            ]);
         if($request->hasFile('ad_imgs')){
             $post['ad_imgs']=$this->upload('ad_imgs');
         }
@@ -73,5 +84,40 @@ class AdController extends Controller
         if($res){
             return response()->json(['code'=>0,'msg'=>'修改成功']);
         }
+    }
+    //修改
+    public function edit($id){
+        $ad=AdModel::find($id);
+        $position=PositionModel::all();
+        // dd($position);
+        return view('admin.ad.edit',['ad'=>$ad,'position'=>$position]);
+    }
+    //执行修改
+    public function update(Request $request,$id){
+        $post=$post=$request->except('_token');
+        $request->validate([
+            'ad_name' => 'required|unique:ad',
+            'link_phone'=>'digits_between:10,11',
+            'link_email' => 'required',
+            ],[
+                'ad_name.required'=>'广告名称不能为空',
+                'ad_name.unique'=>'广告名称已存在',
+                'link_phone.required'=>'联系电话不能为空',
+                'link_email.required'=>'管理员邮箱不能为空',
+                'link_phone.digits_between'=>'联系电话11位',
+            ]);
+        $post['ad_code']=time();
+        $post['start_time']=strtotime($post['start_time'])??'';
+        $post['end_time']=strtotime($post['end_time'])??'';
+        $res=AdModel::where('ad_id',$id)->update($post);
+        if($res){
+            return redirect('/ad');
+        }
+    }
+    public function checkOnly(){
+        $ad_name=request()->ad_name;
+        $count=AdModel::where('ad_name',$ad_name)->count();
+        
+        return json_encode(['code'=>'00000','count'=>$count]);
     }
 }

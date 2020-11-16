@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Model\Role;
 use App\Model\Right;
 use Illuminate\Validation\Rule;
 use Validator;
-use App\Models\RoleRight;
+use App\Model\Role_right;
 class RoleController extends Controller
 {
     //角色添加
@@ -93,7 +94,7 @@ class RoleController extends Controller
             ->withInput();
             }
 
-       $data['add_time']=time();
+       $data['role_time']=time();
        $RoleModel=new Role();
        $reg=$RoleModel->where('role_id',$id)->update($data);
        if($reg){
@@ -121,8 +122,8 @@ class RoleController extends Controller
     //角色添加权限
     public function right(){
         $role_id=request()->id;
-        $RoleRightModel=new RoleRight();
-        $rights=$RoleRightModel->where('role_id',$role_id)->get();
+        $Role_rightModel=new Role_right();
+        $rights=$Role_rightModel->where('role_id',$role_id)->get();
         
         $datas=[];
         foreach($rights as $k=>$v){
@@ -143,8 +144,8 @@ class RoleController extends Controller
     public function rightdo(){
           $data=request()->all();
           if(isset($data['rightCheck'])){
-              $RoleRightModel=new RoleRight();
-              $RoleRightModel->where('role_id',$data['role_id'])->delete();
+              $Role_rightModel=new Role_right();
+              $Role_rightModel->where('role_id',$data['role_id'])->delete();
               $datas=[];
               foreach($data['rightCheck'] as $v){
               
@@ -154,7 +155,7 @@ class RoleController extends Controller
                   ];
               }
               //dd($datas);
-              $reg=$RoleRightModel->insert($datas);
+              $reg=$Role_rightModel->insert($datas);
           }
 
           if($reg){
