@@ -38,8 +38,16 @@
                 <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>商品 sku</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                 <ul class="sub-menu">
                     <li><a _href="{{url('/sku')}}"><i class="iconfont">&#xe6a7;</i><cite>添加商品</cite></a></li>
-                    <li><a _href="{{url('/type')}}"><i class="iconfont">&#xe6a7;</i><cite>商品类型添加</cite></a></li>
-                    <li><a _href="{{url('/type_index')}}"><i class="iconfont">&#xe6a7;</i><cite>商品分类展示</cite></a></li>
+                    <li>
+                        <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>类型 属性 添加</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
+                        <ul class="sub-menu">
+                            <li><a _href="{{url('/type')}}"><i class="iconfont">&#xe6a7;</i><cite>商品类型添加</cite></a></li>
+                            <li><a _href="{{url('/type_index')}}"><i class="iconfont">&#xe6a7;</i><cite>商品类型展示</cite></a></li>
+                           
+                        </ul>
+                    </li>
+                    <li><a _href="{{url('/type')}}"><i class="iconfont">&#xe6a7;</i><cite>是是i</cite></a></li>
+                    <li><a _href="{{url('/type_index')}}"><i class="iconfont">&#xe6a7;</i><cite>rt</cite></a></li>
                     <li><a _href="html/carousel.html"><i class="iconfont">&#xe6a7;</i><cite>轮播图</cite></a></li>
                     <li><a _href="html/city.html"><i class="iconfont">&#xe6a7;</i><cite>城市三级联动</cite></a></li>
                 </ul>
@@ -206,7 +214,7 @@
                     
                 </ul>
             </li>             
-<li>
+        <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6ae;</i>
                     <cite>系统统计</cite>
@@ -262,7 +270,8 @@
                         </a>
                     </li>
                 </ul>
-            </li>            
+
+            </li>
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
@@ -271,6 +280,25 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
+                        <a _href="{{asset('cate/cateadd')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>分类添加</cite>
+
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{{asset('cate/cateindex')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>分类列表</cite>
+
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>商品优惠券管理</cite>
                         <a _href="{{url('ad/position/create')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>广告位添加</cite>
@@ -304,6 +332,21 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
+                        <a _href="{{asset('coupon/couponadd')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>优惠券添加</cite>
+
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{{asset('coupon/couponindex')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>优惠券列表</cite>
+
+                        </a>
+                    </li >
+                </ul>
+            </li>
                         <a _href="{{url('brand/create')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>品牌添加</cite>
@@ -316,7 +359,7 @@
                         </a>
                     </li >
                 </ul>
-            </li> 
+            </li>
         </ul>
       </div>
     </div>

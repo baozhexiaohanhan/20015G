@@ -23,14 +23,14 @@
           <tr cat_id="{{$v->cat_id}}">
             
             <td >{{$v->cat_id}}</td>
-            <td>{{$v->cat_name}}</td>
+            <!-- <td>{{$v->cat_name}}</td> -->
             <td cat_name="cat_name" cat_name="{{$v->cat_name}}">
                 <span class="name_a">{{$v->cat_name}}</span>
                 <input type="text" class="name_s" value="{{$v->cat_name}}" style="display:none">
             </td>
             
             <td>
-                <a href="{{url('/attr/attr_index/'.$v->cat_id)}}" class="layui-btn">属性列表</a>
+                <a href="{{url('/attr_index/'.$v->cat_id)}}" class="layui-btn">属性列表</a>
                 
                 <a href="JavaScript:;" cat_id="{{$v->cat_id}}" class="layui-btn layui-btn-danger san">删除</a>
             </td>
@@ -71,23 +71,24 @@ $(document).ready(function(){
                   _this.hide();
                   return;
                 }
-                var brand_id = _this.parents("tr").attr("cat_id");
-                var brand_name = _this.parent("td").attr("cat_name");
+                var cat_id = _this.parents("tr").attr("cat_id");
+                var cat_name = _this.parent("td").attr("cat_name");
                 var data = {};
-                data.brand_name = brand_name;
-                data.brand_id = brand_id;
+                data.cat_name = cat_name;
+                data.cat_id = cat_id;
                 data.zi = zi;
-               var url = "{{url('/brand/ajaxjdjd')}}";
+               var url = "{{url('/ajaxjdjd')}}";
                 $.ajax({
                     type:"get",
                     data:data,
                     url:url,
                     dataType:"json",
                     success:function(res){
-						// console.log(res)
-					    if(res.code==0){
+                      // console.log(res)
+					    if(res.code==0001){
                 _this.prev("span").text(zi).show();
                 _this.hide();
+                
               // alert(res.message);
               // history.go(0);
 						  }

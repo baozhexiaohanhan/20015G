@@ -23,6 +23,16 @@ class positionController extends Controller
     public function store(Request $request){
     	$post=$request->except('_token');
     	// dd($post);
+        $request->validate([
+            'position_name' => 'required|unique:ad_position',
+            'ad_width' => 'required',
+            'ad_height' => 'required',
+            ],[
+                'position_name.required'=>'广告位名称不能为空',
+                'position_name.unique'=>'广告位名称已存在',
+                'ad_width.required'=>'广告位宽度不能为空',
+                'ad_height.required'=>'广告位高度不能为空',
+            ]);
     	$res=PositionModel::insert($post);
     	if($res){
             return redirect('ad/position');
@@ -76,9 +86,39 @@ class positionController extends Controller
     public function update(Request $request,$id){
         $post=$request->except('_token');
         // dd($post);
+        $request->validate([
+            'position_name' => 'required|unique:ad_position',
+            'ad_width' => 'required',
+            'ad_height' => 'required',
+            ],[
+                'position_name.required'=>'广告位名称不能为空',
+                'position_name.unique'=>'广告位名称已存在',
+                'ad_width.required'=>'广告位宽度不能为空',
+                'ad_height.required'=>'广告位高度不能为空',
+            ]);
         $res=PositionModel::where('position_id',$id)->update($post);
         if($res){
             return redirect('ad/position');
         }
+    }
+    //即点即改
+    public function change(Request $request){
+        $field=$request->field;
+        $value=$request->newname;
+        $id=$request->id;
+        // dd($position);
+        if(!$field){
+            return response()->json(['code'=>3,'msg'=>'缺少参数']);
+        }
+        $res=PositionModel::where('position_id',$id)->update([$field=>$value]);
+        if($res){
+            return response()->json(['code'=>0,'msg'=>'修改成功']);
+        }
+    }
+    public function checkOnly(){
+        $position_name=request()->position_name;
+        $count=PositionModel::where('position_name',$position_name)->count();
+        
+        return json_encode(['code'=>'00000','count'=>$count]);
     }
 }

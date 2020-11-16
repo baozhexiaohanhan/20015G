@@ -68,11 +68,11 @@
     </thead>
     <tbody>
       @foreach($brand as $v)
-      <tr>
+      <tr id="{{$v->brand_id}}">
         <td><input type="checkbox" name="brandcheck[]" lay-skin="primary" value="{{$v->brand_id}}"></td>
         <td>{{$v->brand_id}}</td>
-        <td id="{{$v->brand_id}}" oldval="{{$v->brand_name}}"><span class="brand_name">{{$v->brand_name}}</span></td>
-        <td>{{$v->brand_url}}</td>
+        <td field="brand_name" oldval="{{$v->brand_name}}"><span class="brand_name">{{$v->brand_name}}</span></td>
+        <td field="brand_url" oldval="{{$v->brand_url}}"><span class="brand_name">{{$v->brand_url}}</span></td>
         
         <td>
           @if($v->brand_logo)
@@ -90,6 +90,7 @@
      <tr>
       <td colspan="7">
         {{$brand->links('vendor.pagination.adminshop')}}
+        <button type="button" class="layui-btn layui-btn-warm moredel">批量删除</button>
       </td>
       </tr>
     </tbody>
@@ -104,6 +105,58 @@
 layui.use(['element','form'], function(){
   var element = layui.element;
   var form=layui.form;
+});
+
+//即点即改
+$(document).on('click','.brand_name',function(){
+  var brand_name=$(this).text();
+  var brand_url=$(this).text();
+  var id=$(this).parent().attr('id');
+  $(this).parent().html('<input type="text" class="changename" input_name_'+id+' value='+brand_name+'>');
+});
+$(document).on('blur','.changename',function(){
+  var newname=$(this).val();
+  if(!newname){
+    alert('内容不能为空');return;
+  }
+  var oldval=$(this).parent().attr('oldval');
+        // alert(oldval);
+    if(newname==oldval){
+      $(this).parent().html('<span class="brand_name">'+newname+'</span>');
+        return;
+    }
+    var id=$(this).parent().parent().attr('id');
+    var obj=$(this);
+    var field=$(this).parent().attr('field');
+    $.get('/brand/change',{id:id,field:field,newname:newname},function(res){
+        //alert(res.msg);
+        // console.log(res);
+      if(res.code==0){
+        obj.parent().html('<span class="brand_name">'+newname+'</span>');
+      }
+  },'json')
+});
+
+//批量删除
+$(document).on('click','.moredel',function(){
+  var ids=new Array();
+ $('input[name="brandcheck[]"]:checked').each(function(i,k){
+  ids.push($(this).val());
+ });
+ $.get('/brand/delete/',{id:ids},function(res){
+    alert(res.msg);
+    location.reload();
+  },'json')
+});
+//全选、反选
+$(document).on('click','.layui-form-checkbox:first',function(){
+  var checkedval=$('input[name="allcheckbox"]').prop('checked');
+   $('input[name="brandcheck[]"]').prop('checked',checkedval);
+  if(checkedval){
+    $('.layui-form-checkbox:gt(0)').addClass('layui-form-checked');
+  }else{
+     $('.layui-form-checkbox:gt(0)').removeClass('layui-form-checked');
+  }
 });
 
 //ajax删除
