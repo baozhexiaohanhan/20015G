@@ -4,10 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role_juri extends Model
+class Adminrole extends Model
 {
-    protected $table = 'role_right';
+    protected $table = 'admin_role';
     protected $guarded = [];
-    protected $primaryKey = "role_right_id";
+    protected $primaryKey = "admin_role_id";
     public $timestamps = false;
 }

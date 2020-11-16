@@ -109,15 +109,15 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="html/admin-cate.html">
+                        <a _href="right/right">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite>
+                            <cite>权限添加</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="html/admin-rule.html">
+                        <a _href="right/rigindex">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite>
+                            <cite>权限列表</cite>
                         </a>
                     </li >
                 </ul>

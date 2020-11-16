@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Model\Admin;
 use App\Model\Role;
 use App\Model\Notice;
+use App\Model\AdminRole;
+use Db;
 class AdminController extends Controller
    {
     //管理员类别
@@ -38,7 +40,7 @@ class AdminController extends Controller
     	  $admin_name =  $request->input('admin_name');
     	  $admin_tel =  $request->input('admin_tel');
     	  $email =  $request->input('email');
-    	  $role = $request->input('role');
+    	  
     	  $time = time();
     	  $str = implode($role);
     	     	$data = [

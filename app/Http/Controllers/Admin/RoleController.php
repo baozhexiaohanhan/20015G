@@ -9,7 +9,7 @@ use App\Model\Role;
 use App\Model\Right;
 use Illuminate\Validation\Rule;
 use Validator;
-use App\Model\Role_right;
+use App\Model\Roleright;
 class RoleController extends Controller
 {
     //角色添加
@@ -122,8 +122,8 @@ class RoleController extends Controller
     //角色添加权限
     public function right(){
         $role_id=request()->id;
-        $Role_rightModel=new Role_right();
-        $rights=$Role_rightModel->where('role_id',$role_id)->get();
+        $RoleRightModel=new Roleright();
+        $rights=$RoleRightModel->where('role_id',$role_id)->get();
         
         $datas=[];
         foreach($rights as $k=>$v){
@@ -144,8 +144,8 @@ class RoleController extends Controller
     public function rightdo(){
           $data=request()->all();
           if(isset($data['rightCheck'])){
-              $Role_rightModel=new Role_right();
-              $Role_rightModel->where('role_id',$data['role_id'])->delete();
+              $RoleRightModel=new Roleright();
+              $RoleRightModel->where('role_id',$data['role_id'])->delete();
               $datas=[];
               foreach($data['rightCheck'] as $v){
               
@@ -155,7 +155,7 @@ class RoleController extends Controller
                   ];
               }
               //dd($datas);
-              $reg=$Role_rightModel->insert($datas);
+              $reg=$RoleRightModel->insert($datas);
           }
 
           if($reg){

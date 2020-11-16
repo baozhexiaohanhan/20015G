@@ -151,25 +151,32 @@ Route::prefix('/right')->group(function(){
 
 
 Route::prefix("/admin")->group(function(){
-Route::any('/list','Admin\AdminController@list');//管理员列表
-Route::any('/addlist','Admin\AdminController@addlist');//管理员添加   
-Route::any('/create','Admin\AdminController@create');//管理员添加方法
-Route::get('/destroy/{id}','Admin\AdminController@destroy');//管理员添加方法
-Route::any('/notice','Admin\AdminController@notice');//公告添加   
-Route::any('/noticelist','Admin\AdminController@noticelist');//公告列表
-Route::any('/createlist','Admin\AdminController@createlist');//公告添加方法
-Route::get('/destr/{id}','Admin\AdminController@destr');//公告删除
 
+    Route::any('/create','Admin\RegController@create')->name('admin.create');//管理员添加
+    Route::any('/rstore','Admin\RegController@rstore')->name('admin.store');//管理员执行添加
+    Route::any('/list','Admin\RegController@index')->name('admin.index');//管理员展示
+    Route::any('/delete/{brand_id}','Admin\RegController@delete')->name('admin.del');//管理员删除
+    Route::any('/redit/{admin_id}','Admin\RegController@redit')->name('admin.edit');;//管理员修改
+    Route::any('/rupdate/{admin_id}','Admin\RegController@rupdate')->name('admin.updo');;//管理员执行修改
+    
+
+    // Route::any('/list','Admin\AdminController@list');//管理员列表
+    // Route::any('/addlist','Admin\AdminController@addlist');//管理员添加   
+    // Route::any('/create','Admin\AdminController@create');//管理员添加方法
+    // Route::get('/destroy/{id}','Admin\AdminController@destroy');//管理员添加方法
+    Route::any('/notice','Admin\AdminController@notice');//公告添加   
+    Route::any('/noticelist','Admin\AdminController@noticelist');//公告列表
+    Route::any('/createlist','Admin\AdminController@createlist');//公告添加方法
+    Route::get('/destr/{id}','Admin\AdminController@destr');//公告删除
 });
 
 
 Route::prefix("/birthday")->group(function(){
+    Route::get('/create','Admin\BirthdayController@create');//生日添加
+    Route::get('/list','Admin\BirthdayController@list');//生日列表
+    Route::post('/store','Admin\BirthdayController@store');
 
-Route::get('/create','Admin\BirthdayController@create');//生日添加
-Route::get('/list','Admin\BirthdayController@list');//生日列表
-Route::post('/store','Admin\BirthdayController@store');
-
-    });
+});
 
 
 

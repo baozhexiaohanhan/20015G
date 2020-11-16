@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Juri extends Model
+class Right extends Model
 {
     protected $table = 'right';
     protected $guarded = [];
