@@ -30,15 +30,20 @@ Route::prefix("ad")->group(function(){
     Route::post('/upload','Admin\AdController@upload');
     Route::get("/destroy/{id}","Admin\AdController@destroy");
     Route::get("change","Admin\AdController@change");
+    Route::get("/edit/{id}","Admin\AdController@edit");
+    Route::post("/update/{id}","Admin\AdController@update");
+    Route::get('/checkOnly',"Admin\AdController@checkOnly");
     //广告位
     Route::get("/position/create","Admin\PositionController@create");
     Route::post("/position/store","Admin\PositionController@store");
     Route::get("/position","Admin\PositionController@index");
-    Route::get("/position/{position_id}","Admin\PositionController@showads");
+    // Route::get("/position/{position_id}","Admin\PositionController@showads");
     Route::get("/position/createhtml/{position_id}","Admin\PositionController@createhtml");
     Route::get("/position/destroy/{id}","Admin\PositionController@destroy");
     Route::get("/position/edit/{id}","Admin\PositionController@edit");
     Route::post("/position/update/{id}","Admin\PositionController@update");
+    Route::get("/position/change","Admin\PositionController@change");
+    Route::get('/position/checkOnly',"Admin\PositionController@checkOnly");
 });
 Route::prefix('brand')->group(function(){
     Route::get('/create','Admin\BrandController@create')->name('brand.create');
@@ -48,7 +53,8 @@ Route::prefix('brand')->group(function(){
     Route::get('/edit/{brand_id}','Admin\BrandController@edit')->name('brand.edit');
     Route::post('/update/{brand_id}','Admin\BrandController@update');
     Route::get('/delete/{brand_id?}','Admin\BrandController@destroy');
-    Route::get('/change','Admin\BrandController@change');
+    Route::get("/change","Admin\BrandController@change");
+    Route::get('/checkOnly',"Admin\BrandController@checkOnly");
 });
 Route::any('/admins','Admin\HomeController@admins');//后台首页
 

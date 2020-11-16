@@ -46,11 +46,11 @@
         </thead>
         <tbody>
         @foreach($position as $v)
-            <tr>
+            <tr id="{{$v->position_id}}">
                 <td>{{$v->position_id}}</td>
-                <td>{{$v->position_name}}</td>
-                <td>{{$v->ad_width}}</td>
-                <td>{{$v->ad_height}}</td>
+                <td field="position_name" oldval="{{$v->position_name}}"><span class="position_name">{{$v->position_name}}</span></td>
+                <td field="ad_width" oldval="{{$v->ad_width}}"><span class="position_name">{{$v->ad_width}}</td>
+                <td field="ad_height" oldval="{{$v->ad_height}}"><span class="position_name">{{$v->ad_height}}</span></td>
                 <td>{{$v->position_desc}}</td>
                 <td> 
                      <a href="{{url('ad/position/createhtml/'.$v->position_id)}}" class="layui-btn layui-btn-warm">生成广告</a>
@@ -73,6 +73,42 @@
 </div>
 <script src="/admin/js/jquery.min.js"></script>
 <script>
+   //即点即改
+    $(document).on('click','.position_name',function(){
+        // alert(123);
+        var position_name=$(this).text();
+        var ad_width=$(this).text();
+        var ad_height=$(this).text();
+        // var field=$(this).parent().attr('field');
+        // alert(field);
+        var id=$(this).parent().parent().attr('id');
+        // alert(id);
+        $(this).parent().html('<input type=text class="changename input_name_'+id+'" value='+position_name+'>');
+        $('.input_name').val('').focus().val(position_name);
+    });
+   $(document).on('blur','.changename',function(){
+        var newname=$(this).val();
+         if(!newname){
+            alert('内容不能空');return;
+          }
+        var oldval=$(this).parent().attr('oldval');
+        // alert(oldval);
+        if(newname==oldval){
+            $(this).parent().html('<span class="position_name">'+newname+'</span>');
+            return;
+        }
+        var id=$(this).parent().parent().attr('id');
+        var obj=$(this);
+        var field=$(this).parent().attr('field');
+        $.get('/ad/position/change',{id:id,field:field,newname:newname},function(res){
+        //alert(res.msg);
+        // console.log(res);
+        if(res.code==0){
+          obj.parent().html('<span class="position_name">'+newname+'</span>');
+        }
+  },'json')
+    });
+
     //ajax删除
     function deleteById(position_id){
         if(!position_id){

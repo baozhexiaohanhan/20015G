@@ -42,19 +42,18 @@
         </ul>
         </div>
       @endif
-      <form class="layui-form" action="{{url('brand/store')}}" method="post">
+      <form class="layui-form" action="{{url('brand/update/'.$brand->brand_id)}}" method="post">
       @csrf
       <div class="layui-form-item">
         <label class="layui-form-label">品牌名称:</label>
         <div class="layui-input-block">
-          <input type="text" name="brand_name" lay-verify="title" autocomplete="off" placeholder="请输入品牌名称" class="layui-input">
-          <b style="color:red">{{$errors->first('brand_name')}}</b>
+          <input type="text" name="brand_name" lay-verify="title" autocomplete="off" placeholder="请输入品牌名称" value="{{$brand->brand_name}}" class="layui-input">
         </div>
       </div>
       <div class="layui-form-item">
         <label class="layui-form-label">品牌网址:</label>
         <div class="layui-input-block">
-          <input type="text" name="brand_url" lay-verify="title" autocomplete="off" placeholder="请输入品牌网址" class="layui-input">
+          <input type="text" name="brand_url" lay-verify="title" autocomplete="off" placeholder="请输入品牌网址" value="{{$brand->brand_url}}" class="layui-input">
         </div>
       </div>
       <div class="layui-form-item">
@@ -63,22 +62,22 @@
          <div class="layui-upload-drag" id="test10">
             <i class="layui-icon"></i>
             <p>点击上传，或将文件拖拽到此处</p>
-            <div class="layui-hide" id="uploadDemoView">
+            <div @if(!$brand->brand_logo) class="layui-hide" @endif id="uploadDemoView">
               <hr>
-              <img src="" alt="上传成功后渲染" style="max-width: 196px">
+              <img src="{{$brand->brand_logo}}" alt="上传成功后渲染" style="max-width: 196px">
             </div>
           </div>
-          <input type="hidden" name="brand_logo">
+          <input type="hidden" name="brand_logo" @if($brand->brand_logo) value="{{$brand->brand_logo}} @endif">
         </div>
       </div>
       <div class="layui-form-item">
         <label class="layui-form-label">品牌简介:</label>
         <div class="layui-input-block">
-          <textarea name="brand_desc" placeholder="请输入品牌简介" class="layui-textarea"></textarea>
+          <textarea name="brand_desc" placeholder="请输入品牌简介" class="layui-textarea">{{$brand->brand_url}}</textarea>
         </div>
       </div>
       <div class="layui-form-item" align="center">
-        <button type="button" class="layui-btn layui-btn-normal">添加</button>
+        <button type="submit" class="layui-btn layui-btn-normal">修改</button>
         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
       </div>
     </form>
@@ -115,58 +114,5 @@ layui.use('upload', function(){
       layui.$('input[name="brand_logo"]').attr('value',res.data);
     }
   });
-  });
-
-
-  $('input[name="brand_name"]').blur(function(){
-    // alert(123);
-    $(this).next().empty();
-    var brand_name=$(this).val();
-    var reg=/^[\u4e00-\u9fa5\w-.]{2,50}$/;
-    if(!reg.test(brand_name)){
-      $(this).next().text('品牌名称需由中文、字母、下划线、或者.组成长度为2-50位！');
-      return;
-    }
-    var obj=$(this);
-    //唯一性验证
-    $.ajax({
-      url:"/brand/checkOnly",
-      data:{brand_name:brand_name},
-      //async:true,
-      dataType:'json',
-      success:function(result){
-        if(result.count>0){
-          //alert(123);
-          obj.next().text('品牌名称已经存在！');
-        }
-      }
-    });
-  });
-
-  $('button').click(function(){
-    var nameflag=true;
-    var brand_name=$('input[name="brand_name"]').val();
-    var reg=/^[\u4e00-\u9fa5\w-.]{2,50}$/;
-    if(!reg.test(brand_name)){
-      $('input[name="brand_name"]').next().text('品牌名称需由中文、字母、下划线、-或者.组成长度为2-50位！');
-      return;
-    }
-    //唯一性验证
-    $.ajax({
-      url:"/brand/checkOnly",
-      data:{brand_name:brand_name},
-      async:false,
-      dataType:'json',
-      success:function(result){
-        if(result.count>0){
-          $('input[name="brand_name"]').next().text('品牌名称已经存在！');
-          nameflag=false;
-        }
-      }
-    });
-    if(! nameflag){
-      return;
-    }
-    $('form').submit();
   });
 </script>

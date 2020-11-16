@@ -1,6 +1,5 @@
 @foreach($position as $v)
             <tr>
-                <td><input type="checkbox" name="rolecheck[]" lay-skin="primary" value="{{$v->role_id}}"></td>
                 <td>{{$v->position_id}}</td>
                 <td>{{$v->position_name}}</td>
                 <td>{{$v->ad_width}}</td>

@@ -24,7 +24,7 @@
       <a><cite>添加广告</cite></a>
       </span></legend>
     </fieldset>
-    <div style="padding: 15px;">
+     <div style="padding: 15px;">
       @if ($errors->any())
         <div class="alert alert-danger" style="padding-bottom: 20px;padding-left: 20px">
         <ul>
@@ -35,14 +35,13 @@
         </div>
       @endif
     <a style="float:right;" href="{{url('ad')}}" class="layui-btn layui-btn-warm">广告列表</a>
-<form class="layui-form" action="{{url('ad/store')}}" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
+<form class="layui-form" action="{{url('ad/update/'.$ad->ad_id)}}" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
 @csrf()
     <div class="layui-form-item">
             <label class="layui-form-label">广告名称</label>
             <div class="layui-input-block">
-                <input type="text" name="ad_name" lay-verify="title" autocomplete="off"  class="layui-input">
-                
-                <b style="color:red">{{$errors->first('ad_name')}}</b>
+                <input type="text" name="ad_name" value="{{$ad->ad_name}}" lay-verify="title" autocomplete="off"  class="layui-input">
+                <br><span class="notice-span" style="display:block" id="NameNotic">广告名称只是作为辨别多个广告条目之用，并不显示在广告中</span>
             </div>
         </div>
 
@@ -79,8 +78,6 @@
         </div>
 
 
-        
-
         <div class="layui-form-item">
             <div class="layui-inline">
             <label class="layui-form-label">结束日期</label>
@@ -92,21 +89,22 @@
         <div class="layui-form-item">
             <label class="layui-form-label">广告链接</label>
             <div class="layui-input-block">
-                <input type="text" name="ad_link" lay-verify="title" autocomplete="off"  class="layui-input">
+                <input type="text" name="ad_link" value="{{$v->ad_link}}" lay-verify="title" autocomplete="off"  class="layui-input">
             </div>
         </div>
+
       <div class="layui-form-item">
         <label class="layui-form-label">广告图片:</label>
         <div class="layui-input-block">
          <div class="layui-upload-drag" id="test10">
             <i class="layui-icon"></i>
             <p>点击上传，或将文件拖拽到此处</p>
-            <div class="layui-hide" id="uploadDemoView">
+            <div @if(!$ad->ad_imgs) class="layui-hide" @endif id="uploadDemoView">
               <hr>
-              <img src="" alt="上传成功后渲染" style="max-width: 196px">
+              <img src="{{$ad->ad_imgs}}" alt="上传成功后渲染" style="max-width: 196px">
             </div>
           </div>
-          <input type="hidden" name="ad_imgs">
+          <input type="hidden" name="ad_imgs" @if($ad->ad_imgs) value="{{$ad->ad_imgs}} @endif">
         </div>
       </div>
 
@@ -120,23 +118,23 @@
         <div class="layui-form-item">
             <label class="layui-form-label">广告联系人</label>
             <div class="layui-input-block">
-                <input type="text" name="link_man" lay-verify="title" autocomplete="off"  class="layui-input">
+                <input type="text" name="link_man" value="{{$ad->link_man}}" lay-verify="title" autocomplete="off"  class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">联系人Email</label>
             <div class="layui-input-block">
-                <input type="text" name="link_email" lay-verify="title" autocomplete="off"  class="layui-input">
+                <input type="text" name="link_email" value="{{$ad->link_email}}" lay-verify="title" autocomplete="off"  class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">联系电话</label>
             <div class="layui-input-block">
-                <input type="text" name="link_phone" lay-verify="title" autocomplete="off"  class="layui-input">
+                <input type="text" name="link_phone" value="{{$ad->link_phone}}" lay-verify="title" autocomplete="off"  class="layui-input">
             </div>
         </div>
        <div class="layui-form-item" align="center">
-        <button type="submit" class="layui-btn layui-btn-normal">添加</button>
+        <button type="submit" class="layui-btn layui-btn-normal">修改</button>
         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
       </div>
 </form>
@@ -183,59 +181,4 @@ layui.use('upload', function(){
     }
   });
   });
-
-
-
-  $('input[name="ad_name"]').blur(function(){
-    // alert(123);
-    $(this).next().empty();
-    var ad_name=$(this).val();
-    var reg=/^[\u4e00-\u9fa5\w-.]{2,50}$/;
-    if(!reg.test(ad_name)){
-      $(this).next().text('广告名称需由中文、字母、下划线、-或者.组成长度为2-50位！');
-      return;
-    }
-    var obj=$(this);
-    //唯一性验证
-    $.ajax({
-      url:"/ad/checkOnly",
-      data:{ad_name:ad_name},
-      //async:true,
-      dataType:'json',
-      success:function(result){
-        if(result.count>0){
-          //alert(123);
-          obj.next().text('广告名称已经存在！');
-        }
-      }
-    });
-  });
-
-  $('button').click(function(){
-    var nameflag=true;
-    var ad_name=$('input[name="ad_name"]').val();
-    var reg=/^[\u4e00-\u9fa5\w-.]{2,50}$/;
-    if(!reg.test(ad_name)){
-      $('input[name="ad_name"]').next().text('广告名称需由中文、字母、下划线、-或者.组成长度为2-50位！');
-      return;
-    }
-    //唯一性验证
-    $.ajax({
-      url:"/ad/checkOnly",
-      data:{ad_name:ad_name},
-      async:false,
-      dataType:'json',
-      success:function(result){
-        if(result.count>0){
-          $('input[name="ad_name"]').next().text('广告名称已经存在！');
-          nameflag=false;
-        }
-      }
-    });
-    if(! nameflag){
-      return;
-    }
-    $('form').submit();
-  });
-
 </script>

@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
+
 use App\Model\Role;
 use App\Model\Juri;
-=======
->>>>>>> 14bf110a0a748cabf1648647c5f09572acd194bc
+
 
 class RoleController extends Controller
 {
@@ -28,8 +27,7 @@ class RoleController extends Controller
     }
 
 
-<<<<<<< HEAD
-=======
+
     /**
      * Update the specified resource in storage.
      *
@@ -50,7 +48,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
->>>>>>> 14bf110a0a748cabf1648647c5f09572acd194bc
 
+    }
 
 }
