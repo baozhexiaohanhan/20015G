@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
 
-
-
     protected $table = 'role';
     protected $guarded = [];
     protected $primaryKey = "role_id";

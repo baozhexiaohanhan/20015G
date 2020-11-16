@@ -55,6 +55,31 @@ Route::prefix('brand')->group(function(){
     Route::get('/delete/{brand_id?}','Admin\BrandController@destroy');
     Route::get("/change","Admin\BrandController@change");
     Route::get('/checkOnly',"Admin\BrandController@checkOnly");
+    Route::any("/create","Admin\AdController@create");
+    Route::any("/store","Admin\AdController@store");
+    Route::any("/","Admin\AdController@index");
+    Route::any('/upload','Admin\AdController@upload');
+    Route::any("/destroy/{id}","Admin\AdController@destroy");
+    Route::any("change","Admin\AdController@change");
+    //广告位
+    Route::any("/position/create","Admin\PositionController@create");
+    Route::any("/position/store","Admin\PositionController@store");
+    Route::any("/position","Admin\PositionController@index");
+    Route::any("/position/{position_id}","Admin\PositionController@showads");
+    Route::any("/position/createhtml/{position_id}","Admin\PositionController@createhtml");
+    Route::any("/position/destroy/{id}","Admin\PositionController@destroy");
+    Route::any("/position/edit/{id}","Admin\PositionController@edit");
+    Route::any("/position/update/{id}","Admin\PositionController@update");
+});
+Route::prefix('brand')->group(function(){
+    Route::any('/create','Admin\BrandController@create')->name('brand.create');
+    Route::any('/store','Admin\BrandController@store');
+    Route::any('/','Admin\BrandController@index')->name('brand');
+    Route::any('/upload','Admin\BrandController@upload');
+    Route::any('/edit/{brand_id}','Admin\BrandController@edit')->name('brand.edit');
+    Route::any('/update/{brand_id}','Admin\BrandController@update');
+    Route::any('/delete/{brand_id?}','Admin\BrandController@destroy');
+    Route::any('/change','Admin\BrandController@change');
 });
 Route::any('/admins','Admin\HomeController@admins');//后台首页
 
@@ -63,10 +88,17 @@ Route::prefix("/")->group(function(){
     Route::any('goods/uploads','Admin\SkuController@uploads');
     Route::any('goods/goods_imgdo','Admin\SkuController@goods_imgdo');
     Route::any('goods/store','Admin\SkuController@store');
+    Route::any('goods/type_attr','Admin\SkuController@type_attr');
     Route::any('/type','Admin\TypeController@type');
     Route::any('/type_add','Admin\TypeController@type_add');
     Route::any('/type_index','Admin\TypeController@type_index');
     Route::any('/type_del','Admin\TypeController@type_del');
+    Route::any('/ajaxjdjd','Admin\TypeController@ajaxjdjd');
+    Route::any('/attr/{id}','Admin\AttrController@attr');
+    Route::any('/attr_add','Admin\AttrController@attr_add');
+    Route::any('/attr_index/{id}','Admin\AttrController@attr_index');
+    Route::any('/attr_del','Admin\AttrController@attr_del');
+    
 
 
 
@@ -78,8 +110,6 @@ Route::any('/addlist','Admin\AdminController@addlist');//管理员添加
 Route::any('/create','Admin\AdminController@create');//管理员添加方法
 
 
-
-
 //角色管理
 Route::prefix("/role")->group(function(){
     Route::get('/create','Admin\RoleController@create');//角色添加
@@ -88,14 +118,27 @@ Route::prefix("/role")->group(function(){
 });
 
 
-
 Route::prefix("/admin")->group(function(){
 Route::any('/list','Admin\AdminController@list');//管理员列表
 Route::any('/addlist','Admin\AdminController@addlist');//管理员添加   
 Route::any('/create','Admin\AdminController@create');//管理员添加方法
-Route::any('/destroy/{id}','Admin\AdminController@destroy');//管理员添加方法
+Route::get('/destroy/{id}','Admin\AdminController@destroy');//管理员添加方法
 Route::any('/notice','Admin\AdminController@notice');//公告添加   
 Route::any('/noticelist','Admin\AdminController@noticelist');//公告列表
 Route::any('/createlist','Admin\AdminController@createlist');//公告添加方法
+Route::get('/destr/{id}','Admin\AdminController@destr');//公告删除
+
 
 });
+
+
+Route::prefix("/birthday")->group(function(){
+
+Route::get('/create','Admin\BirthdayController@create');//生日添加
+Route::get('/list','Admin\BirthdayController@list');//生日列表
+
+    });
+
+
+
+

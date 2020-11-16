@@ -49,6 +49,24 @@ class AdminController extends Controller
               'role' => $str,
               'admin_time'=>$time
           ];
+           $AdminModel = new Admin();
+            //唯一性验证
+            $admin_name = $AdminModel::where('admin_name', $admin_name)->first();
+            $admin_tel = $AdminModel::where('admin_tel', $admin_tel)->first();
+             $email = $AdminModel::where('email', $email)->first();
+            if ($admin_name) {
+                return redirect('/addlist')->with('msg', '管理员已存在，请重新添加');
+                die;
+            }
+
+            if ($admin_tel) {
+                return redirect('/addlist')->with('msg', '手机号码已存在，请重新添加');
+                die;
+            }
+             if ($email) {
+                return redirect('/addlist')->with('msg', '邮箱已经存在，请重新添加');
+                die;
+            }
     	$res = Admin::insert($data);
          if($res){
              return redirect('/admin/list');
@@ -76,16 +94,15 @@ class AdminController extends Controller
 
     public function createlist(Request $request){
         $notice_name =  $request->input('notice_name');
-        $notice_tel =  $request->input('notice_tel');
+        $notice_desc =  $request->input('notice_desc');
         $notice_fullname =  $request->input('notice_fullname');
         $time = time();
         $data = [
               'notice_name' => $notice_name,
-              'notice_tel' => $notice_tel,
+              'notice_desc' => $notice_desc,
               'notice_fullname' => $notice_fullname,
               'notice_time'=>$time
           ];
-
           $res = Notice::insert($data);
          if($res){
              return redirect('/admin/noticelist');
@@ -93,8 +110,22 @@ class AdminController extends Controller
     }
 
     public function noticelist(){
-   $noticeModel = new Notice();
-    $data = $noticeModel->orderBy('notice_id','desc')->get();
+
+         $noticeModel = new Notice();
+          $data = $noticeModel->orderBy('notice_id','desc')->paginate(2);
+
+
     return view('admin.notice.noticelist',['data'=>$data]);
+    }
+
+
+    public function destr($id){
+      $res = Notice::where('notice_id',$id)->delete();
+        if($res){
+            if(request()->ajax()){
+                return json_encode(['error_no'=>'1','error_msg'=>'删除成功']);
+            }
+            return redirect('/admin/noticelist');
+        }
     }
 }

@@ -57,7 +57,7 @@
       </table>
       <div class="page">
         <div>
-         <tr><td colspan="6">{{ $data->links()}}</td></tr>
+         <tr><td colspan="6" >{{ $data->links()}}</td></tr>
         </div>
       </div>
 
@@ -67,7 +67,7 @@
             var id = $(this).attr('id');
             var isdel = confirm('确认删除此管理员？');
             if(isdel == true){
-                $.get('/destroy/'+id,function(rest){
+                $.get('/admin/destroy/'+id,function(rest){
                     if(rest.error_no == '1'){
                         location.reload();
                     }

@@ -38,8 +38,16 @@
                 <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>商品 sku</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                 <ul class="sub-menu">
                     <li><a _href="{{url('/sku')}}"><i class="iconfont">&#xe6a7;</i><cite>添加商品</cite></a></li>
-                    <li><a _href="{{url('/type')}}"><i class="iconfont">&#xe6a7;</i><cite>商品类型添加</cite></a></li>
-                    <li><a _href="{{url('/type_index')}}"><i class="iconfont">&#xe6a7;</i><cite>商品分类展示</cite></a></li>
+                    <li>
+                        <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>类型 属性 添加</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
+                        <ul class="sub-menu">
+                            <li><a _href="{{url('/type')}}"><i class="iconfont">&#xe6a7;</i><cite>商品类型添加</cite></a></li>
+                            <li><a _href="{{url('/type_index')}}"><i class="iconfont">&#xe6a7;</i><cite>商品类型展示</cite></a></li>
+                           
+                        </ul>
+                    </li>
+                    <li><a _href="{{url('/type')}}"><i class="iconfont">&#xe6a7;</i><cite>是是i</cite></a></li>
+                    <li><a _href="{{url('/type_index')}}"><i class="iconfont">&#xe6a7;</i><cite>rt</cite></a></li>
                     <li><a _href="html/carousel.html"><i class="iconfont">&#xe6a7;</i><cite>轮播图</cite></a></li>
                     <li><a _href="html/city.html"><i class="iconfont">&#xe6a7;</i><cite>城市三级联动</cite></a></li>
                 </ul>
@@ -137,6 +145,27 @@
                     </li >
                 </ul>
             </li>            
+              <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>生日系统</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/birthday/list">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>生日列表</cite>
+                        </a>
+                    </li >
+                      <li>
+                        <a _href="/birthday/create">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>生日添加</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>

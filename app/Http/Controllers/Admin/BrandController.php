@@ -10,7 +10,6 @@ class BrandController extends Controller
 
 	public function index(){
 		$brand=BrandModel::paginate(2);
-		// dd($brand);
         if(request()->ajax()){
             return view('admin.brand.ajaxpage',['brand'=>$brand]);
         }
