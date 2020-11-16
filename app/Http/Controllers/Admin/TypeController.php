@@ -27,6 +27,15 @@ class TypeController extends Controller
         }
     }
     public function ajaxjdjd(){
-        
+        $da = request()->all();
+        $res = Goods_type::where("cat_id",$da['cat_id'])->update([$da['cat_name']=>$da['zi']]);
+        if($res){
+           return $message = [
+                "code"=>0001,
+                "msg"=>"修改成功",
+                "success"=>true,
+            ];
+        }
     }
+   
 }

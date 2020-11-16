@@ -57,10 +57,17 @@ Route::prefix("/")->group(function(){
     Route::any('goods/uploads','Admin\SkuController@uploads');
     Route::any('goods/goods_imgdo','Admin\SkuController@goods_imgdo');
     Route::any('goods/store','Admin\SkuController@store');
+    Route::any('goods/type_attr','Admin\SkuController@type_attr');
     Route::any('/type','Admin\TypeController@type');
     Route::any('/type_add','Admin\TypeController@type_add');
     Route::any('/type_index','Admin\TypeController@type_index');
     Route::any('/type_del','Admin\TypeController@type_del');
+    Route::any('/ajaxjdjd','Admin\TypeController@ajaxjdjd');
+    Route::any('/attr/{id}','Admin\AttrController@attr');
+    Route::any('/attr_add','Admin\AttrController@attr_add');
+    Route::any('/attr_index/{id}','Admin\AttrController@attr_index');
+    Route::any('/attr_del','Admin\AttrController@attr_del');
+    
 
 
 
