@@ -14,6 +14,11 @@
     <script src="/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/admin/js/xadmin.js"></script>
 </head>
+        @if (session('msg'))
+          <div class="alert alert-success">
+           <h5 style="color:pink">{{ session('msg') }}</h5>
+            </div>
+          @endif
     <div class="x-body">
         <form class="layui-form" action="/admin/createlist" method="post">
           <div class="layui-form-item">
@@ -27,17 +32,14 @@
                   <span class="x-red">*</span>请填您的公告名称
               </div>
           </div>
-          <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>手机号
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="phone" name="notice_tel" required="" lay-verify="phone" autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>请填入公告手机号
-              </div>
-          </div>
+      <div class="layui-form-item layui-form-text">
+                    <label for="desc" class="layui-form-label">
+                        描述
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" id="nosc" name="notice_desc" class="layui-textarea"></textarea>
+                    </div>
+                </div> 
               <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>姓名
