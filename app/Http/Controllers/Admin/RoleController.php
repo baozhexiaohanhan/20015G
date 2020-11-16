@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 
 class RoleController extends Controller
 {
@@ -14,16 +13,6 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -82,11 +71,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         //
-=======
-use App\Model\Login;
-use App\Model\Role;
-class RoleController extends Controller
-{
+    }
     public function list(){
 
 
@@ -121,6 +106,5 @@ class RoleController extends Controller
          if($res){
              return redirect('/list');
          }
->>>>>>> 656be9db0768e25f5d56c43b1b31209605273162
     }
 }
