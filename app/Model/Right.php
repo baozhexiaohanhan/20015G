@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Juri extends Model
 {
-    protected $table = 'juri';
+    protected $table = 'right';
     protected $guarded = [];
-    protected $primaryKey = "juri_id";
+    protected $primaryKey = "right_id";
     public $timestamps = false;
 }

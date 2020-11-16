@@ -5,38 +5,161 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Role;
-use App\Model\Juri;
-
+use App\Model\Right;
+use Illuminate\Validation\Rule;
+use Validator;
+use App\Models\RoleRight;
 class RoleController extends Controller
 {
-    public function index(){
-        return view("/admin/role/index");
-
+    //角色添加
+    public function role(){
+        return view('admin.role.role');
     }
 
-    public function create(){
-        $juri = Juri::get();
-        // dd($res);
-        return view("/admin/role/create",['juri'=>$juri]);
+    //执行
+    public function roledo(){
+        $data=request()->all();
+       $validator= Validator::make($data,[
+           'role_name'=>'required|unique:role',
+           'role_desc'=>'required',
+       ],[
+           'role_name.required'=>'角色名称不能为空',
+           'role_name.unique'=>'角色已存在',
+           'role_desc.required'=>'简介不能为空'
+       ]
+       );
+       if ($validator->fails()) {
+        return redirect('role/role')
+        ->withErrors($validator)
+        ->withInput();
+        }
+
+        $data['role_time']=time();
+        $RoleModel=new Role();
+        $reg=$RoleModel->create($data);
+        if($reg){
+            return redirect('/role/roindex');
+        }else{
+            return redirect('/role/role');
+        }
     }
-    public function store(Request $request){
-        $role_name = $request->input('role_name');
-        $juri = $request->input('juri');
-        $role_desc = $request->input('$role_desc');
-        // $str = $request->except('_token');
-        $time = time();
-        // $str = implode($juri);
-            $data = [
-                'role_name' => $role_name,
-                'juri' => $juri,
-                'role_desc' => $role_desc,
-                'role_time' => $time
-            ];
-        $res = Role::insert($data);
-        // dd($a);die;
+    //展示
+    public function roindex(){
+        $RoleModel= new Role();
+        $data=$RoleModel->where('is_del',1)->orderBy('role_id','desc')->paginate(3);
+        return view('admin.role.roindex',compact('data'));
+    }
+
+    //删除
+    public function rodel($id){
+        // dd($id);
+        $RoleModel=new Role();
+        $res=$RoleModel->where('role_id',$id)->update(['is_del'=>2]);
+        // dd($reg);
         if($res){
-            return view("/admin/role/index");
+            if(request()->ajax()){
+                return json_encode(['error_no'=>'2','error_msg'=>'删除成功']);
+            }
+            return redirect('/admin/roindex');
         }
     }
 
+    //修改
+    public function roedit($id){
+       //dd($id);
+       $RoleModel=new Role();
+       $data=$RoleModel->where('role_id',$id)->first();
+       return view('admin.role.edit',compact('data'));
+    }
+
+    //执行修改
+    public function roup($id){
+       //dd($id);
+       $data=request()->all();
+       $validator=Validator::make($data,[
+           'role_name'=>[
+               'required',
+               Rule::unique('role')->ignore($id,'role_id')
+           ],
+           'role_desc'=>'required'
+
+        ],[
+             'role_name.required'=>'角色名称不能为空',
+             'role_desc'=>'简介不能为空'
+        ]);
+        if ($validator->fails()) {
+            return redirect('role/roedit')
+            ->withErrors($validator)
+            ->withInput();
+            }
+
+       $data['add_time']=time();
+       $RoleModel=new Role();
+       $reg=$RoleModel->where('role_id',$id)->update($data);
+       if($reg){
+           return redirect('/role/roindex');
+       }else{
+           return redirect('/role/role');
+       }
+    }
+     //无限极分类
+     public function list_level($data,$parent_id=0,$level=1){
+        if(!$data){
+            return false; 
+        }
+        static $array=[];
+        foreach($data as $k=>$v){
+            if($v->parent_id==$parent_id){
+                $v->level=$level;
+                $array[]=$v;
+                $this->list_level($data,$v->right_id,$level+1);
+            }
+        }
+
+        return $array;
+}
+    //角色添加权限
+    public function right(){
+        $role_id=request()->id;
+        $RoleRightModel=new RoleRight();
+        $rights=$RoleRightModel->where('role_id',$role_id)->get();
+        
+        $datas=[];
+        foreach($rights as $k=>$v){
+            $datas[]=$v;
+        }
+
+       $right_id=[];
+       foreach($datas as $k=>$v){
+           $right_id[]=$v['right_id'];
+       }
+       
+        $RightModel=new Right();
+        $data=$RightModel->get();
+        //dd($data);
+       $reg= $this->list_level($data);
+        return view('admin.role.rights',compact('reg','role_id','right_id'));
+    }
+    public function rightdo(){
+          $data=request()->all();
+          if(isset($data['rightCheck'])){
+              $RoleRightModel=new RoleRight();
+              $RoleRightModel->where('role_id',$data['role_id'])->delete();
+              $datas=[];
+              foreach($data['rightCheck'] as $v){
+              
+                  $datas[]=[
+                      'role_id'=>$data['role_id'],
+                      'right_id'=>$v
+                  ];
+              }
+              //dd($datas);
+              $reg=$RoleRightModel->insert($datas);
+          }
+
+          if($reg){
+            return redirect('/role/roindex');
+          }
+           
+    }
 }

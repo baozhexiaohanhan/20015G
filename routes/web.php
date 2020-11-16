@@ -73,10 +73,24 @@ Route::any('/create','Admin\AdminController@create');//管理员添加方法
 
 
 //角色管理
-Route::prefix("/role")->group(function(){
-    Route::get('/create','Admin\RoleController@create');//角色添加
-    Route::post('/store','Admin\RoleController@store');//角色列表
-    Route::get('/index','Admin\RoleController@index');//角色列表
+Route::prefix('/role')->group(function(){
+    Route::any('/role','Admin\RoleController@role')->name('role.create');//添加
+    Route::any('/roledo','Admin\RoleController@roledo')->name('role.store');//执行添加
+    Route::any('/roindex','Admin\RoleController@roindex')->name('role.index');//展示
+    Route::any('/rodel/{id?}','Admin\RoleController@rodel')->name('role.del');//删除
+    Route::any('/roedit/{id?}','Admin\RoleController@roedit')->name('role.edit');//修改
+    Route::any('/roup/{id?}','Admin\RoleController@roup')->name('role.updo');//执行修改
+    Route::any('/right/{id?}','Admin\RoleController@right')->name('role.right');//角色添加权限
+    Route::any('/rightdo','Admin\RoleController@rightdo')->name('role.rightdo');//执行角色添加权限
+});
+//权限管理
+Route::prefix('/right')->group(function(){
+    Route::any('/right','Admin\RightController@right')->name('right.create');//添加
+    Route::any('/rigdo','Admin\RightController@rigdo')->name('right.store');//执行添加
+    Route::any('/rigindex','Admin\RightController@rigindex')->name('right.index');//展示
+    Route::any('/rigdel/{id?}','Admin\RightController@rigdel')->name('right.del');//删除
+    Route::any('/rigedit/{id?}','Admin\RightController@rigedit')->name('right.edit');//修改
+    Route::any('/rigup/{id?}','Admin\RightController@rigup')->name('right.updo');//执行修改
 });
 
 
