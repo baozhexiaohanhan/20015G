@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-L-admin1.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="{{asset('/cate/favicon.ico')}}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{asset('/cate/css/font.css')}}">
+    <link rel="stylesheet" href="{{asset('/cate/css/xadmin.css')}}">
+    <script src="{{asset('/cate/js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/cate/lib/layui/layui.js')}}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{asset('/cate/js/xadmin.js')}}"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="x-nav">
+    <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
+</div>
+<div class="x-body">
+    {{--<blockquote class="layui-elem-quote">每个tr 上有两个属性 cate-id='1' 当前分类id fid='0' 父级id ,顶级分类为 0，有子分类的前面加收缩图标<i class="layui-icon x-show" status='true'>&#xe623;</i></blockquote>--}}
+    <table class="layui-table layui-form">
+        <thead>
+        <tr>
+            <th width="20">
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th width="70">ID</th>
+            <th width="70">分类名称</th>
+            <th width="50">是否显示</th>
+            <th width="50">是否显示在导航栏</th>
+            <th width="280">操作</th>
+        </tr>
+        </thead>
+        @foreach($res as $v)
+        <tr cate_id = {{$v->cate_id}} pid = {{$v->pid}}>
+            <td>
+                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>
+                <a href="javascript:;" class="show">+</a>
+                {{$v->cate_id}}
+            </td>
+            <td>
+                {{--<i class="layui-icon x-show showHide" status='true' >&#xe623;</i>--}}
+                <span class="cate_name">{{$v->cate_name}}</span>
+            </td>
+            <td>@if($v->cate_show==1)是 @elseif($v->cate_show==2)否@endif</td>
+            <td>
+                @if($v->cate_new_show==1)是 @elseif($v->cate_new_show==2)否@endif
+            </td>
+            <td class="td-manage">
+                <a href="{{url('cate/update/'.$v->cate_id)}}"><i class="layui-icon">&#xe642;</i>编辑</a>
+                <a href="{{url('cate/del/'.$v->cate_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>
+            </td>
+        </tr>
+        @endforeach
+    </table>
+</div>
+</body>
+</html>
+<script>
+    $(function(){
+        //页面一加载 只展示pid=0
+        $("tr[pid=0]").show();
+//        隐藏pid不为0的数据
+        $("tr[pid!=0]").hide();
+        //点击事件
+        $(document).on("click",".cate_name",function(){
+            //给span 隐藏 span下一个兄弟节点显示
+            $(this).hide();
+            $(this).next("input").show();
+        })
+        //点击事件
+        $(document).on("click",".cate_name",function(){
+            //给span 隐藏 span下一个兄弟节点显示
+            $(this).hide();
+            $(this).next("input").show();
+        })
+        //点击+ -
+        $(document).on("click",".show",function(){
+            var sign=$(this).text();//获取自己当前点击的符号
+            var cate_id=$(this).parents("tr").attr('cate_id');
+            if(sign=='+'){
+                //判断是否有子类
+                if($("tr[pid='"+cate_id+"']").length>0){
+                    $("tr[pid='"+cate_id+"']").show();
+                    $(this).text('-');
+                }
+            }else{
+                $("tr[pid='"+cate_id+"']").hide();
+                $(this).text('+');
+            }
+        })
+
+    })
+</script>

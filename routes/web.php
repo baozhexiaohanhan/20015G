@@ -105,9 +105,30 @@ Route::prefix("/")->group(function(){
 });
 Route::any('/admins','Admin\HomeController@admins');//首页
 
+
 Route::any('/list','Admin\AdminController@list');//管理员列表
 Route::any('/addlist','Admin\AdminController@addlist');//管理员添加   
 Route::any('/create','Admin\AdminController@create');//管理员添加方法
+
+
+//商品分类管理
+Route::prefix('/cate')->group(function (){
+    Route::get('/cateindex','Admin\cateController@cateindex');//列表展示
+    Route::get('/cateadd','Admin\cateController@cateadd');//添加
+    Route::post('/do_cateadd','Admin\cateController@do_cateadd');//添加执行
+    Route::get('/del/{cate_id}','Admin\cateController@del');//删除
+    Route::get('/update/{cate_id}','Admin\cateController@update');//修改
+    Route::post('/do_update','Admin\cateController@do_update');//修改执行
+});
+//优惠券管理
+Route::prefix('coupon')->group(function(){
+    Route::get('/couponadd/','Admin\couponController@couponadd');//添加页面
+    Route::post('/do_coupon/','Admin\couponController@do_coupon');//添加执行
+    Route::get('/couponindex/','Admin\couponController@couponindex');//列表
+    Route::get('/del/{coupon_id}','Admin\couponController@del');//删除
+    Route::get('/edit/{coupon_id}','Admin\couponController@edit');//修改
+    Route::post('/do_edit','Admin\couponController@do_edit');//修改执行
+});
 
 
 //角色管理
@@ -128,7 +149,6 @@ Route::any('/noticelist','Admin\AdminController@noticelist');//公告列表
 Route::any('/createlist','Admin\AdminController@createlist');//公告添加方法
 Route::get('/destr/{id}','Admin\AdminController@destr');//公告删除
 
-
 });
 
 
@@ -136,8 +156,10 @@ Route::prefix("/birthday")->group(function(){
 
 Route::get('/create','Admin\BirthdayController@create');//生日添加
 Route::get('/list','Admin\BirthdayController@list');//生日列表
+Route::post('/store','Admin\BirthdayController@store');
 
     });
+
 
 
 
