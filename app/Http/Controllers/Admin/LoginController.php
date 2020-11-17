@@ -30,7 +30,6 @@ class LoginController extends Controller
       }
       if(password_verify($admin_pwd,$ret->admin_pwd)){
               session(['admin_name' => $ret->admin_name]);
-              // $admin_user = Request()->session()->get('admin_user');
               return redirect('/admins');die;
       }else{
             return redirect('login')->with('msg','账号或密码错误');die;
