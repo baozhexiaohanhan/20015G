@@ -270,7 +270,11 @@
                         </a>
                     </li>
                 </ul>
-
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>商品分类管理</cite>
             </li>
             <li>
                 <a href="javascript:;">
