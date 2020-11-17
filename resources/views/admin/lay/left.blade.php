@@ -275,7 +275,7 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
-                    <cite>广告管理</cite>
+                    <cite>分类管理</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
@@ -297,17 +297,23 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe6b8;</i>
-                    <cite>商品优惠券管理</cite>
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>广告管理</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
                         <a _href="{{url('ad/position/create')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>广告位添加</cite>
+
                         </a>
                     </li >
                     <li>
-                        <a _href="{{url('ad/position')}}">
+                         <a _href="{{url('ad/position')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>广告位列表</cite>
+
                         </a>
                     </li >
                     <li>
@@ -323,11 +329,32 @@
                         </a>
                     </li >
                 </ul>
-            </li> 
-             <li>
+            </li>
+            <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
                     <cite>品牌管理</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{{url('brand/create')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>品牌添加</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{{url('brand')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>品牌列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+             <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>优惠卷管理</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
@@ -343,19 +370,6 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>优惠券列表</cite>
 
-                        </a>
-                    </li >
-                </ul>
-            </li>
-                        <a _href="{{url('brand/create')}}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>品牌添加</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="{{url('brand')}}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>品牌列表</cite>
                         </a>
                     </li >
                 </ul>

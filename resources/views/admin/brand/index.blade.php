@@ -175,6 +175,11 @@ $(document).on('click','.layui-laypage a',function(){
   var url=$(this).attr('href');
   $.get(url,function(res){
     $('tbody').html(res);
+    layui.use(['element','form'], function(){
+      var element = layui.element;
+      var form=layui.form;
+      form.render();
+    });
   })
   return false;
 });

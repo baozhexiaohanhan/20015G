@@ -27,16 +27,7 @@
       </span></legend>
     </fieldset>
 
-    <div style="padding: 15px;">
-      @if ($errors->any())
-        <div class="alert alert-danger" style="padding-bottom: 20px;padding-left: 20px">
-        <ul>
-        @foreach ($errors->all() as $error)
-        <li style="margin-top: 10px;color: #ff0000;">{{ $error }}</li>
-        @endforeach
-        </ul>
-        </div>
-      @endif
+    
 <a style="float:right;" href="{{url('ad/position')}}" class="layui-btn layui-btn-warm">广告位列表</a>
 <div style="padding: 15px;">
         <form class="layui-form" action="{{url('ad/position/store')}}" method="post" enctype="multipart/form-data">
@@ -44,7 +35,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">广告位名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="position_name" lay-verify="title" autocomplete="off" placeholder="广告名称" class="layui-input">
+                    <input type="text" name="position_name" lay-verify="title" autocomplete="off" placeholder="广告名称" class="layui-input"></span>
                     <b style="color:red">{{$errors->first('position_name')}}</b>
                 </div>
             </div>
@@ -52,12 +43,14 @@
                 <label class="layui-form-label">广告位宽</label>
                 <div class="layui-input-block">
                     <input type="text" name="ad_width" lay-verify="title" autocomplete="off" placeholder="广告宽" class="layui-input">
+                    <b style="color:red">{{$errors->first('ad_width')}}</b>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">广告位高</label>
                 <div class="layui-input-block">
                     <input type="text" name="ad_height" lay-verify="title" autocomplete="off" placeholder="广告高" class="layui-input">
+                    <b style="color:red">{{$errors->first('ad_height')}}</b>
                 </div>
             </div>
              <div class="layui-form-item">
@@ -81,7 +74,7 @@
                 </div>
             </div>
        <div class="layui-form-item" align="center">
-        <button type="button" class="layui-btn layui-btn-normal">添加</button>
+        <button type="submit" class="layui-btn layui-btn-normal">添加</button>
         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
       </div>
 </form>
@@ -114,6 +107,9 @@
     });
   });
 
+
+
+
   $('button').click(function(){
     var nameflag=true;
     var position_name=$('input[name="position_name"]').val();
@@ -140,4 +136,5 @@
     }
     $('form').submit();
   });
+
 </script>

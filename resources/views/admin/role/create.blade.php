@@ -41,8 +41,8 @@
                         <tbody>
                             <tr>
                                 <td>
-                            @foreach($res as $k=>$v)
-                                    <input type="checkbox" name="" value="{{$v->juri_id}}" lay-skin="primary">{{$v->juri_name}}
+                            @foreach($juri as $k=>$v)
+                                    <input type="checkbox" value="{{$v->juri_id}}" lay-skin="primary">{{$v->juri_name}}
                             @endforeach
                                 </td>
                             </tr>

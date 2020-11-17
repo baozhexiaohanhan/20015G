@@ -26,15 +26,25 @@ class RoleController extends Controller
     }
 
     public function create(){
-        $res = Juri::get();
+        $juri = Juri::get();
         // dd($res);
-        return view("/admin/role/create",['res'=>$res]);
+        return view("/admin/role/create",['juri'=>$juri]);
     }
     public function store(Request $request){
-        $data = $request->except('_token');
-        $res = Role::create($data);
-        $a = time();
-        dd($a);die;
+        $role_name = $request->input('role_name');
+        $juri = $request->input('juri');
+        $role_desc = $request->input('$role_desc');
+        // $str = $request->except('_token');
+        $time = time();
+        // $str = implode($juri);
+            $data = [
+                'role_name' => $role_name,
+                'juri' => $juri,
+                'role_desc' => $role_desc,
+                'role_time' => $time
+            ];
+        $res = Role::insert($data);
+        // dd($a);die;
         if($res){
             return view("/admin/role/index");
         }
