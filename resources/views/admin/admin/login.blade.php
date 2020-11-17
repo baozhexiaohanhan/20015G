@@ -31,7 +31,7 @@
                         <i class="layui-icon">&#xe612;</i>
                     </label>
                     <input type="text" lay-verify="required" name="admin_name" autocomplete="off" placeholder="这里输入管理员名称" class="layui-input" lay-verType="tips">
-                </div>
+                </div> 
                 <div class="layui-form-item">
                     <label class="beg-login-icon">
                         <i class="layui-icon">&#xe642;</i>

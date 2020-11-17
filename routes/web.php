@@ -156,7 +156,8 @@ Route::prefix("/birthday")->group(function(){
 
 Route::get('/create','Admin\BirthdayController@create');//生日添加
 Route::get('/list','Admin\BirthdayController@list');//生日列表
-Route::post('/store','Admin\BirthdayController@store');
+Route::post('/store','Admin\BirthdayController@store');//添加方法
+Route::get('/destroy/{id}','Admin\BirthdayController@destroy');//管理员添加方法
 
     });
 
@@ -164,3 +165,4 @@ Route::post('/store','Admin\BirthdayController@store');
 
 
 
+Route::get('/reg','Index\LoginController@reg');//注册
