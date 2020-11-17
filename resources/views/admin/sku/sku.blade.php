@@ -54,9 +54,9 @@
                             </div>
 
                             <div class="layui-form-item">
-                                <label class="layui-form-label">商品号</label>
+                                <label class="layui-form-label">商品编号</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="goods_sn" lay-verify="title" style="width: 300px;" autocomplete="off"  class="layui-input">
+                                    <input type="text" name="goods_sn" disabled="disabled" value="商品编号自动给予" lay-verify="title" style="width: 300px;" autocomplete="off"  class="layui-input">
                                 </div>
                             </div>
 
@@ -207,17 +207,7 @@
                 })
             })
             
-            function add_attr_product(obj){
-            var newobj = $(obj).parent().parent().clone();
-            newobj.find('.button').html(' - ');
-            newobj.find('.button').attr("onclick","rescSpec(this)");
-            $(obj).parent().parent().after(newobj);
-            // console.log(newobj);
-            }
-            function rescSpec(obj){
-            $(obj).parent().parent().remove();
-            }
-
+     
             function addSpec(obj){
             var newobj = $(obj).parent().parent().clone();
             newobj.find('a').html('-');

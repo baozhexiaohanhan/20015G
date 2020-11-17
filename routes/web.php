@@ -82,13 +82,18 @@ Route::prefix('brand')->group(function(){
     Route::any('/change','Admin\BrandController@change');
 });
 Route::any('/admins','Admin\HomeController@admins');//后台首页
-
+//sku 商品  类型 属性 
 Route::prefix("/")->group(function(){
     Route::any('/sku','Admin\SkuController@sku');
     Route::any('goods/uploads','Admin\SkuController@uploads');
     Route::any('goods/goods_imgdo','Admin\SkuController@goods_imgdo');
     Route::any('goods/store','Admin\SkuController@store');
     Route::any('goods/type_attr','Admin\SkuController@type_attr');
+    Route::any('goods/product','Admin\SkuController@product');
+    Route::any('goods/product_add','Admin\SkuController@product_add');
+    Route::any('goods/product_index','Admin\SkuController@product_index');
+    Route::any('goods/item_show/{id}','Admin\SkuController@item_show');
+    Route::any('goods/attr_key','Admin\SkuController@attr_key');
     Route::any('/type','Admin\TypeController@type');
     Route::any('/type_add','Admin\TypeController@type_add');
     Route::any('/type_index','Admin\TypeController@type_index');
@@ -98,9 +103,13 @@ Route::prefix("/")->group(function(){
     Route::any('/attr_add','Admin\AttrController@attr_add');
     Route::any('/attr_index/{id}','Admin\AttrController@attr_index');
     Route::any('/attr_del','Admin\AttrController@attr_del');
-    
-
-
+});
+Route::prefix("/")->group(function(){
+    Route::any('/seckill','Admin\SeckillController@seckill');
+    Route::any('/seckill_add','Admin\SeckillController@seckill_add');
+    Route::any('/seckill_index','Admin\SeckillController@seckill_index');
+    Route::any('/updates/{id}','Admin\SeckillController@updates');
+    Route::any('/del','Admin\SeckillController@del');
 
 });
 Route::any('/admins','Admin\HomeController@admins');//首页
