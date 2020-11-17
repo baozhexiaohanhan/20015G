@@ -370,11 +370,7 @@
 	<!-- 顶部轮播 -->
     <div class="swiper-container banner-box">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><a href="item_show.html"><img src="/static/images/temp/banner_1.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_show.html"><img src="/static/images/temp/banner_2.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_category.html"><img src="/static/images/temp/banner_3.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_show.html"><img src="/static/images/temp/banner_4.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_sale_page.html"><img src="/static/images/temp/banner_5.jpg" class="cover"></a></div>
+        	<script src="/ads/7.js"></script>
         </div>
         <div class="swiper-pagination"></div>
     </div>
@@ -397,7 +393,8 @@
 				</div>
 				<div class="con-box">
 					<a class="left-img hot-img" href="">
-						<img src="/static/images/floor_1.jpg" alt="" class="cover">
+						<script src="/ads/1.js"></script>
+						<!-- <img src="/static/images/floor_1.jpg" alt="" class="cover"> -->
 					</a>
 					<div class="right-box hot-box">
 						<a href="item_show.html" class="floor-item">
@@ -533,7 +530,8 @@
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
-					<img src="/static/images/floor_2.jpg" alt="" class="cover">
+					<script src="/ads/2.js"></script>
+					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
 					<a href="item_show.html" class="floor-item">
@@ -633,7 +631,8 @@
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
-					<img src="/static/images/floor_3.jpg" alt="" class="cover">
+					<script src="/ads/3.js"></script>
+					<!-- <img src="/static/images/floor_3.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
 					<a href="item_show.html" class="floor-item">
@@ -733,7 +732,8 @@
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
-					<img src="/static/images/floor_4.jpg" alt="" class="cover">
+					<script src="/ads/4.js"></script>
+					<!-- <img src="/static/images/floor_4.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
 					<a href="item_show.html" class="floor-item">
@@ -833,7 +833,8 @@
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
-					<img src="/static/images/floor_5.jpg" alt="" class="cover">
+					<script src="/ads/5.js"></script>
+					<!-- <img src="/static/images/floor_5.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
 					<a href="item_show.html" class="floor-item">
@@ -933,7 +934,8 @@
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
-					<img src="/static/images/floor_6.jpg" alt="" class="cover">
+					<script src="/ads/6.js"></script>
+					<!-- <img src="/static/images/floor_6.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
 					<a href="item_show.html" class="floor-item">

@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="layui-form-item" align="center">
-        <button type="button" class="layui-btn layui-btn-normal">添加</button>
+        <button type="submit" class="layui-btn layui-btn-normal">添加</button>
         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
       </div>
     </form>

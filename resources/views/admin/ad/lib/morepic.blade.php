@@ -1,5 +1,1 @@
-@foreach($ads as $v)
-<li class="yui3-u-1-2 brand-pit">
-	<img src="{{$v}}" width="{{$width}}" height="{{$height}}">
-</li>
-@endforeach
+@foreach($ads as $v)<div class="swiper-slide"><a href="item_show.html"><img src="{{$v}}" class="cover" width="{{$width}}" height="{{$height}}"></a></div>@endforeach
