@@ -40,6 +40,16 @@ class CateController extends Controller
     {
         $data = $request->all();
 //        dd($data);
+        $validatedData = $request->validate([
+            'cate_name' => 'required|unique:cate',
+            'cate_show' => 'required',
+            'cate_new_show' => 'required',
+        ],[
+            'cate_name.required'=>'分类名称必填',
+            'cate_name.unique'=>'分类名称已存在',
+            'cate_show.required'=>'是否显示必填',
+            'cate_new_show.required'=>'是否显示在导航栏必填',
+        ]);
         $res = DB::table('cate')->insert([
             'cate_name' => $data['cate_name'],
             'pid'=>$data['pid'],
