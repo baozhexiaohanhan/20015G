@@ -11,15 +11,14 @@
 |
 */
 
-Route::get('/','Index\IndexController@index');//首页
+Route::get('/','Index\IndexController@index');//前台首页
 
 Route::any('/admins','Admin\HomeController@admins');//后台首页
 
 
-Route::get('/reg','Admin\LoginController@reg');//注册
-Route::any('/login','Admin\LoginController@login');//登录  logindo
-Route::any('/logindo','Admin\LoginController@logindo');//登录操作
-Route::get('/login','Admin\LoginController@login');//首页
+Route::get('/reg','Admin\LoginController@reg');//后台注册
+Route::any('/login','Admin\LoginController@login');//后台登录  logindo
+Route::any('/logindo','Admin\LoginController@logindo');//后台登录操作
 //防非法登录
 Route::middleware('islog')->group(function(){
     Route::get('/loginapp','Admin\LoginController@loginapp');//退出
@@ -47,32 +46,7 @@ Route::prefix("ad")->group(function(){
     Route::get("/position/change","Admin\PositionController@change");
     Route::get('/position/checkOnly',"Admin\PositionController@checkOnly");
 });
-Route::prefix('brand')->group(function(){
-    Route::get('/create','Admin\BrandController@create')->name('brand.create');
-    Route::post('/store','Admin\BrandController@store');
-    Route::get('/','Admin\BrandController@index')->name('brand');
-    Route::post('/upload','Admin\BrandController@upload');
-    Route::get('/edit/{brand_id}','Admin\BrandController@edit')->name('brand.edit');
-    Route::post('/update/{brand_id}','Admin\BrandController@update');
-    Route::get('/delete/{brand_id?}','Admin\BrandController@destroy');
-    Route::get("/change","Admin\BrandController@change");
-    Route::get('/checkOnly',"Admin\BrandController@checkOnly");
-    Route::any("/create","Admin\AdController@create");
-    Route::any("/store","Admin\AdController@store");
-    Route::any("/","Admin\AdController@index");
-    Route::any('/upload','Admin\AdController@upload');
-    Route::any("/destroy/{id}","Admin\AdController@destroy");
-    Route::any("change","Admin\AdController@change");
-    //广告位
-    Route::any("/position/create","Admin\PositionController@create");
-    Route::any("/position/store","Admin\PositionController@store");
-    Route::any("/position","Admin\PositionController@index");
-    Route::any("/position/{position_id}","Admin\PositionController@showads");
-    Route::any("/position/createhtml/{position_id}","Admin\PositionController@createhtml");
-    Route::any("/position/destroy/{id}","Admin\PositionController@destroy");
-    Route::any("/position/edit/{id}","Admin\PositionController@edit");
-    Route::any("/position/update/{id}","Admin\PositionController@update");
-});
+//品牌
 Route::prefix('brand')->group(function(){
     Route::any('/create','Admin\BrandController@create')->name('brand.create');
     Route::any('/store','Admin\BrandController@store');
@@ -111,9 +85,8 @@ Route::prefix("/")->group(function(){
     Route::any('/seckill_index','Admin\SeckillController@seckill_index');//秒杀展示
     Route::any('/updates/{id}','Admin\SeckillController@updates');//秒杀修改
     Route::any('/del','Admin\SeckillController@del');//秒杀删除
-
+ 
 });
-Route::any('/admins','Admin\HomeController@admins');//首页
 
 
 Route::any('/list','Admin\AdminController@list');//管理员列表
@@ -197,9 +170,7 @@ Route::get('/destroy/{id}','Admin\BirthdayController@destroy');//管理员添加
 
     });
 
-
-
 });
 
 
-Route::get('/reg','Index\LoginController@reg');//注册
+Route::get('/reg','Index\LoginController@reg');//前台注册

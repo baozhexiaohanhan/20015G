@@ -1,24 +1,35 @@
+
 <div class="left-nav">
-      <div id="side-nav">
-      <ul class="layui-nav layui-nav-tree"  lay-filter="test" >
- 
- @php  $name=Route::currentRouteName();@endphp
-   @if(isset($aaaaa))
-   @foreach($aaaaa as $k=>$v)
-     <li @if(strpos($name,$v->right_as)!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item"@endif>
-       <a class="" href="javascript:;">{{$v->right_name}}</a>
-       @if($v->son)
-       <dl class="layui-nav-child">
-          @foreach($v->son as $key=>$val)
-         <dd @if($name==$val->right_as) class='layui-this' @endif><a href="{{$val->right_url}}">{{$val->right_name}}</a></dd>
-         @endforeach
-       </dl>
-       @endif
-     </li>
+<div id="side-nav">
+
+
+
+    <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        @php  $name=Route::currentRouteName();@endphp
+        @if(isset($aaaaa))
+        @foreach($aaaaa as $k=>$v)
+            <li @if(strpos($name,$v->right_as)!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item"@endif>
+            <a class="" href="javascript:;">{{$v->right_name}}</a>
+            @if($v->son)
+            <dl class="layui-nav-child" >
+                @foreach($v->son as $key=>$val)
+                <dd @if($name==$val->right_as) class='layui-this' @endif><a href="{{$val->right_url}}">{{$val->right_name}}</a></dd>
+                @endforeach
+            </dl>
+            @endif
+            </li>
+        @endforeach
+        @endif
+    </ul>
+
     
-   @endforeach
-   @endif
- </ul>
+      
+
+
+
+
+
+
         <!-- <ul id="nav">
              <li >
                 <a href="javascript:;">
@@ -392,3 +403,64 @@
       </div>
     </div>
     <!-- @section('sidebar') -->
+
+
+    <script src="/static/layui.js"></script>
+<script>
+//JavaScript代码区域
+@php $name=Route::currentRouteName();@endphp
+
+layui.use(['element','laydate'], function(){
+  var element = layui.element;
+  var laydate = layui.laydate;
+  //常规用法
+  laydate.render({
+    elem: '#test1'
+  });
+
+  laydate.render({
+    elem: '#test22'
+  });
+   
+  laydate.render({
+    elem: '#test111'
+  });
+
+  laydate.render({
+    elem: '#test222'
+  });
+
+  laydate.render({
+     elem: '#test5'
+    ,type: 'datetime'
+  });
+
+  laydate.render({
+    elem: '#test6'
+    ,type: 'datetime'
+  });
+});
+
+
+layui.use('form', function(){
+  var form = layui.form;
+     form.on('select(demo)', function(data){
+        var cat_id= data.value;
+        $.ajax({
+          data: {'cat_id':cat_id},
+          url: "/goods/attrbuli",
+          type: 'post',
+          success:function (res) {
+             //alert(res)
+            $('.attrs').html(res)
+            //layui重新渲
+             form.render('select');
+              //form.render();
+          }
+      })
+   }); 
+  //各种基于事件的操作，下面会有进一步介绍
+});
+  
+
+</script>
