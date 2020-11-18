@@ -122,21 +122,21 @@ Route::any('/create','Admin\AdminController@create');//管理员添加方法
 
 //商品分类管理
 Route::prefix('/cate')->group(function (){
-    Route::get('/cateindex','Admin\cateController@cateindex');//列表展示
-    Route::get('/cateadd','Admin\cateController@cateadd');//添加
-    Route::post('/do_cateadd','Admin\cateController@do_cateadd');//添加执行
-    Route::get('/del/{cate_id}','Admin\cateController@del');//删除
-    Route::get('/update/{cate_id}','Admin\cateController@update');//修改
-    Route::post('/do_update','Admin\cateController@do_update');//修改执行
+    Route::get('/index','Admin\CateController@index');//列表展示
+    Route::get('/create','Admin\CateController@create');//添加
+    Route::post('/store','Admin\CateController@store');//添加执行
+    Route::get('/destroy/{cate_id}','Admin\CateController@destroy');//删除
+    Route::get('/edit/{cate_id}','Admin\CateController@edit');//修改
+    Route::post('/update','Admin\cateController@update');//修改执行
 });
 //优惠券管理
 Route::prefix('coupon')->group(function(){
-    Route::get('/couponadd/','Admin\couponController@couponadd');//添加页面
-    Route::post('/do_coupon/','Admin\couponController@do_coupon');//添加执行
-    Route::get('/couponindex/','Admin\couponController@couponindex');//列表
-    Route::get('/del/{coupon_id}','Admin\couponController@del');//删除
-    Route::get('/edit/{coupon_id}','Admin\couponController@edit');//修改
-    Route::post('/do_edit','Admin\couponController@do_edit');//修改执行
+    Route::get('/create','Admin\CouponController@create');//添加页面
+    Route::post('/store','Admin\CouponController@store');//添加执行
+    Route::get('/index','Admin\CouponController@index');//列表
+    Route::get('/destroy/{coupon_id}','Admin\CouponController@destroy');//删除
+    Route::get('/edit/{coupon_id}','Admin\CouponController@edit');//修改
+    Route::post('/update','Admin\CouponController@update');//修改执行
 });
 
 
@@ -165,7 +165,8 @@ Route::prefix("/birthday")->group(function(){
 
 Route::get('/create','Admin\BirthdayController@create');//生日添加
 Route::get('/list','Admin\BirthdayController@list');//生日列表
-Route::post('/store','Admin\BirthdayController@store');
+Route::post('/store','Admin\BirthdayController@store');//添加方法
+Route::get('/destroy/{id}','Admin\BirthdayController@destroy');//管理员添加方法
 
     });
 
@@ -173,3 +174,4 @@ Route::post('/store','Admin\BirthdayController@store');
 
 
 
+Route::get('/reg','Index\LoginController@reg');//注册

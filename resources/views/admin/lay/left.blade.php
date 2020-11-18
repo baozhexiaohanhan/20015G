@@ -270,7 +270,6 @@
                         </a>
                     </li>
                 </ul>
-
             </li>
             <li>
                 <a href="javascript:;">
@@ -280,17 +279,15 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="{{asset('cate/cateadd')}}">
+                        <a _href="{{asset('cate/create')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>分类添加</cite>
-
                         </a>
                     </li >
                     <li>
-                        <a _href="{{asset('cate/cateindex')}}">
+                        <a _href="{{asset('cate/index')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>分类列表</cite>
-
                         </a>
                     </li >
                 </ul>
@@ -359,14 +356,14 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="{{asset('coupon/couponadd')}}">
+                        <a _href="{{asset('coupon/create')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>优惠券添加</cite>
 
                         </a>
                     </li >
                     <li>
-                        <a _href="{{asset('coupon/couponindex')}}">
+                        <a _href="{{asset('coupon/index')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>优惠券列表</cite>
 

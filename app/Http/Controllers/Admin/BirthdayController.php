@@ -64,10 +64,30 @@ class BirthdayController extends Controller
 
 
     public function list(){
-    	echo 123456;
+    $name = request()->name;
+        $where = [];
+        if($name){
+            $where[] = ['birthday_name','like',"%$name%"];
+        }
+         $listModel = new Birthday();
+          $data = $listModel->where($where)->orderBy('birthday_id','desc')->paginate(2);
+             $query = request()->all();
+        if (Request()->ajax()){
+                return view('admin.birthday.list',['data'=>$data,'query'=>$query]);
+            }
+              return view('admin.birthday.list',['data'=>$data,'query'=>$query]);
+          }
+
+
+
+          public function destroy($id){
+            $res = Birthday::where('birthday_id',$id)->delete();
+        if($res){
+            if(request()->ajax()){
+                return json_encode(['error_no'=>'1','error_msg'=>'删除成功']);
+            }
+            return redirect('/birthday/list');
+        }
     }
-
-
-
+  }
     
-}

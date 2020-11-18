@@ -31,14 +31,17 @@
         <thead>
         <tr>
             <th width="50">ID</th>
-            <th width="50">类型名称</th>
-            <th width="50">面值</th>
-            <th width="50">满减条件</th>
-            <th width="50">可领取次数</th>
+            <th width="50">优惠券名称</th>
             <th width="50">发行总量</th>
+            <th width="50">优惠形式</th>
+            <th width="50">优惠金额</th>
+            <th width="50">使用门槛</th>
+            <th width="50">每人限领</th>
+            <th width="50">使用范围</th>
+            <th width="50">有效期</th>
             <th width="50">开始时间</th>
             <th width="50">结束时间</th>
-            <th width="50">状态</th>
+            <th width="50">使用说明</th>
             <th width="280">操作</th>
         </tr>
         </thead>
@@ -47,16 +50,19 @@
         <tr>
             <th width="50">{{$v->coupon_id}}</th>
             <th width="50">{{$v->name}}</th>
-            <th width="50">{{$v->pic}}</th>
-            <th width="50">{{$v->condition}}</th>
-            <th width="50">{{$v->number}}</th>
             <th width="50">{{$v->total}}</th>
+            <th width="50">@if($v->shape==1)指定现金 @elseif($v->shape==2)折扣@endif</th>
+            <th width="50">{{$v->shape_pic}}</th>
+            <th width="50">@if($v->condition==1)不限制 @elseif($v->condition==2)满{{$v->condition_pic}}@endif</th>
+            <th width="50">{{$v->number}}</th>
+            <th width="50">@if($v->shape==1)全部商品 @elseif($v->shape==2)指定商品@endif</th>
+            <th width="50">@if($v->state==1)固定日期 @elseif($v->shape==2)领到优惠券当日开始2天有效 @elseif($v->shape==3)领到优惠券次日开始2天有效@endif</th>
             <th width="50">{{$v->start_time}}</th>
             <th width="50">{{$v->end_time}}</th>
-            <th width="50">@if($v->state==1)开启 @elseif($v->state==2)关闭@endif</th>
+            <th width="50">{{$v->explain}}</th>
             <th width="280">
                 <a href="{{url('coupon/edit/'.$v->coupon_id)}}"><i class="layui-icon">&#xe642;</i>编辑</a>
-                <a href="{{url('coupo/del/'.$v->coupon_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>
+                <a href="{{url('coupon/destroy/'.$v->coupon_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>
             </th>
         </tr>
         </thead>
