@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<form action="{{url('/cate/do_cateadd')}}" method="post">
+<form action="{{url('/cate/store')}}" method="post">
 <div class="layui-card">
     <div class="layui-card-body">
         <form class="layui-form" action="" lay-filter="component-form-element">

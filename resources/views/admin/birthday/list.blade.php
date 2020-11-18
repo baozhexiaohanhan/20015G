@@ -23,7 +23,7 @@
           </form>
       </div>
       <xblock>
-        <button class="layui-btn" ><a href="/admin/addlist">添加</a></button>
+        <button class="layui-btn" ><a href="/birthday/create">添加</a></button>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -31,10 +31,11 @@
             <th>
             </th>
             <th>ID</th>
-            <th>登录名</th>
-            <th>手机</th>
+            <th>姓名</th>
+            <th>手机号</th>
             <th>邮箱</th>
-            <th>加入时间</th>
+            <th>身份证号</th>
+            <th>生日时间</th>
             <th>操作</th>
         </tr></thead>
         <tbody>
@@ -42,14 +43,15 @@
           <tr>
             <td>
             </td>
-            <td>{{$v->admin_id}}</td>
-            <td>{{$v->admin_name}}</td>
-            <td>{{$v->admin_tel}}</td>
-            <td>{{$v->email}}</td>
-            <td>{{date("Y-m-d H:i:s",$v->admin_time)}}</td>
+            <td>{{$v->birthday_id}}</td>
+            <td>{{$v->birthday_name}}</td>
+            <td>{{$v->birthday_tel}}</td>
+            <td>{{$v->birthday_email}}</td>
+            <td>{{$v->birthday_shenfen}}</td>
+            <td>{{date("Y-m-d H:i:s",$v->birthday_time)}}</td>
             <td class="td-manage">
             <button class="layui-btn">编辑</button>
-            <a href="javascript:void(0);" id="{{$v->admin_id}}" type="button" class="layui-btn layui-btn-danger">删除</a>
+            <a href="javascript:void(0);" id="{{$v->birthday_id}}" type="button" class="layui-btn layui-btn-danger">删除</a>
             </td>
           </tr>
           @endforeach
@@ -65,9 +67,9 @@
     <script type="text/javascript">
       $('.layui-btn-danger').click(function(){
             var id = $(this).attr('id');
-            var isdel = confirm('确认删除此管理员？');
+            var isdel = confirm('确认删除生日用户？');
             if(isdel == true){
-                $.get('/admin/destroy/'+id,function(rest){
+                $.get('/birthday/destroy/'+id,function(rest){
                     if(rest.error_no == '1'){
                         location.reload();
                     }

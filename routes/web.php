@@ -13,6 +13,7 @@
 
 Route::get('/','Index\IndexController@index');//首页
 
+Route::any('/admins','Admin\HomeController@admins');//后台首页
 
 
 Route::get('/reg','Admin\LoginController@reg');//注册
@@ -82,14 +83,18 @@ Route::prefix('brand')->group(function(){
     Route::any('/delete/{brand_id?}','Admin\BrandController@destroy');
     Route::any('/change','Admin\BrandController@change');
 });
-Route::any('/admins','Admin\HomeController@admins');//后台首页
-
+//sku 商品  类型 属性 
 Route::prefix("/")->group(function(){
     Route::any('/sku','Admin\SkuController@sku');
     Route::any('goods/uploads','Admin\SkuController@uploads');
     Route::any('goods/goods_imgdo','Admin\SkuController@goods_imgdo');
     Route::any('goods/store','Admin\SkuController@store');
     Route::any('goods/type_attr','Admin\SkuController@type_attr');
+    Route::any('goods/product','Admin\SkuController@product');
+    Route::any('goods/product_add','Admin\SkuController@product_add');
+    Route::any('goods/product_index','Admin\SkuController@product_index');
+    Route::any('goods/item_show/{id}','Admin\SkuController@item_show');
+    Route::any('goods/attr_key','Admin\SkuController@attr_key');
     Route::any('/type','Admin\TypeController@type');
     Route::any('/type_add','Admin\TypeController@type_add');
     Route::any('/type_index','Admin\TypeController@type_index');
@@ -99,7 +104,14 @@ Route::prefix("/")->group(function(){
     Route::any('/attr_add','Admin\AttrController@attr_add');
     Route::any('/attr_index/{id}','Admin\AttrController@attr_index');
     Route::any('/attr_del','Admin\AttrController@attr_del');
-    
+});
+Route::prefix("/")->group(function(){
+    Route::any('/seckill','Admin\SeckillController@seckill');
+    Route::any('/seckill_add','Admin\SeckillController@seckill_add');
+    Route::any('/seckill_index','Admin\SeckillController@seckill_index');
+    Route::any('/updates/{id}','Admin\SeckillController@updates');
+    Route::any('/del','Admin\SeckillController@del');
+
 });
 Route::any('/admins','Admin\HomeController@admins');//首页
 
@@ -111,21 +123,21 @@ Route::any('/create','Admin\AdminController@create');//管理员添加方法
 
 //商品分类管理
 Route::prefix('/cate')->group(function (){
-    Route::get('/cateindex','Admin\cateController@cateindex');//列表展示
-    Route::get('/cateadd','Admin\cateController@cateadd');//添加
-    Route::post('/do_cateadd','Admin\cateController@do_cateadd');//添加执行
-    Route::get('/del/{cate_id}','Admin\cateController@del');//删除
-    Route::get('/update/{cate_id}','Admin\cateController@update');//修改
-    Route::post('/do_update','Admin\cateController@do_update');//修改执行
+    Route::get('/index','Admin\CateController@index');//列表展示
+    Route::get('/create','Admin\CateController@create');//添加
+    Route::post('/store','Admin\CateController@store');//添加执行
+    Route::get('/destroy/{cate_id}','Admin\CateController@destroy');//删除
+    Route::get('/edit/{cate_id}','Admin\CateController@edit');//修改
+    Route::post('/update','Admin\cateController@update');//修改执行
 });
 //优惠券管理
 Route::prefix('coupon')->group(function(){
-    Route::get('/couponadd/','Admin\couponController@couponadd');//添加页面
-    Route::post('/do_coupon/','Admin\couponController@do_coupon');//添加执行
-    Route::get('/couponindex/','Admin\couponController@couponindex');//列表
-    Route::get('/del/{coupon_id}','Admin\couponController@del');//删除
-    Route::get('/edit/{coupon_id}','Admin\couponController@edit');//修改
-    Route::post('/do_edit','Admin\couponController@do_edit');//修改执行
+    Route::get('/create','Admin\CouponController@create');//添加页面
+    Route::post('/store','Admin\CouponController@store');//添加执行
+    Route::get('/index','Admin\CouponController@index');//列表
+    Route::get('/destroy/{coupon_id}','Admin\CouponController@destroy');//删除
+    Route::get('/edit/{coupon_id}','Admin\CouponController@edit');//修改
+    Route::post('/update','Admin\CouponController@update');//修改执行
 });
 
 
@@ -178,8 +190,16 @@ Route::prefix("/birthday")->group(function(){
     Route::get('/list','Admin\BirthdayController@list');//生日列表
     Route::post('/store','Admin\BirthdayController@store');
 
-});
+Route::get('/create','Admin\BirthdayController@create');//生日添加
+Route::get('/list','Admin\BirthdayController@list');//生日列表
+Route::post('/store','Admin\BirthdayController@store');//添加方法
+Route::get('/destroy/{id}','Admin\BirthdayController@destroy');//管理员添加方法
+
+    });
+
+
 
 });
 
 
+Route::get('/reg','Index\LoginController@reg');//注册

@@ -21,39 +21,15 @@
 </head>
 
 <body>
-<form action="{{url('/coupon/do_coupon')}}" method="post">
+<form action="{{url('/coupon/store')}}" method="post">
     <div class="layui-card">
         <div class="layui-card-body">
             <form class="layui-form" action="" lay-filter="component-form-element">
                 <div class="layui-row layui-col-space10 layui-form-item">
                     <div class="layui-col-lg6">
-                        <label class="layui-form-label">类型名称：</label>
+                        <label class="layui-form-label">优惠券名称：</label>
                         <div class="layui-input-block">
                             <input type="text" name="name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-row layui-col-space10 layui-form-item">
-                    <div class="layui-col-lg6">
-                        <label class="layui-form-label">面值：</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="pic" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-row layui-col-space10 layui-form-item">
-                    <div class="layui-col-lg6">
-                        <label class="layui-form-label">满减条件：</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="condition" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-row layui-col-space10 layui-form-item">
-                    <div class="layui-col-lg6">
-                        <label class="layui-form-label">可领取次数：</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="number" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -65,27 +41,51 @@
                         </div>
                     </div>
                 </div>
-                <div class="layui-row layui-col-space10 layui-form-item">
-                    <div class="layui-col-lg6">
-                        <label class="layui-form-label">开始时间：</label>
-                        <div class="layui-input-block">
-                            <input type="date" name="start_time" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                        </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">优惠形式：</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="shape" value="1" title="" >指定现金<input type="text" name="shape_pic" id="">元<br>
+                       <input type="radio" name="shape" value="2" title=""> 折扣
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">使用门槛：</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="condition" value="1" title="" >不限制<br>
+                        <input type="radio" name="condition" value="2" title="">满<input type="text" name="condition_pic" id="">元即可用
                     </div>
                 </div>
                 <div class="layui-row layui-col-space10 layui-form-item">
                     <div class="layui-col-lg6">
-                        <label class="layui-form-label">结束时间：</label>
+                        <label class="layui-form-label">每人限领：</label>
                         <div class="layui-input-block">
-                            <input type="date" name="end_time" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                            <input type="text" name="number" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">状态：</label>
+                    <label class="layui-form-label">使用范围：</label>
                     <div class="layui-input-block">
-                        开启：<input type="radio" name="state" value="1" title="" >
-                        关闭：<input type="radio" name="state" value="2" title="">
+                        <input type="radio" name="range" value="1" title="" >全店商品
+                        <input type="radio" name="range" value="2" title="">指定商品
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">有效期：</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="state" value="1" title="" >固定日期<br>
+                        生效日期：<input type="date" name="start_time" id=""><br>
+                        失效日期：<input type="date" name="end_time" id=""><br>
+                        <input type="radio" name="state" value="2" title="">领到优惠券当日开始2天有效<br>
+                        <input type="radio" name="state" value="3" title="">领到优惠券次日开始2天有效<br>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">使用说明：</div>
+                    <div class="layui-card-body layui-row layui-col-space10">
+                        <div class="layui-col-md12">
+                            <textarea name="explain" placeholder="请输入" class="layui-textarea"></textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="layui-form-item">

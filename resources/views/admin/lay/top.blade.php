@@ -36,8 +36,8 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            @if(!session('admin_id'))
-            <a href="javascript:;">欢迎{{session('admin_name')}}登录</a>
+            @if(session('login'))
+            <a href="javascript:;">欢迎{{session('login')->admin_name}}登录</a>
             @endif
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onClick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
@@ -49,8 +49,6 @@
         </ul>
 
 
-
- 
     </div>
 @section('tops')
     

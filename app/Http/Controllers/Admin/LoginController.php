@@ -113,13 +113,14 @@ public function imageCode( Request $request){
           return redirect('login')->with('msg','用户名或密码不能为空');die;
       }
       $ret = Admin::where('admin_name',$admin_name)->first();
+    //   dd($ret);
       if(!$ret){
           return redirect('login')->with('msg','账号或密码错误');die;
       }
       if(password_verify($admin_pwd,$ret->admin_pwd)){
-            //   session(['admin_name' => $ret->admin_name]);
-            session(['login' => $ret]);
-              // $admin_user = Request()->session()->get('admin_user');
+
+            session(['login' => $ret]);//存session
+           
               return redirect('/admins');die;
       }else{
             return redirect('login')->with('msg','账号或密码错误');die;

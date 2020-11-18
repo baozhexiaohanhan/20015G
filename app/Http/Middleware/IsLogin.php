@@ -19,8 +19,10 @@ class IsLogin
      */
     public function handle($request, Closure $next)
     {
-        $data=session('login');
-        if(empty($data)){
+        $data = session('login');
+        $admin_id = $data['admin_id'];
+
+        if(empty($admin_id)){
             return redirect('/login')->with('msg','请先登录！');
         }
        $name=Route::currentRouteName();
@@ -64,9 +66,5 @@ class IsLogin
              }
           }
           return $Arrays;
-         
-          
     }
-
-
 }

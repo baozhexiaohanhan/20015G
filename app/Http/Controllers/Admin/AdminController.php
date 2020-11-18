@@ -129,14 +129,19 @@ class AdminController extends Controller
     }
 
     public function noticelist(){
-
+        $name = request()->name;
+        $where = [];
+        if($name){
+            $where[] = ['birthday_name','like',"%$name%"];
+        }
          $noticeModel = new Notice();
           $data = $noticeModel->orderBy('notice_id','desc')->paginate(2);
-
-
-    return view('admin.notice.noticelist',['data'=>$data]);
-    }
-
+          $query = request()->all();
+        if (Request()->ajax()){
+                return view('admin.notice.noticelist',['data'=>$data,'query'=>$query]);
+            }
+                return view('admin.notice.noticelist',['data'=>$data,'query'=>$query]);
+          }
 
     public function destr($id){
       $res = Notice::where('notice_id',$id)->delete();

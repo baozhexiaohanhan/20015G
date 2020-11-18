@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<form action="{{url('/cate/do_update')}}" method="post">
+<form action="{{url('/cate/update')}}" method="post">
     @foreach($data1 as $v)
     <input type="hidden" name="cate_id" value="{{$v->cate_id}}">
     <div class="layui-card">

@@ -30,27 +30,22 @@
     <table class="layui-table layui-form">
         <thead>
         <tr>
-            <th width="20">
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
-            <th width="70">ID</th>
-            <th width="70">分类名称</th>
-            <th width="50">是否显示</th>
-            <th width="50">是否显示在导航栏</th>
-            <th width="280">操作</th>
+            <th>ID</th>
+            <th>分类名称</th>
+            <th>是否显示</th>
+            <th>是否显示在导航栏</th>
+            <th>操作</th>
         </tr>
         </thead>
         @foreach($res as $v)
+        <thead>
         <tr cate_id = {{$v->cate_id}} pid = {{$v->pid}}>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
             <td>
                 <a href="javascript:;" class="show">+</a>
                 {{$v->cate_id}}
             </td>
             <td>
-                {{--<i class="layui-icon x-show showHide" status='true' >&#xe623;</i>--}}
+                {{--<i class="layui-icon x-show showHide" status=@if($v->cate_show==1)是 @elseif($v->cate_show==2)否@endif'true' >&#xe623;</i>--}}
                 <span class="cate_name">{{$v->cate_name}}</span>
             </td>
             <td>@if($v->cate_show==1)是 @elseif($v->cate_show==2)否@endif</td>
@@ -58,10 +53,11 @@
                 @if($v->cate_new_show==1)是 @elseif($v->cate_new_show==2)否@endif
             </td>
             <td class="td-manage">
-                <a href="{{url('cate/update/'.$v->cate_id)}}"><i class="layui-icon">&#xe642;</i>编辑</a>
-                <a href="{{url('cate/del/'.$v->cate_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>
+                <a href="{{url('cate/edit/'.$v->cate_id)}}"><i class="layui-icon">&#xe642;</i>编辑</a>
+                <a href="{{url('cate/destroy/'.$v->cate_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>
             </td>
         </tr>
+        </thead>
         @endforeach
     </table>
 </div>
@@ -73,18 +69,6 @@
         $("tr[pid=0]").show();
 //        隐藏pid不为0的数据
         $("tr[pid!=0]").hide();
-        //点击事件
-        $(document).on("click",".cate_name",function(){
-            //给span 隐藏 span下一个兄弟节点显示
-            $(this).hide();
-            $(this).next("input").show();
-        })
-        //点击事件
-        $(document).on("click",".cate_name",function(){
-            //给span 隐藏 span下一个兄弟节点显示
-            $(this).hide();
-            $(this).next("input").show();
-        })
         //点击+ -
         $(document).on("click",".show",function(){
             var sign=$(this).text();//获取自己当前点击的符号
