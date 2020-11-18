@@ -85,32 +85,32 @@ Route::prefix('brand')->group(function(){
 });
 //sku 商品  类型 属性 
 Route::prefix("/")->group(function(){
-    Route::any('/sku','Admin\SkuController@sku');
-    Route::any('goods/uploads','Admin\SkuController@uploads');
-    Route::any('goods/goods_imgdo','Admin\SkuController@goods_imgdo');
-    Route::any('goods/store','Admin\SkuController@store');
-    Route::any('goods/type_attr','Admin\SkuController@type_attr');
-    Route::any('goods/product','Admin\SkuController@product');
-    Route::any('goods/product_add','Admin\SkuController@product_add');
-    Route::any('goods/product_index','Admin\SkuController@product_index');
-    Route::any('goods/item_show/{id}','Admin\SkuController@item_show');
-    Route::any('goods/attr_key','Admin\SkuController@attr_key');
-    Route::any('/type','Admin\TypeController@type');
-    Route::any('/type_add','Admin\TypeController@type_add');
-    Route::any('/type_index','Admin\TypeController@type_index');
-    Route::any('/type_del','Admin\TypeController@type_del');
-    Route::any('/ajaxjdjd','Admin\TypeController@ajaxjdjd');
-    Route::any('/attr/{id}','Admin\AttrController@attr');
-    Route::any('/attr_add','Admin\AttrController@attr_add');
-    Route::any('/attr_index/{id}','Admin\AttrController@attr_index');
-    Route::any('/attr_del','Admin\AttrController@attr_del');
+    Route::any('/sku','Admin\SkuController@sku');//添加商品 展示
+    Route::any('goods/uploads','Admin\SkuController@uploads');//上传图片
+    Route::any('goods/goods_imgdo','Admin\SkuController@goods_imgdo');//上传图片
+    Route::any('goods/store','Admin\SkuController@store');//商品添加
+    Route::any('goods/type_attr','Admin\SkuController@type_attr');//属性添加不用进行展示侧边
+    Route::any('goods/product','Admin\SkuController@product');//货品添加不用进行展示侧边
+    Route::any('goods/product_add','Admin\SkuController@product_add');//货品
+    Route::any('goods/product_index','Admin\SkuController@product_index');// 商品 展示
+    Route::any('goods/item_show/{id}','Admin\SkuController@item_show');//sku商品预览 展示
+    Route::any('goods/attr_key','Admin\SkuController@attr_key');//计算sku商品价格
+    Route::any('/type','Admin\TypeController@type');//商品类型添加 展示
+    Route::any('/type_add','Admin\TypeController@type_add');//商品类型添加方法
+    Route::any('/type_index','Admin\TypeController@type_index');//商品类型 展示
+    Route::any('/type_del','Admin\TypeController@type_del');//商品类型删除
+    Route::any('/ajaxjdjd','Admin\TypeController@ajaxjdjd');//商品类型即点即改
+    Route::any('/attr/{id}','Admin\AttrController@attr');//商品属性添加
+    Route::any('/attr_add','Admin\AttrController@attr_add');//商品属性添加方法
+    Route::any('/attr_index/{id}','Admin\AttrController@attr_index');//商品属性展示不用进行展示侧边
+    Route::any('/attr_del','Admin\AttrController@attr_del');//商品属性删除
 });
 Route::prefix("/")->group(function(){
-    Route::any('/seckill','Admin\SeckillController@seckill');
-    Route::any('/seckill_add','Admin\SeckillController@seckill_add');
-    Route::any('/seckill_index','Admin\SeckillController@seckill_index');
-    Route::any('/updates/{id}','Admin\SeckillController@updates');
-    Route::any('/del','Admin\SeckillController@del');
+    Route::any('/seckill','Admin\SeckillController@seckill');//秒杀添加展示
+    Route::any('/seckill_add','Admin\SeckillController@seckill_add');//秒杀添加方法
+    Route::any('/seckill_index','Admin\SeckillController@seckill_index');//秒杀展示
+    Route::any('/updates/{id}','Admin\SeckillController@updates');//秒杀修改
+    Route::any('/del','Admin\SeckillController@del');//秒杀删除
 
 });
 Route::any('/admins','Admin\HomeController@admins');//首页
