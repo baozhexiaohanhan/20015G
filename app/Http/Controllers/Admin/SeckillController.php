@@ -12,6 +12,9 @@ class SeckillController extends Controller
     public function seckill(){
         $goods = Goods::get();
         return view("admin.seckill.seckill",compact("goods"));
+        // showMsg();
+        // $url = "http://www.20015g.com/seckill_index";
+        // dd(curl_get($url));
     }
     public function seckill_add(){
         $da = request()->except("_token");
@@ -50,11 +53,13 @@ class SeckillController extends Controller
     }
     public function seckill_index(){
         $seckill = Seckill::where("seckill.is_del",1)->leftjoin("goods","seckill.goods_id","=","goods.goods_id")->get();
+        // return $seckill;
         return view("admin.seckill.seckill_index",compact("seckill"));
     }
     public function updates($id){
         $goods = Goods::get();
         $res = Seckill::find($id);
+        // return $res;
         return view("admin.seckill.updates",compact("goods","res"));
     }
     public function del(){
