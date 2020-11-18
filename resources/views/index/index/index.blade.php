@@ -397,17 +397,20 @@
 						<!-- <img src="/static/images/floor_1.jpg" alt="" class="cover"> -->
 					</a>
 					<div class="right-box hot-box">
+						@foreach($goods as $k=>$v)
 						<a href="item_show.html" class="floor-item">
 							<div class="item-img hot-img">
-								<img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+								<img src="{{$v['goods_img']}}" style="width: 200px;height: 280px;" />
+								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
 							</div>
 							<div class="price clearfix">
-								<span class="pull-left cr fz16">￥18.0</span>
+								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
 								<span class="pull-right c6">进货价</span>
 							</div>
-							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
 						</a>
-						<a href="item_show.html" class="floor-item">
+						@endforeach
+						<!-- <a href="item_show.html" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="/static/images/temp/S-002.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
 							</div>
@@ -456,7 +459,7 @@
 								<span class="pull-right c6">进货价</span>
 							</div>
 							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-						</a>
+						</a> -->
 					</div>
 				</div>
 			</div>
@@ -534,7 +537,20 @@
 					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					<a href="item_show.html" class="floor-item">
+					@foreach($goods1 as $k=>$v)
+						<a href="item_show.html" class="floor-item">
+							<div class="item-img hot-img">
+								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
+							</div>
+							<div class="price clearfix">
+								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-right c6">进货价</span>
+							</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+						</a>
+						@endforeach
+					<!-- <a href="item_show.html" class="floor-item">
 						<div class="item-img hot-img">
 							<img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
 						</div>
@@ -613,7 +629,7 @@
 							<span class="pull-right c6">进货价</span>
 						</div>
 						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
+					</a> -->
 				</div>
 			</div>
 		</section>
@@ -635,7 +651,20 @@
 					<!-- <img src="/static/images/floor_3.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					<a href="item_show.html" class="floor-item">
+					@foreach($goods2 as $k=>$v)
+						<a href="item_show.html" class="floor-item">
+							<div class="item-img hot-img">
+								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
+							</div>
+							<div class="price clearfix">
+								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-right c6">进货价</span>
+							</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+						</a>
+						@endforeach
+					<!-- <a href="item_show.html" class="floor-item">
 						<div class="item-img hot-img">
 							<img src="/static/images/temp/M-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
 						</div>
@@ -714,7 +743,7 @@
 							<span class="pull-right c6">进货价</span>
 						</div>
 						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
+					</a> -->
 				</div>
 			</div>
 		</section>
@@ -736,7 +765,20 @@
 					<!-- <img src="/static/images/floor_4.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					<a href="item_show.html" class="floor-item">
+					@foreach($goods3 as $k=>$v)
+						<a href="item_show.html" class="floor-item">
+							<div class="item-img hot-img">
+								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
+							</div>
+							<div class="price clearfix">
+								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-right c6">进货价</span>
+							</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+						</a>
+						@endforeach
+					<!-- <a href="item_show.html" class="floor-item">
 						<div class="item-img hot-img">
 							<img src="/static/images/temp/S-011.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
 						</div>
@@ -815,7 +857,7 @@
 							<span class="pull-right c6">进货价</span>
 						</div>
 						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
+					</a> -->
 				</div>
 			</div>
 		</section>
@@ -837,7 +879,20 @@
 					<!-- <img src="/static/images/floor_5.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					<a href="item_show.html" class="floor-item">
+					@foreach($goods4 as $k=>$v)
+						<a href="item_show.html" class="floor-item">
+							<div class="item-img hot-img">
+								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
+							</div>
+							<div class="price clearfix">
+								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-right c6">进货价</span>
+							</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+						</a>
+						@endforeach
+					<!-- <a href="item_show.html" class="floor-item">
 						<div class="item-img hot-img">
 							<img src="/static/images/temp/M-011.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
 						</div>
@@ -916,7 +971,7 @@
 							<span class="pull-right c6">进货价</span>
 						</div>
 						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
+					</a> -->
 				</div>
 			</div>
 		</section>
@@ -938,7 +993,20 @@
 					<!-- <img src="/static/images/floor_6.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					<a href="item_show.html" class="floor-item">
+					@foreach($goods5 as $k=>$v)
+						<a href="item_show.html" class="floor-item">
+							<div class="item-img hot-img">
+								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
+							</div>
+							<div class="price clearfix">
+								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-right c6">进货价</span>
+							</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+						</a>
+						@endforeach
+					<!-- <a href="item_show.html" class="floor-item">
 						<div class="item-img hot-img">
 							<img src="/static/images/temp/S-009.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
 						</div>
@@ -1017,7 +1085,7 @@
 							<span class="pull-right c6">进货价</span>
 						</div>
 						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
+					</a> -->
 				</div>
 			</div>
 		</section>
