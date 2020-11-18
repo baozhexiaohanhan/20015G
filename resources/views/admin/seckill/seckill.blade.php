@@ -5,7 +5,7 @@
     <div class="layui-form-item">
             <label class="layui-form-label">限时抢购名称</label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="title" autocomplete="off" value="{{$res->}}" class="layui-input">
+                <input type="text" name="name" lay-verify="title" autocomplete="off"  class="layui-input">
             </div>
         </div>
 
@@ -13,14 +13,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">开始日期</label>
             <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
-                <input type="text" class="layui-input" value="{{$res->}}" name="start_time" id="test1">
+                <input type="text" class="layui-input" name="start_time" placeholder="2020-10-31 20:00:00" id="test1">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">结束日期</label>
             <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
-                <input type="text" class="layui-input" value="{{$res->}}" name="end_time" id="test0">
+                <input type="text" class="layui-input" name="end_time" placeholder="2020-10-31 20:00:00" id="test0">
             </div>
         </div>
 
@@ -57,7 +57,7 @@
         <div class="layui-form-item">
         <label class="layui-form-label">介绍</label>
         <div class="layui-input-block">
-            <textarea name="intro" id="" cols="30" lay-verify="title" autocomplete="off" placeholder="" class="layui-input" rows="10"></textarea>
+            <textarea name="intro" id="" cols="30" lay-verify="title" autocomplete="off"  class="layui-input" rows="10"></textarea>
         </div>
         </div>
       
@@ -90,3 +90,4 @@
     });
 
 </script>
+
