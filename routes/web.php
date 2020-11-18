@@ -175,3 +175,8 @@ Route::get('/destroy/{id}','Admin\BirthdayController@destroy');//管理员添加
 
 
 Route::get('/reg','Index\LoginController@reg');//注册
+
+Route::prefix('/index')->group(function(){
+    Route::get('/center','Index\CouponController@center');//个人中心
+    Route::get('/coupon','Index\CouponController@coupon');//优惠券
+});

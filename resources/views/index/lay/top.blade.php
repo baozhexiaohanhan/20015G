@@ -28,7 +28,7 @@
 			<div class="pull-right">
 				<a href="login.html"><span class="cr">登录</span></a>
 				<a href="login.html?p=register">注册</a>
-				<a href="udai_welcome.html">我的U袋</a>
+				<a href="{{url('index/center')}}">我的U袋</a>
 				<a href="udai_order.html">我的订单</a>
 				<a href="udai_integral.html">积分平台</a>
 			</div>

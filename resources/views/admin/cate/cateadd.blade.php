@@ -47,10 +47,8 @@
                     <div class="layui-input-block">
                         <select name="pid" lay-filter="aihao">
                             <option value="0">请选择</option>
-                            @foreach($data as $v)
-                            <option value="{{$v->cate_id}}">
-                                {{$v->cate_name}}
-                            </option>
+                            @foreach($cate as $k=>$v)
+                                <option value="{{$v->cate_id}}">{{str_repeat('--',$v->level*3)}}{{$v->cate_name}}</option>
                             @endforeach
                         </select>
                     </div>

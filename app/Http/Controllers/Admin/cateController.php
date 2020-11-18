@@ -16,7 +16,8 @@ class CateController extends Controller
     {
         $res = DB::table('cate')->get();
 //        dd($res);
-        return view('admin/cate/cateindex',['res'=>$res]);
+        $Category=$this->list_level($res);
+        return view('admin/cate/cateindex',['res'=>$Category]);
     }
 
     /**
@@ -27,7 +28,8 @@ class CateController extends Controller
     public function create()
     {
         $data = DB::table('cate')->get();
-        return view('admin/cate/cateadd',['data'=>$data]);
+        $Category=self::list_level($data);
+        return view('admin/cate/cateadd',['cate'=>$Category]);
     }
 
     /**
@@ -142,5 +144,18 @@ class CateController extends Controller
         }else{
             echo "<script>alert('删除失败');location.href='/cate/index';</script>";
         }
+    }
+//    无限极分类
+    public static function list_level($data,$pid=0,$level=0)//三个参数与上面index方法里面穿的参数相对应
+    {
+        static $array=[];
+        foreach($data as $k=>$v){
+            if($pid==$v->pid){
+                $v->level=$level;
+                $array[]=$v;
+                self::list_level($data,$v->cate_id,$level+1);
+            }
+        }
+        return $array;
     }
 }

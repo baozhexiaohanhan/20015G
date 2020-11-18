@@ -39,16 +39,19 @@
         </thead>
         @foreach($res as $v)
         <thead>
-        <tr cate_id = {{$v->cate_id}} pid = {{$v->pid}}>
+        <tr style="display: none" cate_id = {{$v->cate_id}} pid = {{$v->pid}}>
             <td>
-                <a href="javascript:;" class="show">+</a>
+                <a href="javascript:;" class="showHide">+</a>
                 {{$v->cate_id}}
             </td>
             <td>
                 {{--<i class="layui-icon x-show showHide" status=@if($v->cate_show==1)是 @elseif($v->cate_show==2)否@endif'true' >&#xe623;</i>--}}
-                <span class="cate_name">{{$v->cate_name}}</span>
+                {{@str_repeat($v->level*2)}}
+                {{$v->cate_name}}
             </td>
-            <td>@if($v->cate_show==1)是 @elseif($v->cate_show==2)否@endif</td>
+            <td>
+                @if($v->cate_show==1)是 @elseif($v->cate_show==2)否@endif
+            </td>
             <td>
                 @if($v->cate_new_show==1)是 @elseif($v->cate_new_show==2)否@endif
             </td>
@@ -64,26 +67,62 @@
 </body>
 </html>
 <script>
-    $(function(){
-        //页面一加载 只展示pid=0
-        $("tr[pid=0]").show();
-//        隐藏pid不为0的数据
-        $("tr[pid!=0]").hide();
-        //点击+ -
-        $(document).on("click",".show",function(){
-            var sign=$(this).text();//获取自己当前点击的符号
-            var cate_id=$(this).parents("tr").attr('cate_id');
-            if(sign=='+'){
-                //判断是否有子类
-                if($("tr[pid='"+cate_id+"']").length>0){
-                    $("tr[pid='"+cate_id+"']").show();
-                    $(this).text('-');
-                }
-            }else{
-                $("tr[pid='"+cate_id+"']").hide();
-                $(this).text('+');
-            }
-        })
+//    $(function(){
+//        //页面一加载 只展示pid=0
+//        $("tr[pid=0]").show();
+////        隐藏pid不为0的数据
+//        $("tr[pid!=0]").hide();
+//        //点击+ -
+//        $(document).on("click",".show",function(){
+//            var sign=$(this).text();//获取自己当前点击的符号
+//            var cate_id=$(this).parents("tr").attr('cate_id');
+//            if(sign=='+'){
+//                //判断是否有子类
+//                if($("tr[pid='"+cate_id+"']").length>0){
+//                    $("tr[pid='"+cate_id+"']").show();
+//                    $(this).text('-');
+//                }
+//            }else{
+//                $("tr[pid='"+cate_id+"']").hide();
+//                $(this).text('+');
+//            }
+//        })
+//
+//    })
+//顶级
+$(document).ready(function(){
+    $("tr[pid='0']").show();
+})
 
-    })
+//子级
+$(document).on("click",'.showHide',function(){
+//        alert(21212);
+    var _this=$(this);
+    var _sign=_this.text();
+//        alert(_sign);
+    var cate_id=_this.parents("tr").attr("cate_id");
+//        alert(cate_id);
+//        if(_sign=="+"){
+//            var child=$("tr[parent_id='"+cate_id+"']");
+////            console.log(child);
+//                alert(child);
+//            if(child.length>0){
+//                child.show();
+//                _this.text("-");
+//            }else if(child.length<0){
+//                $("tr[parent_id='"+cate_id+"']").hide();
+//                _this.text("+");
+//            }
+//        }
+    if(_sign=="+"){
+        var child=$("tr[pid='"+cate_id+"']");
+        if(child.length>0){
+            child.show();
+            _this.text("-");
+        }
+    }else{
+        $("tr[pid='"+cate_id+"']").hide();
+        _this.text("+");
+    }
+})
 </script>
