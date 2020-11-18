@@ -18,4 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 });
-Route::get('regdo','Api\ApiController@regdo');//注册
+
+Route::any('/regdo','Api\AdminController@regdo');//注册方法
+Route::any('/sendSMS','Api\AdminController@sendSMS');//发送短信验证码

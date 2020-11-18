@@ -65,7 +65,15 @@
   					<h2>欢迎注册<a href="javascript:;" class="pull-right fz16" id="reglogin">返回登录</a></h2>
   				</div>
   				<div class="tabs_container">
-					<form class="tabs_form" action="#" method="get" id="register_form">
+					<form class="tabs_form"  method="get" id="register_form">
+							<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+								</div>
+								<input class="form-control phone" name="user_name" id="register_phone" required placeholder="用户名" maxlength="11" autocomplete="off" type="text">
+							</div>
+						</div>
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">
@@ -76,7 +84,7 @@
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input class="form-control" name="smscode" id="register_sms" placeholder="输入验证码" type="text">
+								<input class="form-control" name="code" id="register_sms" placeholder="输入验证码" type="text">
 								<span class="input-group-btn">
 									<button class="btn btn-primary getsms" type="button">发送短信验证码</button>
 								</span>
@@ -107,11 +115,55 @@
 	</div>
 </body>
 </html>
-<script type="text/javascript">
-	$(document).on('click','.btn-large',function(){
-		var user_tel = $('input[name="user_tel"]').val();
-		var user_pwd = $('input[name="user_pwd"]').val();
-		console.log(user_tel);
-		console.log(user_pwd);
-	})
+	<script type="text/javascript">
+    $(document).on('click','.btn-large ',function (){
+        var user_tel = $('input[name="user_tel"]').val();
+        var user_pwd = $('input[name="user_pwd"]').val();
+        var user_name = $('input[name="user_name"]').val();
+        var code = $('input[name="code"]').val();
+  		$.post('http://www.2001api.com/api/regdo',{user_tel:user_tel,user_pwd:user_pwd,user_name:user_name,code:code},function (result) {
+           if(result.code=='1'){
+                alert(result.msg);
+            }
+            if(result.code=='2'){
+                alert(result.msg);
+            }
+            if(result.code=='3'){
+                alert(result.msg);
+            }
+            if(result.code=='4'){
+                alert(result.msg);
+            }
+            if(result.code=='0'){
+                location.href = "/login"
+            }else{
+                alert(result.msg);
+            }
+        },'json')
+
+    });
+      $(document).on('click','.getsms',function (){
+        var name = $('input[name="user_tel"]').val();
+        var mobilereg = /^1[3|5|6|7|8|9]\d{9}$/;
+        if(mobilereg.test(name)){
+            //发送手机号验证码
+            $.get('http://www.2001api.com/api/sendSMS',{name:name},function (res) {
+                if(res.code=='5'){
+                    alert(res.msg);
+                }
+                if(res.code=='00'){
+                    alert(res.msg);
+                }
+                if(res.code=='02'){
+                    alert(res.msg);
+                }
+            },'json');
+            return;
+        }
+        alert('请输入正确的手机号');
+        return;
+
+
+    })
 </script>
+
