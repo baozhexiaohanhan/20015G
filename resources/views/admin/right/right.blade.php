@@ -57,10 +57,10 @@
     <div class="layui-form-item">
     <label class="layui-form-label">Menu</label>
     <div class="layui-input-block">
-      <select name="parent_id" lay-filter="aihao">
+    <select name="parent_id" lay-filter="aihao">
         <option value="0">顶级分类</option>
         @foreach($reg as $k=>$v)
-        <option value="{{$v->parent_id}}">{{str_repeat('—',$v->level*3)}}{{$v->right_name}}</option>
+        <option value="{{$v->right_id}}">{{str_repeat('—',$v->level*3)}}{{$v->right_name}}</option>
         @endforeach
        
       </select>

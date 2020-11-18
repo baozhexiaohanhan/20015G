@@ -1,6 +1,25 @@
 <div class="left-nav">
       <div id="side-nav">
-        <ul id="nav">
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test" >
+ 
+ @php  $name=Route::currentRouteName();@endphp
+   @if(isset($aaaaa))
+   @foreach($aaaaa as $k=>$v)
+     <li @if(strpos($name,$v->right_as)!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item"@endif>
+       <a class="" href="javascript:;">{{$v->right_name}}</a>
+       @if($v->son)
+       <dl class="layui-nav-child">
+          @foreach($v->son as $key=>$val)
+         <dd @if($name==$val->right_as) class='layui-this' @endif><a href="{{$val->right_url}}">{{$val->right_name}}</a></dd>
+         @endforeach
+       </dl>
+       @endif
+     </li>
+    
+   @endforeach
+   @endif
+ </ul>
+        <!-- <ul id="nav">
              <li >
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6eb;</i>
@@ -212,7 +231,7 @@
                     
                 </ul>
             </li>             
-        <li>
+            <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6ae;</i>
                     <cite>系统统计</cite>
@@ -358,7 +377,7 @@
                     </li >
                 </ul>
             </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
-    @section('sidebar')
+    <!-- @section('sidebar') -->

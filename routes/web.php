@@ -15,12 +15,13 @@ Route::get('/','Index\IndexController@index');//首页
 
 
 
-
 Route::get('/reg','Admin\LoginController@reg');//注册
 Route::any('/login','Admin\LoginController@login');//登录  logindo
 Route::any('/logindo','Admin\LoginController@logindo');//登录操作
 Route::get('/login','Admin\LoginController@login');//首页
-
+//防非法登录
+Route::middleware('islog')->group(function(){
+    Route::get('/loginapp','Admin\LoginController@loginapp');//退出
 //广告管理
 Route::prefix("ad")->group(function(){
 	//广告
@@ -152,18 +153,19 @@ Route::prefix('/right')->group(function(){
 
 Route::prefix("/admin")->group(function(){
 
-    Route::any('/create','Admin\RegController@create')->name('admin.create');//管理员添加
-    Route::any('/rstore','Admin\RegController@rstore')->name('admin.store');//管理员执行添加
-    Route::any('/list','Admin\RegController@index')->name('admin.index');//管理员展示
-    Route::any('/delete/{brand_id}','Admin\RegController@delete')->name('admin.del');//管理员删除
-    Route::any('/redit/{admin_id}','Admin\RegController@redit')->name('admin.edit');;//管理员修改
-    Route::any('/rupdate/{admin_id}','Admin\RegController@rupdate')->name('admin.updo');;//管理员执行修改
+    // Route::any('/create','Admin\RegController@create')->name('admin.create');//管理员添加
+    // Route::any('/rstore','Admin\RegController@rstore')->name('admin.store');//管理员执行添加
+    // Route::any('/list','Admin\RegController@index')->name('admin.index');//管理员展示
+    // Route::any('/delete/{brand_id}','Admin\RegController@delete')->name('admin.del');//管理员删除
+    // Route::any('/redit/{admin_id}','Admin\RegController@redit')->name('admin.edit');;//管理员修改
+    // Route::any('/rupdate/{admin_id}','Admin\RegController@rupdate')->name('admin.updo');;//管理员执行修改
+    // Route::any('/imageCode','Admin\RegController@imageCode');
     
 
-    // Route::any('/list','Admin\AdminController@list');//管理员列表
-    // Route::any('/addlist','Admin\AdminController@addlist');//管理员添加   
-    // Route::any('/create','Admin\AdminController@create');//管理员添加方法
-    // Route::get('/destroy/{id}','Admin\AdminController@destroy');//管理员添加方法
+    Route::any('/list','Admin\AdminController@list');//管理员列表
+    Route::any('/addlist','Admin\AdminController@addlist');//管理员添加   
+    Route::any('/create','Admin\AdminController@create');//管理员添加方法
+    Route::get('/destroy/{id}','Admin\AdminController@destroy');//管理员添加方法
     Route::any('/notice','Admin\AdminController@notice');//公告添加   
     Route::any('/noticelist','Admin\AdminController@noticelist');//公告列表
     Route::any('/createlist','Admin\AdminController@createlist');//公告添加方法
@@ -178,7 +180,6 @@ Route::prefix("/birthday")->group(function(){
 
 });
 
-
-
+});
 
 

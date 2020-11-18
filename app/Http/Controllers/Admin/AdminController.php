@@ -8,7 +8,8 @@ use App\Model\Admin;
 use App\Model\Role;
 use App\Model\Notice;
 use App\Model\AdminRole;
-use Db;
+
+use DB;
 class AdminController extends Controller
    {
     //管理员类别
@@ -30,25 +31,29 @@ class AdminController extends Controller
 
 //添加视图
 
-    public function addlist(){
+    public function addlist(){ 
      		$role = Role::all();
     	return view('admin.admin.addlist',['role'=>$role]);
     }
 //添加方法
     public function create(Request $request){
+   
+        
+
+
     	  $admin_pwd =  $request->input('admin_pwd');
     	  $admin_name =  $request->input('admin_name');
     	  $admin_tel =  $request->input('admin_tel');
     	  $email =  $request->input('email');
-    	  
+    	  $role = $request->input('role');
     	  $time = time();
-    	  $str = implode($role);
+    	//   $str = implode($role);
     	     	$data = [
               'admin_pwd' => password_hash($admin_pwd,PASSWORD_DEFAULT),
               'admin_name' => $admin_name,
               'admin_tel' => $admin_tel,
               'email' => $email,
-              'role' => $str,
+            //   'role' => $str,
               'admin_time'=>$time
           ];
            $AdminModel = new Admin();
@@ -60,7 +65,6 @@ class AdminController extends Controller
                 return redirect('/addlist')->with('msg', '管理员已存在，请重新添加');
                 die;
             }
-
             if ($admin_tel) {
                 return redirect('/addlist')->with('msg', '手机号码已存在，请重新添加');
                 die;
@@ -69,11 +73,24 @@ class AdminController extends Controller
                 return redirect('/addlist')->with('msg', '邮箱已经存在，请重新添加');
                 die;
             }
-    	$res = Admin::insert($data);
-         if($res){
-             return redirect('/admin/list');
-         }
+        $res = Admin::create($data);
+        if($res){
+            if(count($role)){
+                foreach($role as $k=>$v){
+                    $admin_role[]=[
+                        'admin_id'=>$res->admin_id,
+                        'role_id'=>$v
+                    ];
+                }
+                $AdminRoleModel=new AdminRole();
+               $AdminRoleModel->insert($admin_role);
+             
+            }
+            DB::commit();
+            return redirect('/admin/list');
+        }
     }
+    
 //删除
 
     public function destroy($id){

@@ -13,6 +13,7 @@ class RightController extends Controller
     public function right(){
         $RightModel=new Right();
         $data=$RightModel->get();
+        
         //dd($data);
        $reg= $this->list_level($data);
        //dd($reg);
@@ -20,20 +21,20 @@ class RightController extends Controller
     }
     //无限极分类
     public function list_level($data,$parent_id=0,$level=1){
-            if(!$data){
-                return false; 
+        if(!$data){
+            return false; 
+        }
+        static $array=[];
+        foreach($data as $k=>$v){
+            if($v->parent_id==$parent_id){
+                $v->level=$level;
+                $array[]=$v;
+                $this->list_level($data,$v->right_id,$level+1);
             }
-            static $array=[];
-            foreach($data as $k=>$v){
-                if($v->parent_id==$parent_id){
-                    $v->level=$level;
-                    $array[]=$v;
-                    $this->list_level($data,$v->right_id,$level+1);
-                }
-            }
+        }
 
-            return $array;
-    }
+        return $array;
+}
     //执行添加
     public function rigdo(){
         $data=request()->all();
