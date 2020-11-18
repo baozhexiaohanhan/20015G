@@ -131,12 +131,12 @@ Route::prefix('/cate')->group(function (){
 });
 //优惠券管理
 Route::prefix('coupon')->group(function(){
-    Route::get('/create','Admin\couponController@create');//添加页面
-    Route::post('/store','Admin\couponController@store');//添加执行
-    Route::get('/index','Admin\couponController@index');//列表
+    Route::get('/create','Admin\CouponController@create');//添加页面
+    Route::post('/store','Admin\CouponController@store');//添加执行
+    Route::get('/index','Admin\CouponController@index');//列表
     Route::get('/destroy/{coupon_id}','Admin\CouponController@destroy');//删除
     Route::get('/edit/{coupon_id}','Admin\CouponController@edit');//修改
-    Route::post('/update','Admin\couponController@update');//修改执行
+    Route::post('/update','Admin\CouponController@update');//修改执行
 });
 
 
