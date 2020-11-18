@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 });
 
+
 Route::prefix('domain')->group(function(){
 	Route::get('/index','Api\IndexController@index');
 	Route::get('/indexa','Api\IndexController@indexa');
@@ -28,3 +29,6 @@ Route::prefix('domain')->group(function(){
 	Route::get('/indexe','Api\IndexController@indexe');
 });
 Route::get('regdo','Api\TestController@regdo');//注册
+
+Route::get('regdo','Api\ApiController@regdo');//注册
+
