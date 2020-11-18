@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Model\User;
+use AlibabaCloud\Client\AlibabaCloud;
+use AlibabaCloud\Client\Exception\ClientException;
+use AlibabaCloud\Client\Exception\ServerException;
+class AdminController extends Controller
+{
+    public function regdo(Request $request){
+ 		  $user_tel =  $request->input('user_tel');
+ 		  $user_pwd =  $request->input('user_pwd');
+ 		  $user_name =  $request->input('user_name');
+ 		  $time = time();
+        $len = strlen($user_pwd);
+ 		$t = User::where(['user_tel'=>$user_tel])->first();
+        $a = User::where(['user_name'=>$user_name])->first();
+        if($t){
+            return json_encode(['code'=>'1','msg'=>'手机号已存在']);
+        }
+        if($a){
+            return json_encode(['code'=>'2','msg'=>'用户名已存在']);
+        }
+        if($len<6){
+            return json_encode(['code'=>'3','msg'=>'密码长度不能小于六位']);
+        }
+ 		  $data = [
+ 		  	'user_name'=>$user_name,
+ 		  	'user_pwd'=>password_hash($user_pwd,PASSWORD_DEFAULT),
+ 		  	'user_tel'=>$user_tel,
+ 		  	'user_time'=>$time
+ 		  ];
+ 		  $res = User::insert($data);
+        if(!$res){
+            return json_encode(['code'=>'4','msg'=>'注册失败']);
+        }else{
+            return json_encode(['code'=>'0','msg'=>'注册成功']);
+        }
+      }
+
+       public function sendSMS()
+    {
+        $name = request()->name;
+        $reg = '/^1[3|5|6|7|8|9]\d{9}$/';
+        if(!preg_match($reg,$name)){
+           return json_encode(['code'=>'5','msg'=>'请输入正确的手机号']);
+        }
+        $code = rand(10000,999999);
+        $result = $this->send($name,$code);
+       if($result['Message']=='OK'){
+            return json_encode(['code'=>'00','msg'=>'发送成功']);
+        }else{
+            return json_encode(['code'=>'02','msg'=>'发送失败']);
+        }
+
+    }
+    //短信验证
+    public function send($name,$code){
+
+// Download：https://github.com/aliyun/openapi-sdk-php
+// Usage：https://github.com/aliyun/openapi-sdk-php/blob/master/README.md
+        AlibabaCloud::accessKeyClient('LTAI4GGztP28VTaEQn9pMz9C','hY5DL4Y0iple37NwD03apfDv5XA0Ar')
+            ->regionId('cn-hangzhou')
+            ->asDefaultClient();
+        try {
+            $result = AlibabaCloud::rpc()
+                ->product('Dysmsapi')
+                // ->scheme('https') // https | http
+                ->version('2017-05-25')
+                ->action('SendSms')
+                ->method('POST')
+                ->host('dysmsapi.aliyuncs.com')
+                ->options([
+                    'query' => [
+                        'RegionId' => "cn-hangzhou",
+                        'PhoneNumbers' => $name,
+                        'SignName' => "白洁洁",
+                        'TemplateCode' => "SMS_182670126",
+                        'TemplateParam' => "{code:$code}",
+                    ],
+                ])
+                ->request();
+            print_r($result->toArray());
+        } catch (ClientException $e) {
+            echo $e->getErrorMessage() . PHP_EOL;
+        } catch (ServerException $e) {
+            echo $e->getErrorMessage() . PHP_EOL;
+        }
+    }
+ }
+
