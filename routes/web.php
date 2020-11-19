@@ -15,7 +15,6 @@ Route::get('/','Index\IndexController@index');//首页
 
 
 
-
 Route::get('/reg','Admin\LoginController@reg');//注册
 Route::any('/login','Admin\LoginController@login');//登录  logindo
 Route::any('/logindo','Admin\LoginController@logindo');//登录操作

@@ -11,8 +11,14 @@ class IndexController extends Controller
 {
    
     public function index(){
-    	$cate=Cate::get();
-    	$cate=self::createTree($cate,'cate_id');
+
+	
+		//dd($data);
+
+
+
+		$cate=Cate::get();
+		$cate=self::createTree($cate,'cate_id');
 		$goods=Goods::where(['is_up'=>1,'cate_id'=>4,'is_show'=>1])->get();
 		$goods1=Goods::where(['is_up'=>1,'cate_id'=>5,'is_show'=>1])->get();
 		$goods2=Goods::where(['is_up'=>1,'cate_id'=>30,'is_show'=>1])->get();
@@ -20,7 +26,7 @@ class IndexController extends Controller
     	$goods4=Goods::where(['is_up'=>1,'cate_id'=>7,'is_show'=>1])->get();
     	$goods5=Goods::where(['is_up'=>1,'cate_id'=>36,'is_show'=>1])->get();
 		
-		$msg = [
+		$msg1 = [
 			"goods"=>$goods,
 			"goods1"=>$goods1,
 			"goods2"=>$goods2,
@@ -28,8 +34,10 @@ class IndexController extends Controller
 			"goods4"=>$goods4,
 			"goods5"=>$goods5,
 		];
-
-    	return $msg;
+		$msg = json_encode($msg1);
+		$data = ['code'=>100,'msg'=>"返回数据成功","ret"=>$msg];
+		
+    	return $data;
     }
    
      public static function createTree($data,$pid=0,$level=0){

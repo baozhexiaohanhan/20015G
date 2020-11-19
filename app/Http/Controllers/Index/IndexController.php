@@ -15,7 +15,7 @@ class IndexController extends Controller
     	$url='http://www.2001api.com/domain/index';
     	
 		$goods=curl_get($url);
-		
+		$goods = json_decode($goods['ret']);
     	return view('index.index.index',compact('goods'));
     }
 }

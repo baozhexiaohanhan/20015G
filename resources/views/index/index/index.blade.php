@@ -326,17 +326,17 @@
 						<!-- <img src="/static/images/floor_1.jpg" alt="" class="cover"> -->
 					</a>
 					<div class="right-box hot-box">
-						@foreach($goods['goods'] as $k=>$v)
+					@foreach($goods->goods as $k=>$v)
 						<a href="item_show.html" class="floor-item">
 							<div class="item-img hot-img">
-								<img src="{{$v['goods_img']}}" style="width: 200px;height: 280px;" />
+								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
 							</div>
 							<div class="price clearfix">
-								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-left cr fz16">￥{{$v->goods_price}}</span>
 								<span class="pull-right c6">进货价</span>
 							</div>
-							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v->goods_name}}</div>
 						</a>
 						@endforeach
 					
@@ -417,17 +417,17 @@
 					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					@foreach($goods['goods1'] as $k=>$v)
+				@foreach($goods->goods1 as $k=>$v)
 						<a href="item_show.html" class="floor-item">
 							<div class="item-img hot-img">
-								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
 							</div>
 							<div class="price clearfix">
-								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-left cr fz16">￥{{$v->goods_price}}</span>
 								<span class="pull-right c6">进货价</span>
 							</div>
-							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v->goods_name}}</div>
 						</a>
 						@endforeach
 			
@@ -452,17 +452,17 @@
 					<!-- <img src="/static/images/floor_3.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					@foreach($goods['goods2'] as $k=>$v)
+				@foreach($goods->goods2 as $k=>$v)
 						<a href="item_show.html" class="floor-item">
 							<div class="item-img hot-img">
-								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
 							</div>
 							<div class="price clearfix">
-								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-left cr fz16">￥{{$v->goods_price}}</span>
 								<span class="pull-right c6">进货价</span>
 							</div>
-							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v->goods_name}}</div>
 						</a>
 						@endforeach
 				
@@ -487,17 +487,17 @@
 					<!-- <img src="/static/images/floor_4.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					@foreach($goods['goods3'] as $k=>$v)
+				@foreach($goods->goods3 as $k=>$v)
 						<a href="item_show.html" class="floor-item">
 							<div class="item-img hot-img">
-								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
 							</div>
 							<div class="price clearfix">
-								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-left cr fz16">￥{{$v->goods_price}}</span>
 								<span class="pull-right c6">进货价</span>
 							</div>
-							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v->goods_name}}</div>
 						</a>
 						@endforeach
 		
@@ -522,17 +522,17 @@
 					<!-- <img src="/static/images/floor_5.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					@foreach($goods['goods4'] as $k=>$v)
+				@foreach($goods->goods4 as $k=>$v)
 						<a href="item_show.html" class="floor-item">
 							<div class="item-img hot-img">
-								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
 							</div>
 							<div class="price clearfix">
-								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-left cr fz16">￥{{$v->goods_price}}</span>
 								<span class="pull-right c6">进货价</span>
 							</div>
-							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v->goods_name}}</div>
 						</a>
 						@endforeach
 				
@@ -557,17 +557,17 @@
 					<!-- <img src="/static/images/floor_6.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-					@foreach($goods['goods5'] as $k=>$v)
+				@foreach($goods->goods5 as $k=>$v)
 						<a href="item_show.html" class="floor-item">
 							<div class="item-img hot-img">
-								<img src="{{$v['goods_img']}}" style="width: 205.01px;height: 210px;" />
+								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
 							</div>
 							<div class="price clearfix">
-								<span class="pull-left cr fz16">￥{{$v['goods_price']}}</span>
+								<span class="pull-left cr fz16">￥{{$v->goods_price}}</span>
 								<span class="pull-right c6">进货价</span>
 							</div>
-							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v['goods_name']}}</div>
+							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v->goods_name}}</div>
 						</a>
 						@endforeach
 					
