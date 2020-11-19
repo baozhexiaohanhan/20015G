@@ -405,7 +405,7 @@
     <!-- @section('sidebar') -->
 
 
-    <script src="/static/layui.js"></script>
+    <!-- <script src="/static/layui.js"></script>
 <script>
 //JavaScript代码区域
 @php $name=Route::currentRouteName();@endphp
@@ -460,7 +460,7 @@ layui.use('form', function(){
       })
    }); 
   //各种基于事件的操作，下面会有进一步介绍
-});
+}); -->
   
 
 </script>
