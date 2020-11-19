@@ -21,38 +21,38 @@ class IsLogin
     public function handle($request, Closure $next)
     {
         $data = session('login');
+      
         $admin_id = $data['admin_id'];
          
         if(empty($admin_id)){
             return redirect('/login')->with('msg','请先登录！');
         }
        $name=Route::currentRouteName();
-       
- 
-
 
        if($data->admin_name =='admin'){
                 $datas=Right::where('is_show',1)->get();
-
             }else{              //角色权限表
               $datas=Right::join('role_right',"right.right_id","=","role_right.right_id")
               ->join('admin_role',"admin_role.role_id","=","role_right.role_id")
               ->distinct('role_right.right_id')
-              ->where(['admin_role.admin_id'=>$data-> admin_id,'is_show'=>1])
+              ->where(['admin_role.admin_id'=>$data->admin_id,'is_show'=>1])
               ->get(['role_right.right_id','right.*']);
+            
               $routName=[];
               foreach($datas as $key=>$val){
                   $routName[]=$val->right_as;
               }
+            
               if($name!='aindex'){
                 if(!in_array($name,$routName)){
                   return redirect('/login')->with('msg','没有权限');
                 }
               }
             }
-
+ 
            
             $reg=$this->createSoneTree($datas);
+           
             view()->share('aaaaa',$reg);
             return $next($request);
     }

@@ -36,14 +36,12 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            @if(session('login'))
             <a href="javascript:;">欢迎{{session('login')->admin_name}}登录</a>
-            @endif
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onClick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
+            <!-- <dl class="layui-nav-child"> 二级菜单 -->
+              <!-- <dd><a onClick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
               <dd><a onClick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
               <dd><a href="/loginapp">退出</a></dd>
-            </dl>
+            </dl> -->
           </li>
           <li class="layui-nav-item to-index"><a href="#">前台首页</a></li>
         </ul>
