@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 });
 Route::get('regdo','Api\ApiController@regdo');//注册
+Route::get('/','Api\ApiController@index');//注册
