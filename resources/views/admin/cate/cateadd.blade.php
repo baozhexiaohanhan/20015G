@@ -22,6 +22,15 @@
 
 <body>
 <form action="{{url('/cate/store')}}" method="post">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <script>alert('{{ $error }}')</script>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 <div class="layui-card">
     <div class="layui-card-body">
         <form class="layui-form" action="" lay-filter="component-form-element">
@@ -38,8 +47,8 @@
                     <div class="layui-input-block">
                         <select name="pid" lay-filter="aihao">
                             <option value="0">请选择</option>
-                            @foreach($data as $v)
-                            <option value="{{$v->cate_id}}">{{$v->cate_name}}</option>
+                            @foreach($cate as $k=>$v)
+                                <option value="{{$v->cate_id}}">{{str_repeat('--',$v->level*3)}}{{$v->cate_name}}</option>
                             @endforeach
                         </select>
                     </div>
