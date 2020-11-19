@@ -11,60 +11,35 @@ class IndexController extends Controller
 {
    
     public function index(){
-    	$cate=Cate::get();
-    	// dd($cate);
-    	$cate=self::createTree($cate,'cate_id');
-    	// dd($cate);
-    	$goods=Goods::where(['is_up'=>1,'cate_id'=>4,'is_show'=>1])->get();
-    	// dd($goods);
-    	// $goods1=Goods::where(['is_up'=>1,'cate_id'=>5,'is_show'=>1])->get();
-    	return $goods;
-    }
-    public function indexa(){
-    	$cate=Cate::get();
-    	// dd($cate);
-    	$cate=self::createTree($cate,'cate_id');
-    	// dd($cate);
-    	$goods1=Goods::where(['is_up'=>1,'cate_id'=>5,'is_show'=>1])->get();
-    	
-    	return $goods1;
-    }
-    public function indexb(){
-    	$cate=Cate::get();
-    	// dd($cate);
-    	$cate=self::createTree($cate,'cate_id');
-    	// dd($cate);
-    	$goods2=Goods::where(['is_up'=>1,'cate_id'=>30,'is_show'=>1])->get();
-    	
-    	return $goods2;
-    }
-     public function indexc(){
-    	$cate=Cate::get();
-    	// dd($cate);
-    	$cate=self::createTree($cate,'cate_id');
-    	// dd($cate);
-    	$goods3=Goods::where(['is_up'=>1,'cate_id'=>6,'is_show'=>1])->get();
-    	
-    	return $goods3;
-    }
-     public function indexd(){
-    	$cate=Cate::get();
-    	// dd($cate);
-    	$cate=self::createTree($cate,'cate_id');
-    	// dd($cate);
+
+	
+		//dd($data);
+
+
+
+		$cate=Cate::get();
+		$cate=self::createTree($cate,'cate_id');
+		$goods=Goods::where(['is_up'=>1,'cate_id'=>4,'is_show'=>1])->get();
+		$goods1=Goods::where(['is_up'=>1,'cate_id'=>5,'is_show'=>1])->get();
+		$goods2=Goods::where(['is_up'=>1,'cate_id'=>30,'is_show'=>1])->get();
+		$goods3=Goods::where(['is_up'=>1,'cate_id'=>6,'is_show'=>1])->get();
     	$goods4=Goods::where(['is_up'=>1,'cate_id'=>7,'is_show'=>1])->get();
-    	
-    	return $goods4;
-    }
-    public function indexe(){
-    	$cate=Cate::get();
-    	// dd($cate);
-    	$cate=self::createTree($cate,'cate_id');
-    	// dd($cate);
     	$goods5=Goods::where(['is_up'=>1,'cate_id'=>36,'is_show'=>1])->get();
-    	
-    	return $goods5;
+		
+		$msg1 = [
+			"goods"=>$goods,
+			"goods1"=>$goods1,
+			"goods2"=>$goods2,
+			"goods3"=>$goods3,
+			"goods4"=>$goods4,
+			"goods5"=>$goods5,
+		];
+		$msg = json_encode($msg1);
+		$data = ['code'=>100,'msg'=>"返回数据成功","ret"=>$msg];
+		
+    	return $data;
     }
+   
      public static function createTree($data,$pid=0,$level=0){
         if(!$data){
             return;

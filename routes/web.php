@@ -13,12 +13,11 @@
 
 Route::get('/','Index\IndexController@index');//前台首页
 
-Route::any('/admins','Admin\HomeController@admins');//后台首页
+Route::get('/reg','Admin\LoginController@reg');//注册
+Route::any('/login','Admin\LoginController@login');//登录  logindo
+Route::any('/logindo','Admin\LoginController@logindo');//登录操作
+Route::get('/login','Admin\LoginController@login');//首页
 
-
-Route::get('/reg','Admin\LoginController@reg');//后台注册
-Route::any('/login','Admin\LoginController@login');//后台登录  logindo
-Route::any('/logindo','Admin\LoginController@logindo');//后台登录操作
 //防非法登录
 Route::middleware('islog')->group(function(){
     Route::get('/loginapp','Admin\LoginController@loginapp');//退出
