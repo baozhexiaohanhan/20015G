@@ -307,13 +307,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="{{asset('cate/create')}}">
+                        <a _href="{{url('cate/create')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>分类添加</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="{{asset('cate/index')}}">
+                        <a _href="{{url('cate/index')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>分类列表</cite>
                         </a>
@@ -384,14 +384,14 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="{{asset('coupon/create')}}">
+                        <a _href="{{url('coupon/create')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>优惠券添加</cite>
 
                         </a>
                     </li >
                     <li>
-                        <a _href="{{asset('coupon/index')}}">
+                        <a _href="{{url('coupon/index')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>优惠券列表</cite>
 

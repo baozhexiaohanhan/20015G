@@ -1,1 +1,1 @@
-document.write('<img src="http://www.20015g.com/upload/photo/82ZEZUlssm1Ua16jPUvDjDGRZxKGDEykG3OECkJv.webp" width="300" height="560">');
+document.write('<img src="http://www.20015g.com/upload/upload/THS1FrJJwWtc4fnzruab5LhMjskJtlzacYcCY3t0.webp" width="300" height="560">');

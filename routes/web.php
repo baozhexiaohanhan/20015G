@@ -46,7 +46,9 @@ Route::prefix("ad")->group(function(){
     Route::get("/position/change","Admin\PositionController@change");
     Route::get('/position/checkOnly',"Admin\PositionController@checkOnly");
 });
-//品牌
+
+
+//品牌管理
 Route::prefix('brand')->group(function(){
     Route::any('/create','Admin\BrandController@create')->name('brand.create');
     Route::any('/store','Admin\BrandController@store');
@@ -56,6 +58,7 @@ Route::prefix('brand')->group(function(){
     Route::any('/update/{brand_id}','Admin\BrandController@update');
     Route::any('/delete/{brand_id?}','Admin\BrandController@destroy');
     Route::any('/change','Admin\BrandController@change');
+    Route::get('/checkOnly',"Admin\BrandController@checkOnly");
 });
 //sku 商品  类型 属性 
 Route::prefix("/")->group(function(){
@@ -85,7 +88,8 @@ Route::prefix("/")->group(function(){
     Route::any('/seckill_index','Admin\SeckillController@seckill_index');//秒杀展示
     Route::any('/updates/{id}','Admin\SeckillController@updates');//秒杀修改
     Route::any('/del','Admin\SeckillController@del');//秒杀删除
- 
+
+
 });
 
 
@@ -96,21 +100,21 @@ Route::any('/create','Admin\AdminController@create');//管理员添加方法
 
 //商品分类管理
 Route::prefix('/cate')->group(function (){
-    Route::get('/index','Admin\CateController@index');//列表展示
-    Route::get('/create','Admin\CateController@create');//添加
-    Route::post('/store','Admin\CateController@store');//添加执行
-    Route::get('/destroy/{cate_id}','Admin\CateController@destroy');//删除
-    Route::get('/edit/{cate_id}','Admin\CateController@edit');//修改
+    Route::get('/index','Admin\cateController@index');//列表展示
+    Route::get('/create','Admin\cateController@create');//添加
+    Route::post('/store','Admin\cateController@store');//添加执行
+    Route::get('/destroy/{cate_id}','Admin\cateController@destroy');//删除
+    Route::get('/edit/{cate_id}','Admin\cateController@edit');//修改
     Route::post('/update','Admin\cateController@update');//修改执行
 });
 //优惠券管理
 Route::prefix('coupon')->group(function(){
-    Route::get('/create','Admin\CouponController@create');//添加页面
-    Route::post('/store','Admin\CouponController@store');//添加执行
-    Route::get('/index','Admin\CouponController@index');//列表
-    Route::get('/destroy/{coupon_id}','Admin\CouponController@destroy');//删除
-    Route::get('/edit/{coupon_id}','Admin\CouponController@edit');//修改
-    Route::post('/update','Admin\CouponController@update');//修改执行
+    Route::get('/create/','Admin\couponController@create');//添加页面
+    Route::post('/store/','Admin\couponController@store');//添加执行
+    Route::get('/index/','Admin\couponController@index');//列表
+    Route::get('/destroy/{coupon_id}','Admin\couponController@destroy');//删除
+    Route::get('/edit/{coupon_id}','Admin\couponController@edit');//修改
+    Route::post('/update','Admin\couponController@update');//修改执行
 });
 
 
@@ -165,12 +169,21 @@ Route::prefix("/birthday")->group(function(){
 
 Route::get('/create','Admin\BirthdayController@create');//生日添加
 Route::get('/list','Admin\BirthdayController@list');//生日列表
-Route::post('/store','Admin\BirthdayController@store');//添加方法
-Route::get('/destroy/{id}','Admin\BirthdayController@destroy');//管理员添加方法
+Route::post('/store','Admin\BirthdayController@store');
 
     });
 
 });
 
 
-Route::get('/reg','Index\LoginController@reg');//前台注册
+
+
+
+Route::get('/reg','Index\LoginController@reg');//注册
+
+Route::prefix('/index')->group(function(){
+    Route::get('/center','Index\CouponController@center');//个人中心
+    Route::get('/coupon','Index\CouponController@coupon');//优惠券
+});
+
+
