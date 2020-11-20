@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 	Route::any('/getuser','Api\AdminController@getuser');//公告
 	Route::any('/getcurl','Api\AdminController@getcurl');//公告
 
+
  });
 
 
@@ -32,6 +33,16 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 		Route::get('/indexc','Api\IndexController@indexc');
 		Route::get('/indexd','Api\IndexController@indexd');
 		Route::get('/indexe','Api\IndexController@indexe');
+		Route::any('/notice','Api\IndexController@notice');
+		Route::any('/fenlei','Api\IndexController@fenlei');
+		Route::any('/Treecate','Api\IndexController@Treecate');
+
+		
+	});
+	Route::prefix('/')->group(function(){
+		Route::any('details/{id?}','Api\DetailsController@details');
+		Route::get('/attr_key','Api\DetailsController@attr_key');
+	
 	});
 	Route::get('regdo','Api\TestController@regdo');//注册
 	
