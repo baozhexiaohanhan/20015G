@@ -151,6 +151,11 @@ Route::post('/store','Admin\BirthdayController@store');
 
 
 
+Route::get('/cart','Index\CartController@index');//前台购物车列表
+Route::get('/getcartprice','Index\CartController@getcartprice');//算总价
+Route::get('/cartplus','Index\CartController@cartplus');//算数量
+
+
 
 Route::get('/reg','Index\LoginController@reg');//注册
 Route::get('/log','Index\LoginController@log');//注册
@@ -162,4 +167,12 @@ Route::prefix('/index')->group(function(){
 
 });
 
+Route::prefix('/goods')->group(function(){
+    Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
+});
 
+
+Route::prefix('/')->group(function(){
+    Route::any('details','Index\DetailsController@details');
+
+});

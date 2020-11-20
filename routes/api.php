@@ -37,9 +37,17 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 		Route::any('/fenlei','Api\IndexController@fenlei');
 		Route::any('/Treecate','Api\IndexController@Treecate');
 
+		
+	});
+	Route::prefix('/')->group(function(){
+		Route::any('details/{id?}','Api\DetailsController@details');
+		Route::get('/attr_key','Api\DetailsController@attr_key');
+	
 	});
 	Route::get('regdo','Api\TestController@regdo');//注册
 	
 	Route::get('regdo','Api\ApiController@regdo');//注册
 });
+
+
 

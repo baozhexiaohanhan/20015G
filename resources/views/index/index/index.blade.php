@@ -9,12 +9,10 @@
 				
 				<div class="cat-list__box">
 						@foreach($catedata as $k=>$v)
-					
 					<div class="cat-box">
 						<div class="title">
 							<i class="iconfont icon-skirt ce"></i> {{$v->cate_name}}
 						</div>
-						
 						<div class="cat-list__deploy">
 							<div class="deploy-box">
 						@foreach($v->child as $kk=>$vv)
@@ -27,18 +25,13 @@
 										<a href="{{url('/goods/goods_list/'.$v->cate_id)}}">{{$vvv->cate_name}}</a>
 									</div>
 										@endforeach
-									
 								</div>
 							@endforeach
-								
 							</div>
 						</div>
-
 					</div>
 						@endforeach
-					
 				</div>
-				
 			</div>
 		
 			<div class="user-info__box">
