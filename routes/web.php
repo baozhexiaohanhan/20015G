@@ -153,10 +153,8 @@ Route::post('/store','Admin\BirthdayController@store');
 
 
 Route::get('/reg','Index\LoginController@reg');//注册
-<<<<<<< HEAD
 Route::get('/log','Index\LoginController@log');//注册
 Route::get('/logindo','Index\LoginController@logindo');//注册
-=======
 
 Route::prefix('/index')->group(function(){
     Route::get('/center','Index\CouponController@center');//个人中心
@@ -164,4 +162,3 @@ Route::prefix('/index')->group(function(){
 });
 
 
->>>>>>> c5de8666b23a2131f03500acbd2a5643642d84e0
