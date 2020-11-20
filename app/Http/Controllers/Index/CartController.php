@@ -35,7 +35,7 @@ class CartController extends Controller
 
 
 
-    	return view('index.cart',['cart'=>$cart]);
+    	return view('index.cart.cart',['cart'=>$cart]);
     }
     public function getcartprice(){
     	$cart_id=request()->cart_id;

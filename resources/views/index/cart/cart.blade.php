@@ -67,7 +67,6 @@
 									<!-- <input type="checkbox" name="checkbox" class="cartid" id="" value="{{$v->rec_id}}" /> -->
 									<label class="checked-label">
 										@if($v->is_up==2)
-										<input type="checkbox" name="checkbox" class="cartid" value="{{$v->rec_id}}" disabled="disabled">
 										@endif
 										@if($v->is_up==1)
 										<input type="checkbox" name="checkbox" class="cartid" value="{{$v->rec_id}}">
