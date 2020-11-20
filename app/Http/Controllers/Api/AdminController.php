@@ -8,6 +8,8 @@ use App\Model\User;
 use AlibabaCloud\Client\AlibabaCloud;
 use AlibabaCloud\Client\Exception\ClientException;
 use AlibabaCloud\Client\Exception\ServerException;
+use App\Helpers\jwt;
+use App\Helpers\functions;
 class AdminController extends Controller
 {
     public function regdo(Request $request){
@@ -15,7 +17,6 @@ class AdminController extends Controller
  		  $user_pwd =  $request->input('user_pwd');
  		  $user_name =  $request->input('user_name');
  		  $time = time();
-        $len = strlen($user_pwd);
  		$t = User::where(['user_tel'=>$user_tel])->first();
         $a = User::where(['user_name'=>$user_name])->first();
         if($t){
@@ -23,9 +24,6 @@ class AdminController extends Controller
         }
         if($a){
             return json_encode(['code'=>'2','msg'=>'用户名已存在']);
-        }
-        if($len<6){
-            return json_encode(['code'=>'3','msg'=>'密码长度不能小于六位']);
         }
  		  $data = [
  		  	'user_name'=>$user_name,
@@ -90,5 +88,17 @@ class AdminController extends Controller
             echo $e->getErrorMessage() . PHP_EOL;
         }
     }
+
+
+    public function logindo(Request $request){
+        $data= $request->all();
+        $user = User::where(['user_name'=>$data['user_name']])->first();
+        if(!$user){
+            return json_encode(['code'=>'0002','msg'=>'账号密码错误']);
+        }
+        $token = jwt::instance()->setuid($user->user_id)->encode()->gettoken();
+         return json_encode(['code'=>'0000','msg'=>'登录成功','token'=>$token]);
+    }
+
  }
 

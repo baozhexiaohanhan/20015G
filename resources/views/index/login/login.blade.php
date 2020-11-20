@@ -25,45 +25,9 @@
 				<div class="tabs-nav">
 					<h2>欢迎登录U袋网平台</h2>
 				</div>
-				<div class="tabs_container">
-					<form class="tabs_form" action="" method="get" id="login_form">
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-								</div>
-								<input class="form-control phone" name="phone" id="login_phone" required placeholder="手机号" maxlength="11" autocomplete="off" type="text">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-								</div>
-								<input class="form-control password" name="password" id="login_pwd" placeholder="请输入密码" autocomplete="off" type="password">
-								<div class="input-group-addon pwd-toggle" title="显示密码"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></div>
-							</div>
-						</div>
-	                    <!-- 错误信息 -->
-						<div class="form-group">
-							<div class="error_msg" id="login_error">
-								<!-- 错误信息 范例html
-								<div class="alert alert-warning alert-dismissible fade in" role="alert">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<strong>密码错误</strong> 请重新输入密码
-								</div>
-								 -->
-							</div>
-						</div>
-	                    <button class="btn btn-large btn-primary btn-lg btn-block submit" id="login_submit" type="button">登录</button><br>
-	                    <p class="text-center">没有账号？<a href="javascript:;" id="register">免费注册</a></p>
-                    </form>
-                </div>
+				
 			</div>
 			<div class="form-box register">
-  				<div class="tabs-nav">
-  					<h2>欢迎注册<a href="javascript:;" class="pull-right fz16" id="reglogin">返回登录</a></h2>
-  				</div>
   				<div class="tabs_container">
 					<form class="tabs_form"  method="get" id="register_form">
 							<div class="form-group">
@@ -109,6 +73,7 @@
 							<div class="error_msg" id="register_error"></div>
 						</div>
 	                    <button class="btn btn-large btn-primary btn-lg btn-block submit" id="register_submit" type="button">注册</button>
+	                    <p class="text-center">有账号<a href="/log" id="register">登录</a></p>
                     </form>
                 </div>
 			</div>
@@ -121,7 +86,7 @@
         var user_pwd = $('input[name="user_pwd"]').val();
         var user_name = $('input[name="user_name"]').val();
         var code = $('input[name="code"]').val();
-  		$.post('http://www.2001api.com/api/regdo',{user_tel:user_tel,user_pwd:user_pwd,user_name:user_name,code:code},function (result) {
+  		$.post('http://www.2001api.com/regdo',{user_tel:user_tel,user_pwd:user_pwd,user_name:user_name,code:code},function (result) {
            if(result.code=='1'){
                 alert(result.msg);
             }
@@ -135,7 +100,7 @@
                 alert(result.msg);
             }
             if(result.code=='0'){
-                location.href = "/login"
+                location.href = "/log"
             }else{
                 alert(result.msg);
             }
@@ -147,10 +112,7 @@
         var mobilereg = /^1[3|5|6|7|8|9]\d{9}$/;
         if(mobilereg.test(name)){
             //发送手机号验证码
-            $.get('http://www.2001api.com/api/sendSMS',{name:name},function (res) {
-                if(res.code=='5'){
-                    alert(res.msg);
-                }
+            $.get('http://www.2001api.com/sendSMS',{name:name},function (res) {
                 if(res.code=='00'){
                     alert(res.msg);
                 }
@@ -162,8 +124,6 @@
         }
         alert('请输入正确的手机号');
         return;
-
-
     })
 </script>
 
