@@ -16,7 +16,7 @@ Route::get('/','Index\IndexController@index');//首页
 
 
 Route::get('/reg','Admin\LoginController@reg');//注册
-Route::any('/login','Admin\LoginController@login');//登录  logindo
+Route::any('/login','Admin\LoginController@login');//登录  
 Route::any('/logindo','Admin\LoginController@logindo');//登录操作
 Route::get('/login','Admin\LoginController@login');//首页
 
@@ -151,12 +151,23 @@ Route::post('/store','Admin\BirthdayController@store');
 
 
 
+Route::get('/cart','Index\CartController@index');//前台购物车列表
+Route::get('/getcartprice','Index\CartController@getcartprice');//算总价
+Route::get('/cartplus','Index\CartController@cartplus');//算数量
+
+
 
 Route::get('/reg','Index\LoginController@reg');//注册
+Route::get('/log','Index\LoginController@log');//注册
+Route::get('/logindo','Index\LoginController@logindo');//注册
 
 Route::prefix('/index')->group(function(){
     Route::get('/center','Index\CouponController@center');//个人中心
     Route::get('/coupon','Index\CouponController@coupon');//优惠券
+});
+
+Route::prefix('/goods')->group(function(){
+    Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
 });
 
 
