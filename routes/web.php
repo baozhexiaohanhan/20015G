@@ -151,13 +151,6 @@ Route::post('/store','Admin\BirthdayController@store');
 
 
 
-
-
-Route::get('/reg','Index\LoginController@reg');//注册
-
-Route::prefix('/index')->group(function(){
-    Route::get('/center','Index\CouponController@center');//个人中心
-    Route::get('/coupon','Index\CouponController@coupon');//优惠券
-});
-
-
+Route::get('/cart','Index\CartController@index');//前台购物车列表
+Route::get('/getcartprice','Index\CartController@getcartprice');//算总价
+Route::get('/cartplus','Index\CartController@cartplus');//算数量
