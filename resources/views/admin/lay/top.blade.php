@@ -28,7 +28,31 @@
           <li class="layui-nav-item">
             <a href="javascript:;">+新增</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onClick="x_admin_show('资讯','http://www.baidu.com')"><i class="iconfont">&#xe6a2;</i>资讯</a></dd>
+              <dd>
+                  <a onClick="x_admin_show('资讯','http://www.baidu.com')">
+                    <i class="iconfont">&#xe6a2;</i>
+                    <ul>
+                      @php  $name=Route::currentRouteName();@endphp
+                      @if(isset($aaaaa))
+                      @foreach($aaaaa as $k=>$v)
+                          <li @if(strpos($name,$v->right_as)!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item"@endif>
+                          <a class="" href="javascript:;">{{$v->right_name}}</a>
+                          @if($v->son)
+                          <dl class="layui-nav-child" >
+                              @foreach($v->son as $key=>$val)
+                              <dd @if($name==$val->right_as) class='layui-this' @endif><a href="{{$val->right_url}}">{{$val->right_name}}</a></dd>
+                              @endforeach
+                          </dl>
+                          @endif
+                          </li>
+                      @endforeach
+                      @endif
+                  </ul>
+                  
+                  
+                  
+                  </a>
+              </dd>
               <dd><a onClick="x_admin_show('图片','http://www.baidu.com')"><i class="iconfont">&#xe6a8;</i>图片</a></dd>
                <dd><a onClick="x_admin_show('用户','http://www.baidu.com')"><i class="iconfont">&#xe6b8;</i>用户</a></dd>
             </dl>
