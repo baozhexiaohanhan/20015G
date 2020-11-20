@@ -16,7 +16,8 @@ class CateController extends Controller
     {
         $res = DB::table('cate')->get();
 //        dd($res);
-        return view('admin/cate/cateindex',['res'=>$res]);
+        $Category=$this->list_level($res);
+        return view('admin/cate/cateindex',['res'=>$Category]);
     }
 
     /**
@@ -27,7 +28,8 @@ class CateController extends Controller
     public function create()
     {
         $data = DB::table('cate')->get();
-        return view('admin/cate/cateadd',['data'=>$data]);
+        $Category=self::list_level($data);
+        return view('admin/cate/cateadd',['cate'=>$Category]);
     }
 
     /**
@@ -40,6 +42,16 @@ class CateController extends Controller
     {
         $data = $request->all();
 //        dd($data);
+        $validatedData = $request->validate([
+            'cate_name' => 'required|unique:cate',
+            'cate_show' => 'required',
+            'cate_new_show' => 'required',
+        ],[
+            'cate_name.required'=>'分类名称必填',
+            'cate_name.unique'=>'分类名称已存在',
+            'cate_show.required'=>'是否显示必填',
+            'cate_new_show.required'=>'是否显示在导航栏必填',
+        ]);
         $res = DB::table('cate')->insert([
             'cate_name' => $data['cate_name'],
             'pid'=>$data['pid'],
@@ -132,5 +144,18 @@ class CateController extends Controller
         }else{
             echo "<script>alert('删除失败');location.href='/cate/index';</script>";
         }
+    }
+//    无限极分类
+    public static function list_level($data,$pid=0,$level=0)//三个参数与上面index方法里面穿的参数相对应
+    {
+        static $array=[];
+        foreach($data as $k=>$v){
+            if($pid==$v->pid){
+                $v->level=$level;
+                $array[]=$v;
+                self::list_level($data,$v->cate_id,$level+1);
+            }
+        }
+        return $array;
     }
 }

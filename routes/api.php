@@ -24,4 +24,17 @@ use Illuminate\Http\Request;
  });
 
 
+Route::group(['domain' => 'www.2001api.com'], function () {
+	Route::prefix('domain')->group(function(){
+		Route::get('/index','Api\IndexController@index');
+		Route::get('/indexa','Api\IndexController@indexa');
+		Route::get('/indexb','Api\IndexController@indexb');
+		Route::get('/indexc','Api\IndexController@indexc');
+		Route::get('/indexd','Api\IndexController@indexd');
+		Route::get('/indexe','Api\IndexController@indexe');
+	});
+	Route::get('regdo','Api\TestController@regdo');//注册
+	
+	Route::get('regdo','Api\ApiController@regdo');//注册
+});
 
