@@ -10,8 +10,8 @@ use App\Model\Attr;
 use App\Model\Goods_attr;
 class DetailsController extends Controller
 {
-    public function details($goods_id=0){
-        $goods_id = 2;
+    public function details($goods_id){
+        // $goods_id = 2;
         $goods = Goods::where("goods_id",$goods_id)->first();
         $Goods_log = Goods_log::where("goods_id",$goods_id)->first();
 

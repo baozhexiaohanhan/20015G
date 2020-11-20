@@ -184,6 +184,6 @@ Route::prefix('/goods')->group(function(){
 
 
 Route::prefix('/')->group(function(){
-    Route::any('details','Index\DetailsController@details');
+    Route::any('/details/{id?}','Index\DetailsController@details');
 
 });

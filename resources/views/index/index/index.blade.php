@@ -126,7 +126,7 @@
 					</a>
 					<div class="right-box hot-box">
 					@foreach($goods->goods as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
