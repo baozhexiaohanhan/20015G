@@ -13,22 +13,30 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+	Route::prefix('/')->group(function(){
+	Route::any('/regdo','Api\AdminController@regdo');//注册方法
+	Route::any('/sendSMS','Api\AdminController@sendSMS');//发送短信验证码
+	Route::any('/getuserinfo','Api\AdminController@getuserinfo');//公告
+	Route::any('/logindo','Api\AdminController@logindo');//公告
+	Route::any('/getuser','Api\AdminController@getuser');//公告
+	Route::any('/getcurl','Api\AdminController@getcurl');//公告
+
+ });
 
 
+Route::group(['domain' => 'www.2001api.com'], function () {
+	Route::prefix('domain')->group(function(){
+		Route::get('/index','Api\IndexController@index');
+		Route::get('/indexa','Api\IndexController@indexa');
+		Route::get('/indexb','Api\IndexController@indexb');
+		Route::get('/indexc','Api\IndexController@indexc');
+		Route::get('/indexd','Api\IndexController@indexd');
+		Route::get('/indexe','Api\IndexController@indexe');
+	});
+	Route::get('regdo','Api\TestController@regdo');//注册
+	
+	Route::get('regdo','Api\ApiController@regdo');//注册
 });
 
 
-Route::prefix('domain')->group(function(){
-	Route::get('/index','Api\IndexController@index');
-	Route::get('/indexa','Api\IndexController@indexa');
-	Route::get('/indexb','Api\IndexController@indexb');
-	Route::get('/indexc','Api\IndexController@indexc');
-	Route::get('/indexd','Api\IndexController@indexd');
-	Route::get('/indexe','Api\IndexController@indexe');
-});
-Route::get('regdo','Api\TestController@regdo');//注册
-
-Route::get('regdo','Api\ApiController@regdo');//注册
 
