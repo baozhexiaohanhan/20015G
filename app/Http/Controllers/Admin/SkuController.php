@@ -210,7 +210,7 @@ class SkuController extends Controller
             $attrs_new_key[$v['attr_id']]['attr_value'][$v['goods_attr_id']] = $v['attr_value'];
             }
          }
-         dump($attrs_new_key);
+        //  dump($attrs_new_key);
         return view("admin.sku.item_show",compact("attrs_new_key","goods"));
     }
     public function attr_key(){

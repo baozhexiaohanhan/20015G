@@ -20,6 +20,12 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 		Route::get('/indexc','Api\IndexController@indexc');
 		Route::get('/indexd','Api\IndexController@indexd');
 		Route::get('/indexe','Api\IndexController@indexe');
+		
+	});
+	Route::prefix('/')->group(function(){
+		Route::any('details/{id?}','Api\DetailsController@details');
+		Route::get('/attr_key','Api\DetailsController@attr_key');
+	
 	});
 	Route::get('regdo','Api\TestController@regdo');//注册
 	

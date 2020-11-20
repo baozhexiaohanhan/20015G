@@ -160,3 +160,7 @@ Route::prefix('/index')->group(function(){
 });
 
 
+Route::prefix('/')->group(function(){
+    Route::any('details','Index\DetailsController@details');
+
+});
