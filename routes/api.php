@@ -37,6 +37,12 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 	
 	Route::get('regdo','Api\ApiController@regdo');//注册
 });
+Route::prefix('/goods')->group(function(){
+    Route::get('/goods_list','Api\GoodsController@goods_list');
+    Route::get('/cate/{cate_id}','Api\GoodsController@cate');
+    Route::get('/brand','Api\GoodsController@brand');
+    Route::get('/price','Api\GoodsController@price');
+});
 
 
 
