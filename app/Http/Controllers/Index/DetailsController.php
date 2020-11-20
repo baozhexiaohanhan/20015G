@@ -12,7 +12,7 @@ class DetailsController extends Controller
         $data = curl_get($url);
         // dd($data);
         $data = json_decode($data['data'],true);
-        dump($data);
+        // dump($data);
         return view("index.details.details",compact('data'));
     }
 }
