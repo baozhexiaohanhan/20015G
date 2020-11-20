@@ -13,11 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+	Route::prefix('/')->group(function(){
+	Route::any('/regdo','Api\AdminController@regdo');//注册方法
+	Route::any('/sendSMS','Api\AdminController@sendSMS');//发送短信验证码
+	Route::any('/getuserinfo','Api\AdminController@getuserinfo');//公告
+	Route::any('/logindo','Api\AdminController@logindo');//公告
+	Route::any('/getuser','Api\AdminController@getuser');//公告
+	Route::any('/getcurl','Api\AdminController@getcurl');//公告
+
+ });
 
 
-});
 
-Route::any('/regdo','Api\AdminController@regdo');//注册方法
-Route::any('/sendSMS','Api\AdminController@sendSMS');//发送短信验证码
