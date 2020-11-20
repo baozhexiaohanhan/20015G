@@ -159,6 +159,7 @@ Route::get('/logindo','Index\LoginController@logindo');//注册
 Route::prefix('/index')->group(function(){
     Route::get('/center','Index\CouponController@center');//个人中心
     Route::get('/coupon','Index\CouponController@coupon');//优惠券
+
 });
 
 
