@@ -13,7 +13,7 @@ class GoodsController extends Controller
         $url = 'http://www.2001api.com/goods/goods_list';
         $goods_list = curl_get($url);
 //        $goods_list = json_decode($goods_list,true);
-        dump($goods_list);
+//        dump($goods_list);
 //        获取分类
         $cate_url = "http://www.2001api.com/goods/cate/{$cate_id}";
 //        dd($cate_url);
