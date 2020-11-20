@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
     public function index(){
+       // echo "11111";die;
     	//首页推荐位
     	$url='http://www.2001api.com/domain/index';
     	$urla='http://www.2001api.com/domain/indexa';

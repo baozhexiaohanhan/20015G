@@ -160,4 +160,7 @@ Route::prefix('/index')->group(function(){
     Route::get('/coupon','Index\CouponController@coupon');//优惠券
 });
 
+Route::prefix('/goods')->group(function(){
+    Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
+});
 

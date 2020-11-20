@@ -32,3 +32,5 @@ Route::get('regdo','Api\TestController@regdo');//注册
 
 Route::get('regdo','Api\ApiController@regdo');//注册
 
+
+
