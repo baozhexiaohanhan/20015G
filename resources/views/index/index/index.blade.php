@@ -6,232 +6,31 @@
 	<div class="top-nav bg3">
 		<div class="nav-box inner">
 			<div class="all-cat">
+				
 				<div class="cat-list__box">
+						@foreach($catedata as $k=>$v)
 					<div class="cat-box">
 						<div class="title">
-							<i class="iconfont icon-skirt ce"></i> 女装
+							<i class="iconfont icon-skirt ce"></i> {{$v->cate_name}}
 						</div>
-						<ul class="cat-list clearfix">
-							<li>下装</li>
-							<li>上装</li>
-							<li>裙装</li>
-							<li>内衣</li>
-						</ul>
 						<div class="cat-list__deploy">
 							<div class="deploy-box">
+						@foreach($v->child as $kk=>$vv)
+								
 								<div class="genre-box clearfix">
-									<span class="title">下装：</span>
+									<span class="title">{{$vv->cate_name}}</span>
+										@foreach($vv->child as $kkk=>$vvv)
+									
 									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
+										<a href="{{url('/goods/goods_list/'.$v->cate_id)}}">{{$vvv->cate_name}}</a>
 									</div>
+										@endforeach
 								</div>
-								<div class="genre-box clearfix">
-									<span class="title">上装：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-								<div class="genre-box clearfix">
-									<span class="title">裙装：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-								<div class="genre-box clearfix">
-									<span class="title">内衣：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
+							@endforeach
 							</div>
 						</div>
 					</div>
-					<div class="cat-box">
-						<div class="title">
-							<i class="iconfont icon-fushi ce"></i> 男装
-						</div>
-						<ul class="cat-list clearfix">
-							<li>下装</li>
-							<li>上装</li>
-							<li>套装</li>
-						</ul>
-						<div class="cat-list__deploy">
-							<div class="deploy-box">
-								<div class="genre-box clearfix">
-									<span class="title">下装：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-								<div class="genre-box clearfix">
-									<span class="title">上装：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-								<div class="genre-box clearfix">
-									<span class="title">套装：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cat-box">
-						<div class="title">
-							<i class="iconfont icon-bao ce"></i> 包包
-						</div>
-						<ul class="cat-list clearfix">
-							<li>女士包包</li>
-							<li>男士包包</li>
-						</ul>
-						<div class="cat-list__deploy">
-							<div class="deploy-box">
-								<div class="genre-box clearfix">
-									<span class="title">女士包包：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-								<div class="genre-box clearfix">
-									<span class="title">男士包包：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cat-box">
-						<div class="title">
-							<i class="iconfont icon-kid ce"></i> 童装
-						</div>
-						<ul class="cat-list clearfix">
-							<li>女童</li>
-							<li>男童</li>
-							<li>男女童鞋</li>
-						</ul>
-						<div class="cat-list__deploy">
-							<div class="deploy-box">
-								<div class="genre-box clearfix">
-									<span class="title">女童：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-								<div class="genre-box clearfix">
-									<span class="title">男童：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-								<div class="genre-box clearfix">
-									<span class="title">男女童鞋：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cat-box">
-						<div class="title">
-							<i class="iconfont icon-shoes ce"></i> 鞋靴
-						</div>
-						<ul class="cat-list clearfix">
-							<li>男鞋</li>
-							<li>女鞋</li>
-							<li>儿童鞋</li>
-						</ul>
-						<div class="cat-list__deploy">
-							<div class="deploy-box">
-								<div class="genre-box clearfix">
-									<span class="title">男鞋：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-								<div class="genre-box clearfix">
-									<span class="title">女鞋：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-								<div class="genre-box clearfix">
-									<span class="title">儿童鞋：</span>
-									<div class="genre-list">
-										<a href="">牛仔裤</a>
-										<a href="">短裤</a>
-										<a href="">休闲裤</a>
-										<a href="">打底裤</a>
-										<a href="">丝袜</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+						@endforeach
 				</div>
 			</div>
 		
@@ -352,21 +151,9 @@
 					<div class="notice-box bgf5">
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
-								<a class="swiper-slide ep" href="udai_notice.html">【公告】U袋网平台已上线，您还在等什么呢？是吧~</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【资讯】P站服务器爆炸啦。国内86%地区IP被限制~</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【公告】六趣公司9月底将彻底关闭66RPG论坛~</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【资讯】Project1站将接盘66RPG，新域名rpg.blue</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】央行决定对普惠金融实施定向降准政策 最高下调1.5个百分点</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】那些年看的剧里十大虐心情节，谁戳中了你的泪点？</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】惨遭魔改？派拉蒙将拍真人版《你的名字。》</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】外媒称中国限制日本跟团游?旅行社:仍正常发团</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】广电总局：电台电视台应在重要法定节日播放国歌</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】高校性教育课成"爆款" 老师都讲哪些"大尺度"内容?</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】vivo X20全面屏手机首销火爆 陈赫欧豪现身助力</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】“拒绝妻子手术”现场医生：病人丈夫被冤枉了</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】游客们注意了！国庆你要避开十大坑</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】他卖了1.5万双假货，现在面临10年牢狱！</a>
-								<a class="swiper-slide ep" href="udai_notice.html">【新闻】10月1日起国家再次提高部分优抚对象抚恤补助标准 烈属抚恤每年23130元</a>
+								@foreach($notice as $k=>$v)
+								<a class="swiper-slide ep" href="udai_notice.html">【公告】{{$v->notice_name}}</a>
+								@endforeach
 							</div>
 						</div>
 					</div>
@@ -641,3 +428,4 @@
 	<!-- 底部信息 -->
 @include('index.lay.bottom')
 @section('bottom')
+
