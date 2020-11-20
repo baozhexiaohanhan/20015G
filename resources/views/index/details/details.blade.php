@@ -1407,7 +1407,7 @@
 				var goods_id = "{{$data['goods']['goods_id']}}";
 		$.getJSON("http://www.2001api.com/attr_key?callback=?", {"goods_id":goods_id,"goods_attr_id":goods_attr_id},function(obj){
 			$('#price').html(obj.data);
-			console.log(obj.data);
+			// console.log(obj.data);
 		});
 	}
     </script>

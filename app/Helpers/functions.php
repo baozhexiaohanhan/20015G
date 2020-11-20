@@ -14,7 +14,7 @@
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($curl);
         curl_close($curl);
-        return json_decode($output，true);
+        return json_decode($output,true);
     }
 
     // get请求方式
