@@ -32,5 +32,7 @@
         $output = json_decode($output,true);//将json串转换为数组
         return $output;
     }
-
+    function cull(){
+        "http://www.2001api.com";
+    }
 ?>

@@ -90,6 +90,7 @@ Route::prefix("/")->group(function(){
     Route::any('/seckill_index','Admin\SeckillController@seckill_index')->name('.seckill_index');//秒杀展示
     Route::any('/updates/{id}','Admin\SeckillController@updates')->name('.updates');//秒杀修改
     Route::any('/del','Admin\SeckillController@del')->name('.del');//秒杀删除
+    Route::any('/seckill_jia','Admin\SeckillController@seckill_jia')->name('.seckill_jia');//秒杀删除
 });
 
 //商品分类管理
@@ -184,6 +185,6 @@ Route::prefix('/goods')->group(function(){
 
 
 Route::prefix('/')->group(function(){
-    Route::any('/details/{id?}','Index\DetailsController@details');
+    Route::any('/details','Index\DetailsController@details');
 
 });

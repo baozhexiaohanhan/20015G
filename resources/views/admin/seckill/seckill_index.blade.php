@@ -1,5 +1,7 @@
 @extends('admin.lay.js')
      @section('js')
+     @include('admin.lay.top')
+     @section('tops')
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend>
         <span class="layui-breadcrumb">
