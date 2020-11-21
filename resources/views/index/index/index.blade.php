@@ -126,7 +126,7 @@
 					</a>
 					<div class="right-box hot-box">
 					@foreach($goods->goods as $k=>$v)
-						<a href="" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -205,7 +205,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods1 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -240,7 +240,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods2 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -275,7 +275,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods3 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -310,7 +310,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods4 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -345,7 +345,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods5 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->

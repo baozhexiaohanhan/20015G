@@ -40,7 +40,7 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 		
 	});
 	Route::prefix('/')->group(function(){
-		Route::any('details/{id}','Api\DetailsController@details');
+		Route::any('details','Api\DetailsController@details');
 		Route::get('/attr_key','Api\DetailsController@attr_key');
 	
 	});

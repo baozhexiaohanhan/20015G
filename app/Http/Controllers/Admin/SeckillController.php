@@ -30,12 +30,14 @@ class SeckillController extends Controller
             "yuan" => $goods_price,
             "price" => $da['price'],
             "intro" => $da['intro'],
+            "number" => $da['number'],
         ];
         
         $goods_id = $da['goods_id'];
        $res = Seckill::insert($data);
         // dd($res);
-        $buy_number = Goods::where("goods_id",$goods_id)->value("goods_store");
+        // $buy_number = Goods::where("goods_id",$goods_id)->value("goods_store");
+        $buy_number = $da['number'];
         $key = "goods_".$goods_id;
         // dd($key);
         for ($i=0; $i < $buy_number; $i++) { 
@@ -62,5 +64,16 @@ class SeckillController extends Controller
         $res = request()->cat_id;
         $res = Seckill::where("id",$res)->update(['is_del'=>2]);
        return json_encode(["code"=>001,"msg"=>"成功"]);
+    }
+    public function seckill_jia(){
+        $goods_id = request()->goods_id;
+        $goods_price = Goods::select("goods_price","goods_number")->where("goods_id",$goods_id)->first();
+        // dd($goods_price);
+        return $mssage = [
+            "code"=>001,
+            "msg"=>"cg",
+            "data"=>$goods_price['goods_price'],
+            "number"=>$goods_price['goods_number'],
+        ];
     }
 }
