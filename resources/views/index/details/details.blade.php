@@ -1390,8 +1390,18 @@
             goods_attr_id.push($(this).attr('goods_attr_id'));
         });
         $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id},function(res){
-        	alert(res);
-        })
+        	if(res.code=='-1'){
+                location.href="/index/login";
+            }
+        	if(res.code=='1003' || res.code=='1004' || res.code=='1005'){
+                alert(res.msg);
+            }
+            if(res.code=='0'){
+                if(confirm('加入成功是否跳转到购物车列表？')){
+                	location.href="/cart";
+            	}
+        	}
+        },'json');
 	})
     </script>
 	<!-- 底部信息 -->
