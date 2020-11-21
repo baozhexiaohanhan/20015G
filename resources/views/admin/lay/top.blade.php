@@ -28,7 +28,31 @@
           <li class="layui-nav-item">
             <a href="javascript:;">+新增</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onClick="x_admin_show('资讯','http://www.baidu.com')"><i class="iconfont">&#xe6a2;</i>资讯</a></dd>
+              <dd>
+                  <a onClick="x_admin_show('资讯','http://www.baidu.com')">
+                    <i class="iconfont">&#xe6a2;</i>
+                    <ul>
+                      @php  $name=Route::currentRouteName();@endphp
+                      @if(isset($aaaaa))
+                      @foreach($aaaaa as $k=>$v)
+                          <li @if(strpos($name,$v->right_as)!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item"@endif>
+                          <a class="" href="javascript:;">{{$v->right_name}}</a>
+                          @if($v->son)
+                          <dl class="layui-nav-child" >
+                              @foreach($v->son as $key=>$val)
+                              <dd @if($name==$val->right_as) class='layui-this' @endif><a href="{{$val->right_url}}">{{$val->right_name}}</a></dd>
+                              @endforeach
+                          </dl>
+                          @endif
+                          </li>
+                      @endforeach
+                      @endif
+                  </ul>
+                  
+                  
+                  
+                  </a>
+              </dd>
               <dd><a onClick="x_admin_show('图片','http://www.baidu.com')"><i class="iconfont">&#xe6a8;</i>图片</a></dd>
                <dd><a onClick="x_admin_show('用户','http://www.baidu.com')"><i class="iconfont">&#xe6b8;</i>用户</a></dd>
             </dl>
@@ -36,16 +60,18 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+            <a href="javascript:;">欢迎{{session('login')->admin_name}}登录</a>
+                  <!-- 二级菜单 -->
+            <dl class="layui-nav-child"> 
               <dd><a onClick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
               <dd><a onClick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
-              <dd><a href="login.html">退出</a></dd>
+              <dd><a href="/loginapp">退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item to-index"><a href="#">前台首页</a></li>
         </ul>
-        
+
+
     </div>
 @section('tops')
     

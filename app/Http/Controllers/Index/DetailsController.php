@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class DetailsController extends Controller
 {
-    public function details(){
+    public function details($id){
         $url = "http://www.2001api.com/details";
-        $data = curl_get($url);
+        $data = curl_post($url,$id);
         // dd($data);
         $data = json_decode($data['data'],true);
         // dump($data);

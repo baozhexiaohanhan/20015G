@@ -1,6 +1,36 @@
+
 <div class="left-nav">
-      <div id="side-nav">
-        <ul id="nav">
+<div id="side-nav">
+
+
+
+    <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        @php  $name=Route::currentRouteName();@endphp
+        @if(isset($aaaaa))
+        @foreach($aaaaa as $k=>$v)
+            <li @if(strpos($name,$v->right_as)!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item"@endif>
+            <a class="" href="javascript:;">{{$v->right_name}}</a>
+            @if($v->son)
+            <dl class="layui-nav-child" >
+                @foreach($v->son as $key=>$val)
+                <dd @if($name==$val->right_as) class='layui-this' @endif><a href="{{$val->right_url}}">{{$val->right_name}}</a></dd>
+                @endforeach
+            </dl>
+            @endif
+            </li>
+        @endforeach
+        @endif
+    </ul>
+
+    
+      
+
+
+
+
+
+
+        <!-- <ul id="nav">
              <li >
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6eb;</i>
@@ -32,8 +62,6 @@
                     <li><a _href="html/anim.html"><i class="iconfont">&#xe6a7;</i><cite>动画</cite></a></li>
                 </ul>
             </li>
-            
-            
             <li>
                 <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>商品 sku</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                 <ul class="sub-menu">
@@ -99,27 +127,27 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="/role/create">
+                        <a _href="/role/role">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色添加</cite>
                         </a>
-                    </li >
+                    </li > 
                     <li>
-                        <a _href="/role/index">
+                        <a _href="/role/roindex">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色列表</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="html/admin-cate.html">
+                        <a _href="right/right">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite>
+                            <cite>权限添加</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="html/admin-rule.html">
+                        <a _href="right/rigindex">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite>
+                            <cite>权限列表</cite>
                         </a>
                     </li >
                 </ul>
@@ -214,7 +242,7 @@
                     
                 </ul>
             </li>             
-        <li>
+            <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6ae;</i>
                     <cite>系统统计</cite>
@@ -371,7 +399,7 @@
                     </li >
                 </ul>
             </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
-    @section('sidebar')
+    <!-- @section('sidebar') -->

@@ -1,5 +1,6 @@
 @extends('admin.lay.js')
      @section('js')
+     
 <form method="post" action="{{url('goods/product_add')}}" name="addForm" id="addForm">
 <input type="hidden" name="goods_id" value="{{$go['goods_id']}}">
 <input type="hidden" name="act" value="product_add_execute">
