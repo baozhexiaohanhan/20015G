@@ -133,4 +133,6 @@ class AdminController extends Controller
             return redirect('/admin/noticelist');
         }
     }
+
+  
 }

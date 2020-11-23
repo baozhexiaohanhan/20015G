@@ -33,66 +33,6 @@
 						@endforeach
 				</div>
 			</div>
-		
-			<div class="user-info__box">
-				<div class="login-box">
-					<div class="avt-port">
-						<img src="/static/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
-					</div>
-					<!-- 已登录 -->
-					<div class="name c6">Hi~ <span class="cr">18759808122</span></div>
-					<div class="point c6">积分: 30</div>
-
-					<!-- 未登录 -->
-					<!-- <div class="name c6">Hi~ 你好</div>
-					<div class="point c6"><a href="">点此登录</a>，发现更多精彩</div> -->
-					<div class="report-box">
-						<span class="badge">+30</span>
-						<a class="btn btn-info btn-block disabled" href="#" role="button">已签到1天</a>
-						<!-- <a class="btn btn-primary btn-block" href="#" role="button">签到领积分</a> -->
-					</div>
-				</div>
-				<div class="agent-box">
-					<a href="#" class="agent">
-						<i class="iconfont icon-fushi"></i>
-						<p>申请网店代销</p>
-					</a>
-					<a href="javascript:;" class="agent">
-						<i class="iconfont icon-agent"></i>
-						<p><span class="cr">9527</span>位代销商</p>
-					</a>
-				</div>
-				<div class="verify-qq">
-					<div class="title">
-						<i class="fake"></i>
-						<span class="fz12">真假QQ客服验证-远离骗子</span>
-					</div>
-					<form class="input-group">
-						<input class="form-control" placeholder="输入客服QQ号码" type="text">
-						<span class="input-group-btn">
-							<button class="btn btn-primary submit" id="verifyqq" type="button">验证</button>
-						</span>
-					</form>
-					<script>
-						$(function() {
-							$('#verifyqq').click(function() {
-								DJMask.open({
-								　　width:"400px",
-								　　height:"150px",
-								　　title:"U袋网提示您：",
-								　　content:"<b>该QQ不是客服-谨防受骗！</b>"
-							　　});
-							});
-						});
-					</script>
-				</div>
-				<div class="tags">
-					<div class="tag"><i class="iconfont icon-real fz16"></i> 品牌正品</div>
-					<div class="tag"><i class="iconfont icon-credit fz16"></i> 信誉认证</div>
-					<div class="tag"><i class="iconfont icon-speed fz16"></i> 当天发货</div>
-					<div class="tag"><i class="iconfont icon-tick fz16"></i> 人工质检</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<!-- 顶部轮播 -->
@@ -152,7 +92,7 @@
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
 								@foreach($notice as $k=>$v)
-								<a class="swiper-slide ep" href="udai_notice.html">【公告】{{$v->notice_name}}</a>
+								<a class="swiper-slide ep" >【公告】{{$v->notice_name}}</a>
 								@endforeach
 							</div>
 						</div>
@@ -205,7 +145,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods1 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="9l" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->

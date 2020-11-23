@@ -135,6 +135,9 @@ Route::any('/notice','Admin\AdminController@notice');//公告添加
 Route::any('/noticelist','Admin\AdminController@noticelist');//公告列表
 Route::any('/createlist','Admin\AdminController@createlist');//公告添加方法
 Route::get('/destr/{id}','Admin\AdminController@destr');//公告删除
+Route::get('/udai_notice','Admin\AdminController@udai_notice');//公告删除
+
+
 
 });
 
