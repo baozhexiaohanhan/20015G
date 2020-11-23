@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 
 class ShopcartController extends Controller
 {
-    public function shopcart(){
+    public function shopcart(Request $request){
+        $rec_id = $request->rec_id;
+        dd($rec_id);
         return view('index/shopcart/shopcart');
     }
 }
