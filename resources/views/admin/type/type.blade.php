@@ -1,5 +1,8 @@
 @extends('admin.lay.js')
      @section('js')
+     @include('admin.lay.top')
+     @section('tops')
+    
 <form class="layui-form" >
 </form>
 

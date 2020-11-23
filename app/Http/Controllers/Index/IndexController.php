@@ -25,9 +25,10 @@ class IndexController extends Controller
     	// dd($catedata);
     	//楼层
 		$goods=curl_get($url);
+//        dd($goods);
+
 		$goods = json_decode($goods['ret']);
     	return view('index.index.index',compact('goods','notice','catedata'));
     }
-
 
 }

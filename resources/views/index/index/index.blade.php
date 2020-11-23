@@ -66,7 +66,7 @@
 					</a>
 					<div class="right-box hot-box">
 					@foreach($goods->goods as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -144,8 +144,8 @@
 					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-				@foreach($goods->goods1 as $k=>$v)
 						<a href="9l" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -180,7 +180,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods2 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -215,7 +215,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods3 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -250,7 +250,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods4 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -285,7 +285,7 @@
 				</a>
 				<div class="right-box">
 				@foreach($goods->goods5 as $k=>$v)
-						<a href="item_show.html" class="floor-item">
+						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
 								<!-- <img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover"> -->
@@ -302,6 +302,20 @@
 			</div>
 		</section>
 	</div>
+<!-- 友情链接开始 -->
+<!-- <div class="right-box">
+  <div class="right-box"> 
+    <div class="right-box" id="link"> 友情链接：
+        <a href="http://www.baidu.com" target="_blank">百度 </a>
+        <a href="http://www.qq.com" target="_blank">腾讯 </a>
+        <a href="http://www.sina.com.cn" target="_blank">新浪 </a>
+        <a href="http://www.taobao.com" target="_blank">淘宝 </a>
+        <a href="http://www.weibo.com" target="_blank">微博 </a>
+        </div>
+    <div class="clear"></div>
+  </div>
+</div> -->
+<!-- 友情链接结束 -->
 	<script>
 		$(document).ready(function(){ 
 			// 顶部banner轮播

@@ -121,49 +121,19 @@
 						</div>
 						<div class="item-amount clearfix bgf5">
 							<div class="item-metatit">数量：</div>
-							<div class="amount-box">
-								<div class="amount-widget">
-									<input class="amount-input" value="1" maxlength="8" title="请输入购买量" type="text">
-									<div class="amount-btn">
-										<a class="amount-but add"></a>
-										<a class="amount-but sub"></a>
-									</div>
-								</div>
-								<div class="item-stock"><span style="margin-left: 10px;">库存 <b id="Stock">1000</b> 件</span></div>
-								<script>
-									$(function () {
-										$('.amount-input').onlyReg({reg: /[^0-9]/g});
-										var stock = parseInt($('#Stock').html());
-										$('.amount-widget').on('click','.amount-but',function() {
-											var num = parseInt($('.amount-input').val());
-											if (!num) num = 0;
-											if ($(this).hasClass('add')) {
-												if (num > stock - 1){
-													return DJMask.open({
-													　　width:"300px",
-													　　height:"100px",
-													　　content:"您输入的数量超过库存上限"
-												　　});
-												}
-												$('.amount-input').val(num + 1);
-											} else if ($(this).hasClass('sub')) {
-												if (num == 1){
-													return DJMask.open({
-													　　width:"300px",
-													　　height:"100px",
-													　　content:"您输入的数量有误"
-												　　});
-												}
-												$('.amount-input').val(num - 1);
-											}
-										});
-									});
-								</script>
-							</div>
+							<div class="fl title">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input autocomplete="off" id="buy_number" type="text" value="1" minnum="1" class="itxt" />
+                                        <a href="javascript:void(0);" class="increment plus" id="add">+</a>
+                                        <a href="javascript:void(0);" class="increment mins" id="lass">-</a>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 						<div class="item-action clearfix bgf5">
 							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
-							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket">
+							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket addshopcart">
 								<i class="iconfont icon-shopcart"></i> 加入购物车
 							</a>
 						</div>
@@ -1407,9 +1377,58 @@
 				var goods_id = "{{$data['goods']['goods_id']}}";
 		$.getJSON("http://www.2001api.com/attr_key?callback=?", {"goods_id":goods_id,"goods_attr_id":goods_attr_id},function(obj){
 			$('#price').html(obj.data);
-			console.log(obj.data);
+			// console.log(obj.data);
 		});
 	}
+
+	//加入购物车
+	$('.addshopcart').click(function(){
+		var goods_id = "{{$data['goods']['goods_id']}}";
+		var buy_number=$('.itxt').val();
+		var goods_attr_id=new Array();
+        $('.selected').each(function(i,k){
+            goods_attr_id.push($(this).attr('goods_attr_id'));
+        });
+        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id},function(res){
+        	if(res.code=='-1'){
+                location.href="/index/login";
+            }
+        	if(res.code=='1003' || res.code=='1004' || res.code=='1005'){
+                alert(res.msg);
+            }
+            if(res.code=='0'){
+                if(confirm('加入成功是否跳转到购物车列表？')){
+                	location.href="/cart";
+            	}
+        	}
+        },'json');
+	})
+
+	$(document).on("click","#add",function(){
+						    // alert(123);
+						    var _this=$('this');
+						    // alert(_this);
+						    var buy_number=parseInt($("#buy_number").val());
+						    var buy_number=buy_number+1;
+						    //alert(buy_number);
+						    $('#buy_number').val(buy_number);
+
+						});
+						$(document).on("click","#lass",function(){
+						    // alert(123);
+						    //var _this=$('this');
+						    // alert(_this);
+						    var buy_number=parseInt($("#buy_number").val());
+						    if(buy_number<=1){
+						        $('#buy_number').val(1);
+						    } else{
+						         var buy_number=buy_number-1;
+						     //alert(buy_number);
+						        $('#buy_number').val(buy_number);
+						    }   
+						       
+
+						});
     </script>
 	<!-- 底部信息 -->
     @include('index.lay.bottom')
