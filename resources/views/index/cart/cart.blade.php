@@ -92,7 +92,7 @@
 										@endif
 									</div>
 								</td>
-								<td>¥{{$v->shop_price}}</td>
+								<td>¥{{$v->goods_price}}</td>
 								<td>
 									<div class="cart-num__box">
 										<!-- <input type="button" class="sub" goods_id="{{$v->goods_id}}" cart="{{$v->cart_id}}" value="-">
@@ -105,7 +105,7 @@
 									</div>
 									<span style="color: red;" id="sadd"></span>
 								</td>
-								<td><span class="sum">￥{{$v->buy_number*$v->shop_price}}</span></td>
+								<td><span class="sum">￥{{$v->buy_number*$v->goods_price}}</span></td>
 								<td><a href="">删除</a></td>
 							</tr>
 							@endforeach

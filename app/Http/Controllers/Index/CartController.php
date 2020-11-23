@@ -30,6 +30,7 @@ class CartController extends Controller
         }
         // 2.判断商品id、购买数量，未传递提示 缺少参数
         $goods_id=$request->goods_id;
+        // dd($good_id);
         $buy_number=$request->buy_number;
         $goods_attr_id=$request->goods_attr_id;
         if(!$goods_id || !$buy_number){
@@ -38,6 +39,8 @@ class CartController extends Controller
 
         // 3.根据商品id 查询商品是否上下架 下架提示 商品已下架
         $goods=Goods::select('goods_id','goods_name','goods_sn','goods_price','is_up','goods_number')->find($goods_id);
+        // dd($goods);
+
         
 
         if($goods->is_up=='2'){
@@ -48,8 +51,10 @@ class CartController extends Controller
         // 4.判断规格是否存在，有：查询product的库存 购买数量大于库存提示 库存不足 没有规格查询goods的库存 购买数量大于库存提示 库存不足
         if($goods_attr_id){
             $goods_attr_id=implode('|',$goods_attr_id);
+            // dd($goods_attr_id);
             //走规格查询
             $product=Products::select('product_id','product_number')->where(['goods_id'=>$goods_id,'goods_attr'=>$goods_attr_id])->first();
+            // dd($product);
             // dd($product->product_number);
            if($product->product_number<$buy_number){
                  return $this->JsonResponse('1005','商品库存不足');
@@ -166,7 +171,7 @@ class CartController extends Controller
         $info = Cart::where(['user_id'=>$user,"rec_id"=>$rec_id])->first();
         //dd($info);
        
-        $price = $info['buy_number']*$info['shop_price'];
+        $price = $info['buy_number']*$info['goods_price'];
         if($price){
             return $message = [
                 "code"=>0000,
