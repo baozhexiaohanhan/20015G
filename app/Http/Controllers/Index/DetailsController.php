@@ -10,7 +10,7 @@ class DetailsController extends Controller
     public function details(){
         $goods_id = request()->post("goods_id");
         // dd($goods_id);
-        $url = cull()."http://www.2001api.com/details?goods_id=".$goods_id;
+        $url = "http://www.2001api.com/details?goods_id=".$goods_id;
    
       
         $data = curl_get($url);
