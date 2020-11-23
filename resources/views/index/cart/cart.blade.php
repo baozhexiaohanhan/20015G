@@ -154,7 +154,7 @@
 									if(res.code=='0'){
 										$('.fz24').text(res.data.total);
 									}
-								})
+								},'json')
 							});
 							// 点击选择
 							$item_checkboxs.on('change', function() {
@@ -225,8 +225,10 @@
 									var goods_id=$(this).attr("goods_id");
 									// alert(goods_id);
 									$.get("/cartplus",{buy_number:buy_number,rec_id:rec_id,goods_attr_id:goods_attr_id,goods_id:goods_id},function(res){
+										// alert(res);return;
 										if(res.code==0000){
 											_this.parents("tr").find(".sum").text('￥'+res.data);
+											// console.log(res.data);
 											var cart_id = new Array();
 											$("input[name='checkbox']:checked").each(function(){
 												cart_id.push($(this).val());
@@ -235,10 +237,11 @@
 												if(res.code=='0'){
 														$('.fz24').text(res.data.total);
 													}
-											})
+												// console.log(res);
+											},'json')
 										}
 										if(res.code==0001){
-											console.log(res);
+											// console.log(res);
 											_this.prev().val(res.data);
 										}
 										if(res.code==0001){
@@ -265,16 +268,27 @@
 									var goods_id=$(this).attr("goods_id");
 									// alert(goods_id);
 									$.get("/cartplus",{buy_number:buy_number,rec_id:rec_id,goods_attr_id:goods_attr_id,goods_id:goods_id},function(res){
-										_this.parents("tr").find(".sum").text('￥'+res.data);
-										var cart_id = new Array();
-										$("input[name='checkbox']:checked").each(function(){
-											cart_id.push($(this).val());
-										})
-										$.get("/getcartprice",{cart_id:cart_id},function(res){
-											if(res.code=='0'){
-													$('.fz24').text(res.data.total);
-												}
-										})
+										if(res.code==0000){
+											_this.parents("tr").find(".sum").text('￥'+res.data);
+											// console.log(res.data);
+											var cart_id = new Array();
+											$("input[name='checkbox']:checked").each(function(){
+												cart_id.push($(this).val());
+											})
+											$.get("/getcartprice",{cart_id:cart_id},function(res){
+												if(res.code=='0'){
+														$('.fz24').text(res.data.total);
+													}
+												// console.log(res);
+											},'json')
+										}
+										if(res.code==0001){
+											// console.log(res);
+											_this.prev().val(res.data);
+										}
+										if(res.code==0001){
+											_this.parent().next().html();
+										}
 									},'json')
 								})
 								
