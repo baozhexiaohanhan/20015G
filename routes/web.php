@@ -152,11 +152,7 @@ Route::prefix("/birthday")->group(function(){
     Route::post('/store','Admin\BirthdayController@store')->name('birthday.store');//生日执行添加
 });
 
-Route::get('/create','Admin\BirthdayController@create');//生日添加
-Route::get('/list','Admin\BirthdayController@list');//生日列表
-Route::post('/store','Admin\BirthdayController@store');
-
-    });
+});
 
 
 
@@ -185,5 +181,8 @@ Route::prefix('/goods')->group(function(){
 
 Route::prefix('/')->group(function(){
     Route::any('details','Index\DetailsController@details');
-
 });
+
+
+Route::get('shopcart/{rec_id}','Index\ShopcartController@shopcart');
+

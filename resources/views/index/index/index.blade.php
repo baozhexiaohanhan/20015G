@@ -362,6 +362,20 @@
 			</div>
 		</section>
 	</div>
+<!-- 友情链接开始 -->
+<!-- <div class="right-box">
+  <div class="right-box"> 
+    <div class="right-box" id="link"> 友情链接：
+        <a href="http://www.baidu.com" target="_blank">百度 </a>
+        <a href="http://www.qq.com" target="_blank">腾讯 </a>
+        <a href="http://www.sina.com.cn" target="_blank">新浪 </a>
+        <a href="http://www.taobao.com" target="_blank">淘宝 </a>
+        <a href="http://www.weibo.com" target="_blank">微博 </a>
+        </div>
+    <div class="clear"></div>
+  </div>
+</div> -->
+<!-- 友情链接结束 -->
 	<script>
 		$(document).ready(function(){ 
 			// 顶部banner轮播
