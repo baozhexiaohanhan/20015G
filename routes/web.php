@@ -136,6 +136,18 @@ Route::prefix('/right')->group(function(){
 
 //管理员管理
 Route::prefix("/admin")->group(function(){
+Route::any('/list','Admin\AdminController@list');//管理员列表
+Route::any('/addlist','Admin\AdminController@addlist');//管理员添加   
+Route::any('/create','Admin\AdminController@create');//管理员添加方法
+Route::get('/destroy/{id}','Admin\AdminController@destroy');//管理员添加方法
+Route::any('/notice','Admin\AdminController@notice');//公告添加   
+Route::any('/noticelist','Admin\AdminController@noticelist');//公告列表
+Route::any('/createlist','Admin\AdminController@createlist');//公告添加方法
+Route::get('/destr/{id}','Admin\AdminController@destr');//公告删除
+Route::get('/udai_notice','Admin\AdminController@udai_notice');//公告删除
+
+
+
     Route::any('/list','Admin\AdminController@list')->name('admin.list');//管理员列表
     Route::any('/addlist','Admin\AdminController@addlist')->name('admin.addlist');//管理员添加   
     Route::any('/create','Admin\AdminController@create')->name('admin.create');//管理员添加方法
@@ -153,11 +165,7 @@ Route::prefix("/birthday")->group(function(){
     Route::post('/store','Admin\BirthdayController@store')->name('birthday.store');//生日执行添加
 });
 
-Route::get('/create','Admin\BirthdayController@create');//生日添加
-Route::get('/list','Admin\BirthdayController@list');//生日列表
-Route::post('/store','Admin\BirthdayController@store');
-
-    });
+});
 
 
 
@@ -190,3 +198,7 @@ Route::prefix('/')->group(function(){
     
 
 });
+
+
+Route::get('shopcart/{rec_id}','Index\ShopcartController@shopcart');
+
