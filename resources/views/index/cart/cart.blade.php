@@ -124,6 +124,19 @@
 						</div>
 					</div>
 					<script>
+
+					$('.btn').click(function(){
+							var rec_id = new Array();
+							$('.cartid:checked').each(function(){
+								rec_id.push($(this).val());
+							});
+							if(!rec_id.length){
+								alert('选择购买的商品');
+								return; 
+							}
+							location.href="/confrimorder?rec_id="+rec_id;
+						})
+
 						$(document).ready(function(){
 							var $item_checkboxs = $('.shopcart-form__box tbody input[type="checkbox"]'),
 								$check_all = $('.check-all');
