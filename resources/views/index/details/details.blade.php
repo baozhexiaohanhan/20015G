@@ -1384,12 +1384,16 @@
 	//加入购物车
 	$('.addshopcart').click(function(){
 		var goods_id = "{{$data['goods']['goods_id']}}";
+		// alert(goods_id);return;
 		var buy_number=$('.itxt').val();
+		// alert(buy_number);return;
 		var goods_attr_id=new Array();
         $('.selected').each(function(i,k){
             goods_attr_id.push($(this).attr('goods_attr_id'));
         });
+        // alert(goods_attr_id);return;
         $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id},function(res){
+        	// alert(res);return;
         	if(res.code=='-1'){
                 location.href="/index/login";
             }

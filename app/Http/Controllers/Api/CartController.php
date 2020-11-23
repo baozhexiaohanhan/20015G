@@ -170,7 +170,7 @@ class CartController extends Controller
         $info = Cart::where(['user_id'=>$user,"rec_id"=>$rec_id])->first();
       	//dd($info);
        
-        $price = $info['buy_number']*$info['shop_price'];
+        $price = $info['buy_number']*$info['goods_price'];
         if($price){
             return $message = [
                 "code"=>10000,
