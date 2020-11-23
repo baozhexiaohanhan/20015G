@@ -188,5 +188,5 @@ Route::prefix('/')->group(function(){
 });
 
 
-Route::get('shopcart/{rec_id}','Index\ShopcartController@shopcart');
+Route::get('/shopcart','Index\ShopcartController@shopcart');
 
