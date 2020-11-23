@@ -144,7 +144,7 @@
 					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-				@foreach($goods->goods1 as $k=>$v)
+					@foreach($goods->goods1 as $k=>$v)
 						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
