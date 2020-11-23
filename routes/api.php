@@ -42,6 +42,7 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 	Route::prefix('/')->group(function(){
 		Route::any('details','Api\DetailsController@details');
 		Route::get('/attr_key','Api\DetailsController@attr_key');
+		Route::get('/seckill','Api\SeckillController@seckill');
 	
 	});
 	Route::get('regdo','Api\TestController@regdo');//注册
