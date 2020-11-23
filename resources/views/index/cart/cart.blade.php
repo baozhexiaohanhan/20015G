@@ -126,15 +126,15 @@
 					<script>
 
 					$('.btn').click(function(){
-							var cart_id = new Array();
+							var rec_id = new Array();
 							$('.cartid:checked').each(function(){
-								cart_id.push($(this).val());
+								rec_id.push($(this).val());
 							});
-							if(!cart_id.length){
+							if(!rec_id.length){
 								alert('选择购买的商品');
 								return; 
 							}
-							location.href="/confrimorder?cart_id="+cart_id;
+							location.href="/confrimorder?rec_id="+rec_id;
 						})
 
 						$(document).ready(function(){

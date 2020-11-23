@@ -144,7 +144,7 @@
 					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
 				</a>
 				<div class="right-box">
-						<a href="9l" class="floor-item">
+				@foreach($goods->goods1 as $k=>$v)
 						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="{{$v->goods_img}}" style="width: 205.01px;height: 210px;" />
@@ -157,7 +157,7 @@
 							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v->goods_name}}</div>
 						</a>
 						@endforeach
-			
+					
 				</div>
 			</div>
 		</section>
