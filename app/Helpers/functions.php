@@ -13,6 +13,7 @@
         curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($curl);
+        echo $output;exit;
         curl_close($curl);
         return json_decode($output,true);
     }

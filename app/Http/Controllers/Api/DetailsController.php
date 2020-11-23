@@ -11,7 +11,6 @@ use App\Model\Goods_attr;
 class DetailsController extends Controller
 {
     public function details(){
-        // $goods_id = 2;
         $goods_id = request()->goods_id;
         //  dd($goods_id);
         

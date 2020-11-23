@@ -1403,6 +1403,32 @@
         	}
         },'json');
 	})
+
+	$(document).on("click","#add",function(){
+						    // alert(123);
+						    var _this=$('this');
+						    // alert(_this);
+						    var buy_number=parseInt($("#buy_number").val());
+						    var buy_number=buy_number+1;
+						    //alert(buy_number);
+						    $('#buy_number').val(buy_number);
+
+						});
+						$(document).on("click","#lass",function(){
+						    // alert(123);
+						    //var _this=$('this');
+						    // alert(_this);
+						    var buy_number=parseInt($("#buy_number").val());
+						    if(buy_number<=1){
+						        $('#buy_number').val(1);
+						    } else{
+						         var buy_number=buy_number-1;
+						     //alert(buy_number);
+						        $('#buy_number').val(buy_number);
+						    }   
+						       
+
+						});
     </script>
 	<!-- 底部信息 -->
     @include('index.lay.bottom')

@@ -12,6 +12,7 @@ class DetailsController extends Controller
         // dd($goods_id);
         $url = cull()."http://www.2001api.com/details?goods_id=".$goods_id;
    
+      
         $data = curl_get($url);
         // dd($data);
         $data = json_decode($data['data'],true);
