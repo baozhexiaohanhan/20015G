@@ -1377,7 +1377,7 @@
 				var goods_id = "{{$data['goods']['goods_id']}}";
 		$.getJSON("http://www.2001api.com/attr_key?callback=?", {"goods_id":goods_id,"goods_attr_id":goods_attr_id},function(obj){
 			$('#price').html(obj.data);
-			console.log(obj.data);
+			// console.log(obj.data);
 		});
 	}
 
@@ -1390,9 +1390,45 @@
             goods_attr_id.push($(this).attr('goods_attr_id'));
         });
         $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id},function(res){
-        	alert(res);
-        })
+        	if(res.code=='-1'){
+                location.href="/index/login";
+            }
+        	if(res.code=='1003' || res.code=='1004' || res.code=='1005'){
+                alert(res.msg);
+            }
+            if(res.code=='0'){
+                if(confirm('加入成功是否跳转到购物车列表？')){
+                	location.href="/cart";
+            	}
+        	}
+        },'json');
 	})
+
+	$(document).on("click","#add",function(){
+						    // alert(123);
+						    var _this=$('this');
+						    // alert(_this);
+						    var buy_number=parseInt($("#buy_number").val());
+						    var buy_number=buy_number+1;
+						    //alert(buy_number);
+						    $('#buy_number').val(buy_number);
+
+						});
+						$(document).on("click","#lass",function(){
+						    // alert(123);
+						    //var _this=$('this');
+						    // alert(_this);
+						    var buy_number=parseInt($("#buy_number").val());
+						    if(buy_number<=1){
+						        $('#buy_number').val(1);
+						    } else{
+						         var buy_number=buy_number-1;
+						     //alert(buy_number);
+						        $('#buy_number').val(buy_number);
+						    }   
+						       
+
+						});
     </script>
 	<!-- 底部信息 -->
     @include('index.lay.bottom')

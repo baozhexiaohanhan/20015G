@@ -13,8 +13,9 @@
         curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($curl);
+        echo $output;exit;
         curl_close($curl);
-        return json_decode($output，true);
+        return json_decode($output,true);
     }
 
     // get请求方式
@@ -32,5 +33,7 @@
         $output = json_decode($output,true);//将json串转换为数组
         return $output;
     }
-
+    function cull(){
+        "http://www.2001api.com";
+    }
 ?>

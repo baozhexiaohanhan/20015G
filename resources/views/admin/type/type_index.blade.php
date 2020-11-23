@@ -1,5 +1,7 @@
 @extends('admin.lay.js')
      @section('js')
+     @include('admin.lay.top')
+     @section('tops')
 <table class="layui-table">
     <colgroup>
       <col width="150">

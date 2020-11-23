@@ -230,7 +230,7 @@
 											_this.parent().next().html();
 										}
 
-									})
+									},'json')
 								})
 								//给-绑定一个点击事件
 								$(document).on('click','#sub',function(){
@@ -260,7 +260,7 @@
 													$('.fz24').text(res.data.total);
 												}
 										})
-									})
+									},'json')
 								})
 								
 							});
@@ -277,8 +277,8 @@
 								if(res.code=='0'){
 										$('.fz24').text(res.data.total);
 									}
-							})
-						})
+							},'json')
+						});
 					</script>
 				</form>
 			</div>

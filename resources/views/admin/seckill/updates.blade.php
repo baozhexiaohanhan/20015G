@@ -1,5 +1,7 @@
 @extends('admin.lay.js')
      @section('js')
+     @include('admin.lay.top')
+     @section('tops')
 <form class="layui-form" action="/seckill_add" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
 @csrf()
     <div class="layui-form-item">
