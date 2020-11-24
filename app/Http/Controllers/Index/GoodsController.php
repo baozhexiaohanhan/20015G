@@ -10,19 +10,34 @@ class GoodsController extends Controller
     public function goods_list($cate_id)
     {
 //        商品列表展示
-        $url = 'http://www.2001api.com/goods/goods_list';
+        $url = "http://www.2001api.com/goods/goods_list/{$cate_id}";
         $goods_list = curl_get($url);
-//        $goods_list = json_decode($goods_list,true);
-//        dump($goods_list);
-//        获取分类
-        $cate_url = "http://www.2001api.com/goods/cate/{$cate_id}";
-//        dd($cate_url);
-        $cate = curl_get($cate_url);
-//        dd($cate);
-//        获取品牌
-        $brand_url = 'http://www.2001api.com/goods/brand';
-        $brand = curl_get($brand_url);
-//        dd($brand);
-        return view('index/goods/goods_list',['goods_list'=>$goods_list,'cate'=>$cate,'brand'=>$brand]);
+//        dd($goods_list);
+        $data = json_decode($goods_list['data'],true);
+//        dd($data);
+        $query = request()->all();
+//        dd($query);
+        if(isset($query['price'])){
+            $price_array = explode('元',$query['price']);
+            $price_array = explode('-',$price_array[0]);
+            $where = [
+                'goods_price','>',$price_array[0],
+            ];
+            if(isset($price_array[1])){
+                $where[] = [
+                    'shop_price','<',$price_array[1],
+                ];
+            }
+            if(isset($query['brand_id'])){
+                $where[] = [
+                    'brand_id','=',$query['brand_id']
+                ];
+            }
+//            dd($where);
+        }
+//        dd($_SERVER);
+        $urls = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+//        dd($urls);
+        return view('index/goods/goods_list',['data'=>$data,'query'=>$query,'url'=>$urls]);
     }
 }

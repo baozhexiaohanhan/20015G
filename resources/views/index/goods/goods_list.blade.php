@@ -12,44 +12,36 @@
                     <div class="filter-value">
                         <!-- 已选选项 -->
                         <div class="ul_filter">
-							<span class="pull-left">
-								颜色：红色 <a href="javascript:;" class="close">&times;</a>
-							</span>
-                            <span class="pull-left">
-								尺寸：XXL <a href="javascript:;" class="close">&times;</a>
-							</span>
+                            <ul>
+                                <li class="close tag-brand_id" style="display: none" >品牌</li>
+                                <li  class="close tag-price" style="display: none">价格</li>
+                            </ul>
                         </div>
                         <a class="reset pull-right" href="item_category.html">重置</a>
                     </div>
                 </div>
-                {{--<div class="filter-prop-item">--}}
-                    {{--<span class="filter-prop-title">分类：</span>--}}
-                    {{--<ul class="clearfix">--}}
-                        {{--<a href=""><li class="active">全部</li></a>--}}
-                        {{--@foreach($cate as $v)--}}
-                        {{--<a href=""><li>{{$v['cate_name']}}</li></a>--}}
-                        {{--@endforeach--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
                 <div class="filter-prop-item">
                     <span class="filter-prop-title">品牌：</span>
-                    <ul class="clearfix">
-                        <a href=""><li class="active">全部</li></a>
-                        @foreach($brand as $v)
-                        <a href=""><li>{{$v['brand_name']}}</li></a>
+                    <ul class="clearfix search">
+                        @foreach($data['brand'] as $v)
+                            <a href="javascript:void(0)" value="{{$v['brand_id']}}" field="brand_id" title="{{$v['brand_name']}}">
+                                <li @if(isset($query['brand_id']) && $query['brand_id']==$v['brand_id']) class="redhover" @endif>
+                                    {{$v['brand_name']}}
+                                </li>
+                            </a>
                         @endforeach
                     </ul>
                 </div>
                 <div class="filter-prop-item">
                     <span class="filter-prop-title">价格：</span>
-                    <ul class="clearfix">
-                        <a href=""><li class="active">全部</li></a>
-                        @foreach($goods_list['goods_price'] as $v)
-
-                        <a href="JavaScript:;"><li>{{$v}}</li></a>
+                    <ul class="type-list search">
+                        @foreach($data['price'] as $v)
+                            <a href="javascript:void(0)"  value="{{$v}}" field="price">
+                                <li @if(isset($query['price']) && $query['price']==$v) class="redhover" @endif>
+                                    {{$v}}
+                                </li>
+                            </a>
                         @endforeach
-
-
                     </ul>
                 </div>
             </div>
@@ -64,9 +56,9 @@
         <section class="item-show__div clearfix">
             <div class="pull-left">
                 <div class="item-list__area clearfix">
-                    @foreach($goods_list['goods_list'] as $v)
+                    @foreach($data['goods']['data'] as $v)
                     <div class="item-card">
-                        <a href="item_show.html" class="photo">
+                        <a href="4" class="photo">
                             <img src="{{$v['goods_img']}}" class="cover">
                             <div class="name">{{$v['goods_name']}}</div>
                         </a>
@@ -107,16 +99,16 @@
                         <span class="c6">爆款推荐</span>
                     </div>
                     <div class="picked-box">
-                        <a href="" class="picked-item"><img src="images/temp/S-001.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-                        <a href="" class="picked-item"><img src="images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-                        <a href="" class="picked-item"><img src="images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-                        <a href="" class="picked-item"><img src="images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-                        <a href="" class="picked-item"><img src="images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-                        <a href="" class="picked-item"><img src="images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-                        <a href="" class="picked-item"><img src="images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-                        <a href="" class="picked-item"><img src="images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-                        <a href="" class="picked-item"><img src="images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-                        <a href="" class="picked-item"><img src="images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-001.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        {{--<a href="" class="picked-item"><img src="images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
                     </div>
                 </div>
             </div>
@@ -162,6 +154,31 @@
         </ul>
         <script>
             $(document).ready(function(){ $('.to-top').toTop({position:false}) });
+            $(function(){
+                $('.redhover').each(function (i,k) {
+                    var s_key = $(this).parent().attr('field');
+                    var s_val = $(this).parent().attr('value');
+                    if(s_key=='brand_id'){
+                        var s_val = $(this).parent().attr('title');
+                    }
+                   $('.tag-'+s_key).text(s_val).show();
+                });
+            });
+            $('.search a').click(function () {
+                $(this).siblings().find('li').removeClass('redhover');
+                $(this).find('li').addClass('redhover');
+                var search = '';
+                $('.redhover').each(function (i,k) {
+                    var s_key = $(this).parent().attr('field');
+                    var s_val = $(this).parent().attr('value');
+                    search += s_key+ '=' +s_val+'&';
+                });
+                var url = "{{$url}}";
+                if(search){
+                     url +='?'+search.substring(0,search.length-1);
+                     location.href = url;
+                }
+            });
         </script>
     </div>
 @include('index.lay.bottom')
