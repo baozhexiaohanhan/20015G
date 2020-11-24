@@ -36,7 +36,8 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 		Route::any('/notice','Api\IndexController@notice');
 		Route::any('/fenlei','Api\IndexController@fenlei');
 		Route::any('/Treecate','Api\IndexController@Treecate');
-		
+		Route::any('/udai_notice','Api\NoticeController@udai_notice');
+				
 
 		
 	});
@@ -55,12 +56,12 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 	Route::any('/getcartprice','Api\CartController@getcartprice');//算总价
 	Route::any('/cartplus','Api\CartController@cartplus');//算数量
 });
+	
+    Route::any('/history','Api\HistoryController@history');//浏览历史记录
 });
 Route::prefix('/goods')->group(function(){
-    Route::get('/goods_list','Api\GoodsController@goods_list');
-    Route::get('/cate/{cate_id}','Api\GoodsController@cate');
-    Route::get('/brand','Api\GoodsController@brand');
-    Route::get('/price','Api\GoodsController@price');
+    Route::get('/goods_list/{cate_id}','Api\GoodsController@goods_list');
+    Route::get('/getprice}','Api\GoodsController@price');
 });
 
 Route::prefix('/shop')->group(function(){

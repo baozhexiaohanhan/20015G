@@ -8,52 +8,43 @@ use DB;
 class GoodsController extends Controller
 {
 //    商品列表
-    public function goods_list()
+    public function goods_list($cate_id)
     {
 
-        $goods_list = DB::table('goods')->where('cate_id',4)->get();
-//        $goods = json_encode($goods_list);
-//        $goods_price = Goods::where("is_show",1)->whereIn("cate_id",4)->max("goods_price");
-        $goods_price = 2999;
-//        $price = $this->price($goods_price);
-        $length=strlen($goods_price);
-        // dump($length);
-        $foemat='400'.str_repeat(0, $length-4);
-        //dd($aa);
-        $maxprice=substr($goods_price,0,1);
-        $maxprice=$maxprice*$foemat;
-        // dd($maxprice);
-
-        //计算价格阶段
-        $price=[];
-        $avgprice=$maxprice/5;
-        for($i=0,$j=1;$i<$maxprice;$i++,$j++){
-            $price[]=$i.'-'.$avgprice*$j.'元';
-            $i=$avgprice*$j-1;
+//        获取所有分类
+        $soncate_id = DB::table('cate')->where('pid',$cate_id)->pluck('cate_id')->toArray();
+        array_push($soncate_id,$cate_id);
+//        根据分类查询商品
+        $goods = DB::table('goods')->where('is_new',1)->whereIn('cate_id',$soncate_id)->paginate(10);
+//         根据商品查询商品所拥有的品牌
+        $brand_ids = DB::table('goods')->where('is_new',1)->whereIn('cate_id',$soncate_id)->pluck('brand_id')->toArray();
+        $brand_ids = array_unique($brand_ids);
+        $brand = DB::table('brand')->select('brand_id','brand_name')->whereIn('brand_id',$brand_ids)->get();
+//       根据商品查询商品的最大价格 并计算价格阶段
+        $shop_price = DB::table('goods')->where('is_new',1)->whereIn('cate_id',$soncate_id)->max('goods_price');
+//        dd($shop_price);
+        $length = strlen($shop_price);
+//        dump($length);
+        $format = '1'.str_repeat(0,$length-4);
+//        dd($format);
+        $maxprice = substr($shop_price,0,1);
+        $maxprice = $maxprice*$format;
+//        dd($maxpeice);
+        $price = [];
+        $avgprice = $maxprice/5;
+        for ($i=0,$j=1;$i < $maxprice;$i++,$j++){
+            $price[] = $i.'-'.$avgprice*$j.'元';
+            $i = $avgprice*$j-1;
         }
-        $price[]=$maxprice.'元以上';
-//        return $price;
+        $price[] = $maxprice.'元以上';
+//        dd($price);
         $msg = [
-            "goods_list"=>$goods_list,
-            "goods_price"=>$price,
+            'goods'=>$goods,
+            'brand'=>$brand,
+            'price'=>$price
         ];
+        $msg = json_encode($msg);
+        $msg = ["ok","data"=>$msg];
         return $msg;
-    }
-//    获取分类
-    public function cate($cate_id)
-    {
-        $cate = DB::table('cate')->where('pid',$cate_id)->get();
-        return $cate;
-    }
-//    获取品牌
-    public function brand()
-    {
-        $brand = DB::table('brand')->get();
-        return $brand;
-    }
-    public function price($goods_price)
-    {
-
-
     }
 }

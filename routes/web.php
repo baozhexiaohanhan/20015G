@@ -13,6 +13,7 @@
 
 Route::get('/','Index\IndexController@index')->name('.index');//前台首页
 
+Route::get('/udai_notice/{notice_id}','Index\NoticeController@udai_notice')->name('.udai_notice');//前台首页
 
 
 Route::get('/reg','Admin\LoginController@reg')->name('reg');//后台注册
@@ -189,4 +190,5 @@ Route::prefix('/')->group(function(){
 
 
 Route::get('/shopcart','Index\ShopcartController@shopcart');
- 
+
+Route::any('/history','Index\HistoryController@history');//浏览历史记录
