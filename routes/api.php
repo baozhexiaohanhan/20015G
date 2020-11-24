@@ -36,7 +36,8 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 		Route::any('/notice','Api\IndexController@notice');
 		Route::any('/fenlei','Api\IndexController@fenlei');
 		Route::any('/Treecate','Api\IndexController@Treecate');
-		
+		Route::any('/udai_notice','Api\NoticeController@udai_notice');
+				
 
 		
 	});

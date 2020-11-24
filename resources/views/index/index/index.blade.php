@@ -92,7 +92,7 @@
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
 								@foreach($notice as $k=>$v)
-								<a class="swiper-slide ep" >【公告】{{$v->notice_name}}</a>
+								<a  href="/udai_notice/{{$v->notice_id}}" class="swiper-slide ep" >【公告】{{$v->notice_name}}</a>
 								@endforeach
 							</div>
 						</div>
