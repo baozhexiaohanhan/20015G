@@ -63,6 +63,8 @@ Route::prefix('/goods')->group(function(){
     Route::get('/price','Api\GoodsController@price');
 });
 
-
+Route::prefix('/shop')->group(function(){
+    Route::get('/shopcart','Api\ShopcartController@shopcart');
+});
 
 

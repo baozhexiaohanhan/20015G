@@ -189,4 +189,4 @@ Route::prefix('/')->group(function(){
 
 
 Route::get('/shopcart','Index\ShopcartController@shopcart');
-
+ 
