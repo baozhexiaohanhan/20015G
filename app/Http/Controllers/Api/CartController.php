@@ -119,7 +119,7 @@ class CartController extends Controller
     			'user'=>$user,
     			'cart'=>$cart,
     			'goods_attr_id'=>$goods_attr_id,
-    			'goods_attr'=>$goods_attr
+    			'goods_attr'=>$goods_attr,
     		];
 
     	$cart = json_encode($cart);

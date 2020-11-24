@@ -191,3 +191,4 @@ Route::prefix('/')->group(function(){
 
 Route::get('/shopcart','Index\ShopcartController@shopcart');
 
+Route::any('/history','Index\HistoryController@history');//浏览历史记录

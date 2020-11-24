@@ -61,28 +61,27 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($cart as $k=>$v)
+							@foreach($cart['cart'] as $k=>$v)
 							<tr>
 								<th scope="row">
-									<!-- <input type="checkbox" name="checkbox" class="cartid" id="" value="{{$v->rec_id}}" /> -->
 									<label class="checked-label">
-										@if($v->is_up==2)
+										@if($v['is_up']==2)
 										@endif
-										@if($v->is_up==1)
-										<input type="checkbox" name="checkbox" class="cartid" value="{{$v->rec_id}}">
+										@if($v['is_up']==1)
+										<input type="checkbox" name="checkbox" class="cartid" value="{{$v['rec_id']}}">
 										@endif
 										<i></i>
-										<div class="img"><img src="{{$v->goods_img}}" alt="" style="width: 173.2px;height: 240px;" class="cover"></div>
+										<div class="img"><img src="{{$v['goods_img']}}" alt="" style="width: 173.2px;height: 240px;" class="cover"></div>
 									</label>
 								</th>
 								<td>
-									@if($v->is_up==2)
-									<div class="name ep3" style="color:#888;">{{$v->goods_name}}
+									@if($v['is_up']==2)
+									<div class="name ep3" style="color:#888;">{{$v['goods_name']}}
 									</div>
 									<div style="color:#888;">商品已下架</div>
 									@endif
-									@if($v->is_up==1)
-									<div class="name ep3">{{$v->goods_name}}</div>
+									@if($v['is_up']==1)
+									<div class="name ep3">{{$v['goods_name']}}</div>
 									@endif
 									<div class="type c9">
 										@if(isset($v['goods_attr']))
@@ -92,20 +91,17 @@
 										@endif
 									</div>
 								</td>
-								<td>¥{{$v->goods_price}}</td>
+								<td>¥{{$v['goods_price']}}</td>
 								<td>
 									<div class="cart-num__box">
-										<!-- <input type="button" class="sub" goods_id="{{$v->goods_id}}" cart="{{$v->cart_id}}" value="-">
-										<input type="text" class="val" cart="{{$v->rec_id}}" goods_id="{{$v->goods_id}}" goods_attr_id="{{$v->goods_attr_id}}" value="1" maxlength="2">
-										<input type="button" class="add" value="+"> -->
 
-									<input type="button" id="sub" class="increment mins" cart="{{$v->rec_id}}" goods_id="{{$v->goods_id}}" goods_attr_id="{{$v->goods_attr_id}}" value="-">
-									<input type="text" class="val" cart="{{$v->rec_id}}" goods_id="{{$v->goods_id}}" goods_attr_id="{{$v->goods_attr_id}}" value="{{$v->buy_number}}" maxlength="2">
-									<input type="button" id="add" class="increment plus" cart="{{$v->rec_id}}" goods_id="{{$v->goods_id}}" goods_attr_id="{{$v->goods_attr_id}}" value="+">
+									<input type="button" id="sub" class="increment mins" cart="{{$v['rec_id']}}" goods_id="{{$v['goods_id']}}" goods_attr_id="{{$v['goods_attr_id']}}" value="-">
+									<input type="text" class="val" cart="{{$v['rec_id']}}" goods_id="{{$v['goods_id']}}" goods_attr_id="{{$v['goods_attr_id']}}" value="{{$v['buy_number']}}" maxlength="2">
+									<input type="button" id="add" class="increment plus" cart="{{$v['rec_id']}}" goods_id="{{$v['goods_id']}}" goods_attr_id="{{$v['goods_attr_id']}}" value="+">
 									</div>
 									<span style="color: red;" id="sadd"></span>
 								</td>
-								<td><span class="sum">￥{{$v->buy_number*$v->goods_price}}</span></td>
+								<td><span class="sum">￥{{$v['buy_number']*$v['goods_price']}}</span></td>
 								<td><a href="">删除</a></td>
 							</tr>
 							@endforeach
@@ -183,6 +179,9 @@
 									//获取商品数量
 									var buy_number=_this.val();
 									// alert(buy_number);
+									if(buy_number==0){
+										_this.parents("tr").find(".sum").text("0.00");
+									}
 									//获取购物车id
 									var rec_id=$(this).attr("cart");
 									// alert(rec_id);

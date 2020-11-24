@@ -56,6 +56,8 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 	Route::any('/getcartprice','Api\CartController@getcartprice');//算总价
 	Route::any('/cartplus','Api\CartController@cartplus');//算数量
 });
+	
+    Route::any('/history','Api\HistoryController@history');//浏览历史记录
 });
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Api\GoodsController@goods_list');
