@@ -46,7 +46,7 @@
 		<section class="user-center inner clearfix">
 			<div class="user-content__box clearfix bgf">
 				<div class="title">购物车</div>
-				<form action="udai_shopcart_pay.html" class="shopcart-form__box">
+				<form action="/shopcart" class="shopcart-form__box">
 					<table class="table table-bordered">
 						<thead>
 							<tr>
@@ -108,7 +108,7 @@
 						</tbody>
 					</table>
 					<div class="user-form-group tags-box shopcart-submit pull-right">
-						<button type="submit" class="btn">提交订单</button>
+						<a class="btn">提交订单</a>
 					</div>
 					<div class="checkbox shopcart-total">
 						<label><input type="checkbox" class="check-all"><i></i> 全选</label>
@@ -122,15 +122,17 @@
 					<script>
 
 					$('.btn').click(function(){
-							var rec_id = new Array();
-							$('.cartid:checked').each(function(){
-								rec_id.push($(this).val());
-							});
-							if(!rec_id.length){
-								alert('选择购买的商品');
-								return; 
-							}
-							location.href="/confrimorder?rec_id="+rec_id;
+							// var rec_id = new Array();
+							var rec_id =1;
+
+							// $('.cartid:checked').each(function(){
+							// 	rec_id.push($(this).val());
+							// });
+							// if(!rec_id.length){
+							// 	alert('选择购买的商品');
+							// 	return; 
+							// }
+							location.href="/shopcart?rec_id="+rec_id;
 						})
 
 						$(document).ready(function(){
