@@ -157,7 +157,7 @@
 							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v->goods_name}}</div>
 						</a>
 						@endforeach
-			
+					
 				</div>
 			</div>
 		</section>

@@ -46,7 +46,7 @@
 		<section class="user-center inner clearfix">
 			<div class="user-content__box clearfix bgf">
 				<div class="title">购物车</div>
-				<form action="udai_shopcart_pay.html" class="shopcart-form__box">
+				<form action="/shopcart" class="shopcart-form__box">
 					<table class="table table-bordered">
 						<thead>
 							<tr>
@@ -112,7 +112,7 @@
 						</tbody>
 					</table>
 					<div class="user-form-group tags-box shopcart-submit pull-right">
-						<button type="submit" class="btn">提交订单</button>
+						<a class="btn">提交订单</a>
 					</div>
 					<div class="checkbox shopcart-total">
 						<label><input type="checkbox" class="check-all"><i></i> 全选</label>
@@ -126,15 +126,17 @@
 					<script>
 
 					$('.btn').click(function(){
-							var cart_id = new Array();
-							$('.cartid:checked').each(function(){
-								cart_id.push($(this).val());
-							});
-							if(!cart_id.length){
-								alert('选择购买的商品');
-								return; 
-							}
-							location.href="/confrimorder?cart_id="+cart_id;
+							// var rec_id = new Array();
+							var rec_id =1;
+
+							// $('.cartid:checked').each(function(){
+							// 	rec_id.push($(this).val());
+							// });
+							// if(!rec_id.length){
+							// 	alert('选择购买的商品');
+							// 	return; 
+							// }
+							location.href="/shopcart?rec_id="+rec_id;
 						})
 
 						$(document).ready(function(){
@@ -152,7 +154,7 @@
 									if(res.code=='0'){
 										$('.fz24').text(res.data.total);
 									}
-								})
+								},'json')
 							});
 							// 点击选择
 							$item_checkboxs.on('change', function() {
@@ -223,8 +225,10 @@
 									var goods_id=$(this).attr("goods_id");
 									// alert(goods_id);
 									$.get("/cartplus",{buy_number:buy_number,rec_id:rec_id,goods_attr_id:goods_attr_id,goods_id:goods_id},function(res){
+										// alert(res);return;
 										if(res.code==0000){
 											_this.parents("tr").find(".sum").text('￥'+res.data);
+											// console.log(res.data);
 											var cart_id = new Array();
 											$("input[name='checkbox']:checked").each(function(){
 												cart_id.push($(this).val());
@@ -233,10 +237,11 @@
 												if(res.code=='0'){
 														$('.fz24').text(res.data.total);
 													}
-											})
+												// console.log(res);
+											},'json')
 										}
 										if(res.code==0001){
-											console.log(res);
+											// console.log(res);
 											_this.prev().val(res.data);
 										}
 										if(res.code==0001){
@@ -263,16 +268,27 @@
 									var goods_id=$(this).attr("goods_id");
 									// alert(goods_id);
 									$.get("/cartplus",{buy_number:buy_number,rec_id:rec_id,goods_attr_id:goods_attr_id,goods_id:goods_id},function(res){
-										_this.parents("tr").find(".sum").text('￥'+res.data);
-										var cart_id = new Array();
-										$("input[name='checkbox']:checked").each(function(){
-											cart_id.push($(this).val());
-										})
-										$.get("/getcartprice",{cart_id:cart_id},function(res){
-											if(res.code=='0'){
-													$('.fz24').text(res.data.total);
-												}
-										})
+										if(res.code==0000){
+											_this.parents("tr").find(".sum").text('￥'+res.data);
+											// console.log(res.data);
+											var cart_id = new Array();
+											$("input[name='checkbox']:checked").each(function(){
+												cart_id.push($(this).val());
+											})
+											$.get("/getcartprice",{cart_id:cart_id},function(res){
+												if(res.code=='0'){
+														$('.fz24').text(res.data.total);
+													}
+												// console.log(res);
+											},'json')
+										}
+										if(res.code==0001){
+											// console.log(res);
+											_this.prev().val(res.data);
+										}
+										if(res.code==0001){
+											_this.parent().next().html();
+										}
 									},'json')
 								})
 								
