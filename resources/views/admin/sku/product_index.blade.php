@@ -1,6 +1,11 @@
-@extends('admin.lay.js')
-     @section('js')
-
+@include('admin.lay.top')
+     @section('tops')
+<link rel="stylesheet" href="/admin/css/font.css">
+	<link rel="stylesheet" href="/admin/css/xadmin.css">
+	
+    <script src="/admin/js/jquery.min.js"></script>
+    <script src="/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/admin/js/xadmin.js"></script>
      <span class="layui-breadcrumb" >
   <a href="/admin/index">首页</a>
   <a href="javascript:;">商品管理</a>

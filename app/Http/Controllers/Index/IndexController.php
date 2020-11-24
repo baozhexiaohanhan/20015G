@@ -16,7 +16,7 @@ class IndexController extends Controller
     	$url='http://www.2001api.com/domain/index';
     	$url2 ='http://www.2001api.com/domain/notice';
     	$url3 = 'http://www.2001api.com/domain/fenlei';
-    	//公告
+        //公告
     	$notice = curl_get($url2);
     	$notice = json_decode($notice['msg']);
     	//无限极分类

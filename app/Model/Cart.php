@@ -19,7 +19,7 @@ class Cart extends Model
     		$cart_id=implode(',',$cart_id);    
     	}
     	$cart_id = trim($cart_id,',');
-    	$total=\DB::select("select sum(shop_price*buy_number) as total from cart where rec_id in($cart_id)");
+    	$total=\DB::select("select sum(goods_price*buy_number) as total from cart where rec_id in($cart_id)");
 	    $total=$total?$total[0]->total:0;
 	    return $total;
     }

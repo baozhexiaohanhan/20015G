@@ -38,6 +38,15 @@
                     </label>
                     <input type="password" lay-verify="required" name="admin_pwd" autocomplete="off" placeholder="这里输入密码" class="layui-input" lay-verType="tips">
                 </div>
+                <div class="layui-form-item div-reg"  >
+                    <div class="layui-input-block">
+                        
+                        <img id="imageUrl" src="{{$code['image_url']}}" >
+                        <input  type="text" name="code" lay-verify="required"  autocomplete="off" class="layui-input codes" style="width:60px; border-radius:10px; float: left;"/>
+                        <input type="hidden" id="sid" value="{{$code['sid']}}">
+                        <a href="javascript:;" id="code" ><u class="ad">换一张</u></a>
+                    </div>
+                </div>
                 <div class="layui-form-item">
                     <div class="beg-pull">
                         <button type="submit" class="layui-btn layui-btn-normal" style="width:100%;">
@@ -57,3 +66,26 @@
     <script type="text/javascript" src="/admin/login/javascript/login.js"></script>
 </body>
 </html>
+<script>
+
+ //图片验证
+ $(document).ready(function(){
+    $(document).on('click','.ad',function(){
+        window.location.reload();
+        })
+
+      $('.codes').blur(function(){
+           
+           var code = $('input[name="code"]').val();
+           if(code==''){
+               $('span[name="code"]').html('<span style="color: red;">验证码不能为空</span>')
+               $('button[type="submit"]').prop('disabled','disabled');
+               return false;
+           }else{
+               $('span[name="code"]').html('<span style="color:green;">已填写</span>')
+               $('button[type="submit"]').prop('disabled',''); 
+           }
+
+       })
+ })
+</script>
