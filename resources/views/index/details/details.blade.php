@@ -1,4 +1,6 @@
-@section('title', '详情页')
+@section('title', 'U 袋网')
+@include('index.lay.tops')
+@section('tops2')
 @include('index.lay.top')
 @section('tops')
 
