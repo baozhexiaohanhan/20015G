@@ -102,7 +102,7 @@
 									<span style="color: red;" id="sadd"></span>
 								</td>
 								<td><span class="sum">￥{{$v['buy_number']*$v['goods_price']}}</span></td>
-								<td><a href="">删除</a></td>
+								<td><a href="javascript:void(0)" onclick="deleteById({{$v['rec_id']}})" >删除</a></td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -112,7 +112,7 @@
 					</div>
 					<div class="checkbox shopcart-total">
 						<label><input type="checkbox" class="check-all"><i></i> 全选</label>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">删除</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- <a href="">删除</a> -->
 						<div class="pull-right">
 							已选商品 <span>2</span> 件
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合计（不含运费）
@@ -307,6 +307,18 @@
 									}
 							},'json')
 						});
+
+						//ajax删除
+						   function deleteById(rec_id){
+						   	// alert(123);return;
+						        if(!rec_id){
+						            return;
+						        }
+						        $.get('/cart/destroy/'+rec_id,function(res){
+						            alert(res.msg);
+						            location.reload();
+						        },'json')
+						    };
 					</script>
 				</form>
 			</div>

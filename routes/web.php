@@ -163,6 +163,7 @@ Route::get('/addcart','Index\CartController@addcart');//添加购物车
 Route::get('/cart','Index\CartController@index');//前台购物车列表
 Route::get('/getcartprice','Index\CartController@getcartprice');//算总价
 Route::get('/cartplus','Index\CartController@cartplus');//算数量
+Route::get("/cart/destroy/{id}","Index\CartController@destroy");//删除
 
 
 
@@ -184,11 +185,10 @@ Route::prefix('/goods')->group(function(){
 Route::prefix('/')->group(function(){
     Route::any('/details','Index\DetailsController@details');
     Route::any('rush/seckill','Index\SeckillController@seckill');
-    
-
+    Route::any('/history','Index\DetailsController@history');
 });
 
 
 Route::get('/shopcart','Index\ShopcartController@shopcart');
 
-Route::any('/history','Index\HistoryController@history');//浏览历史记录
+

@@ -44,6 +44,7 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 	Route::prefix('/')->group(function(){
 		Route::any('details','Api\DetailsController@details');
 		Route::get('/attr_key','Api\DetailsController@attr_key');
+		Route::any('history','Api\DetailsController@history');//添加浏览历史记录到数据库
 	
 	});
 	Route::get('regdo','Api\TestController@regdo');//注册
@@ -55,9 +56,10 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 	Route::any('/addcart','Api\CartController@addcart');//添加购物车
 	Route::any('/getcartprice','Api\CartController@getcartprice');//算总价
 	Route::any('/cartplus','Api\CartController@cartplus');//算数量
+	Route::get("/cart/destroy/{id}","Api\CartController@destroy");//删除
 });
 	
-    Route::any('/history','Api\HistoryController@history');//浏览历史记录
+
 });
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Api\GoodsController@goods_list');

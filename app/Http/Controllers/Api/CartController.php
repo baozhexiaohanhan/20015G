@@ -99,8 +99,8 @@ class CartController extends Controller
     	//两表联查  cart.*查询购物车所有
     	$cart=Cart::select('cart.*','goods.goods_img','goods.goods_name','goods.is_up')
     		->leftjoin('goods','cart.goods_id','=','goods.goods_id')
-    		->where('user_id',$user)->orderBy('rec_id','desc')->get();
-    		// dd($cart);
+    		->where(['user_id'=>$user,'cart.is_del'=>0])->orderBy('rec_id','desc')->get();
+    		// return $cart;
     		foreach ($cart as $k=>$v) {
     			if($v->goods_attr_id){
     				$goods_attr_id=explode('|',$v->goods_attr_id);
