@@ -58,7 +58,7 @@
                 <div class="item-list__area clearfix">
                     @foreach($data['goods']['data'] as $v)
                     <div class="item-card">
-                        <a href="4" class="photo">
+                        <a href="" class="photo">
                             <img src="{{$v['goods_img']}}" class="cover">
                             <div class="name">{{$v['goods_name']}}</div>
                         </a>
