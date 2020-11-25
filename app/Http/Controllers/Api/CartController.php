@@ -99,7 +99,7 @@ class CartController extends Controller
     	//两表联查  cart.*查询购物车所有
     	$cart=Cart::select('cart.*','goods.goods_img','goods.goods_name','goods.is_up')
     		->leftjoin('goods','cart.goods_id','=','goods.goods_id')
-    		->where('user_id',$user)->get();
+    		->where('user_id',$user)->orderBy('rec_id','desc')->get();
     		// dd($cart);
     		foreach ($cart as $k=>$v) {
     			if($v->goods_attr_id){
@@ -119,7 +119,7 @@ class CartController extends Controller
     			'user'=>$user,
     			'cart'=>$cart,
     			'goods_attr_id'=>$goods_attr_id,
-    			'goods_attr'=>$goods_attr
+    			'goods_attr'=>$goods_attr,
     		];
 
     	$cart = json_encode($cart);
@@ -137,16 +137,22 @@ class CartController extends Controller
         // dd($total);
         return $this->success('ok',['total'=>$total]);    
     }
-    public function cartplus(){
+    public function cartplus(Request $request){
     	$user=1;
-    	$data=request()->all();
+    	// $data=request()->all();
     	// dd($data);
-    	$buy_number=$data['buy_number'];
-    	// dd($buy_number);
-    	$rec_id=$data['rec_id'];
-    	$goods_attr_id=$data['goods_attr_id'];
-    	// dd($goods_attr_id);
-    	$goods_id=$data['goods_id'];
+    	// $buy_number=$data['buy_number'];
+    	// // dd($buy_number);
+    	// $rec_id=$data['rec_id'];
+    	// $goods_attr_id=$data['goods_attr_id'];
+    	// // dd($goods_attr_id);
+    	// $goods_id=$data['goods_id'];
+    	$rec_id=$request->rec_id;
+    	// dd($rec_id);   	
+    	$goods_id=$request->goods_id;
+        $buy_number=$request->buy_number;
+        // dd($buy_number);
+        $goods_attr_id=$request->goods_attr_id;
     	$goods=Goods::find($goods_id);
     	// dd($goods_id);
     	if($goods_attr_id){
@@ -156,8 +162,8 @@ class CartController extends Controller
             $buy_number = $goods->goods_number;
             // dd($buy_number);
             Cart::where(["rec_id"=>$rec_id,"user_id"=>$user,"goods_id"=>$goods_id])->update(['buy_number'=>$buy_number]);
-                 return $message = [
-                    "code"=>10001,
+                  return $message = [
+                    "code"=>0001,
                     "msg"=>"数量",
                     "data"=>$buy_number,
                 ];
@@ -170,13 +176,26 @@ class CartController extends Controller
         $info = Cart::where(['user_id'=>$user,"rec_id"=>$rec_id])->first();
       	//dd($info);
        
-        $price = $info['buy_number']*$info['shop_price'];
+        $price = $info['buy_number']*$info['goods_price'];
         if($price){
             return $message = [
-                "code"=>10000,
+                "code"=>0000,
                 "msg"=>"价格",
                 "data"=>$price,
             ];
         }
+        // $price=[
+        // 	'user'=>$user,
+        // 	'rec_id'=>$rec_id,
+        // 	'goods_attr_id'=>$goods_attr_id,
+        // 	'buy_number'=>$buy_number,
+        // 	'goods_id'=>$goods_id,
+        // 	'info'=>$info,
+        // 	'price'=>$price
+        // ];
+        $price = json_encode($price);
+        $price = ["ok","data"=>$price];
+        // dd($price);
+        return $price; 
     }
 }

@@ -16,6 +16,15 @@
 			</div>
 		</div>
 		<div class="footer-links inner">
+			
+			<dl>
+				<dt>友情链接</dt>
+				<a href="http://www.baidu.com" ><dd>百度一下</dd></a>
+				<a href="http://www.qq.com"><dd>腾讯新闻</dd></a>
+				<a href="http://www.sina.com.cn"><dd>新浪</dd></a>
+				<a href="http://www.taobao.com"><dd>淘宝</dd></a>
+				<a href="http://www.weibo.com"><dd>微博</dd></a>
+			</dl>
 			<dl>
 				<dt>U袋网</dt>
 				<a href="temp_article/udai_article10.html"><dd>企业简介</dd></a>

@@ -13,6 +13,7 @@
 
 Route::get('/','Index\IndexController@index')->name('.index');//前台首页
 
+Route::get('/udai_notice/{notice_id}','Index\NoticeController@udai_notice')->name('.udai_notice');//前台首页
 
 
 Route::get('/reg','Admin\LoginController@reg')->name('reg');//后台注册
@@ -153,11 +154,7 @@ Route::prefix("/birthday")->group(function(){
     Route::post('/store','Admin\BirthdayController@store')->name('birthday.store');//生日执行添加
 });
 
-Route::get('/create','Admin\BirthdayController@create');//生日添加
-Route::get('/list','Admin\BirthdayController@list');//生日列表
-Route::post('/store','Admin\BirthdayController@store');
-
-    });
+});
 
 
 
@@ -191,3 +188,8 @@ Route::prefix('/')->group(function(){
     Route::any('miaosha_show_add','Index\SeckillController@miaosha_show_add');
 
 });
+
+
+Route::get('/shopcart','Index\ShopcartController@shopcart');
+
+Route::any('/history','Index\HistoryController@history');//浏览历史记录
