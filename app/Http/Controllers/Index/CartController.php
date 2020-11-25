@@ -78,4 +78,17 @@ class CartController extends Controller
 
         return $price;
     }
+    //删除
+    public function destroy($id=0){
+        // dd($id);
+       $res=Cart::where('rec_id',$id)->update(['is_del'=>1]);
+       // dd($res);
+        
+       if($res){
+            return response()->json(['code'=>0,'msg'=>'删除成功!']);
+        }
+        if($res){
+            return redirect('/cart');
+        }
+    }
 }

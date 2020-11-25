@@ -9,6 +9,17 @@ class GoodsController extends Controller
 //    列表页
     public function goods_list($cate_id)
     {
+        // $goods_id=request()->all();
+        // dd($goods_id);
+        //浏览历史记录
+        $user_id = 1;
+        $urls = "http://www.2001api.com/history?user_id=".$user_id;
+        $history = curl_get($urls);
+        // dd($history);
+        $history = json_decode($history['data'],true);
+        // dd($history);
+
+
 //        商品列表展示
         $url = "http://www.2001api.com/goods/goods_list/{$cate_id}";
         $goods_list = curl_get($url);
@@ -36,6 +47,6 @@ class GoodsController extends Controller
 //        dd($_SERVER);
         $urls = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 //        dd($urls);
-        return view('index/goods/goods_list',['data'=>$data,'query'=>$query,'url'=>$urls]);
+        return view('index/goods/goods_list',['data'=>$data,'query'=>$query,'url'=>$urls,'history'=>$history]);
     }
 }
