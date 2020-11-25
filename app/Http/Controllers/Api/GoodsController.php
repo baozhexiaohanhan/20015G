@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+
 class GoodsController extends Controller
 {
 //    商品列表
     public function goods_list($cate_id)
     {
-
 //        获取所有分类
         $soncate_id = DB::table('cate')->where('pid',$cate_id)->pluck('cate_id')->toArray();
         array_push($soncate_id,$cate_id);

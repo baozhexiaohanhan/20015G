@@ -67,7 +67,6 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 });
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Api\GoodsController@goods_list');
-    Route::get('/getprice}','Api\GoodsController@price');
 });
 
 Route::prefix('/shop')->group(function(){

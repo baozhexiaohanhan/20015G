@@ -1,6 +1,9 @@
-@section('title', 'U 袋网')
+@section('title', 'U 袋网 列表')
+@include('index.lay.tops')
+@section('tops2')
 @include('index.lay.top')
 @section('tops')
+
     <div class="content inner">
         <section class="filter-section clearfix">
             <ol class="breadcrumb">
@@ -58,7 +61,7 @@
                 <div class="item-list__area clearfix">
                     @foreach($data['goods']['data'] as $v)
                     <div class="item-card">
-                        <a href="4" class="photo">
+                        <a href="" class="photo">
                             <img src="{{$v['goods_img']}}" class="cover">
                             <div class="name">{{$v['goods_name']}}</div>
                         </a>

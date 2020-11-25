@@ -9,12 +9,30 @@ use App\Model\Goods_log;
 use App\Model\Attr;
 use App\Model\Goods_attr;
 use Illuminate\Support\Facades\Redis;
+use DB;
 class DetailsController extends Controller
 {
     public function details(){
         $goods_id = request()->goods_id;
         //  dd($goods_id);
-        
+
+//        统计点击量
+//        $hits = Redis::setnx('hit_'.$goods_id,1)?:Redis::incr('hit_'.$goods_id,1);
+        $hits =Redis::zincrby('hit',1,'hit_'.$goods_id);
+//        dd($hits);
+//        取点击量最高的五条
+        $hitgoods = Redis::zrevrange('hit',0,4);
+//        dd($hitgoods);
+        if($hitgoods){
+            $hit_goods_id = [];
+            foreach ($hitgoods as $v){
+                $hitsarr = explode('_',$v);
+                $hit_goods_id[] = $hitsarr[1];
+            }
+//            dd($hit_goods_id);
+            $hot_goods = DB::table('goods')->whereIn('goods_id',$hit_goods_id)->get();
+        }
+//        dd($hot_goods);
         $goods = Goods::where("goods_id",$goods_id)->first();
         $Goods_log = Goods_log::where("goods_id",$goods_id)->first();
 
@@ -33,6 +51,7 @@ class DetailsController extends Controller
             "attrs_new_key"=>$attrs_new_key,
             "newinfo"=>$newinfo,
             "hits"=>$hits,
+            "hot_goods"=>$hot_goods
         ];
         $shop = json_encode($shop);
         $shop = ["ok","data"=>$shop];
