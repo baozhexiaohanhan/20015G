@@ -1,6 +1,9 @@
-@section('title', 'U 袋网')
+@section('title', 'U 袋网 列表')
+@include('index.lay.tops')
+@section('tops2')
 @include('index.lay.top')
 @section('tops')
+
     <div class="content inner">
         <section class="filter-section clearfix">
             <ol class="breadcrumb">
