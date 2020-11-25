@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Redis;
 class SeckillController extends Controller
 {
     public function seckill(){
+        $res = Redis::hget("token");
+        dd($res);
         $info = Seckill::leftjoin("goods","seckill.goods_id","=","goods.goods_id")->where(['seckill.is_del'=>1,"goods.is_up"=>1])->get();
         $info = json_encode($info);
         $data = ["ok","data"=>$info];
