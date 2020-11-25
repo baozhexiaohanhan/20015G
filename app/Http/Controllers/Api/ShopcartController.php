@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Cart;
 use App\Model\Goods_attr;
-
+use DB;
 class ShopcartController extends Controller
 {
     public function shopcart(Request $request){
         $rec_id = request()->rec_id;
-        // dd($rec_id);
+        // return $rec_id;
+
         $rec_id = explode(',',$request->rec_id);
         $cart = Cart::select('cart.*','goods.goods_img')->leftjoin('goods','cart.goods_id','=','goods.goods_id')->whereIn('rec_id',$rec_id)->get();
         foreach($cart as $k=>$v){
@@ -23,18 +24,28 @@ class ShopcartController extends Controller
             }
         }
 
-        $cartData = CartModel::select('ecs_goods.goods_id','ecs_goods.goods_name','ecs_goods.shop_price','ecs_goods.goods_thumb','ecs_cart.buy_number')
-                    ->leftjoin('ecs_goods','ecs_cart.goods_id','=','ecs_goods.goods_id')
-                    ->where(['user_id'=>$user,'is_on_sale'=>1])
-                    ->whereIn('ecs_cart.cart_id',$cart_id)
-                    ->get();
-         $price = DB::select("select SUM(shop_price*buy_number) as total FROM ecs_cart");
-        //   var_dump($price);exit;
-        
+        // $cartData = Cart::select('goods.goods_id','goods.goods_name','goods.goods_price','cart.buy_number')
+        //             ->leftjoin('goods','cart.goods_id','=','goods.goods_id')
+        //             ->whereIn('cart.rec_id',$rec_id)
+        //             ->get();
         $rec_id = implode(',',$rec_id);
+
+        $price = DB::select("select SUM(goods_price*buy_number) as total FROM cart where rec_id in($rec_id)" );
+        
+        // echo 123;exit;
+        $price = $price[0]->total;
+        // $price= ;
+        // return $price;
+
+        // $count = count($cartData);
+
+
         $shop = [
             "cart"=>$cart,
             "rec_id"=>$rec_id,
+            // "count"=>$count,
+            "price"=>number_format($price,2,".",""),
+            // "price"=>$price,
         ];
         // dd($shop);
 
