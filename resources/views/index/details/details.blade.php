@@ -1,4 +1,6 @@
-@section('title', '详情页')
+@section('title', 'U 袋网')
+@include('index.lay.tops')
+@section('tops2')
 @include('index.lay.top')
 @section('tops')
 
@@ -55,15 +57,9 @@
 							<div class="price-panel pull-left">
 								售价：<span class="price" id="price">￥{{$data['goods']['goods_price']}} <s class="fz16 c9">￥24.00</s></span>
 							</div>
-							<div class="vip-price-panel pull-right">
-								会员等级价格 <i class="iconfont icon-down"></i>
-								<ul class="all-price__box">
-									<!-- 登陆后可见 -->
-									<li><span class="text-justify">普通：</span>40.00元</li>
-									<li><span class="text-justify">银牌：</span>38.00元</li>
-									<li><span class="text-justify">超级：</span>28.00元</li>
-									<li><span class="text-justify">V I P：</span>19.20元</li>
-								</ul>
+							<div class=" pull-right">
+								<h5>浏览量：{{$data['hits']}}</h5>
+								
 							</div>
 							<script>
 								// 会员价格折叠展开

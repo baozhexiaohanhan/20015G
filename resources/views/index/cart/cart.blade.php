@@ -122,16 +122,15 @@
 					<script>
 
 					$('.btn').click(function(){
-							// var rec_id = new Array();
-							var rec_id =1;
+							var rec_id = new Array();
 
-							// $('.cartid:checked').each(function(){
-							// 	rec_id.push($(this).val());
-							// });
-							// if(!rec_id.length){
-							// 	alert('选择购买的商品');
-							// 	return; 
-							// }
+							$('.cartid:checked').each(function(){
+								rec_id.push($(this).val());
+							});
+							if(!rec_id.length){
+								alert('选择购买的商品');
+								return; 
+							}
 							location.href="/shopcart?rec_id="+rec_id;
 						})
 

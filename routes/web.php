@@ -105,12 +105,12 @@ Route::prefix('/cate')->group(function (){
 });
 //优惠券管理
 Route::prefix('/coupon')->group(function(){
-    Route::get('/create','Admin\couponController@create')->name('coupon.create');//添加页面
-    Route::post('/store','Admin\couponController@store')->name('coupon.store');//添加执行
-    Route::get('/index','Admin\couponController@index')->name('coupon.index');//列表
-    Route::get('/destroy/{coupon_id}','Admin\couponController@destroy')->name('coupon.destroy');//删除
-    Route::get('/edit/{coupon_id}','Admin\couponController@edit')->name('coupon.edit');//修改
-    Route::post('/update','Admin\couponController@update')->name('coupon.update');//修改执行
+    Route::get('/create','Admin\CouponController@create')->name('coupon.create');//添加页面
+    Route::post('/store','Admin\CouponController@store')->name('coupon.store');//添加执行
+    Route::get('/index','Admin\CouponController@index')->name('coupon.index');//列表
+    Route::get('/destroy/{coupon_id}','Admin\CouponController@destroy')->name('coupon.destroy');//删除
+    Route::get('/edit/{coupon_id}','Admin\CouponController@edit')->name('coupon.edit');//修改
+    Route::post('/update','Admin\CouponController@update')->name('coupon.update');//修改执行
 });
 
 
@@ -151,7 +151,7 @@ Route::prefix("/admin")->group(function(){
 Route::prefix("/birthday")->group(function(){
     Route::get('/create','Admin\BirthdayController@create')->name('birthday.create');//生日添加
     Route::get('/list','Admin\BirthdayController@list')->name('birthday.list');//生日列表
-    Route::post('/store','Admin\BirthdayController@store')->name('birthday.store');//生日执行添加
+    Route::any('/store','Admin\BirthdayController@store')->name('birthday.store');//生日执行添加
 });
 
 });
@@ -184,11 +184,18 @@ Route::prefix('/goods')->group(function(){
 Route::prefix('/')->group(function(){
     Route::any('/details','Index\DetailsController@details');
     Route::any('rush/seckill','Index\SeckillController@seckill');
-    
+    Route::any('miaosha_show','Index\SeckillController@miaosha_show');
+    Route::any('miaosha_show_add','Index\SeckillController@miaosha_show_add');
 
 });
 
 
 Route::get('/shopcart','Index\ShopcartController@shopcart');
+Route::get('/pay','Index\ShopcartController@pay');//支付
+Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
 
 Route::any('/history','Index\HistoryController@history');//浏览历史记录
+
+Route::prefix('/')->group(function(){
+    Route::any('/welcome','Index\CoreorderController@welcome');
+});

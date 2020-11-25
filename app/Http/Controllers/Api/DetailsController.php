@@ -44,13 +44,7 @@ class DetailsController extends Controller
             $attrs_new_key[$v['attr_id']]['attr_name'] = $v['attr_name'];
             $attrs_new_key[$v['attr_id']]['attr_value'][$v['goods_attr_id']] = $v['attr_value'];
         }
-        //     $newinfo = [];
-        // foreach($data2 as $k=>$v){
-        //     $newinfo[$v['attr_id']]['attr_name'] = $v['attr_name'];
-        //     $newinfo[$v['attr_id']]['attr_value'][$v['goods_attr_id']] = $v['attr_value'];
-        // }
-        // dd($newinfo);
-
+        $hits = Redis::zincrby("hits",1,"hits_".$goods_id);
         $shop = [
             "goods"=>$goods,
             "goods_log"=>$Goods_log,
@@ -65,14 +59,7 @@ class DetailsController extends Controller
         return $shop; 
     }
     public function attr_key(){
-    //     $cal = request()->callback;
-    //     $callback = "2";
-    //     // $callback = request()->get("goods_id");
-    //     // $data = 1;
-    //     $result = json_encode(['code'=>1,'msg'=>'ok','data'=>$callback]);
-    // echo $callback.'('.$result.')';
-    //     // dd($data);
-        // echo $result;
+   
         $callback = request()->callback;
         // $data = Brand::all();
         $goods_id = request()->get("goods_id");

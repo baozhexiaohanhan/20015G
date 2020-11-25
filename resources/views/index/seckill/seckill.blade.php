@@ -1,18 +1,17 @@
-@section('title', 'U 袋网')
+@section('title', 'U 袋网 秒杀')
 @include('index.lay.top')
 @section('tops')
 	<div class="content inner">
 		<section class="filter-section clearfix">
 			<ol class="breadcrumb">
 				<li><a href="index.html">首页</a></li>
-				<li class="active">满减专区</li>
+				<li class="active">秒杀专区</li>
 			</ol>
 			<div class="filter-box">
 				<div class="all-filter">
 					<div class="filter-value">
-						<a href="" class="sale-title active">满减专区</a>
-						<a href="" class="sale-title">热卖专区</a>
-						<a href="" class="sale-title">折扣专区</a>
+						<a href="" class="sale-title active">秒杀专区</a>
+						
 					</div>
 				</div>
 			</div>
@@ -26,15 +25,23 @@
 		</section>
 		<section class="item-show__div clearfix">
 			<div class="pull-left">
-				<div class="item-list__area clearfix">
-                @foreach($res['data'] as $k=>$v)
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="{{$v['goods_img']}}" alt="锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款" class="cover">
+				<div class="item-list__area clearfix zuo">
+                @foreach($res as $k=>$v)
+					<div class="item-card shi">
+							<a href="/miaosha_show?goods_id={{$v['goods_id']}}&seckill_id={{$v['id']}}" class="photo">
+							<!-- <a href="/details/?goods_id={{$v['goods_id']}}" class="photo"> -->
+					
+							<img src="{{$v['goods_img']}}" alt="" class="cover">
 							<div class="name">{{$v['goods_name']}}</div></a>
 						<div class="middle">
 							<div class="price"><small>￥</small>{{$v['price']}}</div>
-							<div class="sale no-hide"><a href="">原价 {{$v['yuan']}} 秒杀降价{{$v['yuan']-$v['price']}}</a></div>
+							<div class="sale no-hide">
+								<p id="time"></p>
+								<h6 id="times" time="{{date('Y-m-d H:i:s',$v['start_time'])}}"> 结束时间:{{date("H:i:s",$v['start_time'])}}</h6>
+							</div>
+						</div>
+                        <div class="buttom">
+							<div>原价 {{$v['yuan']}} 秒杀降价{{$v['yuan']-$v['price']}}.00</div>
 						</div>
 						<div class="buttom">
 							<div>销量 <b>666</b></div>
@@ -120,6 +127,36 @@
 			$(document).ready(function(){ $('.to-top').toTop({position:false}) });
 		</script>
 	</div>
+	<script>
+		// $(document).ready(function(){
+		// 	// var times = $("#times").attr("time");
+		// 	var times = $(".zuo").find('.shi').find(".middle").find("div").find("#times").attr("time");
+		// 	// var times = new Date("date('Y-m-d H:i:s'");
+		// 	// var nowtime = new Date("date('Y-m-d H:i:s')");
+		// 	function getNow(s) {
+		// 		return s < 10 ? '0' + s: s;
+		// 	}
+		// 	var myDate = new Date();             
+		// 	var year=myDate.getFullYear();        //获取当前年
+		// 	var month=myDate.getMonth()+1;   //获取当前月
+		// 	var date=myDate.getDate();            //获取当前日
+
+
+		// 	var h=myDate.getHours();              //获取当前小时数(0-23)
+		// 	var m=myDate.getMinutes();          //获取当前分钟数(0-59)
+		// 	var s=myDate.getSeconds();
+		// 	var now=year+'-'+getNow(month)+"-"+getNow(date)+" "+getNow(h)+':'+getNow(m)+":"+getNow(s);
+		// 	// console.log(now);
+
+			
+		
+		// 	// if(times>now){
+		// 	// 	
+		// 	// }
+		// 	// console.log(now);
+		// })
+	
+	</script>
 	<!-- 底部信息 -->
 	@include('index.lay.bottom')
 @section('bottom')
