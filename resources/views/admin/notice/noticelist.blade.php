@@ -18,7 +18,7 @@
 <div class="x-body">
       <div class="layui-form layui-col-md12 x-so">
        <form>
-            <input type="text" name="name" placeholder="请输入管理员名称" autocomplete="off" class="layui-input" value="{{$query['name']??''}}">
+            <input type="text" name="name" placeholder="请输入添加人" autocomplete="off" class="layui-input" value="{{$query['name']??''}}">
            <button class="layui-btn layui-btn-normal">搜索</button>
           </form>
       </div>
@@ -31,8 +31,7 @@
             <th>
             </th>
             <th>ID</th>
-            <th>公告内容</th>
-            <th>添加人手机号</th>
+            <th>公告</th>
             <th>添加人</th>
             <th>添加时间</th>
             <th>操作</th>
@@ -44,7 +43,6 @@
             </td>
             <td>{{$v->notice_id}}</td>
             <td>{{$v->notice_name}}</td>
-            <td>{{$v->notice_desc}}</td>
             <td>{{$v->notice_fullname}}</td>
             <td>{{date("Y-m-d H:i:s",$v->notice_time)}}</td>
             <td class="td-manage">

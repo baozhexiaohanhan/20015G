@@ -44,7 +44,11 @@
             </td>
             <td>{{$v->admin_id}}</td>
             <td>{{$v->admin_name}}</td>
-            <td>{{$v->admin_tel}}</td>
+            <td>
+            @php 
+            echo substr($v->admin_tel,0,3)."******".substr($v->admin_tel,7,4);
+            @endphp
+            </td>
             <td>{{$v->email}}</td>
             <td>{{date("Y-m-d H:i:s",$v->admin_time)}}</td>
             <td class="td-manage">

@@ -101,53 +101,29 @@
 									<th width="300">商品信息</th>
 									<th width="150">单价</th>
 									<th width="200">数量</th>
-									<th width="200">运费</th>
-									<th width="80">总价</th>
 								</tr>
 							</thead>
 							<tbody>
+							@foreach($data['cart'] as $k=>$v)
 								<tr>
-									<th scope="row"><a href="item_show.html"><div class="img"><img src="images/temp/M-003.jpg" alt="" class="cover"></div></a></th>
+									<th scope="row"><div class="img"><img src="{{$v['goods_img']}}" alt="" class="cover"></div></th>
 									<td>
-										<div class="name ep3">锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款</div>
-										<div class="type c9">颜色分类：深棕色  尺码：均码</div>
+										<div class="name ep3">{{$v['goods_name']}}</div>
+										<div class="type c9">
+											@if(isset($v['goods_attr']))
+												@foreach($v['goods_attr'] as $vv)
+													{{$vv['attr_name']}}:{{$vv['attr_value']}}
+												@endforeach
+											@endif</div>
 									</td>
-									<td>¥20.0</td>
-									<td>1</td>
-									<td>¥0.0</td>
-									<td>¥20.0</td>
+									<td>¥{{$v['goods_price']}}</td>
+									<td>{{$v['buy_number']}}</td>
 								</tr>
-								<tr>
-									<th scope="row"><a href="item_show.html"><div class="img"><img src="images/temp/S-005.jpg" alt="" class="cover"></div></a></th>
-									<td>
-										<div class="name ep3">锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款</div>
-										<div class="type c9">颜色分类：深棕色  尺码：均码</div>
-									</td>
-									<td>¥20.0</td>
-									<td>2</td>
-									<td>¥0.0</td>
-									<td>¥40.0</td>
-								</tr>
-								<tr>
-									<th scope="row"><a href="item_show.html"><div class="img"><img src="images/temp/M-007.jpg" alt="" class="cover"></div></a></th>
-									<td>
-										<div class="name ep3">锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款</div>
-										<div class="type c9">颜色分类：深棕色  尺码：均码</div>
-									</td>
-									<td>¥20.0</td>
-									<td>1</td>
-									<td>¥0.0</td>
-									<td>¥20.0</td>
-								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
 					<div class="shop-cart__info clearfix">
-						<div class="pull-left text-left">
-							<div class="info-line text-nowrap">购买时间：<span class="c6">2017年09月14日 17:31:05</span></div>
-							<div class="info-line text-nowrap">交易类型：<span class="c6">担保交易</span></div>
-							<div class="info-line text-nowrap">交易号：<span class="c6">1001001830267490496</span></div>
-						</div>
 						<div class="pull-right text-right">
 							<div class="form-group">
 								<label for="coupon" class="control-label">优惠券使用：</label>
@@ -168,8 +144,7 @@
 							</script>
 							<div class="info-line">优惠活动：<span class="c6">无</span></div>
 							<div class="info-line">运费：<span class="c6">¥0.00</span></div>
-							<div class="info-line"><span class="favour-value">已优惠 ¥2.0</span>合计：<b class="fz18 cr">¥18.0</b></div>
-							<div class="info-line fz12 c9">（可获 <span class="c6">20</span> 积分）</div>
+							<div class="info-line"><span class="favour-value">已优惠 ¥2.0</span>合计：<b class="fz18 cr">￥{{$data['price']}}</b></div>							
 						</div>
 					</div>
 					<div class="shop-title">确认订单</div>

@@ -44,7 +44,16 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 	Route::prefix('/')->group(function(){
 		Route::any('details','Api\DetailsController@details');
 		Route::get('/attr_key','Api\DetailsController@attr_key');
+
 		Route::any('history','Api\DetailsController@history');//添加浏览历史记录到数据库
+
+		Route::get('/seckill','Api\SeckillController@seckill');
+		Route::get('/miaosha_show','Api\SeckillController@miaosha_show');
+		Route::get('/miaosha_show_add','Api\SeckillController@miaosha_show_add');
+
+		Route::get('/attr_keys','Api\SeckillController@attr_keys');
+
+
 	
 	});
 	Route::get('regdo','Api\TestController@regdo');//注册
@@ -63,9 +72,11 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 });
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Api\GoodsController@goods_list');
-    Route::get('/getprice}','Api\GoodsController@price');
 });
 
-
+Route::prefix('/shop')->group(function(){
+	Route::get('/shopcart','Api\ShopcartController@shopcart');
+	Route::get('/pay','Api\ShopcartController@pay');
+});
 
 
