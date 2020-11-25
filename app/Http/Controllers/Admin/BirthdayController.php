@@ -22,6 +22,8 @@ class BirthdayController extends Controller
     	$birthday_tel =  $request->input('birthday_tel');
     	$birthday_email =  $request->input('birthday_email');
     	$birthday_shenfen =  $request->input('birthday_shenfen');
+        // $res = substr($birthday_shenfen,0,8)."******".substr($birthday_shenfen,14,18);
+        // dd($res);
     	$str = time();
 
     	$data = [
