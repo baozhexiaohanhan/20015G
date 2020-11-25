@@ -191,5 +191,11 @@ Route::prefix('/')->group(function(){
 
 
 Route::get('/shopcart','Index\ShopcartController@shopcart');
+Route::get('/pay','Index\ShopcartController@pay');//支付
+Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
 
 Route::any('/history','Index\HistoryController@history');//浏览历史记录
+
+Route::prefix('/')->group(function(){
+    Route::any('/welcome','Index\CoreorderController@welcome');
+});
