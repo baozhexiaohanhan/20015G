@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Adminrole extends Model
+class AdminRole extends Model
 {
     protected $table = 'admin_role';
     protected $guarded = [];

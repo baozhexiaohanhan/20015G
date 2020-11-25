@@ -45,9 +45,16 @@
             </td>
             <td>{{$v->birthday_id}}</td>
             <td>{{$v->birthday_name}}</td>
-            <td>{{$v->birthday_tel}}</td>
+            <td>
+              @php 
+            echo substr($v->birthday_tel,0,3)."******".substr($v->birthday_tel,7,4);
+            @endphp</td>
             <td>{{$v->birthday_email}}</td>
-            <td>{{$v->birthday_shenfen}}</td>
+            <td>
+            @php 
+            echo substr($v->birthday_shenfen,0,8)."******".substr($v->birthday_shenfen,14,18);
+            @endphp
+            </td>
             <td>{{date("Y-m-d H:i:s",$v->birthday_time)}}</td>
             <td class="td-manage">
             <button class="layui-btn">编辑</button>

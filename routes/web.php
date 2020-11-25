@@ -151,7 +151,7 @@ Route::prefix("/admin")->group(function(){
 Route::prefix("/birthday")->group(function(){
     Route::get('/create','Admin\BirthdayController@create')->name('birthday.create');//生日添加
     Route::get('/list','Admin\BirthdayController@list')->name('birthday.list');//生日列表
-    Route::post('/store','Admin\BirthdayController@store')->name('birthday.store');//生日执行添加
+    Route::any('/store','Admin\BirthdayController@store')->name('birthday.store');//生日执行添加
 });
 
 });
@@ -184,6 +184,9 @@ Route::prefix('/goods')->group(function(){
 Route::prefix('/')->group(function(){
     Route::any('/details','Index\DetailsController@details');
     Route::any('rush/seckill','Index\SeckillController@seckill');
+    Route::any('miaosha_show','Index\SeckillController@miaosha_show');
+    Route::any('miaosha_show_add','Index\SeckillController@miaosha_show_add');
+
 });
 
 
