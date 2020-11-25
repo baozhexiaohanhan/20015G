@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Cart;
 use App\Model\Goods_attr;
-
+use App\Model\Order_info;
+use App\Model\Order_goods;
 class ShopcartController extends Controller
 {
     public function shopcart(Request $request){
@@ -45,4 +46,5 @@ class ShopcartController extends Controller
         $shop = ["ok","msg"=>$shop];
         return $shop;
     }
+    
 }
