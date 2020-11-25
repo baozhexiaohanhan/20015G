@@ -22,6 +22,15 @@ class ShopcartController extends Controller
                 $cart[$k]['goods_attr'] = $goods_attr?$goods_attr->toArray():[];
             }
         }
+
+        $cartData = CartModel::select('ecs_goods.goods_id','ecs_goods.goods_name','ecs_goods.shop_price','ecs_goods.goods_thumb','ecs_cart.buy_number')
+                    ->leftjoin('ecs_goods','ecs_cart.goods_id','=','ecs_goods.goods_id')
+                    ->where(['user_id'=>$user,'is_on_sale'=>1])
+                    ->whereIn('ecs_cart.cart_id',$cart_id)
+                    ->get();
+         $price = DB::select("select SUM(shop_price*buy_number) as total FROM ecs_cart");
+        //   var_dump($price);exit;
+        
         $rec_id = implode(',',$rec_id);
         $shop = [
             "cart"=>$cart,
