@@ -44,6 +44,11 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 		Route::any('details','Api\DetailsController@details');
 		Route::get('/attr_key','Api\DetailsController@attr_key');
 		Route::get('/seckill','Api\SeckillController@seckill');
+		Route::get('/miaosha_show','Api\SeckillController@miaosha_show');
+		Route::get('/miaosha_show_add','Api\SeckillController@miaosha_show_add');
+
+		Route::get('/attr_keys','Api\SeckillController@attr_keys');
+
 	
 	});
 	Route::get('regdo','Api\TestController@regdo');//注册
