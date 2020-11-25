@@ -28,9 +28,12 @@ class HistoryController extends Controller
     	
     	
     }
-    public function saveHistoryDb(){
-    	
+    //添加浏览历史记录到数据库
+    public function saveHistory(Request $request){
+    	 $goods_id = 123;
+        dd($goods_id);
     }
+    //添加浏览历史记录到cookie
     public function historycookie(){
 
     }

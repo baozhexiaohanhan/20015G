@@ -163,6 +163,7 @@ Route::get('/addcart','Index\CartController@addcart');//添加购物车
 Route::get('/cart','Index\CartController@index');//前台购物车列表
 Route::get('/getcartprice','Index\CartController@getcartprice');//算总价
 Route::get('/cartplus','Index\CartController@cartplus');//算数量
+Route::get("/cart/destroy/{id}","Index\CartController@destroy");//删除
 
 
 
@@ -184,8 +185,12 @@ Route::prefix('/goods')->group(function(){
 Route::prefix('/')->group(function(){
     Route::any('/details','Index\DetailsController@details');
     Route::any('rush/seckill','Index\SeckillController@seckill');
+
+    Route::any('/history','Index\DetailsController@history');
+
     Route::any('miaosha_show','Index\SeckillController@miaosha_show');
     Route::any('miaosha_show_add','Index\SeckillController@miaosha_show_add');
+
 
 });
 
@@ -194,8 +199,10 @@ Route::get('/shopcart','Index\ShopcartController@shopcart');
 Route::get('/pay','Index\ShopcartController@pay');//支付
 Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
 
+
 Route::any('/history','Index\HistoryController@history');//浏览历史记录
 
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
 });
+

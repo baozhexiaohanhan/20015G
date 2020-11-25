@@ -1,6 +1,9 @@
-@section('title', 'U 袋网')
+@section('title', 'U 袋网 列表')
+@include('index.lay.tops')
+@section('tops2')
 @include('index.lay.top')
 @section('tops')
+
     <div class="content inner">
         <section class="filter-section clearfix">
             <ol class="breadcrumb">
@@ -58,7 +61,8 @@
                 <div class="item-list__area clearfix">
                     @foreach($data['goods']['data'] as $v)
                     <div class="item-card">
-                        <a href="4" class="photo">
+
+                        <a href="/details/?goods_id={{$v['goods_id']}}" class="photo">
                             <img src="{{$v['goods_img']}}" class="cover">
                             <div class="name">{{$v['goods_name']}}</div>
                         </a>
@@ -96,19 +100,12 @@
 
                 <div class="desc-segments__content">
                     <div class="lace-title">
-                        <span class="c6">爆款推荐</span>
+                        <span class="c6">浏览历史</span>
                     </div>
                     <div class="picked-box">
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-001.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
-                        {{--<a href="" class="picked-item"><img src="images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>--}}
+                        @foreach($history['history'] as $k=>$v)
+                        <a href="" class="picked-item"><img src="{{$v['goods_img']}}" alt="" class="cover"><span class="look_price">¥{{$v['goods_price']}}</span></a>
+                        @endforeach
                     </div>
                 </div>
             </div>
