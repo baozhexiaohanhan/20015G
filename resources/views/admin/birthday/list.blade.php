@@ -18,7 +18,7 @@
 <div class="x-body">
       <div class="layui-form layui-col-md12 x-so">
        <form>
-            <input type="text" name="name" placeholder="请输入管理员名称" autocomplete="off" class="layui-input" value="{{$query['name']??''}}">
+            <input type="text" name="name" placeholder="请输入名称" autocomplete="off" class="layui-input" value="{{$query['name']??''}}">
            <button class="layui-btn layui-btn-normal">搜索</button>
           </form>
       </div>
@@ -46,9 +46,10 @@
             <td>{{$v->birthday_id}}</td>
             <td>{{$v->birthday_name}}</td>
             <td>
-              @php 
-            echo substr($v->birthday_tel,0,3)."******".substr($v->birthday_tel,7,4);
-            @endphp</td>
+            @php 
+            echo substr($v->birthday_tel,0,3)."****".substr($v->birthday_tel,7,4);
+            @endphp
+          </td>
             <td>{{$v->birthday_email}}</td>
             <td>
             @php 

@@ -131,10 +131,10 @@ class AdminController extends Controller
         $name = request()->name;
         $where = [];
         if($name){
-            $where[] = ['birthday_name','like',"%$name%"];
+            $where[] = ['notice_fullname','like',"%$name%"];
         }
          $noticeModel = new Notice();
-          $data = $noticeModel->orderBy('notice_id','desc')->paginate(2);
+          $data = $noticeModel->where($where)->orderBy('notice_id','desc')->paginate(6);
           $query = request()->all();
         if (Request()->ajax()){
                 return view('admin.notice.noticelist',['data'=>$data,'query'=>$query]);
