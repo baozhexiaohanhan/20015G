@@ -184,10 +184,12 @@ Route::prefix('/goods')->group(function(){
 Route::prefix('/')->group(function(){
     Route::any('/details','Index\DetailsController@details');
     Route::any('rush/seckill','Index\SeckillController@seckill');
-    
+    Route::any('miaosha_show','Index\SeckillController@miaosha_show');
+    Route::any('miaosha_show_add','Index\SeckillController@miaosha_show_add');
 
 });
 
 
 Route::get('/shopcart','Index\ShopcartController@shopcart');
 
+Route::any('/history','Index\HistoryController@history');//浏览历史记录

@@ -1,4 +1,4 @@
-@section('title', '详情页')
+@section('title', '秒杀详情页')
 @include('index.lay.top')
 @section('tops')
 
@@ -46,17 +46,23 @@
 				</script>
 				<div class="item-info__box">
 					<div class="item-title">
-						<div class="name ep2">{{$data['goods']['goods_name']}}</div>
-						<div class="sale cr">优惠活动：该商品享受8折优惠</div>
+						<div class="name ep2">{{$data['seckill']['name']}}</div>
+						<div class="sale cr timespan"></div>
 					</div>
 					<div class="item-price bgf5">
 						<div class="price-box clearfix">
 							<div class="price-panel pull-left">
-								售价：<span class="price" id="price">￥{{$data['goods']['goods_price']}} <s class="fz16 c9">￥24.00</s></span>
+								售价：<span class="price" id="price">￥{{$data['seckill']['price']}} <s class="fz16 c9">￥24.00</s></span>
 							</div>
-							<div class=" pull-right">
-								<h5>浏览量：{{$data['hits']}}</h5>
-								
+							<div class="vip-price-panel pull-right">
+								会员等级价格 <i class="iconfont icon-down"></i>
+								<ul class="all-price__box">
+									<!-- 登陆后可见 -->
+									<li><span class="text-justify">普通：</span>40.00元</li>
+									<li><span class="text-justify">银牌：</span>38.00元</li>
+									<li><span class="text-justify">超级：</span>28.00元</li>
+									<li><span class="text-justify">V I P：</span>19.20元</li>
+								</ul>
 							</div>
 							<script>
 								// 会员价格折叠展开
@@ -126,10 +132,8 @@
                             </div>
 						</div>
 						<div class="item-action clearfix bgf5">
-							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
-							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket addshopcart">
-								<i class="iconfont icon-shopcart"></i> 加入购物车
-							</a>
+							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy addshopcart">立即购买</a>
+							
 						</div>
 					</div>
 				</div>
@@ -1357,6 +1361,23 @@
     <script type="text/javascript" src="/admin/login/layui/lay/modules/jquery.js" charset="utf-8"></script>
 	<!-- <script src="/static/js/jquery.1.12.4.min.js" charset="UTF-8"></script> -->
     <script>
+        var starttime = new Date("{{date('Y-m-d H:i:s',$data['seckill']['end_time'])}}");
+		
+  setInterval(function () {
+    var nowtime = new Date();
+    var time = starttime - nowtime;
+    var day = parseInt(time / 1000 / 60 / 60 / 24);
+    var hour = parseInt(time / 1000 / 60 / 60 % 24);
+    var minute = parseInt(time / 1000 / 60 % 60);
+    var seconds = parseInt(time / 1000 % 60);
+
+	if(day==0){
+		$('.timespan').html("结束时间：" + hour + "小时" + minute + "分钟" + seconds + "秒");
+	}else{
+		$('.timespan').html("结束时间：" + day + "天" + hour + "小时" + minute + "分钟" + seconds + "秒");
+	}	
+    
+  }, 1000);
         $("dd a").click(function(){
             $(this).parent().siblings().find('a').removeClass('selected');
             $(this).addClass("selected");
@@ -1369,37 +1390,33 @@
                     goods_attr_id.push($(this).attr('goods_attr_id'));
                 })
 				var goods_id = "{{$data['goods']['goods_id']}}";
-		$.getJSON("http://www.2001api.com/attr_key?callback=?", {"goods_id":goods_id,"goods_attr_id":goods_attr_id},function(obj){
-			$('#price').html(obj.data);
-			// console.log(obj.data);
-		});
+                var seckill_id = "{{$data['seckill']['id']}}";
+                $.getJSON("http://www.2001api.com/attr_keys?callback=?", {"goods_id":goods_id,"goods_attr_id":goods_attr_id,"seckill_id":seckill_id},function(obj){
+                    $('#price').html(obj.data);
+                    // console.log(obj.data);
+                });
 	}
 
 	//加入购物车
 	$('.addshopcart').click(function(){
 		var goods_id = "{{$data['goods']['goods_id']}}";
-		// alert(goods_id);return;
+		var seckill_id = "{{$data['seckill']['id']}}";
 		var buy_number=$('.itxt').val();
-		// alert(buy_number);return;
 		var goods_attr_id=new Array();
         $('.selected').each(function(i,k){
             goods_attr_id.push($(this).attr('goods_attr_id'));
         });
-        // alert(goods_attr_id);return;
-        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id},function(res){
-        	// alert(res);return;
-        	if(res.code=='-1'){
-                location.href="/index/login";
-            }
-        	if(res.code=='1003' || res.code=='1004' || res.code=='1005'){
-                alert(res.msg);
-            }
-            if(res.code=='0'){
-                if(confirm('加入成功是否跳转到购物车列表？')){
-                	location.href="/cart";
-            	}
-        	}
-        },'json');
+		$.getJSON("http://www.2001api.com/miaosha_show_add?callback=?", {"goods_id":goods_id,"goods_attr_id":goods_attr_id,"seckill_id":seckill_id},function(obj){
+			if(obj.code==1110){
+				alert("抢购成功");
+        		location.href="/miaosha_show_add?goods_id="+goods_id+"&goods_attr_id="+goods_attr_id;
+
+			}
+			if(obj.code==1001){
+				alert("您已抢购过");
+			}
+		});
+        
 	})
 
 	$(document).on("click","#add",function(){

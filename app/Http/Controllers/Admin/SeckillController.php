@@ -43,8 +43,7 @@ class SeckillController extends Controller
         for ($i=0; $i < $buy_number; $i++) { 
             Redis::lpush($key,1);
         }
-        // $a = Redis::llen($key);
-        // dd($a);
+        
 
         // if($res){
             return redirect("/seckill_index");
