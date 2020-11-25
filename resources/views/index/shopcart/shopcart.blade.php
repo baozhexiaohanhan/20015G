@@ -60,36 +60,6 @@
 							<a href="javascript:;" class="default">默认地址</a>
 							<a href="udai_address_edit.html" class="edit">修改</a>
 						</div>
-						<div class="radio-line radio-box">
-							<label class="radio-label ep" title="福建省 福州市 鼓楼区 温泉街道 五四路159号世界金龙大厦20层B北 福州rpg.blue网络 （taroxd 收） 153****9999">
-								<input name="addr" value="1" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								福建省 福州市 鼓楼区 温泉街道
-								五四路159号世界金龙大厦20层B北 福州rpg.blue网络
-								（taroxd 收） 153****9999
-							</label>
-							<a href="" class="default">设为默认地址</a>
-							<a href="udai_address_edit.html" class="edit">修改</a>
-						</div>
-						<div class="radio-line radio-box">
-							<label class="radio-label ep" title="福建省 福州市 鼓楼区 温泉街道 五四路159号世界金龙大厦20层B北 福州rpg.blue网络 （喵污喵⑤ 收） 153****9999">
-								<input name="addr" value="2" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								福建省 福州市 鼓楼区 温泉街道
-								五四路159号世界金龙大厦20层B北 福州rpg.blue网络
-								（喵污喵⑤ 收） 153****9999
-							</label>
-							<a href="" class="default">设为默认地址</a>
-							<a href="udai_address_edit.html" class="edit">修改</a>
-						</div>
-						<div class="radio-line radio-box">
-							<label class="radio-label ep" title="福建省 福州市 鼓楼区 温泉街道 五四路159号世界金龙大厦20层B北 福州rpg.blue网络 （浴巾打码女 收） 153****9999">
-								<input name="addr" value="2" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								福建省 福州市 鼓楼区 温泉街道
-								五四路159号世界金龙大厦20层B北 福州rpg.blue网络
-								（浴巾打码女 收） 153****9999
-							</label>
-							<a href="" class="default">设为默认地址</a>
-							<a href="udai_address_edit.html" class="edit">修改</a>
-						</div>
 					</div>
 					<div class="add_addr"><a href="udai_address.html">添加新地址</a></div>
 					<div class="shop-title">确认订单</div>
@@ -152,7 +122,7 @@
 						
 						<div class="radio-line radio-box">
 							<label class="radio-label ep">
-								<input name="pay-mode" value="1" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
+								<input name="pay-mode" value="1" autocomplete="off" type="radio" class="selected pay"><i class="iconfont icon-radio"></i>
 								<img src="static/images/icons/alipay.png" alt="支付宝支付">
 							</label>
 							<div class="pay-value">支付<b class="fz16 cr">{{$data['price']}}</b>元</div>
@@ -160,14 +130,14 @@
 						
 						<div class="radio-line radio-box">
 							<label class="radio-label ep">
-								<input name="pay-mode" value="2" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
+								<input name="pay-mode" value="2" autocomplete="off" type="radio" class="pay"><i class="iconfont icon-radio"></i>
 								<img src="static/images/icons/paywechat.png" alt="微信支付">
 							</label>
 							<div class="pay-value">支付<b class="fz16 cr">{{$data['price']}}</b>元</div>
 						</div>
 						<div class="radio-line radio-box">
 							<label class="radio-label ep">
-								<input name="pay-mode" value="3" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
+								<input name="pay-mode" value="3" autocomplete="off" type="radio" class="pay"><i class="iconfont icon-radio"></i>
 								<span class="fz16">余额支付</span>
 							</label>
 							<div class="pay-value">支付<b class="fz16 cr">{{$data['price']}}</b>元</div>
@@ -177,6 +147,14 @@
 						<button type="submit" class="btn">继续支付</button>
 					</div>
 					<script>
+					$(document).on('click','.pay',function(){
+					   var _this=$(this);
+					   var payname=_this.attr('payname');
+					   $("input[name='payname']").val(payname);
+					   _this.siblings().removeClass('selected');
+					   _this.addClass('selected');
+					})
+
 						$(document).ready(function(){
 							$(this).on('change','input',function() {
 								$(this).parents('.radio-box').addClass('active').siblings().removeClass('active');

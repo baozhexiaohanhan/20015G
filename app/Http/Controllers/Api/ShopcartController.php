@@ -8,12 +8,17 @@ use App\Model\Cart;
 use App\Model\Goods_attr;
 use App\Model\Order_info;
 use App\Model\Order_goods;
+use App\Model\Region;
+use App\Model\Address;
 use DB;
 class ShopcartController extends Controller
 {
     public function shopcart(Request $request){
         $rec_id = request()->rec_id;
         // return $rec_id;
+        $user_id = 1;
+        $address = Address::where('user_id',$user_id)->get();
+        // dd($address);
 
         $rec_id = explode(',',$request->rec_id);
         $cart = Cart::select('cart.*','goods.goods_img')->leftjoin('goods','cart.goods_id','=','goods.goods_id')->whereIn('rec_id',$rec_id)->get();
@@ -46,6 +51,7 @@ class ShopcartController extends Controller
             "cart"=>$cart,
             "rec_id"=>$rec_id,
             // "count"=>$count,
+            "address"=>$address,
             "price"=>number_format($price,2,".",""),
             // "price"=>$price,
         ];
