@@ -8,7 +8,6 @@ use App\Model\Admin;
 use App\Model\Role;
 use App\Model\Notice;
 use App\Model\AdminRole;
-
 use DB;
 class AdminController extends Controller
    {
