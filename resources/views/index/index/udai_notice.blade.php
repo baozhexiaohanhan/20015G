@@ -71,7 +71,7 @@
 				<div class="title"><i class="iconfont icon-menu"></i> 全部分类</div>
 			</div>
 			<ul class="nva-list">
-				<a href="index.html"><li>首页</li></a>
+				<a href="/"><li>首页</li></a>
 				<a href="temp_article/udai_article10.html"><li>企业简介</li></a>
 				<a href="temp_article/udai_article5.html"><li>新手上路</li></a>
 				<a href="class_room.html"><li>U袋学堂</li></a>
@@ -88,29 +88,24 @@
 			</div>
 			<div class="pull-left">
 				<div class="msg-list">
-					@foreach($notice as $k=>$v)
-					<a class="ep" href="/udai_notice/{{$v->notice_id}}">【资讯】{{$v->notice_name}}</a>
-					@endforeach
-					
+				@foreach($notice as $k=>$v)
+				<a  @if($v->notice_id==$address->notice_id)class="ep active" @else class="ep"  @endif href="/udai_notice/{{$v->notice_id}}">【资讯】{{$v->notice_name}}</a>
+				@endforeach	
 				</div>
 			</div>
-			@foreach($address as $k=>$v)
 			<div class="message-box pull-right">
 				<div class="head-div clearfix posr">
 					<div class="title">【资讯】U袋网平台已上线，您还在等什么？</div>
-					<div class="time pull-right">发布时间：{{date("Y-m-d H:i:s",$v->notice_time)}}</div>
+					<div class="time pull-right">发布时间：{{date("Y-m-d H:i:s",$address->notice_time)}}</div>
 				</div>
 				<div class="html-code">
 					<p></p>
-					<p style="text-indent: 2em">{{$v->notice_desc}}</p>
+					<p style="text-indent: 2em">{{$address->notice_desc}}</p>
 					<p><br></p>
-					<p style="text-indent: 2em">{{$v->notice_fullname}}</p>
+					<p style="text-indent: 2em">{{$address->notice_fullname}}</p>
 				</div>
 			</div>
-			@endforeach
-
 		</section>
-	
 	</div>
 
 	<!-- 右侧菜单 -->

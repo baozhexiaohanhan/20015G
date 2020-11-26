@@ -45,6 +45,9 @@ class CartController extends Controller
             $product=Products::select('product_id','product_number')->where(['goods_id'=>$goods_id,'goods_attr'=>$goods_attr_id])->first();
             // dd($product);
             // dd($product->product_number);
+            if(!$product){
+                return $this->JsonResponse('1005','没有此商品');
+            }
            if($product->product_number<$buy_number){
                  return $this->JsonResponse('1005','商品库存不足');
             }
@@ -114,6 +117,8 @@ class CartController extends Controller
     				
     			}
     		}
+            // $total=0;
+            // $total=number_format($total,2,'.','');
     		// dd($cart);
     		$cart=[
     			'user'=>$user,
@@ -134,6 +139,16 @@ class CartController extends Controller
             return $this->success('ok',['total'=>'0.00']);
         }
         $total=Cart::getprice($cart_id);
+        // dd()
+        // $total=0;
+        // echo "123";
+        // dd($total);
+        // $cart_id=implode(',',$cart_id); 
+        // $total=\DB::select("select sum(goods_price*buy_number) as total from cart where rec_id in($cart_id)");
+        // $total=$total?$total[0]->total:0;
+        // dd($total);
+        // $total= number_format($total,2,".","");
+        $total=number_format($total,2,'.','');
         // dd($total);
         return $this->success('ok',['total'=>$total]);    
     }
@@ -177,6 +192,7 @@ class CartController extends Controller
       	//dd($info);
        
         $price = $info['buy_number']*$info['goods_price'];
+        $price=number_format($price,2,'.','');
         if($price){
             return $message = [
                 "code"=>0000,

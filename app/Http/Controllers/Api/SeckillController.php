@@ -13,9 +13,25 @@ use Illuminate\Support\Facades\Redis;
 class SeckillController extends Controller
 {
     public function seckill(){
-        $res = Redis::hget("token");
-        dd($res);
-        $info = Seckill::leftjoin("goods","seckill.goods_id","=","goods.goods_id")->where(['seckill.is_del'=>1,"goods.is_up"=>1])->get();
+        // $res = Redis::hget("token");
+        // $data=;
+        // dd($res);
+        // return $data;
+        $where = [
+            'seckill.is_del'=>1,
+            "goods.is_up"=>1,
+            "seckill.is_close"=>1,
+        ];
+        $where2 = [
+            ["seckill.end_time",">",strtotime(date('Y-m-d H:i:s',time()))],
+            ["seckill.start_time","<",strtotime(date('Y-m-d H:i:s',time()))],
+        ];
+        $info = Seckill::leftjoin("goods","seckill.goods_id","=","goods.goods_id")->where($where2)->where($where)->get();
+        $where3 = [
+            ["seckill.end_time","<",strtotime(date('Y-m-d H:i:s',time()))],
+        ];
+        $res = Seckill::where($where3)->update(['is_close'=>2]);
+        // return $res;
         $info = json_encode($info);
         $data = ["ok","data"=>$info];
         // dd($data);

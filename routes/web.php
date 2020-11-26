@@ -163,7 +163,8 @@ Route::get('/addcart','Index\CartController@addcart');//添加购物车
 Route::get('/cart','Index\CartController@index');//前台购物车列表
 Route::get('/getcartprice','Index\CartController@getcartprice');//算总价
 Route::get('/cartplus','Index\CartController@cartplus');//算数量
-Route::get("/cart/destroy/{id}","Index\CartController@destroy");//删除
+Route::get("/cart/destroy/{id?}","Index\CartController@destroy");//删除
+Route::get("/cart/destroys/{id?}","Index\CartController@destroys");//全删除
 
 
 
@@ -171,11 +172,6 @@ Route::get('/reg','Index\LoginController@reg');//注册
 Route::get('/log','Index\LoginController@log');//注册
 Route::get('/logindo','Index\LoginController@logindo');//注册
 
-Route::prefix('/index')->group(function(){
-    Route::get('/center','Index\CouponController@center');//个人中心
-    Route::get('/coupon','Index\CouponController@coupon');//优惠券
-
-});
 
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
@@ -202,10 +198,17 @@ Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
 
 
 
-
 Route::any('/history','Index\HistoryController@history');//浏览历史记录
 
+
+// 个人中心
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
+    Route::any('/udai_order','Index\CoreorderController@udai_order');
 });
+    Route::any('/history','Index\HistoryController@history');
 
+
+
+//静态公告
+ Route::any('/noticelisthtml','Admin\AdminController@noticelistindex');

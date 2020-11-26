@@ -38,7 +38,9 @@
 						</div>
 						<a href="javascript:;" class="btn btn-default btn-next"></a>
 					</div>
-					<a href="{{url('/goods/collect')}}">收藏</a>
+                    <div>
+                        <input type="button" value="收藏" class="collect">
+                    </div>
 					<div class="big-box"><img src="{{$data['goods']['goods_img']}}" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
 				</div>
 				<script src="/static/js/jquery.magnifier.js"></script>
@@ -1235,7 +1237,7 @@
         $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id},function(res){
         	// alert(res);return;
         	if(res.code=='-1'){
-                location.href="/index/login";
+                location.href="/log?refer="+location.href;
             }
         	if(res.code=='1003' || res.code=='1004' || res.code=='1005'){
                 alert(res.msg);
@@ -1273,6 +1275,15 @@
 						       
 
 						});
+//						收藏
+        $('.collect').click(function(){
+            var goods_id = "{{$data['goods']['goods_id']}}";
+//            alert(goods_id);
+            $.getJSON('http://www.2001api.com/collect?callback=?',{goods_id:goods_id},function(res){
+                $('.collect').html(res.data);
+            });
+
+        })
     </script>
 	<!-- 底部信息 -->
     @include('index.lay.bottom')
