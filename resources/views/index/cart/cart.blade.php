@@ -1,38 +1,6 @@
-<html lang="zh-cmn-Hans">
-<head>
-	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="/static/css/iconfont.css">
-	<link rel="stylesheet" href="/static/css/global.css">
-	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="/static/css/swiper.min.css">
-	<link rel="stylesheet" href="/static/css/styles.css">
-	<script src="/static/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
-	<script src="/static/js/bootstrap.min.js" charset="UTF-8"></script>
-	<script src="/static/js/swiper.min.js" charset="UTF-8"></script>
-	<script src="/static/js/global.js" charset="UTF-8"></script>
-	<script src="/static/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
-	<title>U袋网</title>
-</head>
-<body>
-	<!-- 顶部tab -->
-	<div class="tab-header">
-		<div class="inner">
-			<div class="pull-left">
-				<div class="pull-left">嗨，欢迎来到<span class="cr">U袋网</span></div>
-				<a href="agent_level.html">网店代销</a>
-				<a href="temp_article/udai_article4.html">帮助中心</a>
-			</div>
-			<div class="pull-right">
-				<a href="login.html"><span class="cr">登录</span></a>
-				<a href="login.html?p=register">注册</a>
-				<a href="udai_welcome.html">我的U袋</a>
-				<a href="udai_order.html">我的订单</a>
-				<a href="udai_integral.html">积分平台</a>
-			</div>
-		</div>
-	</div>
+@section('title', '购物车')
+    @include('index.lay.tops')
+    @section('tops2')
 	<!-- 顶部标题 -->
 	<div class="bgf5 clearfix">
 		<div class="top-user">
@@ -51,7 +19,7 @@
 						<thead>
 							<tr>
 								<th width="150">
-									<label class="checked-label"><input type="checkbox" class="check-all"><i></i> 全选</label>
+									<label class="checked-label"><input type="checkbox" class="check-all" name="cartcheck[]"><i></i> 全选</label>
 								</th>
 								<th width="300">商品信息</th>
 								<th width="150">单价</th>
@@ -71,19 +39,19 @@
 										<input type="checkbox" name="checkbox" class="cartid" value="{{$v['rec_id']}}">
 										@endif
 										<i></i>
-										<div class="img"><img src="{{$v['goods_img']}}" alt="" style="width: 173.2px;height: 240px;" class="cover"></div>
+										<a href="/details/?goods_id={{$v['goods_id']}}" class="img"><img src="{{$v['goods_img']}}" alt="" style="width: 173.2px;height: 240px;" class="cover"></a>
 									</label>
 								</th>
 								<td>
 									@if($v['is_up']==2)
-									<div class="name ep3" style="color:#888;">{{$v['goods_name']}}
+									<div href="/details/?goods_id={{$v['goods_id']}}" class="name ep3" style="color:#888;">{{$v['goods_name']}}
 									</div>
 									<div style="color:#888;">商品已下架</div>
 									@endif
 									@if($v['is_up']==1)
-									<div class="name ep3">{{$v['goods_name']}}</div>
+									<a href="/details/?goods_id={{$v['goods_id']}}" class="name ep3">{{$v['goods_name']}}</a>
 									@endif
-									<div class="type c9">
+									<div>
 										@if(isset($v['goods_attr']))
 										@foreach($v['goods_attr'] as $attr)
 										{{$attr['attr_name']}}:{{$attr['attr_value']}}
@@ -101,8 +69,8 @@
 									</div>
 									<span style="color: red;" id="sadd"></span>
 								</td>
-								<td><span class="sum">￥{{$v['buy_number']*$v['goods_price']}}</span></td>
-								<td><a href="">删除</a></td>
+								<td><span class="sum">￥{{$v['buy_number']*$v['goods_price']}}.00</span></td>
+								<td><a href="javascript:void(0)" onclick="deleteById({{$v['rec_id']}})" >删除</a></td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -112,7 +80,7 @@
 					</div>
 					<div class="checkbox shopcart-total">
 						<label><input type="checkbox" class="check-all"><i></i> 全选</label>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">删除</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="moredel">删除选中的商品</a>
 						<div class="pull-right">
 							已选商品 <span>2</span> 件
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合计（不含运费）
@@ -151,6 +119,8 @@
 									}
 								},'json')
 							});
+
+							
 							// 点击选择
 							$item_checkboxs.on('change', function() {
 								var flag = true;
@@ -178,6 +148,17 @@
 									//获取商品数量
 									var buy_number=_this.val();
 									// alert(buy_number);
+									var reg=/^\d{1,}$/;
+					                if(buy_number==''){
+					                    _this.val(1);
+					                    buy_number=1;
+					                }else if(!reg.test(buy_number)){
+					                     _this.val(1);
+					                     buy_number=1;
+					                }else{
+					                    _this.val(parseInt(buy_number));
+					                    buy_number=parseInt(buy_number);
+					                }
 									if(buy_number==0){
 										_this.parents("tr").find(".sum").text("0.00");
 									}
@@ -306,6 +287,30 @@
 									}
 							},'json')
 						});
+
+						//ajax删除
+						   function deleteById(rec_id){
+						   	// alert(123);return;
+						        if(!rec_id){
+						            return;
+						        }
+						        $.get('/cart/destroy/'+rec_id,function(res){
+						            alert(res.msg);
+						            location.reload();
+						        },'json')
+						    };
+						    //批量删除
+							$(document).on('click','.moredel',function(){
+								var ids=new Array;
+								$("input[name='checkbox']:checked").each(function(){
+									ids.push($(this).val());
+									// alert(ids);return;
+								});
+								$.get('/cart/destroys/',{ids:ids},function(res){
+						            alert(res.msg);
+						            location.reload();
+						        },'json')
+							});
 					</script>
 				</form>
 			</div>
