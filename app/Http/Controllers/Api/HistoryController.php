@@ -9,35 +9,29 @@ use App\Model\Goods;
 
 class HistoryController extends Controller
 {
-    public function history(){
-    	$user_id=1;
-    	// $goods_id=History::where(['user_id'=>$user_id])->orderBy('look_time','desc')->pluck('goods_id')->toArray();
-    	// // dd($goods_id);
-    	// if(!empty($goods_id)){
-    	// 	$goods_id=array_unique($goods_id);//去重
-    	// 	$goods_id=implode(',',$goods_id);
-    	// 	$historyInfo=Goods::where(['goods_id'=>$goods_id])->get();//获取浏览的商品id
-    	// 	dd($historyInfo);
-    	// }
-
-    	$goods_id=History::where(['user_id'=>$user_id])->orderBy('look_time','desc')->pluck('goods_id')->toArray();
-    	$goods_id=array_unique($goods_id);//去重
-    	// dd($goods_id);
-    	$goods=Goods::whereIn('goods_id',$goods_id)->get();
-    	// dd($goods);
-    	
-    	
-    }
-    //添加浏览历史记录到数据库
-    public function saveHistory(Request $request){
-    	 $goods_id = 123;
-        dd($goods_id);
-    }
-    //添加浏览历史记录到cookie
-    public function historycookie(){
-
-    }
-    public function test(){
-
+     public function historys(){
+        $user_id=1;
+        $goods_id = request()->goods_id;
+        // dd($user_id);
+        //根据用户id 获取修改用户浏览的商品 根据时间倒序 获取前几条
+        $history=History::leftjoin('goods','goods.goods_id','=','history.goods_id')
+                ->where('user_id',$user_id)->orderBy('history.look_time','desc')->limit(12)->get();
+                // dd($history);
+        // if(count($history)>0){
+        //     //查到获取浏览信息
+        //     $history=['ret'=>$history];
+        //     // dd($history);
+        // }else{
+        //     $history=['ret'=>[]];
+        //     // dd($history);
+        // }
+        // return json_encode($history);
+        // $history=[
+        //     'user_id'=>$user_id,
+        //     'history'=>$history
+        // ];
+        $history = json_encode($history);
+        $history = ["ok","data"=>$history];
+        return $history;
     }
 }

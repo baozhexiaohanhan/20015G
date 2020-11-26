@@ -1235,7 +1235,7 @@
         $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id},function(res){
         	// alert(res);return;
         	if(res.code=='-1'){
-                location.href="/index/login";
+                location.href="/log?refer="+location.href;
             }
         	if(res.code=='1003' || res.code=='1004' || res.code=='1005'){
                 alert(res.msg);
