@@ -23,11 +23,9 @@ class GoodsController extends Controller
 //        商品列表展示
         $url = "http://www.2001api.com/goods/goods_list/{$cate_id}";
         $goods_list = curl_get($url);
-//        dd($goods_list);
         $data = json_decode($goods_list['data'],true);
-//        dd($data);
         $query = request()->all();
-//        dd($query);
+       // dd($query);
         if(isset($query['price'])){
             $price_array = explode('元',$query['price']);
             $price_array = explode('-',$price_array[0]);
