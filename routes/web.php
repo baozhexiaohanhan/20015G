@@ -195,9 +195,12 @@ Route::prefix('/')->group(function(){
 });
 
 
-Route::get('/shopcart','Index\ShopcartController@shopcart');
+Route::get('/shopcart','Index\ShopcartController@shopcart');//购物车订单
+Route::get('/address','Index\ShopcartController@address');//收货地址
 Route::get('/pay','Index\ShopcartController@pay');//支付
 Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
+
+
 
 
 Route::any('/history','Index\HistoryController@history');//浏览历史记录
