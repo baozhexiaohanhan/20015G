@@ -196,6 +196,8 @@ Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
 
 Route::any('/history','Index\HistoryController@history');//浏览历史记录
 
+// 个人中心
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
+    Route::any('/udai_order','Index\CoreorderController@udai_order');
 });

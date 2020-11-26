@@ -24,8 +24,8 @@ class ShopcartController extends Controller
 
     // 沙箱支付
     public function pay(){
-        // $order_id = request()->order_id;
-        $order_id = 4;
+        $order_id = request()->order_id;
+        // $order_id = 4;
         
         $config = config("alipay");
         require_once app_path('Common/alipay/pagepay/service/AlipayTradeService.php');

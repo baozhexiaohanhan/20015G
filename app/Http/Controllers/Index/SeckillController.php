@@ -12,6 +12,7 @@ class SeckillController extends Controller
         $info = curl_get($url);
         // dd($info);
         $res = json_decode($info['data'],true);
+        // dd($res);
         return view("index.seckill.seckill",compact("res"));
     }
     public function miaosha_shows(){

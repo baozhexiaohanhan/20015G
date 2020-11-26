@@ -1,6 +1,9 @@
-@section('title', 'U 袋网 秒杀')
+@section('title', '秒杀')
+@include('index.lay.tops')
+@section('tops2')
 @include('index.lay.top')
 @section('tops')
+
 	<div class="content inner">
 		<section class="filter-section clearfix">
 			<ol class="breadcrumb">
@@ -37,7 +40,7 @@
 							<div class="price"><small>￥</small>{{$v['price']}}</div>
 							<div class="sale no-hide">
 								<p id="time"></p>
-								<h6 id="times" time="{{date('Y-m-d H:i:s',$v['start_time'])}}"> 结束时间:{{date("H:i:s",$v['start_time'])}}</h6>
+								<h6 id="times" time="{{date('Y-m-d H:i:s',$v['start_time'])}}"> 结束时间:{{date("H:i:s",$v['end_time'])}}</h6>
 							</div>
 						</div>
                         <div class="buttom">

@@ -40,7 +40,7 @@
 				<a href="class_room.html"><li>U袋学堂</li></a>
 				<a href="enterprise_id.html"><li>企业账号</li></a>
 				<a href="udai_contract.html"><li>诚信合约</li></a>
-				<a href="item_remove.html"><li>实时下架</li></a>
+				<a href="/rush/seckill" style="color:red"><li>秒杀</li></a>
 			</ul>
 		</div>
     </div>

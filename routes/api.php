@@ -74,5 +74,11 @@ Route::prefix('/shop')->group(function(){
 	Route::get('/shopcart','Api\ShopcartController@shopcart');
 	Route::get('/pay','Api\ShopcartController@pay');
 });
-
+// 个人中心
+Route::prefix('/')->group(function(){
+    Route::any('/welcome','Api\CoreorderController@welcome');
+	Route::any('/udai_order','Api\CoreorderController@udai_order');
+    Route::any('/udai_shopcart_pay','Api\CoreorderController@udai_shopcart_pay');
+	
+});
 
