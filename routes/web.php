@@ -206,3 +206,7 @@ Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
 });
 
+
+
+//静态公告
+ Route::any('/noticelisthtml','Admin\AdminController@noticelistindex');
