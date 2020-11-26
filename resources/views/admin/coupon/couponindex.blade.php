@@ -30,40 +30,34 @@
     <table class="layui-table layui-form">
         <thead>
         <tr>
-            <th width="50">ID</th>
-            <th width="50">优惠券名称</th>
-            <th width="50">发行总量</th>
-            <th width="50">优惠形式</th>
-            <th width="50">优惠金额</th>
-            <th width="50">使用门槛</th>
-            <th width="50">每人限领</th>
-            <th width="50">使用范围</th>
-            <th width="50">有效期</th>
-            <th width="50">开始时间</th>
-            <th width="50">结束时间</th>
-            <th width="50">使用说明</th>
-            <th width="280">操作</th>
+            <th>优惠活动ID</th>
+            <th>优惠活动名称</th>
+            <th>优惠开始时间</th>
+            <th>优惠结束时间</th>
+            <th>享受优惠会员等级</th>
+            <th>金额下限</th>
+            <th>金额上限</th>
+            <th>优惠方式</th>
+            <th>优惠范围</th>
+            {{--<th>操作</th>--}}
         </tr>
         </thead>
         @foreach($data as $v)
         <thead>
         <tr>
-            <th width="50">{{$v->coupon_id}}</th>
-            <th width="50">{{$v->name}}</th>
-            <th width="50">{{$v->total}}</th>
-            <th width="50">@if($v->shape==1)指定现金 @elseif($v->shape==2)折扣@endif</th>
-            <th width="50">{{$v->shape_pic}}</th>
-            <th width="50">@if($v->condition==1)不限制 @elseif($v->condition==2)满{{$v->condition_pic}}@endif</th>
-            <th width="50">{{$v->number}}</th>
-            <th width="50">@if($v->shape==1)全部商品 @elseif($v->shape==2)指定商品@endif</th>
-            <th width="50">@if($v->state==1)固定日期 @elseif($v->shape==2)领到优惠券当日开始2天有效 @elseif($v->shape==3)领到优惠券次日开始2天有效@endif</th>
-            <th width="50">{{$v->start_time}}</th>
-            <th width="50">{{$v->end_time}}</th>
-            <th width="50">{{$v->explain}}</th>
-            <th width="280">
-                <a href="{{url('coupon/edit/'.$v->coupon_id)}}"><i class="layui-icon">&#xe642;</i>编辑</a>
-                <a href="{{url('coupon/destroy/'.$v->coupon_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>
-            </th>
+            <td>{{$v->coupon_id}}</td>
+            <td>{{$v->name}}</td>
+            <td>{{$v->start_time}}</td>
+            <td>{{$v->end_time}}</td>
+            <td>@if($v->user_rank==0)非会员 @elseif($v->user_rank==1)VIP @elseif($v->user_rank==2)注册用户 @elseif($v->user_rank==3)代销用户@endif</td>
+            <td>{{$v->min_amount}}</td>
+            <td>{{$v->max_amount}}</td>
+            <td>@if($v->type==0)非会员享受赠品（特惠品) @elseif($v->type==1)享受现金减免 @elseif($v->type==2)享受价格折扣@endif</td>
+            <td>{{$v->range}}</td>
+            {{--<th width="280">--}}
+                {{--<a href="{{url('coupon/edit/'.$v->coupon_id)}}"><i class="layui-icon">&#xe642;</i>编辑</a>--}}
+                {{--<a href="{{url('coupon/destroy/'.$v->coupon_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>--}}
+            {{--</th>--}}
         </tr>
         </thead>
         @endforeach

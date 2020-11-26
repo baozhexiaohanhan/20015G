@@ -171,11 +171,6 @@ Route::get('/reg','Index\LoginController@reg');//注册
 Route::get('/log','Index\LoginController@log');//注册
 Route::get('/logindo','Index\LoginController@logindo');//注册
 
-Route::prefix('/index')->group(function(){
-    Route::get('/center','Index\CouponController@center');//个人中心
-    Route::get('/coupon','Index\CouponController@coupon');//优惠券
-
-});
 
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
