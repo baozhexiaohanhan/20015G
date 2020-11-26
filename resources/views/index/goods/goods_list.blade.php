@@ -102,9 +102,14 @@
                     <div class="lace-title">
                         <span class="c6">浏览历史</span>
                     </div>
-                    <div class="picked-box">
+                <!--     <div class="picked-box">
                         @foreach($history['history'] as $k=>$v)
                         <a href="" class="picked-item"><img src="{{$v['goods_img']}}" alt="" class="cover"><span class="look_price">¥{{$v['goods_price']}}</span></a>
+                        @endforeach
+                    </div> -->
+                     <div class="picked-box">
+                         @foreach($history['history'] as $k=>$v)
+                        <a href="/details/?goods_id={{$v['goods_id']}}" class="picked-item"><img src="{{$v['goods_img']}}" alt="{{$v['goods_name']}}" style="width: 160px;height: 120px;margin-top: 10px;" class="cover"><span >¥{{$v['goods_price']}}</span><br>{{$v['goods_name']}}</a>
                         @endforeach
                     </div>
                 </div>

@@ -163,7 +163,8 @@ Route::get('/addcart','Index\CartController@addcart');//添加购物车
 Route::get('/cart','Index\CartController@index');//前台购物车列表
 Route::get('/getcartprice','Index\CartController@getcartprice');//算总价
 Route::get('/cartplus','Index\CartController@cartplus');//算数量
-Route::get("/cart/destroy/{id}","Index\CartController@destroy");//删除
+Route::get("/cart/destroy/{id?}","Index\CartController@destroy");//删除
+Route::get("/cart/destroys/{id?}","Index\CartController@destroys");//全删除
 
 
 
@@ -200,9 +201,9 @@ Route::get('/pay','Index\ShopcartController@pay');//支付
 Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
 
 
-Route::any('/history','Index\HistoryController@history');//浏览历史记录
 
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
+    Route::any('/history','Index\HistoryController@history');
 });
 
