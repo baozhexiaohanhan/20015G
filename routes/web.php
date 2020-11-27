@@ -207,6 +207,11 @@ Route::prefix('/')->group(function(){
     Route::any('/history','Index\HistoryController@history');
 });
 
+Route::prefix('/birthday')->group(function(){
+
+ Route::any('/page','Index\BirthdayController@page');
+
+});
 
 
 //静态公告
