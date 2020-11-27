@@ -8,6 +8,7 @@ use App\Model\Order_info;
 use App\Model\Order_goods;
 class ShopcartController extends Controller
 {
+    //购物车订单
     public function shopcart(Request $request){
         $rec_id = request()->post("rec_id");
         // dd($rec_id);
@@ -21,11 +22,15 @@ class ShopcartController extends Controller
 
         return view('index/shopcart/shopcart',compact('data'));
     }
+    //收货地址
+    public function address(){
+        return view('index/address/address');
+    }
 
     // 沙箱支付
     public function pay(){
-        // $order_id = request()->order_id;
-        $order_id = 4;
+        $order_id = request()->order_id;
+        // $order_id = 4;
         
         $config = config("alipay");
         require_once app_path('Common/alipay/pagepay/service/AlipayTradeService.php');

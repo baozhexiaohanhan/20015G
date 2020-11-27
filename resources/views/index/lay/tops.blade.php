@@ -34,4 +34,4 @@
 			</div>
 		</div>
 	</div>
-    @section('tops2')
+	@section('tops2')

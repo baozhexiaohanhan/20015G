@@ -121,4 +121,26 @@ class DetailsController extends Controller
         $history = ["ok","data"=>$history];
         return $history;
     }
+    public function collect()
+    {
+        $callback = request()->callback;
+        $goods_id = request()->get('goods_id');
+//        dd($goods_id);
+        $user_id = 1;
+        if(!$user_id){
+            return json_encode(['code'=>'00001','msg'=>'未登录']);die;
+        }
+        $where=[
+            'user_id'=>$user_id,
+            'goods_id'=>$goods_id
+        ];
+        $count = DB::table('collect')->where($where)->count();
+        if($count){
+            return json_encode(['code'=>'00002','msg'=>'已收藏']);die;
+        }
+        $res = DB::table('collect')->insert($where);
+        if($res){
+            return json_encode(['code'=>'00000','msg'=>'收藏成功']);die;
+        }
+    }
 }

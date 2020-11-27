@@ -172,11 +172,6 @@ Route::get('/reg','Index\LoginController@reg');//注册
 Route::get('/log','Index\LoginController@log');//注册
 Route::get('/logindo','Index\LoginController@logindo');//注册
 
-Route::prefix('/index')->group(function(){
-    Route::get('/center','Index\CouponController@center');//个人中心
-    Route::get('/coupon','Index\CouponController@coupon');//优惠券
-
-});
 
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
@@ -196,16 +191,22 @@ Route::prefix('/')->group(function(){
 });
 
 
-Route::get('/shopcart','Index\ShopcartController@shopcart');
+Route::get('/shopcart','Index\ShopcartController@shopcart');//购物车订单
+Route::get('/address','Index\ShopcartController@address');//收货地址
 Route::get('/pay','Index\ShopcartController@pay');//支付
 Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
 
 
 
+Route::any('/history','Index\HistoryController@history');//浏览历史记录
+
+
+// 个人中心
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
-    Route::any('/history','Index\HistoryController@history');
+    Route::any('/udai_order','Index\CoreorderController@udai_order');
 });
+    Route::any('/history','Index\HistoryController@history');
 
 Route::prefix('/birthday')->group(function(){
 

@@ -19,6 +19,7 @@ class ShopcartController extends Controller
         $user_id = 1;
         $address = Address::where('user_id',$user_id)->get();
         // dd($address);
+        
 
         $rec_id = explode(',',$request->rec_id);
         $cart = Cart::select('cart.*','goods.goods_img')->leftjoin('goods','cart.goods_id','=','goods.goods_id')->whereIn('rec_id',$rec_id)->get();
@@ -31,26 +32,19 @@ class ShopcartController extends Controller
             }
         }
 
-        // $cartData = Cart::select('goods.goods_id','goods.goods_name','goods.goods_price','cart.buy_number')
-        //             ->leftjoin('goods','cart.goods_id','=','goods.goods_id')
-        //             ->whereIn('cart.rec_id',$rec_id)
-        //             ->get();
+    
         $rec_id = implode(',',$rec_id);
 
         $price = DB::select("select SUM(goods_price*buy_number) as total FROM cart where rec_id in($rec_id)" );
         
         // echo 123;exit;
         $price = $price[0]->total;
-        // $price= ;
-        // return $price;
-
-        // $count = count($cartData);
+        
 
 
         $shop = [
             "cart"=>$cart,
             "rec_id"=>$rec_id,
-            // "count"=>$count,
             "address"=>$address,
             "price"=>number_format($price,2,".",""),
             // "price"=>$price,
