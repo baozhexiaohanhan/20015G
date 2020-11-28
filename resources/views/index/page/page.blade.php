@@ -250,7 +250,7 @@
                 <div class="side"></div>
                 <div class="bottom"></div>
                 <div class="text">
-                    Happy Birthday
+                     Happy Birthday
                 </div>
             </div>
 

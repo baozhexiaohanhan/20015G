@@ -30,7 +30,7 @@ class LoginController extends Controller
    		$data['user_pwd'] = $request->user_pwd;
    		$url = "http://www.2001api.com/logindo";
    		$res = $this->posturl($url,$data);
-   		// dd($res);
+   		dd($res);
    		if($res['code']=='0000'){
    			Redis::hset('token'.$data['user_name'],3600,$res['token']);
    			return json_encode($res);

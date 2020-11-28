@@ -58,7 +58,8 @@ class IndexController extends Controller
         return $newarray;
     }
     public function notice(){
-    	$notice = Notice::all();
+    	$notice = Notice::all()->toArray();
+        // dd($notice);
     	$msg = json_encode($notice);
     	$data = ['code'=>200,'msg'=>"返回成功请稍后！！",'msg'=>$msg];
     	return $data;

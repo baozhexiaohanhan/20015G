@@ -10,6 +10,10 @@ class BirthdayController extends Controller
     public function page(){
 
 
-    	return view('index.page.page');
+  	$birthday_id = 1;
+    $data = Birthday::where('birthday_id',$birthday_id)->first();
+   
+
+    	return view('index.page.page',['data'=>$data]);
     }
 }
