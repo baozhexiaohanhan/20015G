@@ -1,16 +1,24 @@
 <?php
 
 namespace App\Http\Controllers\Index;
-
+use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Goods;
 use App\Model\Cate;
-
+use Illuminate\Support\Facades\Redis;
 class IndexController extends Controller
 {
     public function index(){
-       // echo "11111";die;
+		//
+		// dd($res);
+		// $ad = "的地方";
+		// Cookie::queue("test",$ad);
+		$cookie = request()->cookie('user_name');
+		$res = Redis::hget("admin");
+		dd($res);
+		// dd($res);
+    //    echo "11111";die;
 
     	//首页推荐位
     	$url='http://www.2001api.com/domain/index';

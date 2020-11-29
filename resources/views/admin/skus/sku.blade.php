@@ -1,12 +1,10 @@
- @include('admin.lay.top')
-     @section('tops')
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/admin/css/font.css">
     <link rel="stylesheet" href="/admin/css/xadmin.css">
     <script src="/admin/js/jquery.min.js"></script>
     <script src="/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/admin/js/xadmin.js"></script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-    <form  action="/goods/store" method='post' style="margin-top:20px;">
+    <script type="text/javascript" src="/admin/js/xadmin.js"></script>
+    <form  action="/skus/goods/store" method='post' style="margin-top:20px;">
         <div class="layui-card">
                 <div class="layui-card-header"></div>
                 <div class="layui-card-body">
@@ -196,12 +194,13 @@
         </form>
         <!-- <script src="/admin/layui.js"></script>
         <script src="/admin/jquery.js"></script> -->
+        
         <script type="text/javascript" src="/admin/lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="/admin/login/layui/lay/modules/jquery.js" charset="utf-8"></script>
         <script>
             $(document).on("change","select[name='cat_id']",function(){
                 var cat_id = $(this).val();
-                $.get("{{url('/goods/type_attr')}}",{"cat_id":cat_id},function(res){
+                $.get("{{url('/skus/goods/type_attr')}}",{"cat_id":cat_id},function(res){
                     // console.log(res);
                     $(".add").html(res);
                 })
@@ -227,7 +226,7 @@
                         ,upload = layui.upload;
                             upload.render({
                                 elem: '#test8'
-                                ,url: '{{url("/goods/uploads")}}' //改成您自己的上传接口
+                                ,url: '{{url("/skus/goods/uploads")}}' //改成您自己的上传接口
                                 ,headers: {
                                 'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
                                 }
@@ -242,7 +241,7 @@
                           //多图片上传
                             upload.render({
                                 elem: '#test2'
-                                ,url: '/goods/goods_imgdo' //改成您自己的上传接口
+                                ,url: '/skus/goods/goods_imgdo' //改成您自己的上传接口
                                 ,multiple: true
                                 ,before: function(obj){
                                 //预读本地文件示例，不支持ie8

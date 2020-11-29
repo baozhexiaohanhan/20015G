@@ -11,6 +11,7 @@ use AlibabaCloud\Client\Exception\ServerException;
 use App\Helpers\jwt;
 use App\Helpers\functions;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cookie;
 class LoginController extends Controller
 {
    public function reg(){
@@ -29,10 +30,17 @@ class LoginController extends Controller
    		$data['user_name'] = $request->user_name;
    		$data['user_pwd'] = $request->user_pwd;
    		$url = "http://www.2001api.com/logindo";
-   		$res = $this->posturl($url,$data);
-   		// dd($res);
+                $res = $this->posturl($url,$data);
+                // $url = curl_get($url);   
+                $info = [
+                        "user_name"=>$res['user']['user_name'],
+                        "user_id"=>$res['user']['user_id'],
+                ];
+                $user_name = $res['user']['user_name'];
+   		// dd($info);
    		if($res['code']=='0000'){
-   			Redis::hset('token'.$data['user_name'],3600,$res['token']);
+                           Redis::hmset('admin',$user_name,7200,$res['user']['user_id'],$res['user']['user_name'],$res['token']);
+                           Cookie::queue("user_name",$user_name);
    			return json_encode($res);
    		}else{
    			return json_encode($res);
