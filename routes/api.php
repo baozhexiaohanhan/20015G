@@ -79,6 +79,9 @@ Route::prefix('/goods')->group(function(){
 
 Route::prefix('/shop')->group(function(){
 	Route::get('/shopcart','Api\ShopcartController@shopcart');
+	Route::get('/address','Api\ShopcartController@address');
+	Route::get('/address_add','Api\ShopcartController@address_add');
+	Route::get('/address_up','Api\ShopcartController@address_up');
 	Route::get('/pay','Api\ShopcartController@pay');
 });
 // 个人中心

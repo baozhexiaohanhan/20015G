@@ -193,6 +193,8 @@ Route::prefix('/')->group(function(){
 
 Route::get('/shopcart','Index\ShopcartController@shopcart');//购物车订单
 Route::get('/address','Index\ShopcartController@address');//收货地址
+Route::get('/address_add','Index\ShopcartController@address_add');//收货地址
+Route::get('/address_do','Index\ShopcartController@address_do');//收货地址
 Route::get('/pay','Index\ShopcartController@pay');//支付
 Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
 
@@ -207,7 +209,6 @@ Route::prefix('/')->group(function(){
     Route::any('/udai_order','Index\CoreorderController@udai_order');
 });
     Route::any('/history','Index\HistoryController@history');
-
 
 
 //静态公告

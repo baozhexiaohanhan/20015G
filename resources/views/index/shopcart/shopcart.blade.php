@@ -63,7 +63,7 @@
 						</div>
 						@endforeach
 					</div> 
-					<div class="add_addr"><a href="udai_address.html">添加新地址</a></div>
+					<div class="add_addr"><a href="/address">添加新地址</a></div>
 					
 					<div class="shop-order__detail">
 						<table class="table">
@@ -154,6 +154,25 @@
 								$(this).parents('.radio-box').addClass('active').siblings().removeClass('active');
 							})
 						});
+						 //点击提交订单
+		    			$(document).on('click','.btn',function(){
+	    				    var data={};
+	    					data.address_id=$('input[name="address_id"]').val();
+	    					data.payname=$("input[name='payname']").val();
+	    					data.cart_id=$("input[name='cart_id']").val();
+	    					$.ajax({
+	    					    url:'/index/order',
+	    					    data:data,
+	    					    type:'post',
+	    						dataType:'json',
+	    						success:function(reg){
+								
+            			            if(reg.code=='0000'){
+            			                location.href='/index/pay/'+reg.data;
+	    							}
+	    						}
+	    					})
+		    			})
 					</script>
 				</form>
 			</div>

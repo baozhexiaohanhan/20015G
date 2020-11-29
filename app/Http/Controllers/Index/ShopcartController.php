@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Order_info;
 use App\Model\Order_goods;
+use App\Model\Region;
+use App\Model\Address;
+
 class ShopcartController extends Controller
 {
     //购物车订单
@@ -24,8 +27,36 @@ class ShopcartController extends Controller
     }
     //收货地址
     public function address(){
-        return view('index/address/address');
+
+        $url = "http://www.2001api.com/shop/address";
+
+        $data = curl_get($url);
+        // dd($data);
+        $data = json_decode($data['msg'],true);
+        // dd($data); 
+
+        return view('index/address/address',compact('data'));
+    } 
+    //添加三级联动地址
+    public function address_add(Request $request){
+        // $region_id  = $request->region_id;
+        $region_id = request()->post("region_id");
+        
+        $region_son = Region::where('parent_id',$region_id)->get();
+        return json_encode(['code'=>0,'msg'=>'OK','data'=>$region_son]);
     }
+
+    public function address_do(Request $request){
+        // $rec_id = request()->post("rec_id");
+        $post = $request->except('_token');
+        // dd($post);
+        $res = Address::insert($post);
+        if($res){
+            return  redirect('/shopcart');
+        }
+    }
+    
+
 
     // 沙箱支付
     public function pay(){
