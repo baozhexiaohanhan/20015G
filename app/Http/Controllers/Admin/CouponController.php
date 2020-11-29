@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use App\Model\Goods;
 class CouponController extends Controller
 {
     /**
@@ -25,7 +26,9 @@ class CouponController extends Controller
      */
     public function create()
     {
-        return view('admin/coupon/couponadd');
+        $goods=Goods::all();
+//        dd($goods);
+        return view('admin/coupon/couponadd',['goods'=>$goods]);
     }
 
     /**
@@ -38,20 +41,7 @@ class CouponController extends Controller
     {
         $data = $request->all();
 //        dd($data);
-        $res = DB::table('coupon')->insert([
-            'name' => $data['name'],
-            'condition' => $data['condition'],
-            'condition_pic' => $data['condition_pic'],
-            'number' => $data['number'],
-            'total' => $data['total'],
-            'start_time' => $data['start_time'],
-            'end_time' => $data['end_time'],
-            'state' => $data['state'],
-            'explain'=>$data['explain'],
-            'shape'=>$data['shape'],
-            'shape_pic'=>$data['shape_pic'],
-            'range'=>$data['range']
-        ]);
+        $res = DB::table('coupon')->insert([$data]);
         if ($res) {
             echo "<script>alert('添加成功,跳转至列表页');location.href='/coupon/index';</script>";
         } else {
@@ -76,12 +66,12 @@ class CouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $data = DB::table('coupon')->where(['coupon_id'=>$id])->get();
-//        dd($data);
-        return view('/admin/coupon/couponedit',['data'=>$data]);
-    }
+//    public function edit($id)
+//    {
+//        $data = DB::table('coupon')->where(['coupon_id'=>$id])->get();
+////        dd($data);
+//        return view('/admin/coupon/couponedit',['data'=>$data]);
+//    }
 
     /**
      * Update the specified resource in storage.
@@ -90,30 +80,30 @@ class CouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        $data = $request->all();
-//        dd($data);
-        $res = DB::table('coupon')->where('coupon_id',$data['coupon_id'])->update([
-            'name' => $data['name'],
-            'condition' => $data['condition'],
-            'condition_pic' => $data['condition_pic'],
-            'number' => $data['number'],
-            'total' => $data['total'],
-            'start_time' => $data['start_time'],
-            'end_time' => $data['end_time'],
-            'state' => $data['state'],
-            'explain'=>$data['explain'],
-            'shape'=>$data['shape'],
-            'shape_pic'=>$data['shape_pic'],
-            'range'=>$data['range']
-        ]);
-        if($res){
-            echo "<script>alert('修改成功');location.href='/coupon/index';</script>";
-        }else{
-            echo "<script>alert('修改失败');location.href='/coupon/index';</script>";
-        }
-    }
+//    public function update(Request $request)
+//    {
+//        $data = $request->all();
+////        dd($data);
+//        $res = DB::table('coupon')->where('coupon_id',$data['coupon_id'])->update([
+//            'name' => $data['name'],
+//            'condition' => $data['condition'],
+//            'condition_pic' => $data['condition_pic'],
+//            'number' => $data['number'],
+//            'total' => $data['total'],
+//            'start_time' => $data['start_time'],
+//            'end_time' => $data['end_time'],
+//            'state' => $data['state'],
+//            'explain'=>$data['explain'],
+//            'shape'=>$data['shape'],
+//            'shape_pic'=>$data['shape_pic'],
+//            'range'=>$data['range']
+//        ]);
+//        if($res){
+//            echo "<script>alert('修改成功');location.href='/coupon/index';</script>";
+//        }else{
+//            echo "<script>alert('修改失败');location.href='/coupon/index';</script>";
+//        }
+//    }
 
     /**
      * Remove the specified resource from storage.

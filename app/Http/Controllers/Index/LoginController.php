@@ -38,6 +38,7 @@ class LoginController extends Controller
                 ];
                 $user_name = $res['user']['user_name'];
    		// dd($info);
+   		
    		if($res['code']=='0000'){
                            Redis::hmset('admin',$user_name,7200,$res['user']['user_id'],$res['user']['user_name'],$res['token']);
                            Cookie::queue("user_name",$user_name);

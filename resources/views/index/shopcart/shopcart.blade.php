@@ -50,19 +50,21 @@
 				<div class="shop-title">收货地址</div>
 				<form action="" class="shopcart-form__box">
 					<div class="addr-radio">
-						<div class="radio-line radio-box active">
-							<label class="radio-label ep" title="福建省 福州市 鼓楼区 温泉街道 五四路159号世界金龙大厦20层B北 福州rpg.blue网络 （喵喵喵 收） 153****9999">
-								<input name="addr" checked="" value="0" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								福建省 福州市 鼓楼区 温泉街道
-								五四路159号世界金龙大厦20层B北 福州rpg.blue网络
-								（喵喵喵 收） 153****9999
+					@foreach($data['address'] as $k=>$v)
+						<div class="radio-line radio-box active" >
+						
+							<label class="radio-label ep">
+								<input name="addr" checked="" value="0" autocomplete="off" type="radio"></a><i class="iconfont icon-radio"></i>
+								{{$v['consignee']}} &nbsp {{$v['tel']}} &nbsp {{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}} &nbsp {{$v['address']}} 
 							</label>
 							<a href="javascript:;" class="default">默认地址</a>
 							<a href="udai_address_edit.html" class="edit">修改</a>
+						
 						</div>
-					</div>
+						@endforeach
+					</div> 
 					<div class="add_addr"><a href="udai_address.html">添加新地址</a></div>
-					<div class="shop-title">确认订单</div>
+					
 					<div class="shop-order__detail">
 						<table class="table">
 							<thead>
@@ -147,14 +149,6 @@
 						<button type="submit" class="btn">继续支付</button>
 					</div>
 					<script>
-					$(document).on('click','.pay',function(){
-					   var _this=$(this);
-					   var payname=_this.attr('payname');
-					   $("input[name='payname']").val(payname);
-					   _this.siblings().removeClass('selected');
-					   _this.addClass('selected');
-					})
-
 						$(document).ready(function(){
 							$(this).on('change','input',function() {
 								$(this).parents('.radio-box').addClass('active').siblings().removeClass('active');

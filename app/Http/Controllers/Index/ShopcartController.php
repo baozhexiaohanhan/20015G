@@ -8,6 +8,7 @@ use App\Model\Order_info;
 use App\Model\Order_goods;
 class ShopcartController extends Controller
 {
+    //购物车订单
     public function shopcart(Request $request){
         $rec_id = request()->post("rec_id");
         // dd($rec_id);
@@ -20,6 +21,10 @@ class ShopcartController extends Controller
         // dd($data); 
 
         return view('index/shopcart/shopcart',compact('data'));
+    }
+    //收货地址
+    public function address(){
+        return view('index/address/address');
     }
 
     // 沙箱支付
