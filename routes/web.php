@@ -24,6 +24,10 @@ Route::middleware('islog')->group(function(){
 
     Route::any('/admins','Admin\HomeController@admins')->name('aindex');//后台首页
     Route::get('/loginapp','Admin\LoginController@loginapp')->name('loginapp');//退出
+    Route::any('/user/user_index','Admin\UserindexController@user_index');//后台管理商家
+    Route::any('/user/user_index_up','Admin\UserindexController@user_index_up');//后台管理商家
+    Route::any('/user/user_index_up','Admin\UserindexController@user_index_up');//后台管理商家
+    Route::any('/user/user_index_del','Admin\UserindexController@user_index_del');//后台管理商家
 
 //广告管理
 Route::prefix("/ad")->group(function(){
@@ -210,6 +214,51 @@ Route::prefix('/')->group(function(){
 });
     Route::any('/history','Index\HistoryController@history');
 
+Route::prefix('/birthday')->group(function(){
+
+ Route::any('/page','Index\BirthdayController@page');
+
+});
 
 //静态公告
  Route::any('/noticelisthtml','Admin\AdminController@noticelistindex');
+
+ //商家
+ Route::prefix('/')->group(function(){
+    Route::any('/sho','Admin\ShoController@sho');
+    Route::any('/business/index','Admin\BusinessController@index');
+    Route::any('/business/user','Admin\UserController@user');
+    Route::any('/business/region','Admin\UserController@region');
+    Route::any('/business/user_add','Admin\UserController@user_add');
+    Route::any('/business/user_log','Admin\UserController@user_log');
+    Route::any('/business/log_add','Admin\UserController@log_add');
+    Route::any('/business/user_up','Admin\UserController@user_up');
+    Route::any('/business/user_up_add/{id}','Admin\UserController@user_up_add');
+    Route::any('/business/statistics','Admin\UserController@statistics');
+    // 商家后台订单列表
+    Route::any('/business/order_index','Admin\OrderController@order_index');
+});
+Route::prefix('/')->middleware('seller')->group(function(){
+// 商家sku
+Route::prefix("/skus")->group(function(){
+    Route::any('/sku','Admin\SkusController@sku');//添加商品 展示
+    Route::any('/goods/uploads','Admin\SkusController@uploads');//上传图片
+    Route::any('/goods/goods_imgdo','Admin\SkusController@goods_imgdo');//上传图片
+    Route::any('/goods/store','Admin\SkusController@store');//商品执行添加
+    Route::any('/goods/type_attr','Admin\SkusController@type_attr');//属性添加不用进行展示侧边
+    Route::any('/goods/product','Admin\SkusController@product');//货品添加不用进行展示侧边
+    Route::any('/goods/product_add','Admin\SkusController@product_add');//货品
+    Route::any('/goods/product_index','Admin\SkusController@product_index');// 商品 展示
+    Route::any('/goods/item_show/{id}','Admin\SkusController@item_show');//sku商品预览 展示
+    Route::any('/goods/attr_key','Admin\SkusController@attr_key');//计算sku商品价格
+    Route::any('/type','Admin\TypesController@type');//商品类型添加 展示
+    Route::any('/type_add','Admin\TypesController@type_add');//商品类型添加方法
+    Route::any('/type_index','Admin\TypesController@type_index');//商品类型 展示
+    Route::any('/type_del','Admin\TypesController@type_del');//商品类型删除
+    Route::any('/ajaxjdjd','Admin\TypesController@ajaxjdjd');//商品类型即点即改
+    Route::any('/attr/{id}','Admin\AttrsController@attr');//商品属性添加
+    Route::any('/attr_add','Admin\AttrsController@attr_add');//商品属性添加方法
+    Route::any('/attr_index/{id}','Admin\AttrsController@attr_index');//商品属性展示不用进行展示侧边
+    Route::any('/attr_del','Admin\AttrsController@attr_del');//商品属性删除
+});
+});
