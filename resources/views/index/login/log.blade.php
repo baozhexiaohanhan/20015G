@@ -27,6 +27,7 @@
 				</div>
 				<div class="tabs_container">
 					<form class="tabs_form" action="" method="get" id="login_form">
+						<input type="hidden" name="refer" value="{{request()->refer??''}}">
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">
@@ -68,6 +69,8 @@
       $(document).on('click','.btn-primary ',function (){
        var user_pwd = $('input[name="user_pwd"]').val();
         var user_name = $('input[name="user_name"]').val();
+        var refer = $('input[name="refer"]').val();
+        // alert(refer);return;
        $.get('/logindo',{user_pwd:user_pwd,user_name:user_name},function (res) {
             if(res.code=='0002'){
               alert(res.msg);
@@ -76,8 +79,14 @@
               alert(res.msg);
          	 }
               if(res.code=='0000'){
-              alert(res.msg);
-               location.href="/"
+              
+               if(refer){
+               		alert(res.msg);
+               		location.href=refer;
+               }else{
+               		alert(res.msg);
+               		location.href="/";
+               }
           	}
             
         },'json')

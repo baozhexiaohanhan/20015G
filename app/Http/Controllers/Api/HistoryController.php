@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\History;
 use App\Model\Goods;
+use Illuminate\Support\Facades\Redis;
 
 class HistoryController extends Controller
 {
      public function historys(){
-        $user_id=1;
+        $user_id=Redis::hmget("admin",["user_id"]);
+        $user_id=implode("",$user_id);
         $goods_id = request()->goods_id;
         // dd($user_id);
         //根据用户id 获取修改用户浏览的商品 根据时间倒序 获取前几条
