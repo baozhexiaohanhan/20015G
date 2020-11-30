@@ -59,6 +59,60 @@ class ShopcartController extends Controller
             return  redirect('/shopcart');
         }
     }
+
+    //生成订单 and  订单商品
+    public function order(Request $request){
+        $datas = $request->all();
+        // $data=request()->all();
+        dd($datas);
+        $cart_id=$data['cart_id'];
+        $data['order_sn']=$this->createOrderSn();
+        $data['user_id']=session('reg')->user_id;
+        //支付方式
+        //收货地址
+        if($data['address_id']){
+              $userAddress=Address::where('id',$data['address_id'])->first();
+              $userAddress=$userAddress ? $userAddress->toArray():[];
+        }
+        //商品总价
+        $total=DB::select("select sum(goods_price*buy_number) as price from shop_cary where cary_id in($cart_id)");
+        $goods_total=$total[0]->price;
+        $data['goods_price']=$goods_total;
+        
+        //支付价格
+        $data['order_amount']=$data['goods_price'];
+        //添加时间
+        $data['addtime']=time();
+        $data=array_merge($data,$userAddress);
+       
+        unset($data['id'],$data['add_time'],$data['is_del'],$data['is_moren'],$data['address_id'],$data['cart_id']);
+        $order_id=Order::insertGetId($data);
+       //  dd($order);
+         if($order_id){
+           //订单商品入库
+           if(is_string($cart_id)){
+               $cart_id=explode(',',$cart_id);     
+           }
+           // dd($cart_id);
+           $goods=Cary::whereIn('cary_id',$cart_id)->get();
+           $goods=$goods?$goods->toArray():[];
+           // dd($goods);
+           foreach($goods as $k=>$v){
+               // print_r($v);
+               $goods[$k]['order_id']=$order_id;
+               unset($goods[$k]['cary_id'],$goods[$k]['user_id'],$goods[$k]['add_time'],$goods[$k]["is_del"]);
+           }
+           // dd($goods);
+           $OrderGoods=OrderGoods::insert($goods);
+         
+           if($OrderGoods){
+               Cary::destroy($cart_id);
+               return $this->success('0000','结算',$order_id);
+           }
+          
+       }  
+     
+   }
     
 
 

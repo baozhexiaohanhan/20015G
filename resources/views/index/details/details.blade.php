@@ -52,7 +52,9 @@
 				<div class="item-info__box">
 					<div class="item-title">
 						<div class="name ep2">{{$data['goods']['goods_name']}}</div>
-						<div class="sale cr">优惠活动：该商品享受8折优惠</div>
+						@foreach($data['coupon'] as $v)
+						<div class="sale cr coupon" id="{{$v['coupon_id']}}">{{$v['name']}}</div>
+						@endforeach
 					</div>
 					<div class="item-price bgf5">
 						<div class="price-box clearfix">
@@ -1227,6 +1229,8 @@
 	$('.addshopcart').click(function(){
 		var goods_id = "{{$data['goods']['goods_id']}}";
 		// alert(goods_id);return;
+		var seller_id = "{{$data['goods']['seller_id']}}";
+		// alert(seller_id);return;
 		var buy_number=$('.itxt').val();
 		// alert(buy_number);return;
 		var goods_attr_id=new Array();
@@ -1234,12 +1238,12 @@
             goods_attr_id.push($(this).attr('goods_attr_id'));
         });
         // alert(goods_attr_id);return;
-        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id},function(res){
+        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id,seller_id:seller_id},function(res){
         	// alert(res);return;
         	if(res.code=='-1'){
                 location.href="/log?refer="+location.href;
             }
-        	if(res.code=='1003' || res.code=='1004' || res.code=='1005'){
+        	if(res.code=='1003' || res.code=='1004' || res.code=='1005' || res.code=='1006'){
                 alert(res.msg);
             }
             if(res.code=='0'){
@@ -1249,7 +1253,23 @@
         	}
         },'json');
 	})
-
+//		领取优惠券
+        $('.coupon').click(function(){
+//			alert(1232);
+            var goods_id = "{{$data['goods']['goods_id']}}";
+//            alert(goods_id);
+            var coupon_id = $(this).attr('id');
+//            alert(coupon_id);
+            $.getJSON('http://www.2001api.com/addcoupon?callback=?',{goods_id:goods_id,coupon_id:coupon_id},function(msg){
+//                 alert(obj);return;
+//                if(msg.code=='-1'){
+//                    location.href="/log?refer="+location.href;
+//                }
+                if(msg.code=='0'){
+					alert('领取优惠券成功');
+                }
+            });
+		});
 	$(document).on("click","#add",function(){
 						    // alert(123);
 						    var _this=$('this');
