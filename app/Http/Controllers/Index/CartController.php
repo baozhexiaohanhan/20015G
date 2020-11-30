@@ -28,35 +28,13 @@ class CartController extends Controller
         $cart = json_decode($cart['data'],true);
     }
     public function index(Request $request){
-        // $user=1;
-        // //两表联查  cart.*查询购物车所有
-        // $cart=Cart::select('cart.*','goods.goods_img','goods.goods_name','goods.is_up')
-        //     ->leftjoin('goods','cart.goods_id','=','goods.goods_id')
-        //     ->where('user_id',$user)->get();
-        //     // dd($cart);
-        //     foreach ($cart as $k=>$v) {
-        //         if($v->goods_attr_id){
-        //             $goods_attr_id=explode('|',$v->goods_attr_id);
-        //             // dd($goods_attr_id);
-        //             $goods_attr=Goods_attr::select('attr_name','attr_value')
-        //                     ->leftjoin('attr','goods_attr.attr_id','=','attr.attr_id')
-        //                     ->whereIn('goods_attr_id',$goods_attr_id)
-        //                     ->get();
-        //                     // dd($goods_attr);
-        //             $cart[$k]['goods_attr']=$goods_attr?$goods_attr->toArray():[];
-                    
-        //         }
-        //     }
-        //     // dd($cart);
-        // $data = $request->all();
-        // dd($data);
         $url = "http://www.2001api.com/index";
         // dd($url);
         $cart = curl_get($url);
         // dd($cart);
 
         $cart = json_decode($cart['data'],true);
-        // dd($cart);
+        // dump($cart['info']);
 
         return view('index.cart.cart',['cart'=>$cart]);
     }

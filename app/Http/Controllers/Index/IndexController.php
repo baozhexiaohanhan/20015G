@@ -10,15 +10,9 @@ use Illuminate\Support\Facades\Redis;
 class IndexController extends Controller
 {
     public function index(){
-		//
-		// dd($res);
-		// $ad = "的地方";
-		// Cookie::queue("test",$ad);
-		$cookie = request()->cookie('user_name');
-		$res = Redis::hget("admin");
-		dd($res);
-		// dd($res);
-    //    echo "11111";die;
+		
+		// $user_id = Redis::hmget("admin",["user_id","user_name"]);
+		// dd($user_id);
 
     	//首页推荐位
     	$url='http://www.2001api.com/domain/index';
