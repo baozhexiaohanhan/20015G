@@ -187,6 +187,7 @@ Route::prefix('/')->group(function(){
     Route::any('rush/seckill','Index\SeckillController@seckill');
 
     Route::any('/history','Index\DetailsController@history');
+    Route::any('/seckill_order','Index\SeckillController@seckill_order');//支付同步
 
     Route::any('miaosha_show','Index\SeckillController@miaosha_show');
     Route::any('miaosha_show_add','Index\SeckillController@miaosha_show_add');
@@ -199,6 +200,7 @@ Route::get('/shopcart','Index\ShopcartController@shopcart');//购物车订单
 Route::get('/address','Index\ShopcartController@address');//收货地址
 Route::get('/address_add','Index\ShopcartController@address_add');//收货地址
 Route::get('/address_do','Index\ShopcartController@address_do');//收货地址
+Route::any('/order','Index\ShopcartController@order');//生成订单
 Route::get('/pay','Index\ShopcartController@pay');//支付
 Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
 Route::any('/order_add','Index\ShopcartController@order_add');//支付同步
@@ -212,6 +214,7 @@ Route::any('/history','Index\HistoryController@history');//浏览历史记录
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
     Route::any('/udai_order','Index\CoreorderController@udai_order');
+    Route::any('/tucu','Index\CoreorderController@tucu');
 });
     Route::any('/history','Index\HistoryController@history');
     Route::any('/addcoupon','Api\DetailsController@addcoupon');
@@ -264,4 +267,9 @@ Route::prefix("/skus")->group(function(){
     Route::any('/attr_index/{id}','Admin\AttrsController@attr_index');//商品属性展示不用进行展示侧边
     Route::any('/attr_del','Admin\AttrsController@attr_del');//商品属性删除
 });
+});
+
+Route::prefix("/shops")->group(function(){
+    Route::any('/shops','Index\ShopsController@shops');//商品属性删除
+
 });

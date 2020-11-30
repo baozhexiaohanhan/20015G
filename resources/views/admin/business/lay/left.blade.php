@@ -21,6 +21,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li><a _href="{{url('/skus/sku')}}"><i class="iconfont">&#xe6a7;</i><cite>添加商品</cite></a></li>
+                    <li><a _href="{{url('/skus/goods/product_index')}}"><i class="iconfont">&#xe6a7;</i><cite>商品展示</cite></a></li>
                     <li>
                         <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>类型 属性 添加</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                         <ul class="sub-menu">

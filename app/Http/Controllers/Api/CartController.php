@@ -9,17 +9,19 @@ use App\Model\Goods_attr;
 use App\Model\Goods;
 use App\Model\Products;
 use App\Model\Seller;
-
+use Illuminate\Support\Facades\Redis;
 class CartController extends Controller
 {
 	public function addcart(Request $request){
         // dd($request->all());
         // $goods_id = $request->goods_id;
         // dd($goods_id);
-        $user_id=1;
-        // dd($user_id);
+        // Redis::del('admin');die;
+        $user_id=Redis::hmget("admin",["user_id"]);
+        $user_id=implode("",$user_id);
+        // return $user_id;
         if(!$user_id){
-            $this->error('未登录');
+           return $this->error('未登录');
         }
         // 2.判断商品id、购买数量，未传递提示 缺少参数
         $goods_id=$request->goods_id;
@@ -103,7 +105,8 @@ class CartController extends Controller
     }
 
     public function index(){
-    	$user=1;
+    	$user=Redis::hmget("admin",["user_id"]);
+        $user=implode("",$user);
     	// dd($user);
     	//两表联查  cart.*查询购物车所有
     	$cart=Cart::select('cart.*','goods.goods_img','goods.goods_name','goods.is_up','seller.seller_id','seller.seller_name','seller.true_name')
@@ -173,7 +176,8 @@ class CartController extends Controller
         return $this->success('ok',['total'=>$total]);    
     }
     public function cartplus(Request $request){
-    	$user=1;
+    	$user=Redis::hmget("admin",["user_id"]);
+        $user=implode("",$user);
     	// $data=request()->all();
     	// dd($data);
     	// $buy_number=$data['buy_number'];

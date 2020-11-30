@@ -25,12 +25,19 @@
 				<a href="agent_level.html">网店代销</a>
 				<a href="temp_article/udai_article4.html">帮助中心</a>
 			</div>
+		
+
 			<div class="pull-right">
-				<a href="login.html"><span class="cr">登录</span></a>
-				<a href="login.html?p=register">注册</a>
+			@if(session()->get("name")=='')
+			<a href="/log"><span class="cr">登录</span></a>
+				<a href="/reg">注册</a>
+			@else
+			<a><span class="cr">欢迎：@php echo session()->get("name") @endphp 登录</span></a>
+				<a  href="/tucu">退出</a>
+			@endif 
 				<a href="{{url('index/center')}}">我的U袋</a>
-				<a href="udai_order.html">我的订单</a>
-				<a href="udai_integral.html">积分平台</a>
+				<a href="/welcome">我的订单</a>
+				<a href="udai_integral.html"></a>
 			</div>
 		</div>
 	</div>
