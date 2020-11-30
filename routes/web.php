@@ -268,3 +268,8 @@ Route::prefix("/skus")->group(function(){
     Route::any('/attr_del','Admin\AttrsController@attr_del');//商品属性删除
 });
 });
+
+Route::prefix("/shops")->group(function(){
+    Route::any('/shops','Index\ShopsController@shops');//商品属性删除
+
+});

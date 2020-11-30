@@ -12,7 +12,7 @@
 						</button>
 					</span>
 				</form>
-				<p class="help-block text-nowrap">
+				<!-- <p class="help-block text-nowrap">
 					<a href="">连衣裙</a>
 					<a href="">裤</a>
 					<a href="">衬衫</a>
@@ -20,7 +20,7 @@
 					<a href="">女包</a>
 					<a href="">家居服</a>
 					<a href="">2017新款</a>
-				</p>
+				</p> -->
 			</div>
 			<div class="cart-box">
 				<a href="udai_shopcart.html" class="cart-but">
