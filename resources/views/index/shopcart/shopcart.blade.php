@@ -48,7 +48,6 @@
 			<div class="user-content__box clearfix bgf">
 				<div class="title">购物车-确认支付 </div>
 				<div class="shop-title">收货地址</div>
-				<form action="" class="shopcart-form__box">
 					<div class="addr-radio">
 					@foreach($data['address'] as $k=>$v)
 						<div class="radio-line radio-box active" >
@@ -81,7 +80,7 @@
 									<th scope="row"><div class="img"><img src="{{$v['goods_img']}}" alt="" class="cover"></div></th>
 									<td>
 										<div class="name ep3">{{$v['goods_name']}}</div>
-										<div class="type c9">
+										<div class="type c9 cary" cary_id="{{$v['rec_id']}}">
 											@if(isset($v['goods_attr']))
 												@foreach($v['goods_attr'] as $vv)
 													{{$vv['attr_name']}}:{{$vv['attr_value']}}
@@ -127,7 +126,7 @@
 								<input name="pay-mode" value="1" autocomplete="off" type="radio" class="selected pay"><i class="iconfont icon-radio"></i>
 								<img src="static/images/icons/alipay.png" alt="支付宝支付">
 							</label>
-							<div class="pay-value">支付<b class="fz16 cr">{{$data['price']}}</b>元</div>
+							<div class="pay-value">支付<b class="fz16 crpayType" pay_type="2">{{$data['price']}}</b>元</div>
 						</div>
 						
 						<div class="radio-line radio-box">
@@ -146,7 +145,7 @@
 						</div>
 					</div>
 					<div class="user-form-group shopcart-submit">
-						<button type="submit" class="btn">继续支付</button>
+						<a class="btn" id="tijiao">继续支付</a>
 					</div>
 					<script>
 						$(document).ready(function(){
@@ -154,27 +153,26 @@
 								$(this).parents('.radio-box').addClass('active').siblings().removeClass('active');
 							})
 						});
-						 //点击提交订单
-		    			$(document).on('click','.btn',function(){
-	    				    var data={};
-	    					data.address_id=$('input[name="address_id"]').val();
-	    					data.payname=$("input[name='payname']").val();
-	    					data.cart_id=$("input[name='cart_id']").val();
-	    					$.ajax({
-	    					    url:'/index/order',
-	    					    data:data,
-	    					    type:'post',
-	    						dataType:'json',
-	    						success:function(reg){
+						//  //点击提交订单
+		    			// $(document).on('click','.btn',function(){
+	    				//     var data={};
+	    				// 	data.address_id=$('input[name="address_id"]').val();
+	    				// 	data.payname=$("input[name='payname']").val();
+	    				// 	data.cart_id=$("input[name='cart_id']").val();
+	    				// 	$.ajax({
+	    				// 	    url:'/index/order',
+	    				// 	    data:data,
+	    				// 	    type:'post',
+	    				// 		dataType:'json',
+	    				// 		success:function(reg){
 								
-            			            if(reg.code=='0000'){
-            			                location.href='/index/pay/'+reg.data;
-	    							}
-	    						}
-	    					})
-		    			})
+            			//             if(reg.code=='0000'){
+            			//                 location.href='/index/pay/'+reg.data;
+	    				// 			}
+	    				// 		}
+	    				// 	})
+		    			// })
 					</script>
-				</form>
 			</div>
 		</section>
 	</div>
@@ -220,6 +218,44 @@
 			$(document).ready(function(){ $('.to-top').toTop({position:false}) });
 		</script>
 	</div>
+	<script>
+			// 提交订单
+	$(document).on("click","#tijiao",function(){
+		// 获取地址的ID
+		// var address_id = $(".selected").find("#id").attr("address");
+		// 支付方式
+		var price = "{{$data['price']}}";
+		var pay_type = "2";
+		// 获取购物车id
+		var cary_id = [];
+		$(".cary").each(function(){
+			cary_id.push($(this).attr("cary_id"))
+		})
+		var data = {};
+		data.price = price;
+		data.pay_type = pay_type;
+		data.rec_id = cary_id;
+		// console.log(data);return;
+		var url = "{{url('/order_add')}}";
+		$.ajax({
+			type:"post",
+			url:url,
+			data:data,
+			dataType:"json",
+			success:function(res){
+				// if(res.code==0002){
+					// location.href="/pay/?order_id="+res.order_id;
+					console.log(res);
+				// }
+				
+			}
+
+		})
+		// console.log(cary_id);
+	})
+	
+	
+	</script>
 	<!-- 底部信息 -->
 	@include('index.lay.bottom')
 	@section('bottom')

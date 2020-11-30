@@ -201,6 +201,7 @@ Route::get('/address_add','Index\ShopcartController@address_add');//收货地址
 Route::get('/address_do','Index\ShopcartController@address_do');//收货地址
 Route::get('/pay','Index\ShopcartController@pay');//支付
 Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
+Route::any('/order_add','Index\ShopcartController@order_add');//支付同步
 
 
 
