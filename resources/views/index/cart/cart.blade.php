@@ -128,9 +128,10 @@
 					$('.btn').click(function(){
 							var rec_id = new Array();
 
-							$('.cartid:checked').each(function(){
+							$('#cartid:checked').each(function(){
 								rec_id.push($(this).val());
 							});
+							// console.log(rec_id);return;
 							if(!rec_id.length){
 								alert('选择购买的商品');
 								return; 

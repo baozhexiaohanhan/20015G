@@ -63,12 +63,18 @@ class UserController extends Controller
        
         // dd($data);
         $res2 = Seller::where(['seller_name'=>$data['seller_name'],"is_lock"=>0,"is_del"=>0])->first();
+        // dd($res2);
         if($res2){
             if($res['password']==$data['password']){
                 session(["seller"=>$res]);
                 return $msg = [
                     "code"=>0001,
                     "msg"=>"登录成功",
+                ];
+            }else{
+                return $msg = [
+                    "code"=>0002,
+                    "msg"=>"密码错误",
                 ];
             }
         }else{
