@@ -215,6 +215,8 @@ Route::prefix('/')->group(function(){
     Route::any('/udai_order','Index\CoreorderController@udai_order');
 });
     Route::any('/history','Index\HistoryController@history');
+    Route::any('/addcoupon','Api\DetailsController@addcoupon');
+
 
 Route::prefix('/birthday')->group(function(){
 

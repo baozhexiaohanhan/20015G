@@ -52,7 +52,9 @@
 				<div class="item-info__box">
 					<div class="item-title">
 						<div class="name ep2">{{$data['goods']['goods_name']}}</div>
-						<div class="sale cr">优惠活动：该商品享受8折优惠</div>
+						@foreach($data['coupon'] as $v)
+						<div class="sale cr coupon" id="{{$v['coupon_id']}}">{{$v['name']}}</div>
+						@endforeach
 					</div>
 					<div class="item-price bgf5">
 						<div class="price-box clearfix">
@@ -1251,7 +1253,23 @@
         	}
         },'json');
 	})
-
+//		领取优惠券
+        $('.coupon').click(function(){
+//			alert(1232);
+            var goods_id = "{{$data['goods']['goods_id']}}";
+//            alert(goods_id);
+            var coupon_id = $(this).attr('id');
+//            alert(coupon_id);
+            $.getJSON('http://www.2001api.com/addcoupon?callback=?',{goods_id:goods_id,coupon_id:coupon_id},function(msg){
+//                 alert(obj);return;
+//                if(msg.code=='-1'){
+//                    location.href="/log?refer="+location.href;
+//                }
+                if(msg.code=='0'){
+					alert('领取优惠券成功');
+                }
+            });
+		});
 	$(document).on("click","#add",function(){
 						    // alert(123);
 						    var _this=$('this');

@@ -31,9 +31,6 @@ class DetailsController extends Controller
             // dd($History);
         }
         
-
-        //  dd($goods_id);
-
 //        统计点击量
 //        $hits = Redis::setnx('hit_'.$goods_id,1)?:Redis::incr('hit_'.$goods_id,1);
         $hits =Redis::zincrby('hit',1,'hit_'.$goods_id);
@@ -51,6 +48,8 @@ class DetailsController extends Controller
             $hot_goods = DB::table('goods')->whereIn('goods_id',$hit_goods_id)->get();
         }
 //        dd($hot_goods);
+        $coupon = DB::table('coupon')->where(['range'=>$goods_id])->get()->toArray();
+//        dd($coupon);
         $goods = Goods::where("goods_id",$goods_id)->first();
 
         $Goods_log = Goods_log::where("goods_id",$goods_id)->first();
@@ -70,7 +69,8 @@ class DetailsController extends Controller
             "attrs_new_key"=>$attrs_new_key,
             "newinfo"=>$newinfo,
             "hits"=>$hits,
-            "hot_goods"=>$hot_goods
+            "hot_goods"=>$hot_goods,
+            "coupon"=>$coupon
         ];
         $shop = json_encode($shop);
         $shop = ["ok","data"=>$shop];
@@ -142,5 +142,28 @@ class DetailsController extends Controller
         if($res){
             return json_encode(['code'=>'00000','msg'=>'收藏成功']);die;
         }
+    }
+    public function addcoupon(request $request)
+    {
+        $callback = request()->callback;
+        $user_id = 1;
+        if(!$user_id){
+            return json_encode(['code'=>'00001','msg'=>'未登录']);die;
+        }
+        $goods_id = $request->goods_id;
+//        dd($goods_id);
+        $coupon_id = $request->coupon_id;
+//        dd($coupon_id);
+//        $goods = Goods::where(['is_show'=>1,'goods_id'=>$goods_id])->count();
+////        dd($goods);
+//        if(!$goods || !$coupon_id){
+//            return $this->jsonResponse('1003','商品已下架或者缺少参数');die;
+//        }
+        $data = ['user_id'=>$user_id,'coupon_id'=>$coupon_id,'goods_id'=>$goods_id];
+        $res = DB::table('user_coupon')->insert($data);
+        if($res){
+            return json_encode(['code'=>'0','msg'=>'领取优惠券成功']);die;
+        }
+        echo $callback.'('.$res.')';
     }
 }

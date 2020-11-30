@@ -36,8 +36,10 @@
                 <div class="layui-card-body layui-row layui-col-space10">
                     <label class="layui-form-label">优惠范围：</label>
                     <div class="layui-col-md6">
+                        {{--<input type="radio" name="range" id="" value="1">全部商品--}}
+                        {{--<input type="radio" name="range" id="" value="2">指定商品--}}
                         <select name="range" lay-verify="">
-                            <option value="0">全部商品</option>
+                            <option value="">   </option>
                             @foreach($goods as $v)
                                 <option value="{{$v->goods_id}}">{{$v->goods_name}}</option>
                             @endforeach
@@ -74,11 +76,9 @@
                 <div class="layui-card-body layui-row layui-col-space10">
                     <label class="layui-form-label">优惠方式：</label>
                     <div class="layui-col-md6">
-                        <select name="type" id="act_type" lay-verify="" >
-                            <option value="0" selected="selected">享受赠品（特惠品）</option>
-                            <option value="1">享受现金减免</option>
-                            <option value="2">享受价格折扣</option>
-                        </select>
+                        <input type="radio" name="type" id="" value="0">享受赠品
+                        <input type="radio" name="type" id="" value="1">享受现金减免
+                        <input type="radio" name="type" id="" value="2">享受价格折扣
                     </div>
                 </div>
                 <div class="layui-row layui-col-space10 layui-form-item">
