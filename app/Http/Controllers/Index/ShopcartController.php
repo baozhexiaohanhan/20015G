@@ -6,8 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Order_info;
 use App\Model\Order_goods;
+use App\Model\Region;
+use App\Model\Address;
+use App\Model\Cart;
+use DB;
+use Illuminate\Support\Facades\Redis;
 class ShopcartController extends Controller
 {
+    //购物车订单
     public function shopcart(Request $request){
         $rec_id = request()->post("rec_id");
         // dd($rec_id);
@@ -21,11 +27,43 @@ class ShopcartController extends Controller
 
         return view('index/shopcart/shopcart',compact('data'));
     }
+    //收货地址
+    public function address(){
+
+        $url = "http://www.2001api.com/shop/address";
+
+        $data = curl_get($url);
+        // dd($data);
+        $data = json_decode($data['msg'],true);
+        // dd($data); 
+
+        return view('index/address/address',compact('data'));
+    } 
+    //添加三级联动地址
+    public function address_add(Request $request){
+        // $region_id  = $request->region_id;
+        $region_id = request()->post("region_id");
+        
+        $region_son = Region::where('parent_id',$region_id)->get();
+        return json_encode(['code'=>0,'msg'=>'OK','data'=>$region_son]);
+    }
+
+    public function address_do(Request $request){
+        // $rec_id = request()->post("rec_id");
+        $post = $request->except('_token');
+        // dd($post);
+        $res = Address::insert($post);
+        if($res){
+            return  redirect('/shopcart');
+        }
+    }
+    
+
 
     // 沙箱支付
     public function pay(){
-        // $order_id = request()->order_id;
-        $order_id = 4;
+        $order_id = request()->order_id;
+        // $order_id = 4;
         
         $config = config("alipay");
         require_once app_path('Common/alipay/pagepay/service/AlipayTradeService.php');
@@ -126,6 +164,141 @@ class ShopcartController extends Controller
         }
       
        
+    }
+    //订单商品 订单 数据入库order info goods
+    public function order_add(){
+        // $a = request()->all();
+        // dd($a);
+        // if($a==)
+        // DB::beginTransaction();
+        // try {
+        $da = request()->all();
+        // dd($da);
+        $order_sn['order_sn'] = $this->createOrderSn();
+        $order_sn = $order_sn['order_sn'];
+       
+        // $user = request()->session()->get("name");
+        $user_id = Redis::hget("admin",7200);
+        if($user_id==""){
+            return redirect("/log");
+        }
+        // dd($user_id);
+        // $user_id = $user['user_id'];
+        // $user_name = $user['user_name'];
+        // 地址
+        $address = Address::where(["address_id"=>2,"uid"=>$user_id])->first();
+        // dd($address);
+        // 支付方式
+        $info = [1=>"微信",2=>"支付宝",3=>"货到付款"];
+        $mode['pay_type'] =$info[$da['pay_type']];
+        $mode = $mode['pay_type'];
+        // 总价价格
+        $rec_id = $da['rec_id'];
+        $rec_id = implode(",",$rec_id);
+        $order_price = \DB::select("select sum(goods_price*buy_number) as tot from cart where rec_id in($rec_id) ");
+
+        $order_price = $order_price[0]->tot;
+        if($order_price > 100){
+            $aa = rand(1,10);
+            $bb = $aa/100;
+            $price = $order_price*$bb; 
+            // dd($price);
+        }
+        $order_price = $order_price-$price;
+        // dd($order_price);
+        $data = [
+            "order_sn"=>$order_sn,
+            "user_id"=>$user_id,
+            "consignee"=>$address['address_name'],
+            "country"=>$address['country'],
+            "province"=>$address['province'],
+            "city"=>$address['city'],
+            "district"=>$address['district'],
+            "address"=>$address['address'],
+            "mobile"=>$address['tel'],
+            "tel"=>$address['tel'],
+            "best_time"=>0,
+            "sign_building"=>0,
+            "pay_name"=>$mode,
+            "pay_type"=>$da['pay_type'],
+            "order_price"=>$order_price,
+            "goods_price"=>$order_price,
+            "addtime"=>time(),
+        ];
+        // dd($data);
+        // 订单表入库
+       $order_id = Order_info::insertGetId($data);
+    //    dd($order_id);
+        $cary = Cary::whereIn("rec_id",$da['rec_id'])->get();
+        // dump($cary);
+        // unset($cary)
+        $cary = $cary?$cary->toArray():[];
+        // $order_id = 1;
+        // $cary_id = [];
+        foreach($cary as $k=>$v){
+            // dd($v);
+            $cary[$k]["order_id"] = $order_id;
+            $cary[$k]['shop_price'] = $v['goods_totall'];
+            $goods = Goods::find($v['goods_id']);
+            $cary[$k]['goods_name'] =$goods['goods_name'];
+            Cary::where("cary_id",$cary[$k]['cary_id'])->update(['is_del'=>2]);
+            $goods_attr_id = $cary[$k]['goods_attr_id'];
+            unset($cary[$k]['goods_priceb']);
+            unset($cary[$k]['cary_id']);
+            unset($cary[$k]['is_del']);
+            unset($cary[$k]['add_time']);
+            unset($cary[$k]['goods_totall']);
+            unset($cary[$k]['user_id']);
+        }
+        
+        // dd($res);
+        // 订单商品
+        $res = Order_goods::insert($cary);
+        // $goods_attr_id=[];
+        // 提交订单 进行减库存 判断有无规格 对货品表  或 商品表进行减库存
+        if($res){
+          if($goods_attr_id){
+            foreach($cary as $k=>$v){
+                $product_id = $v['product_id'];
+                $product = Products::where("product_id",$product_id)->first();
+                $buy = $product['product_number']-$cary[$k]['buy_number'];
+                $product = Products::where(["product_id"=>$cary[$k]['product_id']])->update(['product_number'=>$buy]);
+            }
+          }else{
+            foreach($cary as $k=>$v){
+                $goods_id = $v['goods_id'];
+                $goods = Goods::where("goods_id",$goods_id)->first();
+                $buy = $goods['goods_store']-$v['buy_number'];
+                $product = Goods::where(["goods_id"=>$goods_id])->update(['goods_store'=>$buy]);
+            }
+          }
+        }
+            // DB::commit();
+            return $message = [
+                "code"=>0002,
+                "message"=>"添加成功",
+                "success"=>true,
+                "order_id"=>$order_id,
+                "price"=>$price,
+                "order_price"=>$order_price
+                ];
+        // } catch (Exception $e){
+            // DB::rollBack();
+            // dump($e->getMessage);
+        // }
+        // dd($res);
+        
+       
+    }
+    public function createOrderSn(){
+        $order_sn = date("Ymdhis").rand(1000,9999);
+        if($this->isHaveOrdersn($order_sn)){
+            $this->createOrderSn();
+        }
+        return $order_sn;
+    }
+    public function isHaveOrdersn($order_sn){
+        return Order_info::where("order_sn",$order_sn)->count();
     }
 
 }

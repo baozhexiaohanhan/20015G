@@ -1,4 +1,6 @@
-@section('title', '秒杀详情页')
+@section('title', 'U 袋网')
+@include('index.lay.tops')
+@section('tops2')
 @include('index.lay.top')
 @section('tops')
 
@@ -14,8 +16,8 @@
 			<div class="pull-left">
 				<ol class="breadcrumb">
 					<li><a href="index.html">首页</a></li>
-					<li><a href="item_sale_page.html">爆款推荐</a></li>
-					<li class="active">原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏</li>
+					<li><a href="item_sale_page.html">秒杀</a></li>
+					<li class="active"></li>
 				</ol>
 				<div class="item-pic__box" id="magnifier">
 					<div class="small-box">

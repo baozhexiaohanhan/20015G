@@ -1,8 +1,11 @@
-@extends('admin.lay.js')
-     @section('js')
-     @include('admin.lay.top')
+ @include('admin.lay.top')
      @section('tops')
-    
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/admin/css/font.css">
+    <link rel="stylesheet" href="/admin/css/xadmin.css">
+    <script src="/admin/js/jquery.min.js"></script>
+    <script src="/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/admin/js/xadmin.js"></script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
     <form  action="/goods/store" method='post' style="margin-top:20px;">
         <div class="layui-card">
                 <div class="layui-card-header"></div>

@@ -152,5 +152,29 @@ class AdminController extends Controller
         }
     }
 
+
+  public function noticelistindex(){
+       // dd(123);
+
+       $name = request()->name;
+        $where = [];
+        if($name){
+            $where[] = ['notice_fullname','like',"%$name%"];
+        }
+         $noticeModel = new Notice();
+          $data = $noticeModel->where($where)->orderBy('notice_id','desc')->paginate(6);
+          $query = request()->all();
+          ob_start();
+          echo  view('admin.notice.noticelist',['data'=>$data,'query'=>$query]);
+          
+          $contents = ob_get_contents();
+
+          $filename = '白敬壮.html';
+          file_put_contents($filename, $contents);
+
+          ob_clean();  
+          
+          }
+    }
+
   
-}

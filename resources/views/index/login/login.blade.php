@@ -99,6 +99,18 @@
             if(result.code=='4'){
                 alert(result.msg);
             }
+             if(result.code=='5'){
+                alert(result.msg);
+            }
+              if(result.code=='50'){
+                alert(result.msg);
+            }
+              if(result.code=='60'){
+                alert(result.msg);
+            }
+             if(result.code=='70'){
+                alert(result.msg);
+            }
             if(result.code=='0'){
                 location.href = "/log"
             }else{
@@ -118,6 +130,18 @@
                 }
                 if(res.code=='02'){
                     alert(res.msg);
+                }
+               if(res.code=='4'){
+                    alert(res.msg);
+                }
+                if(res.code=='0'){
+                   alert(res.msg);
+                }
+                 if(res.code=='5'){
+                   alert(res.msg);
+                }
+                  if(res.code=='6'){
+                   alert(res.msg);
                 }
             },'json');
             return;

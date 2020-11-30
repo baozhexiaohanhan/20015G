@@ -53,6 +53,7 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 
 		Route::get('/attr_keys','Api\SeckillController@attr_keys');
 
+        Route::get('/collect','Api\DetailsController@collect');
 
 	
 	});
@@ -78,7 +79,16 @@ Route::prefix('/goods')->group(function(){
 
 Route::prefix('/shop')->group(function(){
 	Route::get('/shopcart','Api\ShopcartController@shopcart');
+	Route::get('/address','Api\ShopcartController@address');
+	Route::get('/address_add','Api\ShopcartController@address_add');
+	Route::get('/address_up','Api\ShopcartController@address_up');
 	Route::get('/pay','Api\ShopcartController@pay');
 });
-
+// 个人中心
+Route::prefix('/')->group(function(){
+    Route::any('/welcome','Api\CoreorderController@welcome');
+	Route::any('/udai_order','Api\CoreorderController@udai_order');
+    Route::any('/udai_shopcart_pay','Api\CoreorderController@udai_shopcart_pay');
+	
+});
 

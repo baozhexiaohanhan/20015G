@@ -17,8 +17,7 @@
 						</div>
 						<div class="cat-list__deploy">
 							<div class="deploy-box">
-						@foreach($v->child as $kk=>$vv)
-								
+								@foreach($v->child as $kk=>$vv)
 								<div class="genre-box clearfix">
 									<span class="title">{{$vv->cate_name}}</span>
 										@foreach($vv->child as $kkk=>$vvv)
@@ -79,8 +78,7 @@
 							</div>
 							<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">{{$v->goods_name}}</div>
 						</a>
-						@endforeach
-					
+						@endforeach		
 					</div>
 				</div>
 			</div>
@@ -119,7 +117,7 @@
 							</a>
 						</div>
 						<div class="but-div">
-							<a href="item_sale_page.html">
+							<a href="/birthday/page">
 								<i class="but-icon"></i>
 								<p>折扣专区</p>
 							</a>
