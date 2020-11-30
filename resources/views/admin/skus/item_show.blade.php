@@ -1,16 +1,91 @@
-@section('title', 'U 袋网')
-@include('index.lay.tops')
-@section('tops2')
-@include('index.lay.top')
-@section('tops')
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="/static/css/iconfont.css">
+	<link rel="stylesheet" href="/static/css/global.css">
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/static/css/swiper.min.css">
+	<link rel="stylesheet" href="/static/css/styles.css">
+	<script src="/static/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
+	<script src="/static/js/bootstrap.min.js" charset="UTF-8"></script>
+	<script src="/static/js/swiper.min.js" charset="UTF-8"></script>
+	<script src="/static/js/global.js" charset="UTF-8"></script>
+	<script src="/static/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
 
-	<!-- 搜索栏 -->
-
-	<!-- 内页导航栏 -->
     <link rel="stylesheet" type="text/css" href="/static/index/css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="/static/index/css/pages-item.css" />
     <link rel="stylesheet" type="text/css" href="/static/index/css/pages-zoom.css" />
     <link rel="stylesheet" type="text/css" href="/static/index/css/widget-cartPanelView.css" />
+	<title>U袋网</title>
+</head>
+<body>
+	<!-- 顶部tab -->
+	<div class="tab-header">
+		<div class="inner">
+			<div class="pull-left">
+				<div class="pull-left">嗨，欢迎来到<span class="cr">U袋网</span></div>
+				<a href="agent_level.html">网店代销</a>
+				<a href="temp_article/udai_article4.html">帮助中心</a>
+			</div>
+			<div class="pull-right">
+				<a href="login.html"><span class="cr">登录</span></a>
+				<a href="login.html?p=register">注册</a>
+				<a href="udai_welcome.html">我的U袋</a>
+				<a href="udai_order.html">我的订单</a>
+				<a href="udai_integral.html">积分平台</a>
+			</div>
+		</div>
+	</div>
+	<!-- 搜索栏 -->
+	<div class="top-search">
+		<div class="inner">
+			<a class="logo" href="index.html"><img src="/static/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+			<div class="search-box">
+				<form class="input-group">
+					<input placeholder="Ta们都在搜U袋网" type="text">
+					<span class="input-group-btn">
+						<button type="button">
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						</button>
+					</span>
+				</form>
+				<p class="help-block text-nowrap">
+					<a href="">连衣裙</a>
+					<a href="">裤</a>
+					<a href="">衬衫</a>
+					<a href="">T恤</a>
+					<a href="">女包</a>
+					<a href="">家居服</a>
+					<a href="">2017新款</a>
+				</p>
+			</div>
+			<div class="cart-box">
+				<a href="udai_shopcart.html" class="cart-but">
+					<i class="iconfont icon-shopcart cr fz16"></i> 购物车 0 件
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- 内页导航栏 -->
+	<div class="top-nav bg3">
+		<div class="nav-box inner">
+			<div class="all-cat">
+				<div class="title"><i class="iconfont icon-menu"></i> 全部分类</div>
+			</div>
+			<ul class="nva-list">
+				<a href="index.html"><li>首页</li></a>
+				<a href="temp_article/udai_article10.html"><li>企业简介</li></a>
+				<a href="temp_article/udai_article5.html"><li>新手上路</li></a>
+				<a href="class_room.html"><li>U袋学堂</li></a>
+				<a href="enterprise_id.html"><li>企业账号</li></a>
+				<a href="udai_contract.html"><li>诚信合约</li></a>
+				<a href="item_remove.html"><li>实时下架</li></a>
+			</ul>
+		</div>
+	</div>
 	<div class="content inner">
 		<section class="item-show__div item-show__head clearfix">
 			<div class="pull-left">
@@ -21,27 +96,28 @@
 				</ol>
 				<div class="item-pic__box" id="magnifier">
 					<div class="small-box">
-						<img class="cover" src="{{$data['goods']['goods_img']}}" style="width: 360px;height: 360px;" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏">
+						<img class="cover" src="/static/images/temp/S-001-1_s.jpg" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏">
 						<span class="hover"></span>
 					</div>
 					<div class="thumbnail-box">
 						<a href="javascript:;" class="btn btn-default btn-prev"></a>
 						<div class="thumb-list">
 							<ul class="wrapper clearfix">
-                            @if(isset($data['goods_log']['goods_log']))
-                                @php $go = explode("|",$data['goods_log']['goods_log']); @endphp
-                              @foreach($go as $k=>$v)
-								<li class="item active" data-src="{{$v}}"><img class="cover" src="{{$v}}" alt="商品预览图"></li>
-							  @endforeach
-                            @endif
+								<li class="item active" data-src="/static/images/temp/S-001-1_b.jpg"><img class="cover" src="/static/images/temp/S-001-1_s.jpg" alt="商品预览图"></li>
+								<li class="item" data-src="/static/images/temp/S-001-2_b.jpg"><img class="cover" src="/static/images/temp/S-001-2_s.jpg" alt="商品预览图"></li>
+								<li class="item" data-src="/static/images/temp/S-001-3_b.jpg"><img class="cover" src="/static/images/temp/S-001-3_s.jpg" alt="商品预览图"></li>
+								<li class="item" data-src="/static/images/temp/S-001-4_b.jpg"><img class="cover" src="/static/images/temp/S-001-4_s.jpg" alt="商品预览图"></li>
+								<li class="item" data-src="/static/images/temp/S-001-5_b.jpg"><img class="cover" src="/static/images/temp/S-001-5_s.jpg" alt="商品预览图"></li>
+								<li class="item" data-src="/static/images/temp/S-001-6_b.jpg"><img class="cover" src="/static/images/temp/S-001-6_s.jpg" alt="商品预览图"></li>
+								<li class="item" data-src="/static/images/temp/S-001-7_b.jpg"><img class="cover" src="/static/images/temp/S-001-7_s.jpg" alt="商品预览图"></li>
+								<li class="item" data-src="/static/images/temp/S-001-8_b.jpg"><img class="cover" src="/static/images/temp/S-001-8_s.jpg" alt="商品预览图"></li>
+								<li class="item" data-src="/static/images/temp/S-001-9_b.jpg"><img class="cover" src="/static/images/temp/S-001-9_s.jpg" alt="商品预览图"></li>
+								<li class="item" data-src="/static/images/temp/S-001-10_b.jpg"><img class="cover" src="/static/images/temp/S-001-10_s.jpg" alt="商品预览图"></li>
 							</ul>
 						</div>
 						<a href="javascript:;" class="btn btn-default btn-next"></a>
 					</div>
-                    <div>
-                        <input type="button" value="收藏" class="collect">
-                    </div>
-					<div class="big-box"><img src="{{$data['goods']['goods_img']}}" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
+					<div class="big-box"><img src="/static/images/temp/S-001-1_b.jpg" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
 				</div>
 				<script src="/static/js/jquery.magnifier.js"></script>
 				<script>
@@ -51,19 +127,23 @@
 				</script>
 				<div class="item-info__box">
 					<div class="item-title">
-						<div class="name ep2">{{$data['goods']['goods_name']}}</div>
-						@foreach($data['coupon'] as $v)
-						<div class="sale cr coupon" id="{{$v['coupon_id']}}">{{$v['name']}}</div>
-						@endforeach
+						<div class="name ep2">原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏</div>
+						<div class="sale cr">优惠活动：该商品享受8折优惠</div>
 					</div>
 					<div class="item-price bgf5">
 						<div class="price-box clearfix">
 							<div class="price-panel pull-left">
-								售价：<span class="price" id="price">￥{{$data['goods']['goods_price']}} <s class="fz16 c9">￥24.00</s></span>
+								售价：<span class="price" id="price">￥{{$goods->goods_store}} <s class="fz16 c9">￥24.00</s></span>
 							</div>
-							<div class=" pull-right">
-								<h5>浏览量：{{$data['hits']}}</h5>
-								
+							<div class="vip-price-panel pull-right">
+								会员等级价格 <i class="iconfont icon-down"></i>
+								<ul class="all-price__box">
+									<!-- 登陆后可见 -->
+									<li><span class="text-justify">普通：</span>40.00元</li>
+									<li><span class="text-justify">银牌：</span>38.00元</li>
+									<li><span class="text-justify">超级：</span>28.00元</li>
+									<li><span class="text-justify">V I P：</span>19.20元</li>
+								</ul>
 							</div>
 							<script>
 								// 会员价格折叠展开
@@ -85,10 +165,6 @@
 					</div>
 					<ul class="item-ind-panel clearfix">
 						<li class="item-ind-item">
-							<span class="ind-label c9">访问量</span>
-							<span class="ind-count cr">{{$data['hits']}}</span>
-						</li>
-						<li class="item-ind-item">
 							<span class="ind-label c9">累计销量</span>
 							<span class="ind-count cr">1688</span>
 						</li>
@@ -103,8 +179,8 @@
 					</ul>
                     <div class="clearfix choose">
 						<div id="specification" class="summary-wrap clearfix">
-						@if(isset($data['attrs_new_key']))
-						@foreach($data['attrs_new_key'] as $k=>$v)
+						@if(isset($attrs_new_key))
+						@foreach($attrs_new_key as $k=>$v)
 
 							<dl>
 								<dt>
@@ -124,21 +200,78 @@
 						@endif	
 						
 						</div>
+						
+					<!-- <div class="item-key">
+						<div class="item-sku">
+                        @if(isset($attrs_new_key))
+                        @foreach($attrs_new_key as $k=>$v)
+							<dl class="item-prop clearfix">
+								<dt class="item-metatit">{{$v['attr_name']}}：</dt>
+								<dd><ul data-property="颜色" class="clearfix">
+                                @foreach($v['attr_value'] as $kk=>$vv)
+									<li><a class="selected" href="javascript:;" role="button"  data-value="白色" aria-disabled="true">
+										<span>{{$vv}}</span>
+									</a></li>
+                                    @endforeach    
+									 <li><a href="javascript:;" role="button" data-value="黑色" aria-disabled="true">
+										<span>黑色</span>
+									</a></li>
+									<li><a href="javascript:;" role="button" data-value="粉红色" aria-disabled="true">
+										<span>粉红色</span>
+									</a></li>
+									<li><a href="javascript:;" role="button" data-value="黄色" aria-disabled="true">
+										<span>黄色</span>
+									</a></li> -->
+								<!--</ul></dd>
+							</dl>
+                        @endforeach
+                        @endif
+						</div> -->
 						<div class="item-amount clearfix bgf5">
 							<div class="item-metatit">数量：</div>
-							<div class="fl title">
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <input autocomplete="off" id="buy_number" type="text" value="1" minnum="1" class="itxt" />
-                                        <a href="javascript:void(0);" class="increment plus" id="add">+</a>
-                                        <a href="javascript:void(0);" class="increment mins" id="lass">-</a>
-                                    </div>
-                                </div>
-                            </div>
+							<div class="amount-box">
+								<div class="amount-widget">
+									<input class="amount-input" value="1" maxlength="8" title="请输入购买量" type="text">
+									<div class="amount-btn">
+										<a class="amount-but add"></a>
+										<a class="amount-but sub"></a>
+									</div>
+								</div>
+								<div class="item-stock"><span style="margin-left: 10px;">库存 <b id="Stock">1000</b> 件</span></div>
+								<script>
+									$(function () {
+										$('.amount-input').onlyReg({reg: /[^0-9]/g});
+										var stock = parseInt($('#Stock').html());
+										$('.amount-widget').on('click','.amount-but',function() {
+											var num = parseInt($('.amount-input').val());
+											if (!num) num = 0;
+											if ($(this).hasClass('add')) {
+												if (num > stock - 1){
+													return DJMask.open({
+													　　width:"300px",
+													　　height:"100px",
+													　　content:"您输入的数量超过库存上限"
+												　　});
+												}
+												$('.amount-input').val(num + 1);
+											} else if ($(this).hasClass('sub')) {
+												if (num == 1){
+													return DJMask.open({
+													　　width:"300px",
+													　　height:"100px",
+													　　content:"您输入的数量有误"
+												　　});
+												}
+												$('.amount-input').val(num - 1);
+											}
+										});
+									});
+								</script>
+							</div>
 						</div>
 						<div class="item-action clearfix bgf5">
 							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
-							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket addshopcart">
+							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket">
 								<i class="iconfont icon-shopcart"></i> 加入购物车
 							</a>
 						</div>
@@ -152,12 +285,74 @@
 				<div class="swiper-container picked-swiper">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
-							@foreach($data['hot_goods'] as $v)
 							<a class="picked-item" href="">
-								<img src="{{$v['goods_img']}}" alt="" class="cover">
-								<div class="look_price">¥{{$v['goods_price']}}</div>
+								<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
 							</a>
-							@endforeach
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-6_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-7_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-8_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-9_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-10_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
+							<a class="picked-item" href="">
+								<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
+								<div class="look_price">¥134.99</div>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -188,13 +383,24 @@
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="detail" aria-labelledby="detail-tab">
 						<div class="item-detail__info clearfix">
-                        @foreach($data['newinfo'] as $k=>$v)
-							<div class="record">{{$v['attr_name']}}：{{$v['attr_value']}}</div>
-                        @endforeach
+							<div class="record">商品编号：D-8812</div>
+							<div class="record">上架时间：2017-06-24</div>
+							<div class="record">商品毛重：200克</div>
+							<div class="record">商品库存：1000件</div>
 						</div>
 						<div class="rich-text">
 							<p style="text-align: center;">
-								{!!$data['goods']['goods_desc']!!}
+								<i id="desc-module-1" style="font-size: 0"></i>
+
+								<img src="/static/images/temp/S-001_1.jpg" alt=""><br><img src="/static/images/temp/S-001_2.jpg" alt=""><br>
+
+								<i id="desc-module-2" style="font-size: 0"></i><img src="/static/images/temp/S-001_3.jpg" alt=""><br><img src="/static/images/temp/S-001_4.jpg" alt=""><br><img src="/static/images/temp/S-001_5.jpg" alt=""><br><img src="/static/images/temp/S-001_6.jpg" alt=""><br><img src="/static/images/temp/S-001_7.jpg" alt=""><br><img src="/static/images/temp/S-001_8.jpg" alt=""><br>
+								
+								<i id="desc-module-3" style="font-size: 0"></i><img src="/static/images/temp/S-001_9.jpg" alt=""><br><img src="/static/images/temp/S-001_10.jpg" alt=""><br><img src="/static/images/temp/S-001_11.jpg" alt=""><br><img src="/static/images/temp/S-001_12.jpg" alt=""><br>
+								
+								<i id="desc-module-4" style="font-size: 0"></i><img src="/static/images/temp/S-001_13.jpg" alt=""><br><img src="/static/images/temp/S-001_14.jpg" alt=""><br><img src="/static/images/temp/S-001_15.jpg" alt=""><br><img src="/static/images/temp/S-001_16.jpg" alt=""><br><img src="/static/images/temp/S-001_17.jpg" alt=""><br><img src="/static/images/temp/S-001_18.jpg" alt=""><br><img src="/static/images/temp/S-001_19.jpg" alt=""><br><img src="/static/images/temp/S-001_20.jpg" alt=""><br><img src="/static/images/temp/S-001_21.jpg" alt=""><br><img src="/static/images/temp/S-001_22.jpg" alt=""><br><img src="/static/images/temp/S-001_23.jpg" alt=""><br><img src="/static/images/temp/S-001_24.jpg" alt=""><br><img src="/static/images/temp/S-001_25.jpg" alt=""><br><img src="/static/images/temp/S-001_26.jpg" alt=""><br><img src="/static/images/temp/S-001_27.jpg" alt=""><br><img src="/static/images/temp/S-001_28.jpg" alt=""><br><img src="/static/images/temp/S-001_29.jpg" alt=""><br><img src="/static/images/temp/S-001_30.jpg" alt=""><br><img src="/static/images/temp/S-001_31.jpg" alt=""><br><img src="/static/images/temp/S-001_32.jpg" alt=""><br><img src="/static/images/temp/S-001_33.jpg" alt=""><br><img src="/static/images/temp/S-001_34.jpg" alt=""><br><img src="/static/images/temp/S-001_35.jpg" alt=""><br><img src="/static/images/temp/S-001_36.jpg" alt=""><br>
+								
+								<i id="desc-module-5" style="font-size: 0"></i><img src="/static/images/temp/S-001_37.jpg" alt=""><br><img src="/static/images/temp/S-001_38.jpg" alt=""><br><img src="/static/images/temp/S-001_39.jpg" alt=""><br><img src="/static/images/temp/S-001_40.jpg" alt=""><br><img src="/static/images/temp/S-001_41.png" width="790" alt="">
 							</p>
 						</div>
 					</div>
@@ -1047,13 +1253,112 @@
 					<div class="swiper-container recommends-swiper">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								@foreach($data['hot_goods'] as $v)
-									<a class="picked-item" href="">
-										<img src="{{$v['goods_img']}}" alt="" class="cover">
-										<div class="look_price">¥{{$v['goods_price']}}</div>
-									</a>
-								@endforeach
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
 							</div>
+							<div class="swiper-slide">
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+							</div>
+							<div class="swiper-slide">
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+							</div>
+							<div class="swiper-slide">
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+							</div>
+							<div class="swiper-slide">
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+								<a class="picked-item" href="">
+									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
+									<div class="look_price">¥134.99</div>
+								</a>
+							</div>
+						</div>
 					</div>
 					<script>
 						$(document).ready(function(){
@@ -1203,108 +1508,89 @@
 			$(document).ready(function(){ $('.to-top').toTop({position:false}) });
 		</script>
 	</div>
-    <script type="text/javascript" src="/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/admin/login/layui/lay/modules/jquery.js" charset="utf-8"></script>
-	<!-- <script src="/static/js/jquery.1.12.4.min.js" charset="UTF-8"></script> -->
-    <script>
-        $("dd a").click(function(){
-            $(this).parent().siblings().find('a').removeClass('selected');
-            $(this).addClass("selected");
-            pricedata();
-        })
-        pricedata();
-		function pricedata(){
-			var goods_attr_id = new Array();
-                $('.selected').each(function(i){
-                    goods_attr_id.push($(this).attr('goods_attr_id'));
-                })
-				var goods_id = "{{$data['goods']['goods_id']}}";
-		$.getJSON("http://www.2001api.com/attr_key?callback=?", {"goods_id":goods_id,"goods_attr_id":goods_attr_id},function(obj){
-			$('#price').html(obj.data);
-			// console.log(obj.data);
-		});
-	}
-
-	//加入购物车
-	$('.addshopcart').click(function(){
-		var goods_id = "{{$data['goods']['goods_id']}}";
-		// alert(goods_id);return;
-		var seller_id = "{{$data['goods']['seller_id']}}";
-		// alert(seller_id);return;
-		var buy_number=$('.itxt').val();
-		// alert(buy_number);return;
-		var goods_attr_id=new Array();
-        $('.selected').each(function(i,k){
-            goods_attr_id.push($(this).attr('goods_attr_id'));
-        });
-        // alert(goods_attr_id);return;
-        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id,seller_id:seller_id},function(res){
-        	// alert(res);return;
-        	if(res.code=='-1'){
-                location.href="/log?refer="+location.href;
-            }
-        	if(res.code=='1003' || res.code=='1004' || res.code=='1005' || res.code=='1006'){
-                alert(res.msg);
-            }
-            if(res.code=='0'){
-                if(confirm('加入成功是否跳转到购物车列表？')){
-                	location.href="/cart";
-            	}
-        	}
-        },'json');
-	})
-//		领取优惠券
-        $('.coupon').click(function(){
-//			alert(1232);
-            var goods_id = "{{$data['goods']['goods_id']}}";
-//            alert(goods_id);
-            var coupon_id = $(this).attr('id');
-//            alert(coupon_id);
-            $.getJSON('http://www.2001api.com/addcoupon?callback=?',{goods_id:goods_id,coupon_id:coupon_id},function(msg){
-//                 alert(obj);return;
-//                if(msg.code=='-1'){
-//                    location.href="/log?refer="+location.href;
-//                }
-                if(msg.code=='0'){
-					alert('领取优惠券成功');
-                }
-            });
-		});
-	$(document).on("click","#add",function(){
-						    // alert(123);
-						    var _this=$('this');
-						    // alert(_this);
-						    var buy_number=parseInt($("#buy_number").val());
-						    var buy_number=buy_number+1;
-						    //alert(buy_number);
-						    $('#buy_number').val(buy_number);
-
-						});
-						$(document).on("click","#lass",function(){
-						    // alert(123);
-						    //var _this=$('this');
-						    // alert(_this);
-						    var buy_number=parseInt($("#buy_number").val());
-						    if(buy_number<=1){
-						        $('#buy_number').val(1);
-						    } else{
-						         var buy_number=buy_number-1;
-						     //alert(buy_number);
-						        $('#buy_number').val(buy_number);
-						    }   
-						       
-
-						});
-//						收藏
-        $('.collect').click(function(){
-            var goods_id = "{{$data['goods']['goods_id']}}";
-//            alert(goods_id);
-            $.getJSON('http://www.2001api.com/collect?callback=?',{goods_id:goods_id},function(res){
-                $('.collect').html(res.data);
-            });
-
-        })
-    </script>
 	<!-- 底部信息 -->
-    @include('index.lay.bottom')
-@section('bottom')
+	<div class="footer">
+		<div class="footer-tags">
+			<div class="tags-box inner">
+				<div class="tag-div">
+					<img src="/static/images/icons/footer_1.gif" alt="厂家直供">
+				</div>
+				<div class="tag-div">
+					<img src="/static/images/icons/footer_2.gif" alt="一件代发">
+				</div>
+				<div class="tag-div">
+					<img src="/static/images/icons/footer_3.gif" alt="美工活动支持">
+				</div>
+				<div class="tag-div">
+					<img src="/static/images/icons/footer_4.gif" alt="信誉认证">
+				</div>
+			</div>
+		</div>
+		<div class="footer-links inner">
+			<dl>
+				<dt>U袋网</dt>
+				<a href="temp_article/udai_article10.html"><dd>企业简介</dd></a>
+				<a href="temp_article/udai_article11.html"><dd>加入U袋</dd></a>
+				<a href="temp_article/udai_article12.html"><dd>隐私说明</dd></a>
+			</dl>
+			<dl>
+				<dt>服务中心</dt>
+				<a href="temp_article/udai_article1.html"><dd>售后服务</dd></a>
+				<a href="temp_article/udai_article2.html"><dd>配送服务</dd></a>
+				<a href="temp_article/udai_article3.html"><dd>用户协议</dd></a>
+				<a href="temp_article/udai_article4.html"><dd>常见问题</dd></a>
+			</dl>
+			<dl>
+				<dt>新手上路</dt>
+				<a href="temp_article/udai_article5.html"><dd>如何成为代理商</dd></a>
+				<a href="temp_article/udai_article6.html"><dd>代销商上架教程</dd></a>
+				<a href="temp_article/udai_article7.html"><dd>分销商常见问题</dd></a>
+				<a href="temp_article/udai_article8.html"><dd>付款账户</dd></a>
+			</dl>
+		</div>
+		<div class="copy-box clearfix">
+			<ul class="copy-links">
+				<a href="agent_level.html"><li>网店代销</li></a>
+				<a href="class_room.html"><li>U袋学堂</li></a>
+				<a href="udai_about.html"><li>联系我们</li></a>
+				<a href="temp_article/udai_article10.html"><li>企业简介</li></a>
+				<a href="temp_article/udai_article5.html"><li>新手上路</li></a>
+			</ul>
+			<!-- 版权 -->
+			<p class="copyright">
+				© 2005-2017 U袋网 版权所有，并保留所有权利<br>
+				ICP备案证书号：闽ICP备16015525号-2&nbsp;&nbsp;&nbsp;&nbsp;福建省宁德市福鼎市南下村小区（锦昌阁）1栋1梯602室&nbsp;&nbsp;&nbsp;&nbsp;Tel: 18650406668&nbsp;&nbsp;&nbsp;&nbsp;E-mail: 18650406668@qq.com
+			</p>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="/admin/lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/admin/login/layui/lay/modules/jquery.js" charset="utf-8"></script>
+<script>
+    $("dd a").click(function(){
+		$(this).parent().siblings().find('a').removeClass('selected');
+		$(this).addClass("selected");
+		// alert(23)
+		pricedata();
+	
+	
+	})
+    pricedata();
+    function pricedata(){
+			var goods_attr_id = new Array();
+			$('.selected').each(function(i){
+				goods_attr_id.push($(this).attr('goods_attr_id'));
+			})
+			// alert(goods_attr_id); 
+			if(goods_attr_id.length){
+			var goods_id = {{$goods->goods_id}}
+			$.get("{{url('/goods/attr_key')}}",{"goods_id":goods_id,"goods_attr_id":goods_attr_id},function(res){
+				// console.log(res);
+				$("#price").html(res.data);
+			
+			},'json')
+		}
+	}
+	
+</script>

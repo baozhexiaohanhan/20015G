@@ -12,6 +12,7 @@ use AlibabaCloud\Client\Exception\ClientException;
 use AlibabaCloud\Client\Exception\ServerException;
 use App\Helpers\jwt;
 use App\Helpers\functions;
+use Illuminate\Support\Facades\Redis;
 class AdminController extends Controller
 {
     public function regdo(Request $request){
@@ -121,6 +122,7 @@ class AdminController extends Controller
             return json_encode(['code'=>'0002','msg'=>'账号密码错误']);
         }
         $token = jwt::instance()->setuid($user->user_id)->encode()->gettoken();
+            
          return json_encode(['code'=>'0000','msg'=>'登录成功','token'=>$token,'user'=>$user]);
     }
 

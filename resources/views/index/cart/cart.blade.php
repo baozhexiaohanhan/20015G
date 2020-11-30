@@ -28,52 +28,62 @@
 								<th width="80">操作</th>
 							</tr>
 						</thead>
+						
 						<tbody>
-							@foreach($cart['cart'] as $k=>$v)
+							@foreach($cart['info'] as $k=>$v)
+							<tr>
+								<td>
+									<label class="checked-label"><input type="checkbox" class="cartseller parent_{{$v['seller_id']}}" value="{{$v['seller_id']}}"><i></i>{{$v['true_name']}}</label>
+									
+								</td>
+							</tr>
+							@foreach($v['child'] as $kk=>$vv)
 							<tr>
 								<th scope="row">
 									<label class="checked-label">
-										@if($v['is_up']==2)
+										@if($vv['is_up']==2)
 										@endif
-										@if($v['is_up']==1)
-										<input type="checkbox" name="checkbox" class="cartid" value="{{$v['rec_id']}}">
+										@if($vv['is_up']==1)
+										<input type="checkbox" name="checkbox" id="cartid" class="cartseller seller_{{$vv['seller_id']}}" seller_id="{{$vv['seller_id']}}" value="{{$vv['rec_id']}}">
 										@endif
 										<i></i>
-										<a href="/details/?goods_id={{$v['goods_id']}}" class="img"><img src="{{$v['goods_img']}}" alt="" style="width: 173.2px;height: 240px;" class="cover"></a>
+										<a href="/details/?goods_id={{$vv['goods_id']}}" class="img"><img src="{{$vv['goods_img']}}" alt="" style="width: 173.2px;height: 240px;" class="cover"></a>
 									</label>
 								</th>
 								<td>
-									@if($v['is_up']==2)
-									<div href="/details/?goods_id={{$v['goods_id']}}" class="name ep3" style="color:#888;">{{$v['goods_name']}}
+									@if($vv['is_up']==2)
+									<div href="/details/?goods_id={{$vv['goods_id']}}" class="name ep3" style="color:#888;">{{$vv['goods_name']}}
 									</div>
 									<div style="color:#888;">商品已下架</div>
 									@endif
-									@if($v['is_up']==1)
-									<a href="/details/?goods_id={{$v['goods_id']}}" class="name ep3">{{$v['goods_name']}}</a>
+									@if($vv['is_up']==1)
+									<a href="/details/?goods_id={{$vv['goods_id']}}" class="name ep3">{{$vv['goods_name']}}</a>
 									@endif
-									<div>
-										@if(isset($v['goods_attr']))
-										@foreach($v['goods_attr'] as $attr)
+									<div class="type c9">
+										@if(isset($vv['goods_attr']))
+										@foreach($vv['goods_attr'] as $attr)
 										{{$attr['attr_name']}}:{{$attr['attr_value']}}
 										@endforeach
 										@endif
 									</div>
 								</td>
-								<td>¥{{$v['goods_price']}}</td>
+								<td>¥{{$vv['goods_price']}}</td>
 								<td>
 									<div class="cart-num__box">
 
-									<input type="button" id="sub" class="increment mins" cart="{{$v['rec_id']}}" goods_id="{{$v['goods_id']}}" goods_attr_id="{{$v['goods_attr_id']}}" value="-">
-									<input type="text" class="val" cart="{{$v['rec_id']}}" goods_id="{{$v['goods_id']}}" goods_attr_id="{{$v['goods_attr_id']}}" value="{{$v['buy_number']}}" maxlength="2">
-									<input type="button" id="add" class="increment plus" cart="{{$v['rec_id']}}" goods_id="{{$v['goods_id']}}" goods_attr_id="{{$v['goods_attr_id']}}" value="+">
+									<input type="button" id="sub" class="increment mins" cart="{{$vv['rec_id']}}" goods_id="{{$vv['goods_id']}}" goods_attr_id="{{$vv['goods_attr_id']}}" value="-">
+									<input type="text" class="val" cart="{{$vv['rec_id']}}" goods_id="{{$vv['goods_id']}}" goods_attr_id="{{$vv['goods_attr_id']}}" value="{{$vv['buy_number']}}" maxlength="2">
+									<input type="button" id="add" class="increment plus" cart="{{$vv['rec_id']}}" goods_id="{{$vv['goods_id']}}" goods_attr_id="{{$vv['goods_attr_id']}}" value="+">
 									</div>
 									<span style="color: red;" id="sadd"></span>
 								</td>
-								<td><span class="sum">￥{{$v['buy_number']*$v['goods_price']}}.00</span></td>
-								<td><a href="javascript:void(0)" onclick="deleteById({{$v['rec_id']}})" >删除</a></td>
+								<td><span class="sum">￥{{$vv['buy_number']*$vv['goods_price']}}.00</span></td>
+								<td><a href="javascript:void(0)" onclick="deleteById({{$vv['rec_id']}})" >删除</a></td>
 							</tr>
 							@endforeach
+							@endforeach
 						</tbody>
+
 					</table>
 					<div class="user-form-group tags-box shopcart-submit pull-right">
 						<a class="btn">提交订单</a>
@@ -311,6 +321,28 @@
 						            location.reload();
 						        },'json')
 							});
+
+							$('.cartseller').click(function(){
+								// alert(123);
+								var checkedval=$(this).prop('checked');
+								// //属于商家的全选
+								var val=$(this).val();
+								// alert(val);
+								$(this).parents('td').parent('tr').siblings("tr").find(".seller_"+val).prop('checked',checkedval);
+								var seller_id=$(this).attr('seller_id');
+								// alert(seller_id);
+								$(this).parents('table').find('.parent_'+seller_id).prop('checked',checkedval);
+								var cart_id = new Array();
+								$("input[name='checkbox']:checked").each(function(){
+									cart_id.push($(this).val());
+								})
+								$.get("/getcartprice",{cart_id:cart_id},function(res){
+									if(res.code=='0'){
+											$('.fz24').text(res.data.total);
+										}
+								},'json')
+							})
+
 					</script>
 				</form>
 			</div>

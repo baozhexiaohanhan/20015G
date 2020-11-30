@@ -117,7 +117,7 @@
 							</a>
 						</div>
 						<div class="but-div">
-							<a href="item_sale_page.html">
+							<a href="/birthday/page">
 								<i class="but-icon"></i>
 								<p>折扣专区</p>
 							</a>
