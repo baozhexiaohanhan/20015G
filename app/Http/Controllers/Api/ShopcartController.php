@@ -11,12 +11,15 @@ use App\Model\Order_goods;
 use App\Model\Region;
 use App\Model\Address;
 use DB;
+use Illuminate\Support\Facades\Redis;
 class ShopcartController extends Controller
 {
     public function shopcart(Request $request){
         $rec_id = request()->rec_id;
         // return $rec_id;
-        $user_id = 0;
+        $user_id = Redis::hmget("admin",["user_id"]);
+        // dd($user_id);
+        $user_id = implode(",",$user_id);
         $address = Address::where('user_id',$user_id)->get();
         // dd($address);
         $reg = new Region;
@@ -95,6 +98,7 @@ class ShopcartController extends Controller
 
 
     }
+    
 
     
 }

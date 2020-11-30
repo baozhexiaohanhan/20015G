@@ -11,8 +11,12 @@ class IndexController extends Controller
 {
     public function index(){
 		
-		// $user_id = Redis::hmget("admin",["user_id","user_name"]);
-		// dd($user_id);
+		$user_name = Redis::hmget("admin",["user_name"]);
+		$user_name = implode("|",$user_name);
+		// $user_name = ["user_name"=>$user_name];
+		session(['name'=>$user_name]);
+		// $res = session()->get("name");
+		// dd($res);
 
     	//首页推荐位
     	$url='http://www.2001api.com/domain/index';
@@ -24,13 +28,14 @@ class IndexController extends Controller
     	//无限极分类
     	$catedata = curl_get($url3);
     	$catedata = json_decode($catedata['msg']);
-    	// dd($catedata);
+//    	 dd($catedata);
     	//楼层
 		$goods=curl_get($url);
 //        dd($goods);
 
 		$goods = json_decode($goods['ret']);
     	return view('index.index.index',compact('goods','notice','catedata'));
-    }
+	}
+
 
 }

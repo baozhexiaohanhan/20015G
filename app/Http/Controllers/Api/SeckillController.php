@@ -27,10 +27,11 @@ class SeckillController extends Controller
             ["seckill.start_time","<",strtotime(date('Y-m-d H:i:s',time()))],
         ];
         $info = Seckill::leftjoin("goods","seckill.goods_id","=","goods.goods_id")->where($where2)->where($where)->get();
+        // dd($info);
         $where3 = [
             ["seckill.end_time","<",strtotime(date('Y-m-d H:i:s',time()))],
         ];
-        $res = Seckill::where($where3)->update(['is_close'=>2]);
+        // $res = Seckill::where($where3)->update(['is_close'=>2]);
         // return $res;
         $info = json_encode($info);
         $data = ["ok","data"=>$info];
@@ -87,7 +88,7 @@ class SeckillController extends Controller
         $goods_attr_id = request()->get("goods_attr_id");
         $seckill_id = request()->get("seckill_id");
         $user_id = 2;
-        // Redis::del("goods_user_".$goods_id,$user_id);
+        Redis::del("goods_user_".$goods_id,$user_id);
         $where = [
             ["id","=",$seckill_id],
             ["end_time",">",strtotime(date("Y-m-d H:i:s",time()))],
