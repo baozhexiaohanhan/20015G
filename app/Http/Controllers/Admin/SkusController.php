@@ -70,8 +70,9 @@ class SkusController extends Controller
        
         // ,"cat_id","goods_imgs","cat_id","attr_id_list","attr_value_list","attr_price_list",""
         $data = request()->except(["_token","file"]);
-        
-        // dump($data);
+        // dd($data);
+        $user = session("seller");
+        $seller_id = $user['seller_id'];
          // 商品表
         $goods_sn = $this->goods_sn();
         $goods = [
@@ -79,7 +80,7 @@ class SkusController extends Controller
             "cate_id" => $data['cate_id'],
             "brand_id" => $data['brand_id'],
             "goods_price" => $data['goods_price'],
-            "goods_store" => $data['goods_store'],
+            "goods_number" => $data['goods_store'],
             "goods_img" => $data['goods_img'],
             "goods_sn" => $goods_sn,
             "goods_desc" => $data['editorValue'],
@@ -88,7 +89,7 @@ class SkusController extends Controller
             "is_up" => $data['is_up'],
             "is_new" => $data['is_new'],
             "add_time" => time(),
-            // "seller" => $user,
+            "seller_id" => $seller_id,
         ];
        $goods_id = Goods::insertGetId($goods);
 
@@ -135,7 +136,7 @@ class SkusController extends Controller
         }
         $go = Goods::where("goods_id",$goods_id)->first();
 
-            dump($new_goods_specs);
+            // dump($new_goods_specs);
 
         return view("admin.skus.product",compact("new_goods_specs","go"));
 
@@ -195,7 +196,9 @@ class SkusController extends Controller
     }
 
     public function product_index(){
-        $data = Goods::get();
+        $user = session("seller");
+        $seller_id = $user['seller_id'];
+        $data = Goods::where("seller_id",$seller_id)->get();
         return view("admin.skus.product_index",compact("data"));
     }
 
