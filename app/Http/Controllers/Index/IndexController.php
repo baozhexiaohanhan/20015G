@@ -22,7 +22,7 @@ class IndexController extends Controller
     	//无限极分类
     	$catedata = curl_get($url3);
     	$catedata = json_decode($catedata['msg']);
-    	// dd($catedata);
+//    	 dd($catedata);
     	//楼层
 		$goods=curl_get($url);
 //        dd($goods);

@@ -53,7 +53,8 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 
 		Route::get('/attr_keys','Api\SeckillController@attr_keys');
 
-        Route::get('/collect','Api\DetailsController@collect');
+        Route::any('/addcoupon','Api\DetailsController@addcoupon');
+        Route::any('/collect','Api\DetailsController@collect');
 
 	
 	});

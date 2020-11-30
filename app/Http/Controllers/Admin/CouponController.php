@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\Model\Goods;
+use App\Model\Cate;
+use App\Model\BrandModel;
 class CouponController extends Controller
 {
     /**
@@ -16,6 +18,8 @@ class CouponController extends Controller
     public function index()
     {
         $data = DB::table('coupon')->get();
+//        dd($data);
+
         return view('admin/coupon/couponindex', ['data' => $data]);
     }
 
@@ -28,6 +32,9 @@ class CouponController extends Controller
     {
         $goods=Goods::all();
 //        dd($goods);
+//        $cate=Cate::all();
+////        dd($cate);
+//        $brand=BrandModel::all();
         return view('admin/coupon/couponadd',['goods'=>$goods]);
     }
 
