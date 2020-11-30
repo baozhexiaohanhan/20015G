@@ -48,13 +48,13 @@
 			<div class="user-content__box clearfix bgf">
 				<div class="title">购物车-确认支付 </div>
 				<div class="shop-title">收货地址</div>
-				<form action="" class="shopcart-form__box">
+				<form action="/order" class="shopcart-form__box">
 					<div class="addr-radio">
 					@foreach($data['address'] as $k=>$v)
-						<div class="radio-line radio-box active" >
+						<div class="radio-line radio-box active" address_id='{{$v['address_id']}}'>
 						
 							<label class="radio-label ep">
-								<input name="addr" checked="" value="0" autocomplete="off" type="radio"></a><i class="iconfont icon-radio"></i>
+								<input name="country" checked="" value="" autocomplete="off" type="radio"></a><i class="iconfont icon-radio"></i>
 								{{$v['consignee']}} &nbsp {{$v['tel']}} &nbsp {{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}} &nbsp {{$v['address']}} 
 							</label>
 							<a href="javascript:;" class="default">默认地址</a>
@@ -77,7 +77,7 @@
 							</thead>
 							<tbody>
 							@foreach($data['cart'] as $k=>$v)
-								<tr>
+								<tr cart_id="{{$v['rec_id']}}">
 									<th scope="row"><div class="img"><img src="{{$v['goods_img']}}" alt="" class="cover"></div></th>
 									<td>
 										<div class="name ep3">{{$v['goods_name']}}</div>
@@ -155,24 +155,23 @@
 							})
 						});
 						 //点击提交订单
-		    			$(document).on('click','.btn',function(){
-	    				    var data={};
-	    					data.address_id=$('input[name="address_id"]').val();
-	    					data.payname=$("input[name='payname']").val();
-	    					data.cart_id=$("input[name='cart_id']").val();
-	    					$.ajax({
-	    					    url:'/index/order',
-	    					    data:data,
-	    					    type:'post',
-	    						dataType:'json',
-	    						success:function(reg){
-								
-            			            if(reg.code=='0000'){
-            			                location.href='/index/pay/'+reg.data;
-	    							}
-	    						}
-	    					})
-		    			})
+		    			// $(document).on('click','.btn',function(){
+	    				//     var data={};
+	    				// 	data.address_id=$('input[name="address_id"]').val();
+	    				// 	data.payname=$("input[name='payname']").val();
+	    				// 	data.cart_id=$("input[name='cart_id']").val();
+	    				// 	$.ajax({
+	    				// 	    url:'/order',
+	    				// 	    data:data,
+	    				// 	    type:'post',
+	    				// 		dataType:'json',
+	    				// 		success:function(reg){
+            			//             if(reg.code=='0000'){
+            			//                 location.href='/pay'+reg.data;
+	    				// 			}
+	    				// 		}
+	    				// 	})
+		    			// })
 					</script>
 				</form>
 			</div>
