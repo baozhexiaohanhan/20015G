@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Order_info;
 use App\Model\Order_goods;
+use Illuminate\Support\Facades\Redis;
 class CoreorderController extends Controller
 {
     public function udai_order(){
@@ -13,7 +14,10 @@ class CoreorderController extends Controller
         // if($user==""){
             // return redirect("/user/login");
         // }
-        $user_id = 2;
+        // $user_id = 2;
+        $user_id = Redis::hmget("admin",["user_id"]);
+        // dd($user_id);
+        $user_id = implode(",",$user_id);
         $order_info = Order_info::where(["user_id"=>$user_id,"is_del"=>0])->get();
         foreach($order_info as $k=>$v){
             $data = Order_goods::where("order_id",$v['order_id'])->leftjoin("goods","order_goods.goods_id","=","goods.goods_id")->get();

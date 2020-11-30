@@ -3,7 +3,8 @@
 		<div class="inner">
 			<a class="logo" href="index.html"><img src="/static/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 			<div class="search-box">
-				<form class="input-group">
+			
+				<form class="input-group" action="" method="">
 					<input placeholder="Ta们都在搜U袋网" type="text">
 					<span class="input-group-btn">
 						<button type="button">
@@ -23,7 +24,7 @@
 			</div>
 			<div class="cart-box">
 				<a href="udai_shopcart.html" class="cart-but">
-					<i class="iconfont icon-shopcart cr fz16"></i> 购物车 0 件
+					<i class="iconfont icon-shopcart cr fz16"></i> 购物车
 				</a>
 			</div>
 		</div>

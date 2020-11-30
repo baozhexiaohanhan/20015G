@@ -9,6 +9,8 @@ use App\Model\Order_goods;
 use App\Model\Region;
 use App\Model\Address;
 use App\Model\Cart;
+use App\Model\Goods;
+use App\Model\Products;
 use DB;
 use Illuminate\Support\Facades\Redis;
 class ShopcartController extends Controller
@@ -177,16 +179,15 @@ class ShopcartController extends Controller
         $order_sn['order_sn'] = $this->createOrderSn();
         $order_sn = $order_sn['order_sn'];
        
-        // $user = request()->session()->get("name");
-        $user_id = Redis::hget("admin",7200);
+        $user_id = Redis::hmget("admin",["user_id"]);
+        // dd($user_id);
+        $user_id = implode(",",$user_id);
         if($user_id==""){
             return redirect("/log");
         }
-        // dd($user_id);
-        // $user_id = $user['user_id'];
-        // $user_name = $user['user_name'];
+      
         // 地址
-        $address = Address::where(["address_id"=>2,"uid"=>$user_id])->first();
+        $address = Address::where(["address_id"=>2,"user_id"=>$user_id])->first();
         // dd($address);
         // 支付方式
         $info = [1=>"微信",2=>"支付宝",3=>"货到付款"];
@@ -198,13 +199,13 @@ class ShopcartController extends Controller
         $order_price = \DB::select("select sum(goods_price*buy_number) as tot from cart where rec_id in($rec_id) ");
 
         $order_price = $order_price[0]->tot;
-        if($order_price > 100){
-            $aa = rand(1,10);
-            $bb = $aa/100;
-            $price = $order_price*$bb; 
-            // dd($price);
-        }
-        $order_price = $order_price-$price;
+        // if($order_price > 100){
+        //     $aa = rand(1,10);
+        //     $bb = $aa/100;
+        //     $price = $order_price*$bb; 
+        //     // dd($price);
+        // }
+        // $order_price = $order_price-$price;
         // dd($order_price);
         $data = [
             "order_sn"=>$order_sn,
@@ -224,37 +225,36 @@ class ShopcartController extends Controller
             "order_price"=>$order_price,
             "goods_price"=>$order_price,
             "addtime"=>time(),
+            "seller_id"=>$da['seller_id'],
         ];
         // dd($data);
         // 订单表入库
        $order_id = Order_info::insertGetId($data);
-    //    dd($order_id);
-        $cary = Cary::whereIn("rec_id",$da['rec_id'])->get();
-        // dump($cary);
-        // unset($cary)
+   
+        $cary = Cart::whereIn("rec_id",$da['rec_id'])->get();
         $cary = $cary?$cary->toArray():[];
         // $order_id = 1;
-        // $cary_id = [];
         foreach($cary as $k=>$v){
             // dd($v);
             $cary[$k]["order_id"] = $order_id;
-            $cary[$k]['shop_price'] = $v['goods_totall'];
+            $cary[$k]['shop_price'] = $v['goods_price'];
             $goods = Goods::find($v['goods_id']);
             $cary[$k]['goods_name'] =$goods['goods_name'];
-            Cary::where("cary_id",$cary[$k]['cary_id'])->update(['is_del'=>2]);
+            Cart::where("rec_id",$cary[$k]['rec_id'])->update(['is_del'=>2]);
             $goods_attr_id = $cary[$k]['goods_attr_id'];
-            unset($cary[$k]['goods_priceb']);
-            unset($cary[$k]['cary_id']);
+            unset($cary[$k]['goods_price']);
+            unset($cary[$k]['rec_id']);
             unset($cary[$k]['is_del']);
+            unset($cary[$k]['seller_id']);
             unset($cary[$k]['add_time']);
             unset($cary[$k]['goods_totall']);
             unset($cary[$k]['user_id']);
         }
         
-        // dd($res);
+        // dd($cary);
         // 订单商品
         $res = Order_goods::insert($cary);
-        // $goods_attr_id=[];
+        // dd($res);
         // 提交订单 进行减库存 判断有无规格 对货品表  或 商品表进行减库存
         if($res){
           if($goods_attr_id){
@@ -279,8 +279,6 @@ class ShopcartController extends Controller
                 "message"=>"添加成功",
                 "success"=>true,
                 "order_id"=>$order_id,
-                "price"=>$price,
-                "order_price"=>$order_price
                 ];
         // } catch (Exception $e){
             // DB::rollBack();

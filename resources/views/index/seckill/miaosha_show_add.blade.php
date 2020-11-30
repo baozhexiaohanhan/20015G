@@ -49,7 +49,7 @@
 				<div class="title">购物车-确认支付 </div>
 				<div class="shop-title">收货地址</div>
 					<div class="addr-radio">
-					@foreach($data['address'] as $k=>$v)
+					@foreach($address as $k=>$v)
 						<div class="radio-line radio-box active" >
 						
 							<label class="radio-label ep">
@@ -75,22 +75,16 @@
 								</tr>
 							</thead>
 							<tbody>
-							@foreach($data['cart'] as $k=>$v)
 								<tr>
-									<th scope="row"><div class="img"><img src="{{$v['goods_img']}}" alt="" class="cover"></div></th>
+									<th scope="row"><div class="img"><img src="{{$goods['goods_img']}}" alt="" class="cover"></div></th>
 									<td>
-										<div class="name ep3">{{$v['goods_name']}}</div>
-										<div class="type c9 cary" cary_id="{{$v['rec_id']}}" seller_id="{{$v['seller_id']}}">
-											@if(isset($v['goods_attr']))
-												@foreach($v['goods_attr'] as $vv)
-													{{$vv['attr_name']}}:{{$vv['attr_value']}}
-												@endforeach
-											@endif</div>
+										<div class="name ep3">{{$goods['goods_name']}}</div>
+										<div class="type c9 cary" seckill_id="{{$goods['id']}}">
+										</div>
 									</td>
-									<td>¥{{$v['goods_price']}}</td>
-									<td>{{$v['buy_number']}}</td>
+									<td>¥{{$goods['price']}}</td>
+									<td>X{{$goods['numbers']}}</td>
 								</tr>
-								@endforeach
 							</tbody>
 						</table>
 					</div>
@@ -115,7 +109,7 @@
 							</script>
 							<div class="info-line">优惠活动：<span class="c6">无</span></div>
 							<div class="info-line">运费：<span class="c6">¥0.00</span></div>
-							<div class="info-line"><span class="favour-value">已优惠 ¥2.0</span>合计：<b class="fz18 cr">￥{{$data['price']}}</b></div>							
+							<div class="info-line"><span class="favour-value">已优惠 ¥2.0</span>合计：<b class="fz18 cr">￥{{$attr_goods}}</b></div>							
 						</div>
 					</div> -->
 					<div class="shop-title">确认订单</div>
@@ -126,7 +120,7 @@
 								<input name="pay-mode" value="1" autocomplete="off" type="radio" class="selected pay"><i class="iconfont icon-radio"></i>
 								<img src="static/images/icons/alipay.png" alt="支付宝支付">
 							</label>
-							<div class="pay-value">支付<b class="fz16 crpayType" pay_type="2">{{$data['price']}}</b>元</div>
+							<div class="pay-value">支付<b class="fz16 crpayType" pay_type="2">{{$attr_goods}}</b>元</div>
 						</div>
 						
 						<div class="radio-line radio-box">
@@ -134,14 +128,14 @@
 								<input name="pay-mode" value="2" autocomplete="off" type="radio" class="pay"><i class="iconfont icon-radio"></i>
 								<img src="static/images/icons/paywechat.png" alt="微信支付">
 							</label>
-							<div class="pay-value">支付<b class="fz16 cr">{{$data['price']}}</b>元</div>
+							<div class="pay-value">支付<b class="fz16 cr">{{$attr_goods}}</b>元</div>
 						</div>
 						<div class="radio-line radio-box">
 							<label class="radio-label ep">
 								<input name="pay-mode" value="3" autocomplete="off" type="radio" class="pay"><i class="iconfont icon-radio"></i>
 								<span class="fz16">余额支付</span>
 							</label>
-							<div class="pay-value">支付<b class="fz16 cr">{{$data['price']}}</b>元</div>
+							<div class="pay-value">支付<b class="fz16 cr">{{$attr_goods}}</b>元</div>
 						</div>
 					</div>
 					<div class="user-form-group shopcart-submit">
@@ -224,21 +218,22 @@
 		// 获取地址的ID
 		// var address_id = $(".selected").find("#id").attr("address");
 		// 支付方式
-		var price = "{{$data['price']}}";
+		var price = "{{$attr_goods}}";
 		var pay_type = "2";
 		// 获取购物车id
 		var cary_id = [];
-		var seller_id = $(".cary").attr("seller_id");
-		$(".cary").each(function(){
-			cary_id.push($(this).attr("cary_id"))
-		})
+		var id = "{{$goods['id']}}";
+		var seller_id = "{{$goods['seller_id']}}";
+		// $(".cary").each(function(){
+		// 	cary_id.push($(this).attr("cary_id"))
+		// })
 		var data = {};
 		data.price = price;
 		data.pay_type = pay_type;
-		data.rec_id = cary_id;
+		data.id = id;
 		data.seller_id = seller_id;
 		// console.log(data);return;
-		var url = "{{url('/order_add')}}";
+		var url = "{{url('/seckill_order')}}";
 		$.ajax({
 			type:"post",
 			url:url,

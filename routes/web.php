@@ -187,6 +187,7 @@ Route::prefix('/')->group(function(){
     Route::any('rush/seckill','Index\SeckillController@seckill');
 
     Route::any('/history','Index\DetailsController@history');
+    Route::any('/seckill_order','Index\SeckillController@seckill_order');//支付同步
 
     Route::any('miaosha_show','Index\SeckillController@miaosha_show');
     Route::any('miaosha_show_add','Index\SeckillController@miaosha_show_add');
@@ -212,6 +213,7 @@ Route::any('/history','Index\HistoryController@history');//浏览历史记录
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
     Route::any('/udai_order','Index\CoreorderController@udai_order');
+    Route::any('/tucu','Index\CoreorderController@tucu');
 });
     Route::any('/history','Index\HistoryController@history');
 
