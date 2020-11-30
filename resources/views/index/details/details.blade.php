@@ -1225,6 +1225,8 @@
 	$('.addshopcart').click(function(){
 		var goods_id = "{{$data['goods']['goods_id']}}";
 		// alert(goods_id);return;
+		var seller_id = "{{$data['goods']['seller_id']}}";
+		// alert(seller_id);return;
 		var buy_number=$('.itxt').val();
 		// alert(buy_number);return;
 		var goods_attr_id=new Array();
@@ -1232,12 +1234,12 @@
             goods_attr_id.push($(this).attr('goods_attr_id'));
         });
         // alert(goods_attr_id);return;
-        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id},function(res){
+        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id,seller_id:seller_id},function(res){
         	// alert(res);return;
         	if(res.code=='-1'){
                 location.href="/log?refer="+location.href;
             }
-        	if(res.code=='1003' || res.code=='1004' || res.code=='1005'){
+        	if(res.code=='1003' || res.code=='1004' || res.code=='1005' || res.code=='1006'){
                 alert(res.msg);
             }
             if(res.code=='0'){
