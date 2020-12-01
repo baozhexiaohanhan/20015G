@@ -8,7 +8,7 @@ use App\Model\Goods;
 use App\Model\Cate;
 use App\Model\Notice;
 use App\Model\Category;
-
+use App\Model\Seller;
 class IndexController extends Controller
 {
 
@@ -27,15 +27,18 @@ class IndexController extends Controller
 		$goods2=Goods::where(['is_up'=>1,'cate_id'=>30,'is_show'=>1])->get();
 		$goods3=Goods::where(['is_up'=>1,'cate_id'=>6,'is_show'=>1])->get();
     	$goods4=Goods::where(['is_up'=>1,'cate_id'=>7,'is_show'=>1])->get();
-    	$goods5=Goods::where(['is_up'=>1,'cate_id'=>36,'is_show'=>1])->get();
-		
+        $goods5=Goods::where(['is_up'=>1,'cate_id'=>36,'is_show'=>1])->get();
+        //导航
+        $daohang = Seller::where("is_slice",0)->get();
+		// dd($daohang);
 		$msg1 = [
 			"goods"=>$goods,
 			"goods1"=>$goods1,
 			"goods2"=>$goods2,
 			"goods3"=>$goods3,
 			"goods4"=>$goods4,
-			"goods5"=>$goods5,
+            "goods5"=>$goods5,
+            "daohang"=>$daohang,
 		];
 		$msg = json_encode($msg1);
 		$data = ['code'=>100,'msg'=>"返回数据成功","ret"=>$msg];

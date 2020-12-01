@@ -12,7 +12,7 @@
 						</button>
 					</span>
 				</form>
-				<p class="help-block text-nowrap">
+				<!-- <p class="help-block text-nowrap">
 					<a href="">连衣裙</a>
 					<a href="">裤</a>
 					<a href="">衬衫</a>
@@ -20,7 +20,7 @@
 					<a href="">女包</a>
 					<a href="">家居服</a>
 					<a href="">2017新款</a>
-				</p>
+				</p> -->
 			</div>
 			<div class="cart-box">
 				<a href="udai_shopcart.html" class="cart-but">
@@ -36,11 +36,6 @@
 			</div>
 			<ul class="nva-list">
 				<a href="/"><li>首页</li></a>
-				<a href="temp_article/udai_article10.html"><li>企业简介</li></a>
-				<a href="temp_article/udai_article5.html"><li>新手上路</li></a>
-				<a href="class_room.html"><li>U袋学堂</li></a>
-				<a href="enterprise_id.html"><li>企业账号</li></a>
-				<a href="udai_contract.html"><li>诚信合约</li></a>
 				<a href="/rush/seckill" style="color:red"><li>秒杀</li></a>
 			</ul>
 		</div>
