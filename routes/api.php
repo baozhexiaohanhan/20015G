@@ -41,6 +41,10 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 
 		
 	});
+	Route::prefix("/shops")->group(function(){
+    	Route::any('/shops','Api\ShopsController@shops');
+
+	});
 	Route::prefix('/')->group(function(){
 		Route::any('details','Api\DetailsController@details');
 		Route::get('/attr_key','Api\DetailsController@attr_key');
@@ -53,8 +57,8 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 
 		Route::get('/attr_keys','Api\SeckillController@attr_keys');
 
-        Route::any('/addcoupon','Api\DetailsController@addcoupon');
-        Route::any('/collect','Api\DetailsController@collect');
+        Route::any('/addcoupon','Api\CouponController@addcoupon');
+        Route::any('/collect','Api\CouponController@collect');
 
 	
 	});

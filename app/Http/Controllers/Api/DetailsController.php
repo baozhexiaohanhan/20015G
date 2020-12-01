@@ -18,20 +18,22 @@ class DetailsController extends Controller
         // dd($goods_id);
         $user_id=Redis::hmget("admin",["user_id"]);
         $user_id=implode("",$user_id);
+//         dd($user_id);
+        if($user_id){
         // dd($user_id);
         //查看用户是否浏览过该商品
         $history=History::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->get();
-        // dd($history);
+        // return $history;
         if(count($history)>0){
             //用户浏览过的商品 时间改为当前时间
-            $res=History::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->update(['look_time'=>time()]);
+            History::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->update(['look_time'=>time()]);
             // dd($res);
         }else{
             //用户没有浏览过商品 添加入库
-            $History=History::insert(['look_time'=>time(),'user_id'=>$user_id,'goods_id'=>$goods_id]);
+            History::insert(['look_time'=>time(),'user_id'=>$user_id,'goods_id'=>$goods_id]);
             // dd($History);
         }
-        
+        }
 //        统计点击量
 //        $hits = Redis::setnx('hit_'.$goods_id,1)?:Redis::incr('hit_'.$goods_id,1);
         $hits =Redis::zincrby('hit',1,'hit_'.$goods_id);
@@ -123,49 +125,6 @@ class DetailsController extends Controller
         $history = ["ok","data"=>$history];
         return $history;
     }
-    public function collect()
-    {
-        $callback = request()->callback;
-        $goods_id = request()->get('goods_id');
-//        dd($goods_id);
-        $user_id = 1;
-        if(!$user_id){
-            return json_encode(['code'=>'00001','msg'=>'未登录']);die;
-        }
-        $where=[
-            'user_id'=>$user_id,
-            'goods_id'=>$goods_id
-        ];
-        $count = DB::table('collect')->where($where)->count();
-        if($count){
-            return json_encode(['code'=>'00002','msg'=>'已收藏']);die;
-        }
-        $res = DB::table('collect')->insert($where);
-        if($res){
-            return json_encode(['code'=>'00000','msg'=>'收藏成功']);die;
-        }
-    }
-    public function addcoupon(request $request)
-    {
-        $callback = request()->callback;
-        $user_id = 1;
-        if(!$user_id){
-            return json_encode(['code'=>'00001','msg'=>'未登录']);die;
-        }
-        $goods_id = $request->goods_id;
-//        dd($goods_id);
-        $coupon_id = $request->coupon_id;
-//        dd($coupon_id);
-//        $goods = Goods::where(['is_show'=>1,'goods_id'=>$goods_id])->count();
-////        dd($goods);
-//        if(!$goods || !$coupon_id){
-//            return $this->jsonResponse('1003','商品已下架或者缺少参数');die;
-//        }
-        $data = ['user_id'=>$user_id,'coupon_id'=>$coupon_id,'goods_id'=>$goods_id];
-        $res = DB::table('user_coupon')->insert($data);
-        if($res){
-            return json_encode(['code'=>'0','msg'=>'领取优惠券成功']);die;
-        }
-        echo $callback.'('.$res.')';
-    }
+
+
 }
