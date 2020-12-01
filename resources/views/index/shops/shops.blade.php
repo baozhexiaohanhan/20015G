@@ -1,4 +1,4 @@
-@section('title', 'U 袋网')
+@section('title', '店铺')
 @include('index.lay.tops')
 @section('tops2')
 @include('index.lay.top')
@@ -9,36 +9,21 @@
     <div class="swiper-container banner-box">
         <div class="swiper-wrapper">
         	@foreach($msg['slice'] as $k=>$v)
-            <div class="swiper-slide"><a href="item_show.html"><img src="{{$v['goods_img']}}" class="cover"></a></div>
+            <div class="swiper-slide"><a href="/details/?goods_id={{$v['goods_id']}}"><img src="{{$v['goods_img']}}" class="cover"></a></div>
             @endforeach
-           <!--  <div class="swiper-slide"><a href="item_show.html"><img src="/static/images/temp/banner_2.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_category.html"><img src="/static/images/temp/banner_3.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_show.html"><img src="/static/images/temp/banner_4.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_sale_page.html"><img src="/static/images/temp/banner_5.jpg" class="cover"></a></div> -->
+          
         </div>
         <div class="swiper-pagination"></div>
     </div>
     <!-- 首页楼层导航 -->
-	<nav class="floor-nav visible-lg-block">
-		<span class="scroll-nav active">爆款推荐</span>
-		<span class="scroll-nav">女装</span>
-		<span class="scroll-nav">男装</span>
-		<span class="scroll-nav">活力童装</span>
-		<span class="scroll-nav">时尚包包</span>
-		<span class="scroll-nav">鞋靴</span>
-	</nav>
+
 	<!-- 楼层内容 -->
 	<div class="content inner" style="margin-bottom: 40px;">
 		<section class="scroll-floor floor-2">
 			<div class="floor-title">
-				<i class="iconfont icon-skirt fz16"></i> 女装
+				<i class="iconfont icon-skirt fz16"></i>{{$msg['seller']['true_name']}}
 				<div class="case-list fz0 pull-right">
-					<a href="item_category.html">高端女装</a>
-					<a href="item_category.html">时尚女装</a>
-					<a href="item_category.html">上装</a>
-					<a href="item_category.html">下装</a>
-					<a href="item_category.html">裙装</a>
-					<a href="item_category.html">内衣</a>
+					
 				</div>
 			</div>
 			<div class="con-box">
@@ -47,8 +32,8 @@
 					<script src="/ads/2.js"></script>
 				</a>
 				<div class="right-box">
-					@foreach($msg['goods2'] as $k=>$v)
-					<a href="item_show.html" class="floor-item">
+					@foreach($msg['goods'] as $k=>$v)
+					<a href="/details/?goods_id={{$v['goods_id']}}" class="floor-item">
 						<div class="item-img hot-img">
 							<img src="{{$v['goods_img']}}" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
 						</div>
@@ -64,207 +49,26 @@
 			</div>
 		</section>
 		<section class="scroll-floor floor-3">
-			<div class="floor-title">
-				<i class="iconfont icon-fushi fz16"></i> 男装
-				<div class="case-list fz0 pull-right">
-					<a href="item_category.html">高端女装</a>
-					<a href="item_category.html">时尚女装</a>
-					<a href="item_category.html">上装</a>
-					<a href="item_category.html">下装</a>
-					<a href="item_category.html">裙装</a>
-					<a href="item_category.html">内衣</a>
-				</div>
-			</div>
+			
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
 					<!-- <img src="/static/images/floor_3.jpg" alt="" class="cover"> -->
 					<script src="/ads/3.js"></script>
 				</a>
-				<div class="right-box">
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/M-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/M-002.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/M-003.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/M-004.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/M-005.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/M-006.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/M-007.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/M-008.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-				</div>
+			
 			</div>
 		</section>
 		<section class="scroll-floor floor-4">
-			<div class="floor-title">
-				<i class="iconfont icon-kid fz16"></i> 活力童装
-				<div class="case-list fz0 pull-right">
-					<a href="item_category.html">高端女装</a>
-					<a href="item_category.html">时尚女装</a>
-					<a href="item_category.html">上装</a>
-					<a href="item_category.html">下装</a>
-					<a href="item_category.html">裙装</a>
-					<a href="item_category.html">内衣</a>
-				</div>
-			</div>
+			
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
 					<!-- <img src="/static/images/floor_4.jpg" alt="" class="cover"> -->
-					<script src="/ads/4.js"></script>
+					<!-- <script src="/ads/4.js"></script> -->
 				</a>
-				<div class="right-box">
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-011.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-012.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-013.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-014.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-015.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-016.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-017.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-018.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-				</div>
+			
 			</div>
 		</section>
+		
 	</div>
 	<script>
 		$(document).ready(function(){ 
