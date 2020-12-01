@@ -124,6 +124,12 @@
                                     <input type="radio" name="is_new" value="2" title="否">
                                 </div>
                             </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">首页幻灯片</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="is_slice" value="1" title="" checked="">
+                                </div>
+                            </div>
                     </div>
                     <div class="layui-tab-item">
                         <label class="layui-form-label"style="margin-left: -10px;" >商品相册</label>
