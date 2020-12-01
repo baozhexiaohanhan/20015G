@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Goods;
-
+use App\Model\Seller;
 class ShopsController extends Controller
 {
 	public function shops(){
@@ -13,18 +13,13 @@ class ShopsController extends Controller
     	//首页幻灯片
     	$goods=new Goods;
     	$slice=$goods->getslice();
-
-    	$goods2=Goods::where(['is_up'=>1,'seller_id'=>2,'is_show'=>1])->get();
-    	$goods3=Goods::where(['is_up'=>1,'seller_id'=>3,'is_show'=>1])->get();
-    	$goods4=Goods::where(['is_up'=>1,'seller_id'=>4,'is_show'=>1])->get();
-		// dd($goods2);
-
+		$seller_id = request()->seller_id;
+    	$goods=Goods::where(['is_up'=>1,'seller_id'=>$seller_id,'is_show'=>1])->limit(24)->get();
+    	$seller = Seller::where("seller_id",$seller_id)->first();
     	$msg=[
     		'goods'=>$goods,
-    		'slice'=>$slice,
-    		'goods2'=>$goods2,
-    		'goods3'=>$goods3,
-    		'goods4'=>$goods4,
+			'slice'=>$slice,
+			'seller'=>$seller,
     	];
     	// dd($slice);
     	$msg = json_encode($msg);

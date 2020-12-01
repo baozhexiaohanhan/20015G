@@ -50,10 +50,10 @@
                     <div class="layui-card-body layui-row layui-col-space10">
                         <div class="layui-col-md12">
                             <label class="layui-form-label">享受优惠的会员等级：</label>
-                            <input type="checkbox" name="user_rank" title="非会员" value="0">
-                            <input type="checkbox" name="user_rank" title="vip" value="1">
-                            <input type="checkbox" name="user_rank" title="注册用户" value="2">
-                            <input type="checkbox" name="user_rank" title="代销用户" value="3">
+                            <input type="radio" name="user_rank" title="非会员" value="0">
+                            <input type="radio" name="user_rank" title="vip" value="1">
+                            <input type="radio" name="user_rank" title="注册用户" value="2">
+                            <input type="radio" name="user_rank" title="代销用户" value="3">
                         </div>
                     </div>
                 </div>
@@ -83,6 +83,14 @@
                 </div>
                 <div class="layui-row layui-col-space10 layui-form-item">
                     <div class="layui-col-lg6">
+                        <label class="layui-form-label">优惠金额或折扣：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="type_ext" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row layui-col-space10 layui-form-item">
+                    <div class="layui-col-lg6">
                         <label class="layui-form-label">开始时间：</label>
                         <div class="layui-input-block">
                             <input type="date" name="start_time" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
@@ -97,6 +105,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button class="layui-btn" lay-submit lay-filter="component-form-element">立即提交</button>

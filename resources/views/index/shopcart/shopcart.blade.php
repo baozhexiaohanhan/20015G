@@ -50,7 +50,7 @@
 				<div class="shop-title">收货地址</div>
 				<form action="/order" class="shopcart-form__box">
 					<div class="addr-radio">
-					<input type="hidden" name="data['rec_id']" >
+					
 					@foreach($data['address'] as $k=>$v)
 						<div class="radio-line radio-box active" address_id='{{$v['address_id']}}'>
 						
