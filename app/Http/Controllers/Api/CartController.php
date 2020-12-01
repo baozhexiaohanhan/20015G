@@ -141,7 +141,7 @@ class CartController extends Controller
     		}
             // $total=0;
             // $total=number_format($total,2,'.','');
-    		// dd($cart);
+    		// return $cart;
     		$cart=[
     			'user'=>$user,
     			'cart'=>$cart,
