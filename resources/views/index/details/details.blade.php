@@ -1295,10 +1295,10 @@
 						       
 
 						});
-//						收藏
+						// 收藏
         $('.collect').click(function(){
             var goods_id = "{{$data['goods']['goods_id']}}";
-//            alert(goods_id);
+        //    alert(goods_id);
             $.getJSON('http://www.2001api.com/collect?callback=?',{goods_id:goods_id},function(res){
                 $('.collect').html(res.data);
             });
