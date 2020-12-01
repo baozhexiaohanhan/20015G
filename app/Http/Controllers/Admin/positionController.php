@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\PositionModel;
 use App\Model\AdModel;
-
+use App\Model\Seller;
 class positionController extends Controller
 {
 	public function index(){
@@ -55,6 +55,14 @@ class positionController extends Controller
             // dd($ad);
             $template='morepic';
         }
+        if($position->template==3){
+            // $ad=AdModel::where('position_id',$position_id)->value('ad_imgs');
+            $ad = Seller::where("is_slice",0)->get();
+            // dd($ad);
+            $template='navigation';
+        }
+
+
         $content=view('admin.ad.lib.'.$template,['ads'=>$ad,'width'=>$position->ad_width,'height'=>$position->ad_height])->render();
         $content='document.write(\''.$content.'\');';
         $filename=public_path('\ads\\'.$position_id.'.js');

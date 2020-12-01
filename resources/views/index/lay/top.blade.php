@@ -36,11 +36,6 @@
 			</div>
 			<ul class="nva-list">
 				<a href="/"><li>首页</li></a>
-				<a href="temp_article/udai_article10.html"><li>企业简介</li></a>
-				<a href="temp_article/udai_article5.html"><li>新手上路</li></a>
-				<a href="class_room.html"><li>U袋学堂</li></a>
-				<a href="enterprise_id.html"><li>企业账号</li></a>
-				<a href="udai_contract.html"><li>诚信合约</li></a>
 				<a href="/rush/seckill" style="color:red"><li>秒杀</li></a>
 			</ul>
 		</div>
