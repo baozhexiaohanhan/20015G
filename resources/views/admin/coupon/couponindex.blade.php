@@ -39,6 +39,7 @@
             <th>金额上限</th>
             <th>优惠方式</th>
             <th>优惠范围</th>
+            <th>优惠金额或折扣</th>
             {{--<th>操作</th>--}}
         </tr>
         </thead>
@@ -54,6 +55,7 @@
             <td>{{$v->max_amount}}</td>
             <td>@if($v->type==0)非会员享受赠品（特惠品) @elseif($v->type==1)享受现金减免 @elseif($v->type==2)享受价格折扣@endif</td>
             <td>{{$v->range}}</td>
+            <td>{{$v->type_ext}}</td>
             {{--<th width="280">--}}
                 {{--<a href="{{url('coupon/edit/'.$v->coupon_id)}}"><i class="layui-icon">&#xe642;</i>编辑</a>--}}
                 {{--<a href="{{url('coupon/destroy/'.$v->coupon_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>--}}

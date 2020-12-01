@@ -173,8 +173,10 @@
                 $('.redhover').each(function (i,k) {
                     var s_key = $(this).parent().attr('field');
                     var s_val = $(this).parent().attr('value');
+//                    alert(s_key);
                     search += s_key+ '=' +s_val+'&';
                 });
+//                alert(search);
                 var url = "{{$url}}";
                 if(search){
                      url +='?'+search.substring(0,search.length-1);
