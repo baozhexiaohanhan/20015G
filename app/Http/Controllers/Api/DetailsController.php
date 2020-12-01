@@ -18,20 +18,21 @@ class DetailsController extends Controller
         // dd($goods_id);
         $user_id=Redis::hmget("admin",["user_id"]);
         $user_id=implode("",$user_id);
+        if($user_id){
         // dd($user_id);
         //查看用户是否浏览过该商品
         $history=History::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->get();
-        // dd($history);
+        // return $history;
         if(count($history)>0){
             //用户浏览过的商品 时间改为当前时间
-            $res=History::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->update(['look_time'=>time()]);
+            History::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->update(['look_time'=>time()]);
             // dd($res);
         }else{
             //用户没有浏览过商品 添加入库
-            $History=History::insert(['look_time'=>time(),'user_id'=>$user_id,'goods_id'=>$goods_id]);
+            History::insert(['look_time'=>time(),'user_id'=>$user_id,'goods_id'=>$goods_id]);
             // dd($History);
         }
-        
+        }
 //        统计点击量
 //        $hits = Redis::setnx('hit_'.$goods_id,1)?:Redis::incr('hit_'.$goods_id,1);
         $hits =Redis::zincrby('hit',1,'hit_'.$goods_id);
