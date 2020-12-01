@@ -53,7 +53,7 @@
                         <div class="layui-btn-group">
                             <a  class="layui-btn layui-btn-sm "><i class="layui-icon del" goods_id="{{$v->goods_id}}"></i></a>
                             <a href='edit?id={{$v->goods_id}}' class="layui-btn layui-btn-sm"><i class="layui-icon"></i></a>
-                            <a href="{{url('/goods/item_show/'.$v->goods_id)}}" class="layui-btn layui-btn-sm"><i class="layui-icon">预览</i></a>
+                            <a href="{{url('/skus/goods/item_show/'.$v->goods_id)}}" class="layui-btn layui-btn-sm"><i class="layui-icon">预览</i></a>
                         </div>
                     </td>
 

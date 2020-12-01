@@ -16,7 +16,8 @@ class DetailsController extends Controller
     public function details(){
         $goods_id = request()->goods_id;
         // dd($goods_id);
-        $user_id=1;
+        $user_id=Redis::hmget("admin",["user_id"]);
+        $user_id=implode("",$user_id);
         // dd($user_id);
         //查看用户是否浏览过该商品
         $history=History::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->get();
@@ -98,7 +99,8 @@ class DetailsController extends Controller
     }
 
     public function history(){
-        $user_id=1;
+        $user_id=Redis::hmget("admin",["user_id"]);
+        $user_id=implode("",$user_id);
         // dd($user_id);
         //根据用户id 获取修改用户浏览的商品 根据时间倒序 获取前几条
         $history=History::leftjoin('goods','goods.goods_id','=','history.goods_id')

@@ -12,8 +12,8 @@ class GoodsController extends Controller
         // $goods_id=request()->all();
         // dd($goods_id);
         //浏览历史记录
-        $user_id = 1;
-        $urls = "http://www.2001api.com/history?user_id=".$user_id;
+        // $user_id = 1;
+        $urls = "http://www.2001api.com/history";
         $history = curl_get($urls);
         // dd($history);
         $history = json_decode($history['data'],true);

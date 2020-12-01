@@ -68,7 +68,7 @@
                         </a>
                         <div class="middle">
                             <div class="price"><small>￥</small>{{$v['goods_price']}}</div>
-                            <div class="sale"><a href="">加入购物车</a></div>
+                            <!-- <div class="sale"><a href="">加入购物车</a></div> -->
                         </div>
                         <div class="buttom">
                             <div>销量 <b>666</b></div>
@@ -79,7 +79,7 @@
                     @endforeach
                 </div>
                 <!-- 分页 -->
-                <div class="page text-right clearfix">
+                <!-- <div class="page text-right clearfix">
                     <a class="disabled">上一页</a>
                     <a class="select">1</a>
                     <a href="">2</a>
@@ -94,7 +94,7 @@
                         页
                         <input class="sub" type="submit" value="确定">
                     </form>
-                </div>
+                </div> -->
             </div>
             <div class="pull-right">
 

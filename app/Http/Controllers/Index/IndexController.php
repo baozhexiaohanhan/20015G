@@ -11,8 +11,12 @@ class IndexController extends Controller
 {
     public function index(){
 		
-		// $user_id = Redis::hmget("admin",["user_id","user_name"]);
-		// dd($user_id);
+		$user_name = Redis::hmget("admin",["user_name"]);
+		$user_name = implode("|",$user_name);
+		// $user_name = ["user_name"=>$user_name];
+		session(['name'=>$user_name]);
+		// $res = session()->get("name");
+		// dd($res);
 
     	//首页推荐位
     	$url='http://www.2001api.com/domain/index';
@@ -31,6 +35,7 @@ class IndexController extends Controller
 
 		$goods = json_decode($goods['ret']);
     	return view('index.index.index',compact('goods','notice','catedata'));
-    }
+	}
+
 
 }
