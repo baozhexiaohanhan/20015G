@@ -11,7 +11,7 @@
 				</dl>
 				<dl class="user-center__nav">
 					<dt>订单中心</dt>
-					<a href="udai_order.html"><dd>我的订单</dd></a>
+					<a href="{{url('/udai_order')}}"><dd>我的订单</dd></a>
 					<a href="udai_refund.html"><dd>退款/退货</dd></a>
 					<a href="udai_collection.html"><dd>我的收藏</dd></a>
                     <a href="{{url('/history')}}"><dd>浏览历史</dd></a>

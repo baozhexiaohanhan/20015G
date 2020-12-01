@@ -81,7 +81,6 @@
 								});
 							</script>
 						</div>
-						<div class="c6">普通会员限购 2 件，想要<u class="cr"><a href="">购买更多</a></u>？</div>
 					</div>
 					<ul class="item-ind-panel clearfix">
 						<li class="item-ind-item">
@@ -1065,87 +1064,7 @@
 					</script>
 				</div>
 			</div>
-			<div class="pull-right">
-				<div class="tab-content" id="descCate">
-					<div role="tabpanel" class="tab-pane fade in active" id="detail-tab" aria-labelledby="detail-tab">
-						<div class="descCate-content bgf5">
-							<dd class="dc-idsItem selected">
-								<a href="#desc-module-1"><i class="iconfont icon-dot"></i> 产品图</a>
-							</dd>
-							<dd class="dc-idsItem">
-								<a href="#desc-module-2"><i class="iconfont icon-selected"></i> 细节图</a>
-							</dd>
-							<dd class="dc-idsItem">
-								<a href="#desc-module-3"><i class="iconfont"></i> 尺寸及试穿</a>
-							</dd>
-							<dd class="dc-idsItem">
-								<a href="#desc-module-4"><i class="iconfont"></i> 模特效果图</a>
-							</dd>
-							<dd class="dc-idsItem">
-								<a href="#desc-module-5"><i class="iconfont"></i> 常见问题</a>
-							</dd>
-						</div>
-					</div>
-					<div role="tabpanel" class="tab-pane fade" id="evaluate-tab" aria-labelledby="evaluate-tab">
-						<div class="descCate-content posr bgf5">
-							<div class="lace-title">
-								<span class="c6">相关推荐</span>
-							</div>
-							<div class="picked-box">
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-1_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-2_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-3_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-4_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-5_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div role="tabpanel" class="tab-pane fade" id="service-tab" aria-labelledby="service-tab">
-						<div class="descCate-content posr bgf5">
-							<div class="lace-title">
-								<span class="c6">最近浏览</span>
-							</div>
-							<div class="picked-box">
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-1_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-2_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-3_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-4_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-5_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		
 			<script>
 				$(document).ready(function(){
 					$('#descCate').smartFloat(0);
@@ -1296,6 +1215,7 @@
 						       
 
 						});
+
 //		收藏
         $('.collect').click(function(){
             var goods_id = "{{$data['goods']['goods_id']}}";

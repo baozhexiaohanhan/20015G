@@ -41,6 +41,10 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 
 		
 	});
+	Route::prefix("/shops")->group(function(){
+    	Route::any('/shops','Api\ShopsController@shops');
+
+	});
 	Route::prefix('/')->group(function(){
 		Route::any('details','Api\DetailsController@details');
 		Route::get('/attr_key','Api\DetailsController@attr_key');
