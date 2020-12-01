@@ -3,7 +3,6 @@
 @section('tops2')
 @include('index.lay.top')
 @section('tops')
-
 	<!-- 首页导航栏 -->
 	<div class="top-nav bg3">
 		<div class="nav-box inner">
