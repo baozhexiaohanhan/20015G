@@ -1,1 +1,0 @@
-document.write('@foreach($ads as $k=>$v)<a href="/shops/shops/?seller_id={{$v->true_name}}"><li>{{$v->true_name}}</li></a>@endforeach');

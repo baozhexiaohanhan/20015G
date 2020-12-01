@@ -8,11 +8,13 @@
 	<!-- 顶部轮播 -->
     <div class="swiper-container banner-box">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><a href="item_show.html"><img src="/static/images/temp/banner_1.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_show.html"><img src="/static/images/temp/banner_2.jpg" class="cover"></a></div>
+        	@foreach($msg['slice'] as $k=>$v)
+            <div class="swiper-slide"><a href="item_show.html"><img src="{{$v['goods_img']}}" class="cover"></a></div>
+            @endforeach
+           <!--  <div class="swiper-slide"><a href="item_show.html"><img src="/static/images/temp/banner_2.jpg" class="cover"></a></div>
             <div class="swiper-slide"><a href="item_category.html"><img src="/static/images/temp/banner_3.jpg" class="cover"></a></div>
             <div class="swiper-slide"><a href="item_show.html"><img src="/static/images/temp/banner_4.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_sale_page.html"><img src="/static/images/temp/banner_5.jpg" class="cover"></a></div>
+            <div class="swiper-slide"><a href="item_sale_page.html"><img src="/static/images/temp/banner_5.jpg" class="cover"></a></div> -->
         </div>
         <div class="swiper-pagination"></div>
     </div>
@@ -41,90 +43,24 @@
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
-					<img src="/static/images/floor_2.jpg" alt="" class="cover">
+					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
+					<script src="/ads/2.js"></script>
 				</a>
 				<div class="right-box">
+					@foreach($msg['goods2'] as $k=>$v)
 					<a href="item_show.html" class="floor-item">
 						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+							<img src="{{$v['goods_img']}}" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
 						</div>
 						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
+							<span class="pull-left cr fz16">￥{{$v['goods_price']}}.00</span>
 							<span class="pull-right c6">进货价</span>
 						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
+						<div class="name ep" title="{{$v['goods_name']}}">{{$v['goods_name']}}</div>
 					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-002.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-003.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-004.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-005.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-006.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-007.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
-					<a href="item_show.html" class="floor-item">
-						<div class="item-img hot-img">
-							<img src="/static/images/temp/S-008.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-						</div>
-						<div class="price clearfix">
-							<span class="pull-left cr fz16">￥18.0</span>
-							<span class="pull-right c6">进货价</span>
-						</div>
-						<div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-					</a>
+					@endforeach
 				</div>
+
 			</div>
 		</section>
 		<section class="scroll-floor floor-3">
@@ -141,7 +77,8 @@
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
-					<img src="/static/images/floor_3.jpg" alt="" class="cover">
+					<!-- <img src="/static/images/floor_3.jpg" alt="" class="cover"> -->
+					<script src="/ads/3.js"></script>
 				</a>
 				<div class="right-box">
 					<a href="item_show.html" class="floor-item">
@@ -241,7 +178,8 @@
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="">
-					<img src="/static/images/floor_4.jpg" alt="" class="cover">
+					<!-- <img src="/static/images/floor_4.jpg" alt="" class="cover"> -->
+					<script src="/ads/4.js"></script>
 				</a>
 				<div class="right-box">
 					<a href="item_show.html" class="floor-item">

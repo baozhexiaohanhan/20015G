@@ -36,6 +36,10 @@
 			</div>
 			<ul class="nva-list">
 				<a href="/"><li>首页</li></a>
+				<a href="/shops/shops/?seller_id=1"><li>艾兰斯专卖店</li></a>
+				<a href="/shops/shops/?seller_id=2"><li>haipaihaoyu旗舰店</li></a>
+				<a href="/shops/shops/?seller_id=3"><li>浩尚服饰专营店</li></a>
+				<a href="/shops/shops/?seller_id=4"><li>森马妙步专卖店</li></a>
 				<a href="/rush/seckill" style="color:red"><li>秒杀</li></a>
 			</ul>
 		</div>
