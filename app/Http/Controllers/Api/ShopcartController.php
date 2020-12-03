@@ -18,10 +18,9 @@ class ShopcartController extends Controller
         $rec_id = request()->rec_id;
         // return $rec_id;
         $user_id = Redis::hmget("admin",["user_id"]);
-        $user_id = implode(",",$user_id);
         // dd($user_id);
-
-        $address = Address::where('user_id',29)->get();
+        $user_id = implode(",",$user_id);
+        $address = Address::where('user_id',$user_id)->get();
         // dd($address);
         $reg = new Region;
         foreach($address as $k=>$v){

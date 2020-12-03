@@ -52,10 +52,10 @@
 					<div class="addr-radio">
 					
 					@foreach($data['address'] as $k=>$v)
-						<div class="radio-line radio-box active" address_id='{{$v['address_id']}}'>
+						<div  @if($v['mo']==2) class="radio-line radio-box active" @else  class="radio-line radio-box" @endif>
 						
 							<label class="radio-label ep">
-								<input name="country" checked="" value="" autocomplete="off" type="radio"></a><i class="iconfont icon-radio"></i>
+								<input name="country" @if($v['mo']==2) checked @endif value="" autocomplete="off" type="radio"></a><i class="iconfont icon-radio" ></i>
 								{{$v['consignee']}} &nbsp {{$v['tel']}} &nbsp {{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}} &nbsp {{$v['address']}} 
 							</label>
 							<a href="javascript:;" class="default">默认地址</a>
@@ -123,12 +123,12 @@
 					<div class="shop-title">确认订单</div>
 					<div class="pay-mode__box">
 						
-						<div class="radio-line radio-box">
-							<label class="radio-label ep">
-								<input name="pay-mode" value="1" autocomplete="off" type="radio" class="selected pay"><i class="iconfont icon-radio"></i>
+						<div class="radio-line radio-box active">
+							<label class="radio-label ep ">
+								<input name="pay-mode" value="1" checked autocomplete="off" type="radio" class="pay"><i class="iconfont icon-radio "></i>
 								<img src="static/images/icons/alipay.png" alt="支付宝支付">
 							</label>
-							<div class="pay-value">支付<b class="fz16 crpayType" pay_type="2">{{$data['price']}}</b>元</div>
+							<div class="pay-value">支付<b class="fz16 crpayType" pay_type="2"  selected>{{$data['price']}}</b>元</div>
 						</div>
 						
 						<div class="radio-line radio-box">
