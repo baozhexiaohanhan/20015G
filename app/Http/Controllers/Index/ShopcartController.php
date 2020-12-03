@@ -52,8 +52,14 @@ class ShopcartController extends Controller
 
     public function address_do(Request $request){
         // $rec_id = request()->post("rec_id");
+        $user_id = Redis::hmget("admin",["user_id"]);
+        // dd($user_id);
         $post = $request->except('_token');
         // dd($post);
+        $user_id = implode(",",$user_id);
+        $post['user_id'] = $user_id;
+        // dd($post);
+        
         $res = Address::insert($post);
         if($res){
             return  redirect('/shopcart');
