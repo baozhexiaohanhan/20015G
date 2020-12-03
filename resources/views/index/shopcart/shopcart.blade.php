@@ -229,7 +229,10 @@
 		var pay_type = "2";
 		// 获取购物车id
 		var cary_id = [];
-		var seller_id = $(".cary").attr("seller_id");
+		var seller_id = [];
+		$(".cary").each(function(){
+			seller_id.push($(this).attr("seller_id"))
+		})
 		$(".cary").each(function(){
 			cary_id.push($(this).attr("cary_id"))
 		})
