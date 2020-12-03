@@ -266,18 +266,154 @@ class ShopcartController extends Controller
         }
       
         // 地址
-        $address = Address::where(["address_id"=>2,"user_id"=>$user_id])->first();
+        $address = Address::where(["user_id"=>$user_id])->first();
         // dd($address);
         // 支付方式
         $info = [1=>"微信",2=>"支付宝",3=>"货到付款"];
         $mode['pay_type'] =$info[$da['pay_type']];
         $mode = $mode['pay_type'];
+        // dd($mode);
         // 总价价格
         $rec_id = $da['rec_id'];
         $rec_id = implode(",",$rec_id);
         $order_price = \DB::select("select sum(goods_price*buy_number) as tot from cart where rec_id in($rec_id) ");
 
         $order_price = $order_price[0]->tot;
+
+        $rec_id = request()->rec_id;
+        $seller_id = request()->seller_id;
+        $seller_id = array_unique($seller_id);
+        $arr = [];
+        foreach($seller_id as $key=>$v){
+            $cary = Cart::whereIn("rec_id",$rec_id)->where("seller_id",$v)->get();
+            $arr[$v]=$cary;
+        }
+      
+        // dd($arr);
+        $order_id = [];
+        foreach($arr as $k=>$v){
+            $data['seller_id'] = $k;
+            $data['order_sn'] = $this->createOrderSn();
+            $data['user_id'] = $user_id;
+            $data['consignee'] = $address['consignee'];
+            $data['country'] = $address['country'];
+            $data['email'] = $address['email'];
+            $data['province'] = $address['province'];
+            $data['city'] = $address['city'];
+            $data['district'] = $address['district'];
+            $data['address'] = $address['address'];
+            $data['mobile'] = $address['tel'];
+            $data['tel'] = $address['tel'];
+            $data['best_time'] = 0;
+            $data['sign_building'] = 0;
+            $data['pay_name'] = $mode;
+            $data['addtime'] = time();
+            // dd($data);
+            $order_id = Order_info::insertGetId($data);
+            // dd($order_id);
+            if($order_id){
+                $cart_id = [];
+                $order_price = 0;
+                foreach($v as $kk=>$val){
+                    // dd($val);
+                    $info = [];
+                    $info['goods_id'] = $val['goods_id'];
+                    $info['product_id'] = $val['product_id'];
+                    $info['goods_name'] = $val['goods_name'];
+                    $info['shop_price'] = $val['goods_price'];
+                    $info['buy_number'] = $val['buy_number'];
+                    $info['goods_attr_id'] = $val['goods_attr_id'];
+                    $info['goods_id'] = $val['goods_id'];
+                    $info['seller_id'] = $val['seller_id'];
+                    $info['order_id'] = $order_id;
+
+                    $order_price = $order_price+$val['goods_price'];
+
+                    // dd($info);
+
+                    $res = Order_goods::insert($info);
+                    if($res){
+                        Cart::where("rec_id",$val['rec_id'])->update(['is_del'=>2]);
+                        // foreach($v as $kk=>$vv){
+                        if($val['goods_attr_id']){
+                            $product = Products::where(["product_id"=>$val['product_id']])->decrement('product_number',$val['buy_number']);
+                        }else{
+                            $product = Goods::where(["goods_id"=>$val['goods_id']])->decrement('goods_number',$val['buy_number']);
+                        }
+                    // }
+                    }
+                //    $order_pricea = Order_info::where("order_id",$order_id)->frist();
+                //     $order_prices = $order_pricea+$order_prices;
+                Order_info::where("order_id",$order_id)->update(["order_price"=>$order_price]);
+
+                }
+
+            }
+        }
+
+        // foreach($order_id as $k=>$v){
+            
+        // }
+        dd(111);
+
+
+        if(count($seller_id)==2){
+            foreach($seller_id as $k=>$v){
+            $data = [
+                "order_sn"=>$order_sn,
+                "user_id"=>$user_id,
+                "consignee"=>$address['address_name'],
+                "country"=>$address['country'],
+                "province"=>$address['province'],
+                "city"=>$address['city'],
+                "district"=>$address['district'],
+                "address"=>$address['address'],
+                "mobile"=>$address['tel'],
+                "tel"=>$address['tel'],
+                "best_time"=>0,
+                "sign_building"=>0,
+                "pay_name"=>$mode,
+                "pay_type"=>$da['pay_type'],
+                "order_price"=>"1",
+                "goods_price"=>"1",
+                "addtime"=>time(),
+                "seller_id"=>$v,
+            ];
+            $order_id[] = Order_info::insertGetId($data);
+            
+                // $order_id = 1;
+               
+            }
+            $cary = Cart::whereIn("rec_id",$rec_id)->get();
+            dd($rec_id);
+            $cary = $cary?$cary->toArray():[];
+            $carys = ["cary"=>$cary,"order_id"=>$order_id];
+            // $order_id = 1;
+            dd($carys);
+            foreach($cary as $k=>$v){
+                // dd($v);
+                $cary[$k]["order_id"] = $order_id;
+                $cary[$k]['shop_price'] = $v['goods_price'];
+                $goods = Goods::find($v['goods_id']);
+                $cary[$k]['goods_name'] =$goods['goods_name'];
+                Cart::where("rec_id",$cary[$k]['rec_id'])->update(['is_del'=>2]);
+                $goods_attr_id = $cary[$k]['goods_attr_id'];
+                unset($cary[$k]['goods_price']);
+                unset($cary[$k]['rec_id']);
+                unset($cary[$k]['is_del']);
+                unset($cary[$k]['seller_id']);
+                unset($cary[$k]['add_time']);
+                unset($cary[$k]['goods_totall']);
+                unset($cary[$k]['user_id']);
+            }
+            $res = Order_goods::insert($cary);
+            // dd($order_id);
+        }
+        
+        // $cart = Cart::whereIn("rec_id",$rec_id)->get();
+        // dump($cart);
+       
+        // dd($cart['seller_id']);
         // if($order_price > 100){
         //     $aa = rand(1,10);
         //     $bb = $aa/100;
