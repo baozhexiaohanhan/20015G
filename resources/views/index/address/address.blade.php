@@ -90,6 +90,34 @@
 								return;
 							},'json');
 						});
+
+						$(document).on("click",".btn",function (){
+							// alert(123);die;
+							//这个对象
+							var _this = $(this);
+							//判断用户是否确认删除
+						var ifdel = confirm("您确定删除吗？");
+						if(ifdel == true){
+							var id = _this.attr('address_id');
+							// console.log(id);
+								$.ajax({
+									url : '/destroy',
+									dataType : 'json',
+									type : 'get',
+									data : {'id':id},
+									success:function ( res ){
+										if( res.code == 0 ){
+											location.reload();
+										}else{
+											alert('操作繁忙，请稍后重试...');
+											return false;
+										}
+									}
+								});
+						}
+						return false;
+						});
+
 						</script>
 
 					</form>
@@ -101,59 +129,19 @@
 						<!-- <div class="tdf1">邮编</div> -->
 						<div class="tdf1">电话/手机</div>
 						<div class="tdf1">操作</div>
-						<div class="tdf1"></div>
 					</div>
-
-					<div class="addr-list">
+						@foreach($data['address'] as $k=>$v)
 						<div class="addr-item">
-							<div class="tdf1">喵喵喵</div>
-							<div class="tdf2 tdt-a_l">福建省 福州市 晋安区</div>
-							<div class="tdf3 tdt-a_l">浦下村74号</div>
-							<div class="tdf1">153****7649</div>
+							<div class="tdf1">{{$v['consignee']}}</div>
+							<div class="tdf2 tdt-a_l">{{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}}</div>
+							<div class="tdf3 tdt-a_l">{{$v['address']}}</div>
+							<div class="tdf1">{{$v['tel']}}</div>
 							<div class="tdf1 order">
-								<a href="udai_address_edit.html">修改</a><a href="">删除</a>
-							</div>
-							<div class="tdf1">
-								<a href="" class="default active">默认地址</a>
+								<a href="" >修改</a>
+								<a class="btn" address_id ="{{$v['address_id']}}">删除</a>
 							</div>
 						</div>
-						<div class="addr-item">
-							<div class="tdf1">喵污喵⑤</div>
-							<div class="tdf2 tdt-a_l">福建省 福州市 仓山区 建新镇</div>
-							<div class="tdf3 tdt-a_l">建新中心小学</div>
-							<div class="tdf1">153****7649</div>
-							<div class="tdf1 order">
-								<a href="udai_address_edit.html">修改</a><a href="">删除</a>
-							</div>
-							<div class="tdf1">
-								<a href="" class="default">设为默认</a>
-							</div>
-						</div>
-						<div class="addr-item">
-							<div class="tdf1">taroxd</div>
-							<div class="tdf2 tdt-a_l">福建省 福州市 鼓楼区 鼓东街道</div>
-							<div class="tdf3 tdt-a_l">世界金龙大厦20层B北 福州腾讯企点运营中心</div>
-							<div class="tdf1">153****7649</div>
-							<div class="tdf1 order">
-								<a href="udai_address_edit.html">修改</a><a href="">删除</a>
-							</div>
-							<div class="tdf1">
-								<a href="" class="default">设为默认</a>
-							</div>
-						</div>
-						<div class="addr-item">
-							<div class="tdf1">VIPArcher</div>
-							<div class="tdf2 tdt-a_l">福建省 福州市 仓山区 建新镇</div>
-							<div class="tdf3 tdt-a_l">详细地址</div>
-							<div class="tdf1">153****7649</div>
-							<div class="tdf1 order">
-								<a href="udai_address_edit.html">修改</a><a href="">删除</a>
-							</div>
-							<div class="tdf1">
-								<a href="" class="default">设为默认</a>
-							</div>
-						</div>
-					</div>
+						@endforeach
 				</div>
 			</div>
 		</section>
