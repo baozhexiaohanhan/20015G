@@ -9,6 +9,7 @@ use App\Model\Goods_attr;
 use App\Model\Goods;
 use App\Model\Products;
 use App\Model\Seller;
+use App\Model\Coupon;
 use Illuminate\Support\Facades\Redis;
 class CartController extends Controller
 {
@@ -29,6 +30,8 @@ class CartController extends Controller
         // dd($seller_id);
         $buy_number=$request->buy_number;
         // dd($buy_number);
+        $coupon_id=$request->coupon_id;
+        // dd($coupon_id);
         $goods_attr_id=$request->goods_attr_id;
         if(!$goods_id || !$buy_number){
             return $this->JsonResponse('1003','缺少参数');
@@ -63,7 +66,7 @@ class CartController extends Controller
         }
         
             // 5.根据当前用户人id，商品id和规格判断购物车内是否有此商品 没有添加入库 有 更新购买数量，购买数量大于库存提示，把购买数量改为最大库存 更新
-            $cart=Cart::where(['user_id'=>$user_id,'goods_id'=>$goods_id,'goods_attr_id'=>$goods_attr_id,'seller_id'=>$seller_id])->first();
+            $cart=Cart::where(['user_id'=>$user_id,'goods_id'=>$goods_id,'goods_attr_id'=>$goods_attr_id,'seller_id'=>$seller_id,'coupon_id'=>$coupon_id])->first();
             // dd($cart);
             if($cart){
                 //更新购买数量
@@ -88,7 +91,8 @@ class CartController extends Controller
                     'product_id'=>$product->product_id??0,
                     'buy_number'=>$buy_number,
                     'goods_attr_id'=>$goods_attr_id??'',
-                    'seller_id'=>$seller_id
+                    'seller_id'=>$seller_id,
+                    'coupon_id'=>$coupon_id
                 ];
                 // dd($data);
                 $goods=$goods?$goods->toArray():[];
@@ -109,15 +113,16 @@ class CartController extends Controller
         $user=implode("",$user);
     	// dd($user);
     	//两表联查  cart.*查询购物车所有
-    	$cart=Cart::select('cart.*','goods.goods_img','goods.goods_name','goods.is_up','seller.seller_id','seller.seller_name','seller.true_name')
+    	$cart=Cart::select('cart.*','goods.goods_img','goods.goods_name','goods.is_up','seller.seller_id','seller.seller_name','seller.true_name','coupon.range','coupon.name','coupon.coupon_id')
     		->leftjoin('goods','cart.goods_id','=','goods.goods_id')
             ->leftjoin('seller','goods.seller_id','=','seller.seller_id')
+            ->leftjoin('coupon','goods.goods_id','=','coupon.range')
     		->where(['user_id'=>$user,'cart.is_del'=>0])->orderBy('rec_id','desc')->get();
     		
         // $cart=Cart::select('cart.*','goods.goods_img','goods.goods_name','goods.is_up')
         //     ->leftjoin('goods','cart.goods_id','=','goods.goods_id')
         //     ->where(['user_id'=>$user,'cart.is_del'=>0])->orderBy('rec_id','desc')->get();
-// return $cart;
+            // return $cart;die;
             $info = [];
             foreach($cart as $k=>$v){
                 $info[$v->seller_id]['seller_id']=$v->seller_id;
@@ -125,6 +130,12 @@ class CartController extends Controller
                 $info[$v->seller_id]["child"][]=$v;
                 
             }
+            // $coupon=[];
+            // foreach($cart as $k=>$v){
+            //     $coupon[$v->coupon_id]['coupon_id']=$v->coupon_id;
+            //     $coupon[$v->coupon_id]['name']=$v->name;
+            //     $coupon[$v->coupon_id]['child'][]=$v;
+            // }
             // return $cart;
     		foreach ($cart as $k=>$v) {
     			if($v->goods_attr_id){
