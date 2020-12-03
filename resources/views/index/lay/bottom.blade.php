@@ -1,3 +1,4 @@
+
 <div class="footer">
 		<div class="footer-tags">
 			<div class="tags-box inner">
@@ -63,4 +64,3 @@
 	</div>
 </body>
 </html>
-@section('bottom')
