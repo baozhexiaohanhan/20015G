@@ -12,7 +12,7 @@
 */
 
 Route::get('/','Index\IndexController@index')->name('.index');//前台首页
-
+Route::get('indexdo','Index\IndexController@indexdo')->name('.index');//静态前台首页
 Route::get('/udai_notice/{notice_id}','Index\NoticeController@udai_notice')->name('.udai_notice');//前台首页
 
 
@@ -179,6 +179,7 @@ Route::get('/logindo','Index\LoginController@logindo');//注册
 
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
+    // Route::get('/list/{cate_id}','Index\GoodsController@list');
 });
 
 
@@ -268,7 +269,8 @@ Route::prefix("/skus")->group(function(){
     Route::any('/attr_del','Admin\AttrsController@attr_del');//商品属性删除
 });
 });
-
+Route::any('/coupon','Index\CouponController@addcoupon');
+Route::any('/collect','Index\CouponController@collect');
 Route::prefix("/shops")->group(function(){
     Route::any('/shops','Index\ShopsController@shops');//商品属性删除
 

@@ -1150,6 +1150,8 @@
 		// alert(goods_id);return;
 		var seller_id = "{{$data['goods']['seller_id']}}";
 		// alert(seller_id);return;
+		var coupon_id = $(".coupon").attr('id');
+        // alert(coupon_id);return;
 		var buy_number=$('.itxt').val();
 		// alert(buy_number);return;
 		var goods_attr_id=new Array();
@@ -1157,7 +1159,7 @@
             goods_attr_id.push($(this).attr('goods_attr_id'));
         });
         // alert(goods_attr_id);return;
-        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id,seller_id:seller_id},function(res){
+        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id,seller_id:seller_id,coupon_id:coupon_id},function(res){
         	// alert(res);return;
         	if(res.code=='-1'){
                 location.href="/log?refer="+location.href;
@@ -1173,22 +1175,24 @@
         },'json');
 	})
 //		领取优惠券
-        $('.coupon').click(function(){
-//			alert(1232);
+		$('.coupon').click(function(){
             var goods_id = "{{$data['goods']['goods_id']}}";
-//            alert(goods_id);
+            // alert(goods_id);return;
             var coupon_id = $(this).attr('id');
-//            alert(coupon_id);
-            $.getJSON('http://www.2001api.com/addcoupon?callback=?',{goods_id:goods_id,coupon_id:coupon_id},function(msg){
-//                 alert(obj);return;
-//                if(msg.code=='-1'){
-//                    location.href="/log?refer="+location.href;
-//                }
-                if(msg.code=='0'){
-					alert('领取优惠券成功');
+            // alert(coupon_id);return;
+            $.get('/coupon',{goods_id:goods_id,coupon_id:coupon_id},function(res){
+                // alert(res);return;
+                if(res.code=='-1'){
+                    location.href="/log?refer="+location.href;
                 }
-            });
-		});
+                if(res.code=='1003' || res.code=='1004'){
+                    alert(res.msg);
+                }
+                if(res.code=='0'){
+                   alert(res.msg);
+                }
+            },'json');
+        })
 	$(document).on("click","#add",function(){
 						    // alert(123);
 						    var _this=$('this');
@@ -1214,14 +1218,23 @@
 						       
 
 						});
-						// 收藏
+
+//		收藏
         $('.collect').click(function(){
             var goods_id = "{{$data['goods']['goods_id']}}";
-        //    alert(goods_id);
-            $.getJSON('http://www.2001api.com/collect?callback=?',{goods_id:goods_id},function(res){
-                $('.collect').html(res.data);
-            });
-
+            // alert(goods_id);return;
+            $.get('/collect',{goods_id:goods_id},function(res){
+                // alert(res);return;
+                if(res.code=='-1'){
+                    location.href="/log?refer="+location.href;
+                }
+                if(res.code=='1004'){
+                    alert(res.msg);
+                }
+                if(res.code=='0'){
+                    alert(res.msg);
+                }
+            },'json');
         })
     </script>
 	<!-- 底部信息 -->

@@ -1,39 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-cmn-Hans">
-<head>
-	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="/static/css/iconfont.css">
-	<link rel="stylesheet" href="/static/css/global.css">
-	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="/static/css/swiper.min.css">
-	<link rel="stylesheet" href="/static/css/styles.css">
-	<script src="/static/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
-	<script src="/static/js/bootstrap.min.js" charset="UTF-8"></script>
-	<script src="/static/js/swiper.min.js" charset="UTF-8"></script>
-	<script src="/static/js/global.js" charset="UTF-8"></script>
-	<script src="/static/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
-	<title>@yield('title')</title>
-</head>
-<body>
-	<!-- 顶部tab -->
-	<div class="tab-header">
-		<div class="inner">
-			<div class="pull-left">
-				<div class="pull-left">嗨，欢迎来到<span class="cr">U袋网</span></div>
-				<a href="agent_level.html">网店代销</a>
-				<a href="temp_article/udai_article4.html">帮助中心</a>
-			</div>
-			<div class="pull-right">
-				<a href="login.html"><span class="cr">登录</span></a>
-				<a href="login.html?p=register">注册</a>
-				<a href="{{url('index/center')}}">我的U袋</a>
-				<a href="udai_order.html">我的订单</a>
-				<a href="udai_integral.html">积分平台</a>
-			</div>
-		</div>
-	</div>
+@section('title', 'U 袋网')
+@include('index.lay.tops')
+@section('tops2')
+
 	<!-- 顶部标题 -->
 	<div class="bgf5 clearfix">
 		<div class="top-user">
@@ -52,13 +20,13 @@
 					<div class="addr-radio">
 					
 					@foreach($data['address'] as $k=>$v)
-						<div class="radio-line radio-box active" address_id='{{$v['address_id']}}'>
+						<div  @if($v['mo']==2) class="radio-line radio-box active" @else  class="radio-line radio-box" @endif>
 						
 							<label class="radio-label ep">
-								<input name="country" checked="" value="" autocomplete="off" type="radio"></a><i class="iconfont icon-radio"></i>
+								<input name="country" @if($v['mo']==2) checked @endif value="" autocomplete="off" type="radio"></a><i class="iconfont icon-radio" ></i>
 								{{$v['consignee']}} &nbsp {{$v['tel']}} &nbsp {{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}} &nbsp {{$v['address']}} 
 							</label>
-							<a href="javascript:;" class="default">默认地址</a>
+							<a href="javascript:;" address_id="{{$v['address_id']}}" class="default">默认地址</a>
 							<a href="udai_address_edit.html" class="edit">修改</a>
 						
 						</div>
@@ -123,12 +91,12 @@
 					<div class="shop-title">确认订单</div>
 					<div class="pay-mode__box">
 						
-						<div class="radio-line radio-box">
-							<label class="radio-label ep">
-								<input name="pay-mode" value="1" autocomplete="off" type="radio" class="selected pay"><i class="iconfont icon-radio"></i>
+						<div class="radio-line radio-box active">
+							<label class="radio-label ep ">
+								<input name="pay-mode" value="1" checked autocomplete="off" type="radio" class="pay"><i class="iconfont icon-radio "></i>
 								<img src="static/images/icons/alipay.png" alt="支付宝支付">
 							</label>
-							<div class="pay-value">支付<b class="fz16 crpayType" pay_type="2">{{$data['price']}}</b>元</div>
+							<div class="pay-value">支付<b class="fz16 crpayType" pay_type="2"  selected>{{$data['price']}}</b>元</div>
 						</div>
 						
 						<div class="radio-line radio-box">
@@ -155,24 +123,15 @@
 								$(this).parents('.radio-box').addClass('active').siblings().removeClass('active');
 							})
 						});
-						 //点击提交订单
-		    			// $(document).on('click','.btn',function(){
-	    				//     var data={};
-	    				// 	data.address_id=$('input[name="address_id"]').val();
-	    				// 	data.payname=$("input[name='payname']").val();
-	    				// 	data.cart_id=$("input[name='cart_id']").val();
-	    				// 	$.ajax({
-	    				// 	    url:'/order',
-	    				// 	    data:data,
-	    				// 	    type:'post',
-	    				// 		dataType:'json',
-	    				// 		success:function(reg){
-            			//             if(reg.code=='0000'){
-            			//                 location.href='/pay'+reg.data;
-	    				// 			}
-	    				// 		}
-	    				// 	})
-		    			// })
+					
+						$(document).on("click",".default",function(){
+							var address_id = $(this).attr('address_id');
+							// console.log(address_id);return
+							$.getJSON("http://www.2001api.com/shop/address_up?callback=?", {"address_id":address_id},function(obj){
+								
+								console.log(obj);
+							});
+						});
 					</script>
 			</div>
 		</section>
@@ -253,9 +212,7 @@
 					location.href="/pay/?order_id="+res.order_id;
 					// console.log(res);
 				}
-				
 			}
-
 		})
 		// console.log(cary_id);
 	})

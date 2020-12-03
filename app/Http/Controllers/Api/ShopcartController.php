@@ -18,10 +18,9 @@ class ShopcartController extends Controller
         $rec_id = request()->rec_id;
         // return $rec_id;
         $user_id = Redis::hmget("admin",["user_id"]);
-        $user_id = implode(",",$user_id);
         // dd($user_id);
-
-        $address = Address::where('user_id',29)->get();
+        $user_id = implode(",",$user_id);
+        $address = Address::where('user_id',$user_id)->get();
         // dd($address);
         $reg = new Region;
         foreach($address as $k=>$v){
@@ -75,8 +74,23 @@ class ShopcartController extends Controller
 
         $region = Region::where('parent_id',0)->get();
 
+        $user_id = Redis::hmget("admin",["user_id"]);
+        // dd($user_id);
+        $user_id = implode(",",$user_id);
+        $address = Address::where('user_id',$user_id)->get();
+        // dd($address);
+        $reg = new Region;
+        foreach($address as $k=>$v){
+            $address[$k]['country'] = $reg->where('region_id',$v->country)->value('region_name');
+            $address[$k]['province'] = $reg->where('region_id',$v->province)->value('region_name');
+            $address[$k]['city'] = $reg->where('region_id',$v->city)->value('region_name');
+            $address[$k]['district'] = $reg->where('region_id',$v->district)->value('region_name');
+            $address[$k]['tel'] = substr($v->tel,0,3)."****".substr($v->tel,7,4);
+        }
+
         $shop = [
             "region"=>$region,
+            "address"=>$address,
         ];
         // dd($shop);
         $shop = json_encode($shop);
@@ -84,20 +98,20 @@ class ShopcartController extends Controller
         return $shop;
     }
     public function address_up(){
+         // return $rec_id;
+         $user_id = Redis::hmget("admin",["user_id"]);
+         // dd($user_id);
+         $user_id = implode(",",$user_id);
         $callback = request()->callback;
         // $data = Brand::all();
         $address_id = request()->get("address_id");
-         Address::update(['mo'=>0]);
-        $res = Address::where("address_id",$address_id)->update(['mo'=>1]);
+        Address::where('user_id',$user_id)->update(['mo'=>1]);
+        $res = Address::where(['user_id'=>$user_id,'address_id'=>$address_id])->update(['mo'=>2]);
         if($res){
             
             $result = json_encode(['code'=>1,'msg'=>'ok','data'=>"ok"]);
-            // echo $callback.'('.$result.')';
+            echo $callback.'('.$result.')';
         }
-       
-
-
-
     }
     
 
