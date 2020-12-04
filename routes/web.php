@@ -179,6 +179,8 @@ Route::get('/logindo','Index\LoginController@logindo');//注册
 
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
+    Route::any('/search','Index\GoodsController@search');
+    Route::any('/video','Index\GoodsController@video');
     // Route::get('/list/{cate_id}','Index\GoodsController@list');
 });
 

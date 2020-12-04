@@ -11,11 +11,19 @@ class GoodsController extends Controller
 //    商品列表
     public function goods_list($cate_id)
     {
+
+
+        $goods_name = request()->goods_name;
+        $where = [];
+        if($goods_name){
+            $where[] = ['goods_name','like',"%$goods_name%"];
+        }
 //        获取所有分类
         $soncate_id = DB::table('cate')->where('pid',$cate_id)->pluck('cate_id')->toArray();
         array_push($soncate_id,$cate_id);
 //        根据分类查询商品
-        $goods = DB::table('goods')->where('is_new',1)->whereIn('cate_id',$soncate_id)->paginate(10);
+        $goods = DB::table('goods')->where($where)->where('is_new',1)->whereIn('cate_id',$soncate_id)->paginate(10);
+        // dd($goods);
 //         根据商品查询商品所拥有的品牌
         $brand_ids = DB::table('goods')->where('is_new',1)->whereIn('cate_id',$soncate_id)->pluck('brand_id')->toArray();
         $brand_ids = array_unique($brand_ids);

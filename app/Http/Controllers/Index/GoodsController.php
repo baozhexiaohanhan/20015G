@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Goods;
 class GoodsController extends Controller
 {
 //    列表页
@@ -18,8 +19,7 @@ class GoodsController extends Controller
         // dd($history);
         $history = json_decode($history['data'],true);
         // dd($history);
-
-
+         $res = request()->all();
 //        商品列表展示
         $url = "http://www.2001api.com/goods/goods_list/{$cate_id}";
         $goods_list = curl_get($url);
@@ -47,7 +47,7 @@ class GoodsController extends Controller
 //        dd($_SERVER);
         $urls = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 //        dd($urls);
-        return view('index/goods/goods_list',['data'=>$data,'query'=>$query,'url'=>$urls,'history'=>$history]);
+        return view('index/goods/goods_list',['data'=>$data,'query'=>$query,'url'=>$urls,'history'=>$history,'res'=>$res]);
     }
 
 //     public function list($cate_id){
@@ -96,4 +96,21 @@ class GoodsController extends Controller
 //           file_put_contents($filename, $contents);
 //           ob_clean();  
 //     }
+        public function search(){
+        $goods_name = request()->goods_name;
+        $where = [];
+        if($goods_name){
+            $where[] = ['goods_name','like',"%$goods_name%"];
+        }
+        $listModel = new Goods();
+        $data = $listModel->where($where)->orderBy('goods_id','desc')->get();
+        $query = request()->all();
+         return view('index/goods/goods',['data'=>$data,'query'=>$query]);
+        }
+
+        public function video(){
+           $goods = Goods::where('is_del','1')->orderBy('goods_id','desc')->get();
+
+           return view('index/goods/room',['goods'=>$goods]);
+        }
 }

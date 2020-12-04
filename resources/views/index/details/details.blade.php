@@ -39,7 +39,7 @@
 						<a href="javascript:;" class="btn btn-default btn-next"></a>
 					</div>
                     <div>
-                        <input type="button" value="收藏" class="collect">
+                        <input type="button" value="收藏" class="collect item-action__basket ">
                     </div>
 					<div class="big-box"><img src="{{$data['goods']['goods_img']}}" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
 				</div>
