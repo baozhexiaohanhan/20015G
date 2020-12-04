@@ -34,7 +34,7 @@ class CartController extends Controller
         // dd($cart);
 
         $cart = json_decode($cart['data'],true);
-        // dd($cart);
+        // dump($cart);
         // dump($cart['info']);
 
         return view('index.cart.cart',['cart'=>$cart]);

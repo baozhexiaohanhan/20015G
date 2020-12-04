@@ -12,17 +12,17 @@
 						@foreach($catedata as $k=>$v)
 					<div class="cat-box">
 						<div class="title">
-							<i class="iconfont icon-skirt ce"></i> {{$v->cate_name}}
+							<a href="{{url('/goods/goods_list/'.$v->cate_id)}}" class="iconfont icon-skirt ce" style="color:#fff">{{$v->cate_name}}</a> 
 						</div>
 						<div class="cat-list__deploy">
 							<div class="deploy-box">
 								@foreach($v->child as $kk=>$vv)
 								<div class="genre-box clearfix">
-									<span class="title">{{$vv->cate_name}}</span>
+									<a href="{{url('/goods/goods_list/'.$vv->cate_id)}}" class="title">{{$vv->cate_name}}</a>
 										@foreach($vv->child as $kkk=>$vvv)
 									
 									<div class="genre-list">
-										<a href="{{url('/goods/goods_list/'.$v->cate_id)}}">{{$vvv->cate_name}}</a>
+										<a href="{{url('/goods/goods_list/'.$vvv->cate_id)}}">{{$vvv->cate_name}}</a>
 									</div>
 										@endforeach
 								</div>
@@ -129,12 +129,14 @@
 			<div class="floor-title">
 				<i class="iconfont icon-skirt fz16"></i> 女装
 				<div class="case-list fz0 pull-right">
-					<a href="item_category.html">高端女装</a>
-					<a href="item_category.html">时尚女装</a>
+					@foreach($catedata as $k=>$v)
+					<a href="{{url('/goods/goods_list/'.$v->cate_id)}}">{{$v->cate_name}}</a>
+					@endforeach
+					<!-- <a href="item_category.html">时尚女装</a>
 					<a href="item_category.html">上装</a>
 					<a href="item_category.html">下装</a>
 					<a href="item_category.html">裙装</a>
-					<a href="item_category.html">内衣</a>
+					<a href="item_category.html">内衣</a> -->
 				</div>
 			</div>
 			<div class="con-box">
@@ -164,12 +166,15 @@
 			<div class="floor-title">
 				<i class="iconfont icon-fushi fz16"></i> 男装
 				<div class="case-list fz0 pull-right">
-					<a href="item_category.html">高端女装</a>
+					@foreach($catedata as $k=>$v)
+					<a href="{{url('/goods/goods_list/'.$v->cate_id)}}">{{$v->cate_name}}</a>
+					@endforeach
+					<!-- <a href="item_category.html">高端女装</a>
 					<a href="item_category.html">时尚女装</a>
 					<a href="item_category.html">上装</a>
 					<a href="item_category.html">下装</a>
 					<a href="item_category.html">裙装</a>
-					<a href="item_category.html">内衣</a>
+					<a href="item_category.html">内衣</a> -->
 				</div>
 			</div>
 			<div class="con-box">
@@ -199,12 +204,15 @@
 			<div class="floor-title">
 				<i class="iconfont icon-kid fz16"></i> 活力童装
 				<div class="case-list fz0 pull-right">
-					<a href="item_category.html">高端女装</a>
+					@foreach($catedata as $k=>$v)
+					<a href="{{url('/goods/goods_list/'.$v->cate_id)}}">{{$v->cate_name}}</a>
+					@endforeach
+					<!-- <a href="item_category.html">高端女装</a>
 					<a href="item_category.html">时尚女装</a>
 					<a href="item_category.html">上装</a>
 					<a href="item_category.html">下装</a>
 					<a href="item_category.html">裙装</a>
-					<a href="item_category.html">内衣</a>
+					<a href="item_category.html">内衣</a> -->
 				</div>
 			</div>
 			<div class="con-box">
@@ -234,12 +242,15 @@
 			<div class="floor-title">
 				<i class="iconfont icon-bao fz16"></i> 时尚包包
 				<div class="case-list fz0 pull-right">
-					<a href="item_category.html">高端女装</a>
+					@foreach($catedata as $k=>$v)
+					<a href="{{url('/goods/goods_list/'.$v->cate_id)}}">{{$v->cate_name}}</a>
+					@endforeach
+					<!-- <a href="item_category.html">高端女装</a>
 					<a href="item_category.html">时尚女装</a>
 					<a href="item_category.html">上装</a>
 					<a href="item_category.html">下装</a>
 					<a href="item_category.html">裙装</a>
-					<a href="item_category.html">内衣</a>
+					<a href="item_category.html">内衣</a> -->
 				</div>
 			</div>
 			<div class="con-box">
@@ -269,12 +280,15 @@
 			<div class="floor-title">
 				<i class="iconfont icon-shoes fz16"></i> 鞋靴
 				<div class="case-list fz0 pull-right">
-					<a href="item_category.html">高端女装</a>
+					@foreach($catedata as $k=>$v)
+					<a href="{{url('/goods/goods_list/'.$v->cate_id)}}">{{$v->cate_name}}</a>
+					@endforeach
+					<!-- <a href="item_category.html">高端女装</a>
 					<a href="item_category.html">时尚女装</a>
 					<a href="item_category.html">上装</a>
 					<a href="item_category.html">下装</a>
 					<a href="item_category.html">裙装</a>
-					<a href="item_category.html">内衣</a>
+					<a href="item_category.html">内衣</a> -->
 				</div>
 			</div>
 			<div class="con-box">

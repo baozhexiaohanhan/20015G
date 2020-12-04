@@ -1,91 +1,19 @@
-<!DOCTYPE html>
-<html lang="zh-cmn-Hans">
-<head>
-	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="/static/css/iconfont.css">
-	<link rel="stylesheet" href="/static/css/global.css">
-	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="/static/css/swiper.min.css">
-	<link rel="stylesheet" href="/static/css/styles.css">
-	<script src="/static/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
-	<script src="/static/js/bootstrap.min.js" charset="UTF-8"></script>
-	<script src="/static/js/swiper.min.js" charset="UTF-8"></script>
-	<script src="/static/js/global.js" charset="UTF-8"></script>
-	<script src="/static/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
-	<title>@yield('title')</title>
-</head>
-<body>
-	<!-- 顶部tab -->
-	<div class="tab-header">
-		<div class="inner">
-			<div class="pull-left">
-				<div class="pull-left">嗨，欢迎来到<span class="cr">U袋网</span></div>
-				<a href="agent_level.html">网店代销</a>
-				<a href="temp_article/udai_article4.html">帮助中心</a>
-			</div>
-			<div class="pull-right">
-				<a href="login.html"><span class="cr">登录</span></a>
-				<a href="login.html?p=register">注册</a>
-				<a href="udai_welcome.html">我的U袋</a>
-				<a href="udai_order.html">我的订单</a>
-				<a href="udai_integral.html">积分平台</a>
-			</div>
-		</div>
-	</div>
+@section('title', '个人中心')
+    @include('index.lay.tops')
+    @section('tops2')
 	<!-- 顶部标题 -->
 	<div class="bgf5 clearfix">
 		<div class="top-user">
 			<div class="inner">
-			<a class="logo" href="index.html"><img src="/static/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+				<a class="logo" href="index.html"><img src="/static/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 				<div class="title">个人中心</div>
 			</div>
 		</div>
 	</div>
 	<div class="content clearfix bgf5">
 		<section class="user-center inner clearfix">
-			<div class="pull-left bgf">
-				<a href="udai_welcome.html" class="title">U袋欢迎页</a>
-				<dl class="user-center__nav">
-					<dt>帐户信息</dt>
-					<a href="udai_setting.html"><dd>个人资料</dd></a>
-					<a href="udai_treasurer.html"><dd>资金管理</dd></a>
-					<a href="udai_integral.html"><dd>积分平台</dd></a>
-					<a href="/address"><dd class="active">收货地址</dd></a>
-					<a href="udai_coupon.html"><dd>我的优惠券</dd></a>
-					<a href="udai_paypwd_modify.html"><dd>修改支付密码</dd></a>
-					<a href="udai_pwd_modify.html"><dd>修改登录密码</dd></a>
-				</dl>
-				<dl class="user-center__nav">
-					<dt>订单中心</dt>
-					<a href="udai_order.html"><dd>我的订单</dd></a>
-					<a href="udai_collection.html"><dd>我的收藏</dd></a>
-					<a href="udai_refund.html"><dd>退款/退货</dd></a>
-				</dl>
-				<dl class="user-center__nav">
-					<dt>服务中心</dt>
-					<a href="udai_mail_query.html"><dd>物流查询</dd></a>
-					<a href=""><dd>数据自助下载</dd></a>
-					<a href="temp_article/udai_article1.html"><dd>售后服务</dd></a>
-					<a href="temp_article/udai_article2.html"><dd>配送服务</dd></a>
-					<a href="temp_article/udai_article3.html"><dd>用户协议</dd></a>
-					<a href="temp_article/udai_article4.html"><dd>常见问题</dd></a>
-				</dl>
-				<dl class="user-center__nav">
-					<dt>新手上路</dt>
-					<a href="temp_article/udai_article5.html"><dd>如何成为代理商</dd></a>
-					<a href="temp_article/udai_article6.html"><dd>代销商上架教程</dd></a>
-					<a href="temp_article/udai_article7.html"><dd>分销商常见问题</dd></a>
-					<a href="temp_article/udai_article8.html"><dd>付款账户</dd></a>
-				</dl>
-				<dl class="user-center__nav">
-					<dt>U袋网</dt>
-					<a href="temp_article/udai_article10.html"><dd>企业简介</dd></a>
-					<a href="temp_article/udai_article11.html"><dd>加入U袋</dd></a>
-					<a href="temp_article/udai_article12.html"><dd>隐私说明</dd></a>
-				</dl>
-			</div>
+		@include('index.lay.left')
+    	@section('left')
 			<div class="pull-right">
 				<div class="user-content__box clearfix bgf">
 					<div class="title">账户信息-收货地址</div>
@@ -163,14 +91,62 @@
 							},'json');
 						});
 
+						$(document).on("click",".btn",function (){
+							// alert(123);die;
+							//这个对象
+							var _this = $(this);
+							//判断用户是否确认删除
+						var ifdel = confirm("您确定删除吗？");
+						if(ifdel == true){
+							var id = _this.attr('address_id');
+							// console.log(id);
+								$.ajax({
+									url : '/destroy',
+									dataType : 'json',
+									type : 'get',
+									data : {'id':id},
+									success:function ( res ){
+										if( res.code == 0 ){
+											location.reload();
+										}else{
+											alert('操作繁忙，请稍后重试...');
+											return false;
+										}
+									}
+								});
+						}
+						return false;
+						});
 
-					
 						</script>
+
 					</form>
+					<p class="fz18 cr">已保存的有效地址</p>
+					<div class="table-thead addr-thead">
+						<div class="tdf1">收货人</div>
+						<div class="tdf2">所在地</div>
+						<div class="tdf3"><div class="tdt-a_l">详细地址</div></div>
+						<!-- <div class="tdf1">邮编</div> -->
+						<div class="tdf1">电话/手机</div>
+						<div class="tdf1">操作</div>
+					</div>
+						@foreach($data['address'] as $k=>$v)
+						<div class="addr-item">
+							<div class="tdf1">{{$v['consignee']}}</div>
+							<div class="tdf2 tdt-a_l">{{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}}</div>
+							<div class="tdf3 tdt-a_l">{{$v['address']}}</div>
+							<div class="tdf1">{{$v['tel']}}</div>
+							<div class="tdf1 order">
+								<a href="" >修改</a>
+								<a class="btn" address_id ="{{$v['address_id']}}">删除</a>
+							</div>
+						</div>
+						@endforeach
 				</div>
 			</div>
 		</section>
 	</div>
+	
 	<!-- 右侧菜单 -->
 	<div class="right-nav">
 		<ul class="r-with-gotop">

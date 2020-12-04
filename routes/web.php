@@ -179,6 +179,8 @@ Route::get('/logindo','Index\LoginController@logindo');//注册
 
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
+    Route::any('/search','Index\GoodsController@search');
+    Route::any('/video','Index\GoodsController@video');
     // Route::get('/list/{cate_id}','Index\GoodsController@list');
 });
 
@@ -201,6 +203,7 @@ Route::get('/shopcart','Index\ShopcartController@shopcart');//购物车订单
 Route::get('/address','Index\ShopcartController@address');//收货地址
 Route::get('/address_add','Index\ShopcartController@address_add');//收货地址
 Route::get('/address_do','Index\ShopcartController@address_do');//收货地址
+Route::get('/destroy','Index\ShopcartController@destroy');//收货地址
 Route::any('/order','Index\ShopcartController@order');//生成订单
 Route::get('/pay','Index\ShopcartController@pay');//支付
 Route::get('/return_url','Index\ShopcartController@return_url');//支付同步
@@ -210,7 +213,7 @@ Route::any('/order_add','Index\ShopcartController@order_add');//支付同步
 
 Route::any('/history','Index\HistoryController@history');//浏览历史记录
 
-
+Route::any('/historycookie','Index\HistoryController@historycookie');//个人中心-浏览历史
 // 个人中心
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');

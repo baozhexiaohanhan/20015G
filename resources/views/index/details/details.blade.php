@@ -39,7 +39,7 @@
 						<a href="javascript:;" class="btn btn-default btn-next"></a>
 					</div>
                     <div>
-                        <input type="button" value="收藏" class="collect">
+                        <input type="button" value="收藏" class="collect item-action__basket ">
                     </div>
 					<div class="big-box"><img src="{{$data['goods']['goods_img']}}" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
 				</div>
@@ -1150,6 +1150,8 @@
 		// alert(goods_id);return;
 		var seller_id = "{{$data['goods']['seller_id']}}";
 		// alert(seller_id);return;
+		var coupon_id = $(".coupon").attr('id');
+        // alert(coupon_id);return;
 		var buy_number=$('.itxt').val();
 		// alert(buy_number);return;
 		var goods_attr_id=new Array();
@@ -1157,7 +1159,7 @@
             goods_attr_id.push($(this).attr('goods_attr_id'));
         });
         // alert(goods_attr_id);return;
-        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id,seller_id:seller_id},function(res){
+        $.get('/addcart',{goods_id:goods_id,buy_number:buy_number,goods_attr_id:goods_attr_id,seller_id:seller_id,coupon_id:coupon_id},function(res){
         	// alert(res);return;
         	if(res.code=='-1'){
                 location.href="/log?refer="+location.href;
@@ -1177,6 +1179,7 @@
             var goods_id = "{{$data['goods']['goods_id']}}";
             // alert(goods_id);return;
             var coupon_id = $(this).attr('id');
+            // alert(coupon_id);return;
             $.get('/coupon',{goods_id:goods_id,coupon_id:coupon_id},function(res){
                 // alert(res);return;
                 if(res.code=='-1'){

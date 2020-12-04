@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Redis;
 class IndexController extends Controller
 {
     public function index(){
-         ob_start();
-		
 		$user_name = Redis::hmget("admin",["user_name"]);
 		$user_name = implode("|",$user_name);
 		// $user_name = ["user_name"=>$user_name];
