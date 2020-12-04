@@ -74,6 +74,7 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 	Route::get("/cart/destroy/{id}","Api\CartController@destroy");//删除
 
 	Route::any('/historys','Api\HistoryController@historys');//个人中心-浏览历史
+	Route::any('/historycookie','Api\HistoryController@historycookie');//个人中心-浏览历史cookie
 });
 	
 

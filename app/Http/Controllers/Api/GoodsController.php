@@ -5,12 +5,30 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Redis;
 
 class GoodsController extends Controller
 {
 //    商品列表
     public function goods_list($cate_id)
     {
+
+        //        统计点击量
+//        $hits = Redis::setnx('hit_'.$goods_id,1)?:Redis::incr('hit_'.$goods_id,1);
+        $hits =Redis::zincrby('hit',1,'hit_'.$cate_id);
+//        dd($hits);
+//        取点击量最高的五条
+        $hitgoods = Redis::zrevrange('hit',0,10);
+//        dd($hitgoods);
+        if($hitgoods){
+            $hit_goods_id = [];
+            foreach ($hitgoods as $v){
+                $hitsarr = explode('_',$v);
+                $hit_goods_id[] = $hitsarr[1];
+            }
+//            dd($hit_goods_id);
+            $hot_goods = DB::table('goods')->whereIn('goods_id',$hit_goods_id)->get();
+        }
 //        获取所有分类
         $soncate_id = DB::table('cate')->where('pid',$cate_id)->pluck('cate_id')->toArray();
         array_push($soncate_id,$cate_id);
@@ -41,7 +59,8 @@ class GoodsController extends Controller
         $msg = [
             'goods'=>$goods,
             'brand'=>$brand,
-            'price'=>$price
+            'price'=>$price,
+            "hot_goods"=>$hot_goods
         ];
         $msg = json_encode($msg);
         $msg = ["ok","data"=>$msg];
