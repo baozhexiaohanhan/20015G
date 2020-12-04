@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use App\Model\Goods;
 use Illuminate\Support\Facades\Redis;
 
 class GoodsController extends Controller
@@ -35,10 +36,32 @@ class GoodsController extends Controller
             $where[] = ['goods_name','like',"%$goods_name%"];
         }
 //        获取所有分类
+$query = request()->all();
+// return $query;
+if(isset($query['price'])){
+        $price_array = explode('元',$query['price']);
+        $price_array = explode('-',$price_array[0]);
+        $where[] = [
+            'goods_price','>',$price_array[0],
+        ];
+        if(isset($price_array[1])){
+            $where[] = [
+                'goods_price','<',$price_array[1],
+            ];
+        }
+        if(isset($query['brand_id'])){
+            $where[] = [
+                'brand_id','=',$query['brand_id']
+            ];
+        }
+        //    return $where;
+    }
         $soncate_id = DB::table('cate')->where('pid',$cate_id)->pluck('cate_id')->toArray();
         array_push($soncate_id,$cate_id);
 //        根据分类查询商品
-        $goods = DB::table('goods')->where($where)->where('is_new',1)->whereIn('cate_id',$soncate_id)->paginate(10);
+        $goods = DB::table('goods')->where('is_new',1)->where($where)->where('cate_id',$soncate_id)->get();
+        // Goods::where($where)->get();
+        // return $goods;
         // dd($goods);
 //         根据商品查询商品所拥有的品牌
         $brand_ids = DB::table('goods')->where('is_new',1)->whereIn('cate_id',$soncate_id)->pluck('brand_id')->toArray();
@@ -61,6 +84,12 @@ class GoodsController extends Controller
             $i = $avgprice*$j-1;
         }
         $price[] = $maxprice.'元以上';
+
+      
+                //        dd($_SERVER);
+                        
+
+        
 //        dd($price);
         $msg = [
             'goods'=>$goods,
@@ -72,4 +101,5 @@ class GoodsController extends Controller
         $msg = ["ok","data"=>$msg];
         return $msg;
     }
+}
 }

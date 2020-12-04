@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Model\History;
 use App\Model\Goods;
 use Illuminate\Support\Facades\Redis;
-use Cookie;
 
 class HistoryController extends Controller
 {
@@ -36,19 +35,5 @@ class HistoryController extends Controller
         $history = json_encode($history);
         $history = ["ok","data"=>$history];
         return $history;
-    }
-    public function historycookie(){
-        $history=Cookie::get('historyInfo');
-            
-        $history=unserialize($history);
-        // dd($history);
-        
-        $goods_id=array_column($history,'goods_id');
-        $goods=Goods::whereIn('goods_id',$goods_id)->take(3)->get();
-        // dd($goods);
-        $history = json_encode($history);
-        $history = ["ok","data"=>$history];
-        return $history;
-        
     }
 }

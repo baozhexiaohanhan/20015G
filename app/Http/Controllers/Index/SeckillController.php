@@ -126,7 +126,7 @@ class SeckillController extends Controller
     // $rec_id = implode(",",$rec_id);
     $order_price = $da['price'];
      //\DB::select("select sum(goods_price*buy_number) as tot from cart where rec_id in($rec_id) ");
-
+    //  Redis::hmset("order".$user_id,[]);
     // $order_price = $order_price[0]->tot;
     // if($order_price > 100){
     //     $aa = rand(1,10);

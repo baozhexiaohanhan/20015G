@@ -213,7 +213,7 @@ Route::any('/order_add','Index\ShopcartController@order_add');//支付同步
 
 Route::any('/history','Index\HistoryController@history');//浏览历史记录
 
-
+Route::any('/historycookie','Index\HistoryController@historycookie');//个人中心-浏览历史
 // 个人中心
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
