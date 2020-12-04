@@ -37,31 +37,6 @@
 
 									
 								</td>
-								<td>
-									<!-- <div class="pull-right text-right">
-										<div class="form-group">
-											<label for="coupon" class="control-label">优惠券使用：</label>
-											<select id="coupon" >
-												<option value="-1" selected>- 请选择可使用的优惠券 -</option>
-												<option value="1">【满￥20.0元减￥2.0】</option>
-												<option value="2">【满￥30.0元减￥2.0】</option>
-												<option value="3">【满￥25.0元减￥1.0】</option>
-												<option value="4">【满￥10.0元减￥1.5】</option>
-												<option value="5">【满￥15.0元减￥1.5】</option>
-												<option value="6">【满￥20.0元减￥1.0】</option>
-											</select>
-										</div>
-										<script>
-											$('#coupon').bind('change',function() {
-												console.log($(this).val());
-											})
-										</script> -->
-										<!-- <div class="info-line">优惠活动：<span class="c6">无</span></div>
-										<div class="info-line">运费：<span class="c6">¥0.00</span></div>
-										<div class="info-line"><span class="favour-value">已优惠 ¥2.0</span>合计：<b class="fz18 cr">¥18.0</b></div>
-										<div class="info-line fz12 c9">（可获 <span class="c6">20</span> 积分）</div> -->
-									<!-- </div> -->
-								</td>
 							</tr>
 							@foreach($v['child'] as $kk=>$vv)
 							<tr>
@@ -93,7 +68,11 @@
 										@endif
 									</div>
 								</td>
-								<td>¥{{$vv['goods_price']}}</td>
+								<td>
+									¥{{$vv['goods_price']}}
+									<br>
+									<span style="color:red;line-height:200px;font-size:20px;">{{$vv['name']}}</span>
+								</td>
 								<td>
 									<div class="cart-num__box">
 
