@@ -59,7 +59,7 @@
         <section class="item-show__div clearfix">
             <div class="pull-left">
                 <div class="item-list__area clearfix">
-                    @foreach($data['goods']['data'] as $v)
+                    @foreach($data['goods'] as $v)
                     <div class="item-card">
 
                         <a href="/details/?goods_id={{$v['goods_id']}}" class="photo">
@@ -177,7 +177,7 @@
                     search += s_key+ '=' +s_val+'&';
                 });
 //                alert(search);
-                var url = "{{$url}}";
+                var url = "{{$urls}}";
                 if(search){
                      url +='?'+search.substring(0,search.length-1);
                      location.href = url;

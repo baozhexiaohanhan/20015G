@@ -11,6 +11,7 @@ use App\Model\Order_goods;
 use App\Model\Region;
 use App\Model\Address;
 use DB;
+use App\Model\Coupon;
 use Illuminate\Support\Facades\Redis;
 class ShopcartController extends Controller
 {
@@ -32,7 +33,8 @@ class ShopcartController extends Controller
         }
 
         $rec_id = explode(',',$request->rec_id);
-        $cart = Cart::select('cart.*','goods.goods_img')->leftjoin('goods','cart.goods_id','=','goods.goods_id')->whereIn('rec_id',$rec_id)->get();
+        $cart = Cart::select('cart.*','goods.goods_img','coupon.name')->leftjoin('goods','cart.goods_id','=','goods.goods_id')->leftjoin("coupon","cart.goods_id","=","coupon.range")->whereIn('rec_id',$rec_id)->get();
+        // return $cart;
         foreach($cart as $k=>$v){
             if($v->goods_attr_id){
                 $goods_attr_id = explode('|',$v->goods_attr_id);

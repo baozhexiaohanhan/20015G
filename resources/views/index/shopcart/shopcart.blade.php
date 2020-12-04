@@ -57,7 +57,13 @@
 												@endforeach
 											@endif</div>
 									</td>
-									<td>¥{{$v['goods_price']}}</td>
+									<td>
+										¥{{$v['goods_price']}}
+										<br>
+        								 <span style="color:red;line-height:200px;font-size:20px;">
+											{{$v['name']}}
+										</span>
+									</td>
 									<td>{{$v['buy_number']}}</td>
 								</tr>
 								@endforeach
@@ -88,7 +94,7 @@
 							<div class="info-line"><span class="favour-value">已优惠 ¥2.0</span>合计：<b class="fz18 cr">￥{{$data['price']}}</b></div>							
 						</div>
 					</div> -->
-					<div class="shop-title">确认订单</div>
+					<div class="shop-title"></div>
 					<div class="pay-mode__box">
 						
 						<div class="radio-line radio-box active">
@@ -115,7 +121,7 @@
 						</div>
 					</div>
 					<div class="user-form-group shopcart-submit">
-						<a class="btn" id="tijiao">继续支付</a>
+						<div class="btn" id="tijiao">确认订单</div>
 					</div>
 					<script>
 						$(document).ready(function(){
