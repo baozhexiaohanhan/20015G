@@ -22,6 +22,7 @@ class GoodsController extends Controller
          $res = request()->all();
 //        商品列表展示
         $url = "http://www.2001api.com/goods/goods_list/{$cate_id}";
+        // dd($url);
         $goods_list = curl_get($url);
         // dd($goods_list);
         $data = json_decode($goods_list['data'],true);

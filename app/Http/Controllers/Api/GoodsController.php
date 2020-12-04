@@ -13,7 +13,6 @@ class GoodsController extends Controller
     public function goods_list($cate_id)
     {
 
-
         //        统计点击量
 //        $hits = Redis::setnx('hit_'.$goods_id,1)?:Redis::incr('hit_'.$goods_id,1);
         $hits =Redis::zincrby('hit',1,'hit_'.$cate_id);
@@ -30,12 +29,10 @@ class GoodsController extends Controller
 //            dd($hit_goods_id);
             $hot_goods = DB::table('goods')->whereIn('goods_id',$hit_goods_id)->get();
 
-
         $goods_name = request()->goods_name;
         $where = [];
         if($goods_name){
             $where[] = ['goods_name','like',"%$goods_name%"];
-
         }
 //        获取所有分类
         $soncate_id = DB::table('cate')->where('pid',$cate_id)->pluck('cate_id')->toArray();
