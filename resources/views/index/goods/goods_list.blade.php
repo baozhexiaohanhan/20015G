@@ -65,6 +65,7 @@
                         <a href="/details/?goods_id={{$v['goods_id']}}" class="photo">
                             <img src="{{$v['goods_img']}}" class="cover">
                             <div class="name">{{$v['goods_name']}}</div>
+                            <input type="hidden" name="goods_name">
                         </a>
                         <div class="middle">
                             <div class="price"><small>￥</small>{{$v['goods_price']}}</div>
@@ -100,17 +101,22 @@
 
                 <div class="desc-segments__content">
                     <div class="lace-title">
-                        <span class="c6">浏览历史</span>
+                        <span class="c6">爆款推荐</span>
                     </div>
-                <!--     <div class="picked-box">
-                        @foreach($history['history'] as $k=>$v)
-                        <a href="" class="picked-item"><img src="{{$v['goods_img']}}" alt="" class="cover"><span class="look_price">¥{{$v['goods_price']}}</span></a>
+                
+                <div class="picked-box">
+                    @foreach($data['hot_goods'] as $k=>$v)
+                        <a href="" class="picked-item"><img src="{{$v['goods_img']}}" alt="" class="cover"><span class="look_price">¥134.99</span></a>
                         @endforeach
-                    </div> -->
-                     <div class="picked-box">
-                         @foreach($history['history'] as $k=>$v)
-                        <a href="/details/?goods_id={{$v['goods_id']}}" class="picked-item"><img src="{{$v['goods_img']}}" alt="{{$v['goods_name']}}" style="width: 160px;height: 120px;margin-top: 10px;" class="cover"><span >¥{{$v['goods_price']}}</span><br>{{$v['goods_name']}}</a>
-                        @endforeach
+                        <!-- <a href="" class="picked-item"><img src="images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a> -->
                     </div>
                 </div>
             </div>

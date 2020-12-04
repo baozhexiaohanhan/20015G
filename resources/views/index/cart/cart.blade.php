@@ -91,13 +91,13 @@
 
 					</table>
 					<div class="user-form-group tags-box shopcart-submit pull-right">
-						<a class="btn">提交订单</a>
+						<div class="btn">提交订单</div>
 					</div>
 					<div class="checkbox shopcart-total">
 						<label><input type="checkbox" class="check-all"><i></i> 全选</label>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="moredel">删除选中的商品</a>
 						<div class="pull-right">
-							已选商品 <span>2</span> 件
+							<!-- 已选商品 <span>2</span> 件 -->
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合计（不含运费）
 							<b class="cr">¥<span class="fz24">0.00</span></b>
 						</div>

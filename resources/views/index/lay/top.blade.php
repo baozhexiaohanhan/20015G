@@ -4,12 +4,10 @@
 			<a class="logo" href="index.html"><img src="/static/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 			<div class="search-box">
 			
-				<form class="input-group" action="" method="">
-					<input placeholder="Ta们都在搜U袋网" type="text">
+				<form class="input-group" action="/goods/search" method="post">
+					 <input type="text" name="goods_name" placeholder="请输入名称" autocomplete="off" class="layui-input">
 					<span class="input-group-btn">
-						<button type="button">
-							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						</button>
+          			 <button class="layui-btn layui-btn-normal">搜索</button>
 					</span>
 				</form>
 				<!-- <p class="help-block text-nowrap">
@@ -40,6 +38,7 @@
 				<a href="/shops/shops/?seller_id=2"><li>haipaihaoyu旗舰店</li></a>
 				<a href="/shops/shops/?seller_id=3"><li>浩尚服饰专营店</li></a>
 				<a href="/shops/shops/?seller_id=4"><li>森马妙步专卖店</li></a>
+				<a href="/goods/video"><li>视频专区</li></a>
 				<a href="/rush/seckill" style="color:red"><li>秒杀</li></a>
 			</ul>
 		</div>

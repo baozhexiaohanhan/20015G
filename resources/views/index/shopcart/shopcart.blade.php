@@ -27,7 +27,7 @@
 								{{$v['consignee']}} &nbsp {{$v['tel']}} &nbsp {{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}} &nbsp {{$v['address']}} 
 							</label>
 							<a href="javascript:;" address_id="{{$v['address_id']}}" class="default">默认地址</a>
-							<a href="udai_address_edit.html" class="edit">修改</a>
+							<a href="/address" class="edit">修改</a>
 						
 						</div>
 						@endforeach

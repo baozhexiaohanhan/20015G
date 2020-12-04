@@ -50,7 +50,7 @@ class ShopcartController extends Controller
         $region_son = Region::where('parent_id',$region_id)->get();
         return json_encode(['code'=>0,'msg'=>'OK','data'=>$region_son]);
     }
-
+    //执行添加收货地址
     public function address_do(Request $request){
         // $rec_id = request()->post("rec_id");
         $user_id = Redis::hmget("admin",["user_id"]);
@@ -66,6 +66,25 @@ class ShopcartController extends Controller
             return  redirect('/shopcart');
         }
     }
+    //  删除收货地址
+        public function destroy(){
+    //  $brand_id = $request->input('id');
+            $ids = Request()->all();
+            // dd($ids);
+            if(!$ids){
+                return $this->JsonResponse('11','请选择要删除的数据');
+            }
+            foreach ($ids as $k=>$v){
+                $isdel = Address::destroy($v);
+            }
+    //  dd($isdel);
+            if($isdel){
+                return $this->JsonResponse('0','OK');
+            }else{
+                return $this->JsonResponse('1','删除失败');
+            }
+        }
+    
 
     //生成订单 and  订单商品
     public function order(Request $request){

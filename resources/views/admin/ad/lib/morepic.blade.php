@@ -1,1 +1,1 @@
-@foreach($ads as $v)<div class="swiper-slide"><a href="item_show.html"><img src="{{$v}}" class="cover" width="{{$width}}" height="{{$height}}"></a></div>@endforeach
+@foreach($ads as $v)<div class="swiper-slide"><a href="/shops/shops/?seller_id={{$v}}"><img src="{{$v}}" class="cover" width="{{$width}}" height="{{$height}}"></a></div>@endforeach

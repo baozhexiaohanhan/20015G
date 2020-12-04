@@ -79,7 +79,7 @@ class SkuController extends Controller
             "cate_id" => $data['cate_id'],
             "brand_id" => $data['brand_id'],
             "goods_price" => $data['goods_price'],
-            "goods_store" => $data['goods_store'],
+            "goods_number" => $data['goods_store'],
             "goods_img" => $data['goods_img'],
             "goods_sn" => $goods_sn,
             "goods_desc" => $data['editorValue'],
