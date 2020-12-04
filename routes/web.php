@@ -216,6 +216,7 @@ Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
     Route::any('/udai_order','Index\CoreorderController@udai_order');
     Route::any('/tucu','Index\CoreorderController@tucu');
+    Route::any('/udai_collect','Index\CoreorderController@udai_collect');
 });
     Route::any('/history','Index\HistoryController@history');
     Route::any('/addcoupon','Api\DetailsController@addcoupon');

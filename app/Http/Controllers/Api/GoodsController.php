@@ -41,7 +41,7 @@ class GoodsController extends Controller
         $msg = [
             'goods'=>$goods,
             'brand'=>$brand,
-            'price'=>$price
+            'price'=>$price,
         ];
         $msg = json_encode($msg);
         $msg = ["ok","data"=>$msg];

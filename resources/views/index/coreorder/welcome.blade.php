@@ -35,7 +35,7 @@
 							<i class="iconfont icon-eval fz40 cr"></i>
 							<div class="c6">待评价 <span class="c3">0</span></div>
 						</a>
-						<a href="udai_collection.html" class="user-nav__but">
+						<a href="{{url('/udai_collect')}}" class="user-nav__but">
 							<i class="iconfont icon-star fz40 cr"></i>
 							<div class="c6">收藏 <span class="c3">0</span></div>
 						</a>
@@ -387,129 +387,45 @@
 						</div>
 					</div>
 				</div>
-				<div class="recommends">
-					<div class="lace-title type-2">
-						<span class="cr">爆款推荐</span>
-					</div>
-					<div class="swiper-container recommends-swiper">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<script>
-						$(document).ready(function(){
-							var recommends = new Swiper('.recommends-swiper', {
-								spaceBetween : 40,
-								autoplay : 5000,
-							});
-						});
-					</script>
-				</div>
+				{{--<div class="recommends">--}}
+					{{--<div class="lace-title type-2">--}}
+						{{--<span class="cr">爆款推荐</span>--}}
+					{{--</div>--}}
+					{{--<div class="swiper-container recommends-swiper">--}}
+						{{--<div class="swiper-wrapper">--}}
+							{{--<div class="swiper-slide">--}}
+								{{--<a class="picked-item" href="">--}}
+									{{--<img src="/static/images/temp/S-001-1_s.jpg" alt="" class="cover">--}}
+									{{--<div class="look_price">¥134.99</div>--}}
+								{{--</a>--}}
+								{{--<a class="picked-item" href="">--}}
+									{{--<img src="/static/images/temp/S-001-2_s.jpg" alt="" class="cover">--}}
+									{{--<div class="look_price">¥134.99</div>--}}
+								{{--</a>--}}
+								{{--<a class="picked-item" href="">--}}
+									{{--<img src="/static/images/temp/S-001-3_s.jpg" alt="" class="cover">--}}
+									{{--<div class="look_price">¥134.99</div>--}}
+								{{--</a>--}}
+								{{--<a class="picked-item" href="">--}}
+									{{--<img src="/static/images/temp/S-001-4_s.jpg" alt="" class="cover">--}}
+									{{--<div class="look_price">¥134.99</div>--}}
+								{{--</a>--}}
+								{{--<a class="picked-item" href="">--}}
+									{{--<img src="/static/images/temp/S-001-5_s.jpg" alt="" class="cover">--}}
+									{{--<div class="look_price">¥134.99</div>--}}
+								{{--</a>--}}
+							{{--</div>--}}
+						{{--</div>--}}
+					{{--</div>--}}
+					{{--<script>--}}
+						{{--$(document).ready(function(){--}}
+							{{--var recommends = new Swiper('.recommends-swiper', {--}}
+								{{--spaceBetween : 40,--}}
+								{{--autoplay : 5000,--}}
+							{{--});--}}
+						{{--});--}}
+					{{--</script>--}}
+				{{--</div>--}}
 			</div>
 		</section>
 	</div>

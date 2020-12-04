@@ -35,7 +35,7 @@
 			<a><span class="cr">欢迎：@php echo session()->get("name") @endphp 登录</span></a>
 				<a  href="/tucu">退出</a>
 			@endif 
-				<a href="{{url('index/center')}}">我的U袋</a>
+				<a href="">我的U袋</a>
 				<a href="/welcome">我的订单</a>
 				<a href="udai_integral.html"></a>
 			</div>

@@ -6,10 +6,6 @@
 
     <div class="content inner">
         <section class="filter-section clearfix">
-            <ol class="breadcrumb">
-                <li><a href="index.html">首页</a></li>
-                <li class="active">商品筛选</li>
-            </ol>
             <div class="filter-box">
                 <div class="all-filter">
                     <div class="filter-value">
@@ -20,7 +16,6 @@
                                 <li  class="close tag-price" style="display: none">价格</li>
                             </ul>
                         </div>
-                        <a class="reset pull-right" href="item_category.html">重置</a>
                     </div>
                 </div>
                 <div class="filter-prop-item">
@@ -47,13 +42,6 @@
                         @endforeach
                     </ul>
                 </div>
-            </div>
-            <div class="sort-box bgf5">
-                <div class="sort-text">排序：</div>
-                <a href=""><div class="sort-text">销量 <i class="iconfont icon-sortDown"></i></div></a>
-                <a href=""><div class="sort-text">评价 <i class="iconfont icon-sortUp"></i></div></a>
-                <a href=""><div class="sort-text">价格 <i class="iconfont"></i></div></a>
-                <div class="sort-total pull-right">共1688个商品</div>
             </div>
         </section>
         <section class="item-show__div clearfix">
@@ -156,6 +144,7 @@
         </ul>
         <script>
             $(document).ready(function(){ $('.to-top').toTop({position:false}) });
+
             $(function(){
                 $('.redhover').each(function (i,k) {
                     var s_key = $(this).parent().attr('field');
@@ -174,7 +163,7 @@
                     var s_key = $(this).parent().attr('field');
                     var s_val = $(this).parent().attr('value');
 //                    alert(s_key);
-                    search += s_key+ '=' +s_val+'&';
+                    search += s_key+'='+s_val+'&';
                 });
 //                alert(search);
                 var url = "{{$url}}";
@@ -182,7 +171,12 @@
                      url +='?'+search.substring(0,search.length-1);
                      location.href = url;
                 }
+//                alert(url);
+                $.get('/goods/goods_list',{url:url},function(res){
+
+                },'json');
             });
+
         </script>
     </div>
 @include('index.lay.bottom')
