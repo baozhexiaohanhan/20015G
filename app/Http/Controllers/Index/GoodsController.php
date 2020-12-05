@@ -34,7 +34,7 @@ class GoodsController extends Controller
         }
 
         public function video(){
-           $goods = Goods::where('is_del','1')->orderBy('goods_id','desc')->get();
+           $goods = Goods::where('is_del','1')->orderBy('goods_id','desc')->paginate(12);
 
            return view('index/goods/room',['goods'=>$goods]);
         }
