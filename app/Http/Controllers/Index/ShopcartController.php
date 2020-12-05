@@ -144,15 +144,30 @@ class ShopcartController extends Controller
 
     // 沙箱支付
     public function pay(){
+        // 普通订单
         $order_id = request()->order_id;
-        // $order_id = 4;
         $order_id = explode(",",$order_id);
+
+        $orders = request()->order;
+        if($orders){
+        $ordera = explode(",",$orders);
+        $info = Redis::hgetall($orders);
+        $kk = "order_sn".$info['order_sn'];
+        Redis::hmset($kk,$ordera);
+        }
+        // $res = Redis::hgetall($kk);
+        // dd($res);
+        // $order_id = 1;
         $config = config("alipay");
         require_once app_path('Common/alipay/pagepay/service/AlipayTradeService.php');
         require_once app_path('Common/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php');
+        $order = Order_info::whereIn("order_id",$order_id)->pluck("order_sn")->toArray();
+        $order_price = Order_info::whereIn("order_id",$order_id)->sum("order_price");
+        // dd($order);
+        if($order){
+            // dd(11);
             //使用SQL查询订单信息
-            $order = Order_info::whereIn("order_id",$order_id)->pluck("order_sn")->toArray();
-            $order_price = Order_info::whereIn("order_id",$order_id)->sum("order_price");
+           
             // dd($order);
            
             // dd($order_name);
@@ -167,6 +182,23 @@ class ShopcartController extends Controller
             //付款金额，必填
             $total_amount = $order_price;
         
+        }else{
+            // dd(22);
+            //使用SQL查询订单信息
+           
+            // dd($order_name);
+            //商户订单号，商户网站订单系统中唯一订单号，必填
+            $out_trade_no = $info['order_sn'];
+        
+            //订单名称，必填
+           
+            $subject = $info['name'];
+        
+            //付款金额，必填
+            $total_amount = $info['order_price'];
+        
+        }
+            
             //商品描述，可空
             $body = "";
         
@@ -195,6 +227,21 @@ class ShopcartController extends Controller
         $config =config("alipay");
         require_once app_path('Common/alipay/pagepay/service/AlipayTradeService.php');
         $arr = $_GET;
+
+        $kk = "order_sn".$arr['out_trade_no'];
+        $res = Redis::hgetall($kk);
+        $order_id = implode(",",$res);
+        // dd($order_id);
+        Redis::hmset($order_id,
+            "order_status",1,
+            "pay_status",1,
+        );
+
+        $data = Redis::hgetall($order_id);
+        unset($data['name']);
+        // dd($data);
+        
+        // dd($res2);
         $aop = new \AlipayTradeService($config);
         $result = $aop->check($arr);
         $count = Order_info::where(['order_sn'=>$arr['out_trade_no'],"order_price"=>$arr['total_amount']])->count();
@@ -205,16 +252,56 @@ class ShopcartController extends Controller
         3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
         4、验证app_id是否为该商户本身。
         */
-        if($result) {//验证成功
-            if(!$count){
-                return '发生重大事故:订单号'.$arr['out_trade_no'].'和订单金额'.$arr['total_amount'].'不在当前系统中！请联系客服';
+        if(!$data){
+            if($result) {//验证成功
+                if(!$count){
+                    return '发生重大事故:订单号'.$arr['out_trade_no'].'和订单金额'.$arr['total_amount'].'不在当前系统中！请联系客服';
+                }
+                // if($arr['seller_id']!=config('alipay.seller_id')){
+                //     return '发生重大事故:商家UID'.$arr['seller_id'].'和系统商家不符！请联系客服';
+                // }
+                if($arr['app_id']!=config('alipay.app_id')){
+                    return '发生重大事故:应用ID'.$arr['app_id'].'和系统商家不符！请联系客服';
+                }
+
+                $data = [
+                    "order_status"=>1,
+                    "pay_status"=>1,
+                ];
+                $update = Order_info::where(['order_sn'=>$arr['out_trade_no']])->update($data);
+                if($update){
+                    return redirect("/udai_order");
+                }else{
+                    return "修改失败";
+                }
+            }else {
+                //验证失败
+                echo "验证失败";
             }
-            // if($arr['seller_id']!=config('alipay.seller_id')){
-            //     return '发生重大事故:商家UID'.$arr['seller_id'].'和系统商家不符！请联系客服';
-            // }
-            if($arr['app_id']!=config('alipay.app_id')){
-                return '发生重大事故:应用ID'.$arr['app_id'].'和系统商家不符！请联系客服';
+        }else{
+            if($result) {//验证成功
+                if(!$data){
+                    return '发生重大事故:订单号'.$arr['out_trade_no'].'和订单金额'.$arr['total_amount'].'不在当前系统中！请联系客服';
+                }
+                // if($arr['seller_id']!=config('alipay.seller_id')){
+                //     return '发生重大事故:商家UID'.$arr['seller_id'].'和系统商家不符！请联系客服';
+                // }
+                if($arr['app_id']!=config('alipay.app_id')){
+                    return '发生重大事故:应用ID'.$arr['app_id'].'和系统商家不符！请联系客服';
+                }
+                $res2 = Order_info::insert($data);
+                // dd($res2);
+                if($res2){
+                    return redirect("/udai_order");
+                }else{
+                    return "修改失败";
+                }
+            }else {
+                //验证失败
+                echo "验证失败";
             }
+        }
+        
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代码
             
@@ -232,21 +319,8 @@ class ShopcartController extends Controller
             //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
             
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            $data = [
-                "order_status"=>1,
-                "pay_status"=>1,
-            ];
-            $update = Order_info::where(['order_sn'=>$arr['out_trade_no']])->update($data);
-            if($update){
-                return redirect("/home");
-            }else{
-                return "修改失败";
-            }
-        }
-        else {
-            //验证失败
-            echo "验证失败";
-        }
+           
+        
       
        
     }

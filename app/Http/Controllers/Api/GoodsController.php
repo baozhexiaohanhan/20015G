@@ -36,26 +36,26 @@ class GoodsController extends Controller
             $where[] = ['goods_name','like',"%$goods_name%"];
         }
 //        获取所有分类
-$query = request()->all();
-// return $query;
-if(isset($query['price'])){
-        $price_array = explode('元',$query['price']);
-        $price_array = explode('-',$price_array[0]);
-        $where[] = [
-            'goods_price','>',$price_array[0],
-        ];
-        if(isset($price_array[1])){
+        $query = request()->all();
+        // return $query;
+        if(isset($query['price'])){
+            $price_array = explode('元',$query['price']);
+            $price_array = explode('-',$price_array[0]);
             $where[] = [
-                'goods_price','<',$price_array[1],
+                'goods_price','>',$price_array[0],
             ];
-        }
-        if(isset($query['brand_id'])){
-            $where[] = [
-                'brand_id','=',$query['brand_id']
-            ];
-        }
+            if(isset($price_array[1])){
+                $where[] = [
+                    'goods_price','<',$price_array[1],
+                ];
+            }
+            if(isset($query['brand_id'])){
+                $where[] = [
+                    'brand_id','=',$query['brand_id']
+                ];
+            }
         //    return $where;
-    }
+        }
         $soncate_id = DB::table('cate')->where('pid',$cate_id)->pluck('cate_id')->toArray();
         // return $soncate_id;
         array_push($soncate_id,$cate_id);
