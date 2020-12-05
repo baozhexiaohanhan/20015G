@@ -17,12 +17,12 @@
 			<div class="pull-right">
 				<div class="user-content__box clearfix bgf">
 					<div class="title">账户信息-收货地址</div>
-					<form action="/address_do" class="user-addr__form form-horizontal" role="form">
-						<p class="fz18 cr">新增收货地址<span class="c6" style="margin-left: 20px">电话号码、手机号码选填一项，其余均为必填项</span></p>
+					<form action="/edit" class="user-addr__form form-horizontal" role="form">
+						<p class="fz18 cr">修改收货地址<span class="c6" style="margin-left: 20px">电话号码、手机号码选填一项，其余均为必填项</span></p>
 						<div class="form-group">
 							<label for="name" class="col-sm-2 control-label">收货人姓名：</label>
 							<div class="col-sm-6">
-								<input class="form-control" id="name" name="consignee" placeholder="请输入姓名" type="text">
+								<input class="form-control" id="name" name="consignee" value="{{$data['consignee']}}" placeholder="请输入姓名" type="text">
 							</div>
 						</div>
 						<div class="form-group">
@@ -32,7 +32,7 @@
 								
 									<select name="country" id="selCountries_0">
 										<option value="0">请选择国家</option>
-										@foreach($data['region'] as $v)
+										@foreach($region as $v)
 										<option value="{{$v['region_id']}}">{{$v['region_name']}}</option>
 										@endforeach
 									</select>
@@ -46,25 +46,25 @@
 										<option value="0">请选择区/县</option>
 									</select>
 								</div>
-								<input class="form-control" id="details" name="address" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码等信息" maxlength="30" type="text">
+								<input class="form-control" id="details" name="address" value="{{$data['address']}}" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码等信息" maxlength="30" type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="mobile" class="col-sm-2 control-label">手机号码：</label>
 							<div class="col-sm-6">
-								<input class="form-control" id="mobile" name="tel" placeholder="请输入手机号码" type="text">
+								<input class="form-control" id="mobile" name="tel" value="{{$data['tel']}}" placeholder="请输入手机号码" type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="mobile" class="col-sm-2 control-label">邮箱：</label>
 							<div class="col-sm-6">
-								<input class="form-control" id="mobile" name="email" placeholder="请输入邮箱" type="text">
+								<input class="form-control" id="mobile" name="email" value="{{$data['email']}}" placeholder="请输入邮箱" type="text">
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-6">
-								<button type="submit" class="but">保存</button>
+								<button type="submit" class="but">修改</button>
 							</div>
 						</div>
 						
@@ -121,28 +121,7 @@
 						</script>
 
 					</form>
-					<p class="fz18 cr">已保存的有效地址</p>
-					<div class="table-thead addr-thead">
-						<div class="tdf1">收货人</div>
-						<div class="tdf2">所在地</div>
-						<div class="tdf3"><div class="tdt-a_l">详细地址</div></div>
-						<!-- <div class="tdf1">邮编</div> -->
-						<div class="tdf1">电话/手机</div>
-						<div class="tdf1">操作</div>
-					</div>
-						@foreach($data['address'] as $k=>$v)
-						<div class="addr-item">
-							<div class="tdf1">{{$v['consignee']}}</div>
-							<div class="tdf2 tdt-a_l">{{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}}</div>
-							<div class="tdf3 tdt-a_l">{{$v['address']}}</div>
-							<div class="tdf1">{{$v['tel']}}</div>
-							<div class="tdf1 order">
-								<a href="{{url('/show/'.$v['address_id'])}}" >修改</a>
-								<a class="btn" address_id ="{{$v['address_id']}}">删除</a>
-							</div>
-						</div>
-						@endforeach
-				</div>
+					
 			</div>
 		</section>
 	</div>
