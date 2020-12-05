@@ -199,9 +199,11 @@ Route::prefix('/')->group(function(){
 
 Route::get('/shopcart','Index\ShopcartController@shopcart');//购物车订单
 Route::get('/address','Index\ShopcartController@address');//收货地址
-Route::get('/address_add','Index\ShopcartController@address_add');//收货地址
-Route::get('/address_do','Index\ShopcartController@address_do');//收货地址
-Route::get('/destroy','Index\ShopcartController@destroy');//收货地址
+Route::get('/address_add','Index\ShopcartController@address_add');//三级联动收货地址
+Route::get('/address_do','Index\ShopcartController@address_do');//执行收货地址
+Route::get('/destroy','Index\ShopcartController@destroy');//删除收货地址
+Route::get('/show/{id}','Index\ShopcartController@show');//修改收货地址
+Route::post('/edit/{id}','Index\ShopcartController@edit');//执行修改
 Route::any('/order','Index\ShopcartController@order');//生成订单
 Route::get('/pay','Index\ShopcartController@pay');//支付
 Route::get('/return_url','Index\ShopcartController@return_url');//支付同步

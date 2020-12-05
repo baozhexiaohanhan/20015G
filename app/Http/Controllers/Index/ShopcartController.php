@@ -65,24 +65,37 @@ class ShopcartController extends Controller
             return  redirect('/shopcart');
         }
     }
-    //  删除收货地址
-        public function destroy(){
-    //  $brand_id = $request->input('id');
-            $ids = Request()->all();
-            // dd($ids);
-            if(!$ids){
-                return $this->JsonResponse('11','请选择要删除的数据');
-            }
-            foreach ($ids as $k=>$v){
-                $isdel = Address::destroy($v);
-            }
-    //  dd($isdel);
-            if($isdel){
-                return $this->JsonResponse('0','OK');
-            }else{
-                return $this->JsonResponse('1','删除失败');
-            }
+//  删除收货地址
+    public function destroy(){
+//  $brand_id = $request->input('id');
+        $ids = Request()->all();
+        // dd($ids);
+        if(!$ids){
+            return $this->JsonResponse('11','请选择要删除的数据');
         }
+        foreach ($ids as $k=>$v){
+            $isdel = Address::destroy($v);
+        }
+//  dd($isdel);
+        if($isdel){
+            return $this->JsonResponse('0','OK');
+        }else{
+            return $this->JsonResponse('1','删除失败');
+        }
+    }
+
+    public function show($id)
+    {
+        $addressModel = new Address();
+        $region = Region::where('parent_id',0)->get();
+        $data = $addressModel->where('address_id',$id)->first();
+    //    dd($data);
+        return view('index/address/update',['data'=>$data,'region'=>$region]);
+    }
+
+    public function edit(){
+        
+    }
     
 
     //生成订单 and  订单商品
