@@ -47,11 +47,11 @@ class positionController extends Controller
     public function createhtml(Request $request,$position_id){
         $position=PositionModel::find($position_id);
         if($position->template==1){
-            $ad=AdModel::where('position_id',$position_id)->value('ad_imgs');
+            $ad=AdModel::find($position_id);
             // dd($ad);
             $template='onepic';
         }elseif($position->template==2){
-            $ad=AdModel::where('position_id',$position_id)->pluck('ad_imgs');
+            $ad=AdModel::where('position_id',$position_id)->get();
             // dd($ad);
             $template='morepic';
         }

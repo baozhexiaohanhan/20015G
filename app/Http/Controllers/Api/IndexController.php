@@ -17,9 +17,6 @@ class IndexController extends Controller
 
 	
 		//dd($data);
-
-
-
 		$cate=Cate::get();
 		$cate=self::createTree($cate,'cate_id');
 		$goods=Goods::where(['is_up'=>1,'cate_id'=>4,'is_show'=>1])->get();
@@ -40,6 +37,7 @@ class IndexController extends Controller
             "goods5"=>$goods5,
             "daohang"=>$daohang,
 		];
+
 		$msg = json_encode($msg1);
 		$data = ['code'=>100,'msg'=>"返回数据成功","ret"=>$msg];
 		

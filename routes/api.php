@@ -59,6 +59,7 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 
         Route::any('/addcoupon','Api\CouponController@addcoupon');
         Route::any('/collect','Api\CouponController@collect');
+        Route::any('/udai_collect','Api\CouponController@udai_collect');
 
 	
 	});
@@ -74,6 +75,7 @@ Route::group(['domain' => 'www.2001api.com'], function () {
 	Route::get("/cart/destroy/{id}","Api\CartController@destroy");//删除
 
 	Route::any('/historys','Api\HistoryController@historys');//个人中心-浏览历史
+	
 });
 	
 

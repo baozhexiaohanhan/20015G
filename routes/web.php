@@ -179,6 +179,8 @@ Route::get('/logindo','Index\LoginController@logindo');//注册
 
 Route::prefix('/goods')->group(function(){
     Route::get('/goods_list/{cate_id}','Index\GoodsController@goods_list');
+    Route::any('/search','Index\GoodsController@search');
+    Route::any('/video','Index\GoodsController@video');
     // Route::get('/list/{cate_id}','Index\GoodsController@list');
 });
 
@@ -213,12 +215,13 @@ Route::any('/order_add','Index\ShopcartController@order_add');//支付同步
 
 Route::any('/history','Index\HistoryController@history');//浏览历史记录
 
-
+Route::any('/historycookie','Index\HistoryController@historycookie');//个人中心-浏览历史
 // 个人中心
 Route::prefix('/')->group(function(){
     Route::any('/welcome','Index\CoreorderController@welcome');
     Route::any('/udai_order','Index\CoreorderController@udai_order');
     Route::any('/tucu','Index\CoreorderController@tucu');
+    Route::any('/udai_collect','Index\CoreorderController@udai_collect');
 });
     Route::any('/history','Index\HistoryController@history');
     Route::any('/addcoupon','Api\DetailsController@addcoupon');

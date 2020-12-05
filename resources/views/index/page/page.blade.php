@@ -1,8 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
+@section('title', 'U 袋网 列表')
+@include('index.lay.tops')
+@section('tops2')
+@include('index.lay.top')
+@section('tops')
+ 
     <style>
         .birthday .container{
             width:600px;
@@ -269,5 +270,40 @@
             </div>
         </div>
     </div>
+    <div class="content inner">
+       <section class="scroll-floor floor-2">
+            <div class="floor-title">
+                <i class="iconfont icon-skirt fz16">生日活动区</i>
+            </div>
+        </section>
+        <div>
+            <section class="item-show__div clearfix">
+            <div class="pull-left">
+              <div class="item-list__area clearfix">
+                    @foreach($data as $k=>$v)
+                    <div class="item-card">
+                        <a href="/details/?goods_id={{$v->goods_id}}" class="photo">
+                            <img src="{{$v->goods_img}}" class="cover">
+                            <div class="name">{{$v->goods_name}}</div>
+                            <input type="hidden" name="goods_name">
+                        </a>
+                        <div class="middle">
+                            <div class="price"><small>￥</small>原价{{$v->goods_price}}  现价 ￥{{$v->shop_price}}</div>
+                            <!-- <div class="sale"><a href="">加入购物车</a></div> -->
+                        </div>
+                        <div class="buttom">
+                            <div>销量 <b>666</b></div>
+                            <div>人气 <b>888</b></div>
+                            <div>评论 <b>1688</b></div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+        </div>
+    </div>
+       
 </body>
-</html>
+@include('index.lay.bottom')
+@section('bottom')

@@ -6,10 +6,6 @@
 
     <div class="content inner">
         <section class="filter-section clearfix">
-            <ol class="breadcrumb">
-                <li><a href="index.html">首页</a></li>
-                <li class="active">商品筛选</li>
-            </ol>
             <div class="filter-box">
                 <div class="all-filter">
                     <div class="filter-value">
@@ -20,7 +16,6 @@
                                 <li  class="close tag-price" style="display: none">价格</li>
                             </ul>
                         </div>
-                        <a class="reset pull-right" href="item_category.html">重置</a>
                     </div>
                 </div>
                 <div class="filter-prop-item">
@@ -48,23 +43,17 @@
                     </ul>
                 </div>
             </div>
-            <div class="sort-box bgf5">
-                <div class="sort-text">排序：</div>
-                <a href=""><div class="sort-text">销量 <i class="iconfont icon-sortDown"></i></div></a>
-                <a href=""><div class="sort-text">评价 <i class="iconfont icon-sortUp"></i></div></a>
-                <a href=""><div class="sort-text">价格 <i class="iconfont"></i></div></a>
-                <div class="sort-total pull-right">共1688个商品</div>
-            </div>
         </section>
         <section class="item-show__div clearfix">
             <div class="pull-left">
                 <div class="item-list__area clearfix">
-                    @foreach($data['goods']['data'] as $v)
+                    @foreach($data['goods'] as $v)
                     <div class="item-card">
 
                         <a href="/details/?goods_id={{$v['goods_id']}}" class="photo">
                             <img src="{{$v['goods_img']}}" class="cover">
                             <div class="name">{{$v['goods_name']}}</div>
+                            <input type="hidden" name="goods_name">
                         </a>
                         <div class="middle">
                             <div class="price"><small>￥</small>{{$v['goods_price']}}</div>
@@ -100,17 +89,22 @@
 
                 <div class="desc-segments__content">
                     <div class="lace-title">
-                        <span class="c6">浏览历史</span>
+                        <span class="c6">爆款推荐</span>
                     </div>
-                <!--     <div class="picked-box">
-                        @foreach($history['history'] as $k=>$v)
+                
+                <div class="picked-box">
+                    @foreach($data['hot_goods'] as $k=>$v)
                         <a href="" class="picked-item"><img src="{{$v['goods_img']}}" alt="" class="cover"><span class="look_price">¥{{$v['goods_price']}}</span></a>
                         @endforeach
-                    </div> -->
-                     <div class="picked-box">
-                         @foreach($history['history'] as $k=>$v)
-                        <a href="/details/?goods_id={{$v['goods_id']}}" class="picked-item"><img src="{{$v['goods_img']}}" alt="{{$v['goods_name']}}" style="width: 160px;height: 120px;margin-top: 10px;" class="cover"><span >¥{{$v['goods_price']}}</span><br>{{$v['goods_name']}}</a>
-                        @endforeach
+                        <!-- <a href="" class="picked-item"><img src="images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a> -->
                     </div>
                 </div>
             </div>
@@ -156,6 +150,7 @@
         </ul>
         <script>
             $(document).ready(function(){ $('.to-top').toTop({position:false}) });
+
             $(function(){
                 $('.redhover').each(function (i,k) {
                     var s_key = $(this).parent().attr('field');
@@ -174,15 +169,20 @@
                     var s_key = $(this).parent().attr('field');
                     var s_val = $(this).parent().attr('value');
 //                    alert(s_key);
-                    search += s_key+ '=' +s_val+'&';
+                    search += s_key+'='+s_val+'&';
                 });
 //                alert(search);
-                var url = "{{$url}}";
+                var url = "{{$urls}}";
                 if(search){
                      url +='?'+search.substring(0,search.length-1);
                      location.href = url;
                 }
+//                alert(url);
+                $.get('/goods/goods_list',{url:url},function(res){
+
+                },'json');
             });
+
         </script>
     </div>
 @include('index.lay.bottom')

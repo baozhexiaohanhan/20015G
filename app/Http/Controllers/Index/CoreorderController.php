@@ -19,7 +19,16 @@ class CoreorderController extends Controller
     }
     public function tucu(Request $request){
 		Redis::del("admin");
-		$request->session()->forget('name');
+        $request->session()->forget('name');
 		return redirect("/");
 	}
+	public function udai_collect()
+    {
+        $url = "http://www.2001api.com/udai_collect";
+        $data = curl_get($url);
+//        dd($data);
+        $data = json_decode($data['data'],true);
+//         dd($data);
+        return view("index.coreorder.udai_collect",['data'=>$data]);
+    }
 }
