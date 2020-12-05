@@ -26,7 +26,7 @@ class AdController extends Controller
     }
      public function store(Request $request){
     	$post=$request->except('_token');
-    	// dd($post);
+    	dd($post);
         $request->validate([
             'ad_name' => 'required|unique:ad',
             'link_phone'=>'digits_between:10,11',
