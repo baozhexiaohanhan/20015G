@@ -22,13 +22,13 @@
                     @foreach($data as $k=>$v)
                     <div class="item-card">
 
-                        <a href="/details/?goods_id={{$v['goods_id}}" class="photo">
-                            <img src="{{$v['goods_img']}}" class="cover">
-                            <div class="name">{{$v['goods_name']}}</div>
+                        <a href="/details/?goods_id={{$v->goods_id}}" class="photo">
+                            <img src="{{$v->goods_img}}" class="cover">
+                            <div class="name">{{$v->goods_name}}</div>
                             <input type="hidden" name="goods_name">
                         </a>
                         <div class="middle">
-                            <div class="price"><small>￥</small>{{$v['goods_price']}}</div>
+                            <div class="price"><small>￥</small>{{$v->goods_price}}</div>
                             <!-- <div class="sale"><a href="">加入购物车</a></div> -->
                         </div>
                         <div class="buttom">
