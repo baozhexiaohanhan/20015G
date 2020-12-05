@@ -60,10 +60,10 @@
 					<a href="" class="more"><i class="iconfont icon-more"></i></a>
 				</div>
 				<div class="con-box">
-					<a class="left-img hot-img" href="">
+					<!-- <a class="left-img hot-img" href=""> -->
 						<script src="/ads/1.js"></script>
 						<!-- <img src="/static/images/floor_1.jpg" alt="" class="cover"> -->
-					</a>
+					<!-- </a> -->
 					<div class="right-box hot-box">
 					@foreach($goods->goods as $k=>$v)
 						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
@@ -140,10 +140,10 @@
 				</div>
 			</div>
 			<div class="con-box">
-				<a class="left-img hot-img" href="">
+				<!-- <a class="left-img hot-img" href=""> -->
 					<script src="/ads/2.js"></script>
 					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
-				</a>
+				<!-- </a> -->
 				<div class="right-box">
 					@foreach($goods->goods1 as $k=>$v)
 						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
@@ -178,10 +178,10 @@
 				</div>
 			</div>
 			<div class="con-box">
-				<a class="left-img hot-img" href="">
+				<!-- <a class="left-img hot-img" href=""> -->
 					<script src="/ads/3.js"></script>
 					<!-- <img src="/static/images/floor_3.jpg" alt="" class="cover"> -->
-				</a>
+				<!-- </a> -->
 				<div class="right-box">
 				@foreach($goods->goods2 as $k=>$v)
 						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
@@ -216,10 +216,10 @@
 				</div>
 			</div>
 			<div class="con-box">
-				<a class="left-img hot-img" href="">
+				<!-- <a class="left-img hot-img" href=""> -->
 					<script src="/ads/4.js"></script>
 					<!-- <img src="/static/images/floor_4.jpg" alt="" class="cover"> -->
-				</a>
+				<!-- </a> -->
 				<div class="right-box">
 				@foreach($goods->goods3 as $k=>$v)
 						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
@@ -254,10 +254,10 @@
 				</div>
 			</div>
 			<div class="con-box">
-				<a class="left-img hot-img" href="">
+				<!-- <a class="left-img hot-img" href=""> -->
 					<script src="/ads/5.js"></script>
 					<!-- <img src="/static/images/floor_5.jpg" alt="" class="cover"> -->
-				</a>
+				<!-- </a> -->
 				<div class="right-box">
 				@foreach($goods->goods4 as $k=>$v)
 						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
@@ -292,10 +292,10 @@
 				</div>
 			</div>
 			<div class="con-box">
-				<a class="left-img hot-img" href="">
+				<!-- <a class="left-img hot-img" href=""> -->
 					<script src="/ads/6.js"></script>
 					<!-- <img src="/static/images/floor_6.jpg" alt="" class="cover"> -->
-				</a>
+				<!-- </a> -->
 				<div class="right-box">
 				@foreach($goods->goods5 as $k=>$v)
 						<a href="/details/?goods_id={{$v->goods_id}}" class="floor-item">
