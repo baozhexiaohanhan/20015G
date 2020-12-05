@@ -66,24 +66,37 @@ class ShopcartController extends Controller
             return  redirect('/shopcart');
         }
     }
-    //  删除收货地址
-        public function destroy(){
-    //  $brand_id = $request->input('id');
-            $ids = Request()->all();
-            // dd($ids);
-            if(!$ids){
-                return $this->JsonResponse('11','请选择要删除的数据');
-            }
-            foreach ($ids as $k=>$v){
-                $isdel = Address::destroy($v);
-            }
-    //  dd($isdel);
-            if($isdel){
-                return $this->JsonResponse('0','OK');
-            }else{
-                return $this->JsonResponse('1','删除失败');
-            }
+//  删除收货地址
+    public function destroy(){
+//  $brand_id = $request->input('id');
+        $ids = Request()->all();
+        // dd($ids);
+        if(!$ids){
+            return $this->JsonResponse('11','请选择要删除的数据');
         }
+        foreach ($ids as $k=>$v){
+            $isdel = Address::destroy($v);
+        }
+//  dd($isdel);
+        if($isdel){
+            return $this->JsonResponse('0','OK');
+        }else{
+            return $this->JsonResponse('1','删除失败');
+        }
+    }
+
+    public function show($id)
+    {
+        $addressModel = new Address();
+        $region = Region::where('parent_id',0)->get();
+        $data = $addressModel->where('address_id',$id)->first();
+    //    dd($data);
+        return view('index/address/update',['data'=>$data,'region'=>$region]);
+    }
+
+    public function edit(){
+        
+    }
     
 
     //生成订单 and  订单商品
@@ -150,10 +163,10 @@ class ShopcartController extends Controller
 
         $orders = request()->order;
         if($orders){
-        $ordera = explode(",",$orders);
-        $info = Redis::hgetall($orders);
-        $kk = "order_sn".$info['order_sn'];
-        Redis::hmset($kk,$ordera);
+            $ordera = explode(",",$orders);
+            $info = Redis::hgetall($orders);
+            $kk = "order_sn".$info['order_sn'];
+            Redis::hmset($kk,$ordera);
         }
         // $res = Redis::hgetall($kk);
         // dd($res);
@@ -222,29 +235,57 @@ class ShopcartController extends Controller
         
             //输出表单
             // var_dump($response);
+            //  改变订单号查出订单号的格式
     }
     public function return_url(){
         $config =config("alipay");
         require_once app_path('Common/alipay/pagepay/service/AlipayTradeService.php');
         $arr = $_GET;
-
+        // dd($arr);
+        $out_trade_no = $arr['out_trade_no'];
+        // trim($out_trade_no);
+        // dump($out_trade_no);
+        if(strlen($out_trade_no)>=38){
+        $count = strlen($out_trade_no)/2;
+        $order1 = $count-1;
+        $order2 = $count+1;
+        // dd($order2);
+        // dd($count); 
+        $order_sn1 = substr($out_trade_no,0,$order1);
+        $order_sn2 = substr($out_trade_no,$order2);
+        $order_sns = [
+            $order_sn1,
+            $order_sn2,
+        ];
+        // dd(11);
+        }else{
+            $order_snss = $arr['out_trade_no'];
+            $order_sns = explode(",",$order_snss);
+            // dd($order_sns);
+        }
+        // dd($order_sns);
+        // $out_trade_no = explode(",",$out_trade_no);
+        // $out_trade_no = array_chunk($out_trade_no,2);
+        // dd($out_trade_no);
         $kk = "order_sn".$arr['out_trade_no'];
         $res = Redis::hgetall($kk);
         $order_id = implode(",",$res);
         // dd($order_id);
-        Redis::hmset($order_id,
-            "order_status",1,
-            "pay_status",1,
-        );
-
+        if($res){
+            Redis::hmset($order_id,
+                "order_status",1,
+                "pay_status",1,
+            );
+        }
         $data = Redis::hgetall($order_id);
         unset($data['name']);
         // dd($data);
-        
         // dd($res2);
         $aop = new \AlipayTradeService($config);
         $result = $aop->check($arr);
-        $count = Order_info::where(['order_sn'=>$arr['out_trade_no'],"order_price"=>$arr['total_amount']])->count();
+        $count = Order_info::whereIn('order_sn',$order_sns)->count();
+        
+        // dd($count);
 
                 /* 实际验证过程建议商户添加以下校验。
         1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
@@ -252,7 +293,9 @@ class ShopcartController extends Controller
         3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
         4、验证app_id是否为该商户本身。
         */
-        if(!$data){
+        // dd($res);
+        if(!$res){
+            // dd(11);/
             if($result) {//验证成功
                 if(!$count){
                     return '发生重大事故:订单号'.$arr['out_trade_no'].'和订单金额'.$arr['total_amount'].'不在当前系统中！请联系客服';
@@ -268,7 +311,9 @@ class ShopcartController extends Controller
                     "order_status"=>1,
                     "pay_status"=>1,
                 ];
-                $update = Order_info::where(['order_sn'=>$arr['out_trade_no']])->update($data);
+                // dd(11);
+                $update = Order_info::whereIn('order_sn',$order_sns)->update($data);
+                // dd($update);
                 if($update){
                     return redirect("/udai_order");
                 }else{
@@ -279,6 +324,7 @@ class ShopcartController extends Controller
                 echo "验证失败";
             }
         }else{
+            // dd(22);
             if($result) {//验证成功
                 if(!$data){
                     return '发生重大事故:订单号'.$arr['out_trade_no'].'和订单金额'.$arr['total_amount'].'不在当前系统中！请联系客服';
