@@ -35,19 +35,7 @@
             <li>
                 <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>订单模块</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                 <ul class="sub-menu">
-                    <li><a _href="{{url('/skus/sku')}}"><i class="iconfont">&#xe6a7;</i><cite>订单列表</cite></a></li>
-                    <li>
-                        <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>类型 属性 添加</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
-                        <ul class="sub-menu">
-                            <li><a _href="{{url('/skus/type')}}"><i class="iconfont">&#xe6a7;</i><cite>商品类型添加</cite></a></li>
-                            <li><a _href="{{url('/skus/type_index')}}"><i class="iconfont">&#xe6a7;</i><cite>商品类型展示</cite></a></li>
-                           
-                        </ul>
-                    </li>
-                    <!-- <li><a _href="{{url('/type')}}"><i class="iconfont">&#xe6a7;</i><cite>是是i</cite></a></li>
-                    <li><a _href="{{url('/type_index')}}"><i class="iconfont">&#xe6a7;</i><cite>rt</cite></a></li>
-                    <li><a _href="html/carousel.html"><i class="iconfont">&#xe6a7;</i><cite>轮播图</cite></a></li>
-                    <li><a _href="html/city.html"><i class="iconfont">&#xe6a7;</i><cite>城市三级联动</cite></a></li> -->
+                    <li><a _href="{{url('/business/order_index')}}"><i class="iconfont">&#xe6a7;</i><cite>订单列表</cite></a></li>
                 </ul>
             </li>
              <li >
