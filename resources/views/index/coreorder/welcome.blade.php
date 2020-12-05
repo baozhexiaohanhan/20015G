@@ -39,18 +39,18 @@
 							<i class="iconfont icon-star fz40 cr"></i>
 							<div class="c6">收藏 <span class="c3">0</span></div>
 						</a>
-						<a href="udai_coupon.html" class="user-nav__but">
+						<!-- <a href="udai_coupon.html" class="user-nav__but">
 							<i class="iconfont icon-quan fz40 cr"></i>
 							<div class="c6">优惠券 <span class="cr">2</span></div>
-						</a>
-						<a href="udai_integral.html" class="user-nav__but">
+						</a> -->
+						<!-- <a href="udai_integral.html" class="user-nav__but">
 							<i class="iconfont icon-jifen fz40 cr"></i>
 							<div class="c6">积分 <span class="cr">200</span></div>
-						</a>
-						<a href="udai_message.html" class="user-nav__but">
+						</a> -->
+						<!-- <a href="udai_message.html" class="user-nav__but">
 							<i class="iconfont icon-xiaoxi fz40 cr"></i>
 							<div class="c6">消息 <span class="cr">2</span></div>
-						</a>
+						</a> -->
 					</div>
 				</div>
 				<div class="order-list__div bgf">
