@@ -110,13 +110,14 @@ class SeckillController extends Controller
     $user_id = Redis::hmget("admin",["user_id"]);
     // dd($user_id);
     $user_id = implode(",",$user_id);
+    // dd($user_id);
     if($user_id==""){
         return redirect("/log");
     }
   
     // 地址
-    $address = Address::where(["address_id"=>2,"user_id"=>$user_id])->first();
-    // dd($address);
+    $address = Address::where(["address_id"=>1,"user_id"=>$user_id])->first();
+    // dd($da['price']);
     // 支付方式
     $info = [1=>"微信",2=>"支付宝",3=>"货到付款"];
     $mode['pay_type'] =$info[$da['pay_type']];
@@ -124,9 +125,44 @@ class SeckillController extends Controller
     // 总价价格
     // $rec_id = $da['rec_id'];
     // $rec_id = implode(",",$rec_id);
-    $order_price = $da['price'];
+    // $order_price = $da['price'];
+
      //\DB::select("select sum(goods_price*buy_number) as tot from cart where rec_id in($rec_id) ");
-    //  Redis::hmset("order".$user_id,[]);
+
+     $seckill_id = $da['id'];
+     $or = "order_".$user_id."_".$seckill_id;
+    //  dump($or);
+    $seckill = Seckill::where("id",$seckill_id)->first();
+    // dd();
+    Redis::hmset($or,
+        "order_sn",$order_sn,
+        "user_id",$user_id,
+        "consignee",$address['address_name'],
+        "country",$address['country'],
+        "province",$address['province'],
+        "city",$address['city'],
+        "district",$address['district'],
+        "address",$address['address'],
+        "mobile",$address['tel'],
+        "tel",$address['tel'],
+        "order_price",$da['price'],
+        "goods_price",$da['price'],
+        "pay_type",$da['pay_type'],
+        "pay_name",$mode,
+        "seller_id",$da['seller_id'],
+        "name",$seckill['name'],
+    );
+    // Redis::exprie($or);
+    // $res = Redis::hgetall($or);
+    // Redis::del($or);dd(11);
+    // dd($res['order_price']);
+    $order = $or;
+    return $message = [
+        "code"=>0002,
+        "message"=>"添加成功",
+        "success"=>true,
+        "order"=>$order,
+        ];
     // $order_price = $order_price[0]->tot;
     // if($order_price > 100){
     //     $aa = rand(1,10);
@@ -136,35 +172,35 @@ class SeckillController extends Controller
     // }
     // $order_price = $order_price-$price;
     // dd($order_price);
-    $data = [
-        "order_sn"=>$order_sn,
-        "user_id"=>$user_id,
-        "consignee"=>$address['address_name'],
-        "country"=>$address['country'],
-        "province"=>$address['province'],
-        "city"=>$address['city'],
-        "district"=>$address['district'],
-        "address"=>$address['address'],
-        "mobile"=>$address['tel'],
-        "tel"=>$address['tel'],
-        "best_time"=>0,
-        "sign_building"=>0,
-        "pay_name"=>$mode,
-        "pay_type"=>$da['pay_type'],
-        "order_price"=>$order_price,
-        "goods_price"=>$order_price,
-        "addtime"=>time(),
-        "seller_id"=>$da['seller_id'],
-        "seckill"=>2,
-    ];
+    // $data = [
+    //     "order_sn"=>$order_sn,
+    //     "user_id"=>$user_id,
+    //     "consignee"=>$address['address_name'],
+    //     "country"=>$address['country'],
+    //     "province"=>$address['province'],
+    //     "city"=>$address['city'],
+    //     "district"=>$address['district'],
+    //     "address"=>$address['address'],
+    //     "mobile"=>$address['tel'],
+    //     "tel"=>$address['tel'],
+    //     "best_time"=>0,
+    //     "sign_building"=>0,
+    //     "pay_name"=>$mode,
+    //     "pay_type"=>$da['pay_type'],
+    //     "order_price"=>$order_price,
+    //     "goods_price"=>$order_price,
+    //     "addtime"=>time(),
+    //     "seller_id"=>$da['seller_id'],
+    //     "seckill"=>2,
+    // ];
     // Redis::hmset("order","order_sn",$order_sn,"user_id",$user_id,"address_id",2,"order_price",$order_price);
     // $order = Redis::hmget("order",["order_sn","user_id","address_id","order_price"]);
 
     // dd($order);
     // 订单表入库
-   $order_id = Order_info::insertGetId($data);
+//    $order_id = Order_info::insertGetId($data);
 //    $order_id = 1;
-    $seckill = Seckill::where("id",$da['id'])->first();
+    // $seckill = Seckill::where("id",$da['id'])->first();
     // dd($seckill);
     // $cary = $cary?$cary->toArray():[];
     // // $order_id = 1;
@@ -184,20 +220,20 @@ class SeckillController extends Controller
         // unset($cary[$k]['goods_totall']);
         // unset($cary[$k]['user_id']);
     // }
-    $goods_sn = rand(99999,10000);
-    $order_goods = [
-        "order_id"=>$order_id,
-        "goods_id"=>$seckill['goods_id'],
-        "goods_sn"=>$goods_sn,
-        "product_id"=>20,
-        "goods_name"=>$seckill['name'],
-        "shop_price"=>$seckill['price'],
-        "buy_number"=>1,
-        "goods_attr_id"=>"106|108|110",
-    ];
+    // $goods_sn = rand(99999,10000);
+    // $order_goods = [
+    //     "order_id"=>$order_id,
+    //     "goods_id"=>$seckill['goods_id'],
+    //     "goods_sn"=>$goods_sn,
+    //     "product_id"=>20,
+    //     "goods_name"=>$seckill['name'],
+    //     "shop_price"=>$seckill['price'],
+    //     "buy_number"=>1,
+    //     "goods_attr_id"=>"106|108|110",
+    // ];
     // dd($order_goods);
     // 订单商品
-    $res = Order_goods::insert($order_goods);
+    // $res = Order_goods::insert($order_goods);
     // dd($res);
     // 提交订单 进行减库存 判断有无规格 对货品表  或 商品表进行减库存
     // if($res){
@@ -218,12 +254,12 @@ class SeckillController extends Controller
     //   }
     // }
         // DB::commit();
-        return $message = [
-            "code"=>0002,
-            "message"=>"添加成功",
-            "success"=>true,
-            "order_id"=>$order_id,
-            ];
+        // return $message = [
+        //     "code"=>0002,
+        //     "message"=>"添加成功",
+        //     "success"=>true,
+        //     "order_id"=>$order_id,
+        //     ];
     // } catch (Exception $e){
         // DB::rollBack();
         // dump($e->getMessage);
