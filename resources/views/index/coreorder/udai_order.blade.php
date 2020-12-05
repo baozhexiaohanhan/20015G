@@ -57,7 +57,7 @@
 														<div class="img"><img src="{{$vv['goods_img']}}" alt="" class="cover"></div>
 														<div class="name ep2">{{$vv['goods_name']}}   X{{$vv['buy_number']}}</div>
 														<div class="format">颜色分类：深棕色  尺码：均码</div>
-														<div class="favour">使用优惠券：优惠¥2.00</div>
+														<div class="favour"></div>
 													</div>
 													@endforeach
 												</label>
@@ -68,9 +68,12 @@
 													@if($v['pay_status']==0)
 														等待付款
 													@endif
-													@if($v['is_send']==0)
-														待发货
+													@if($v['pay_status']==1)
+														@if($v['is_send']==0)
+															待发货
+														@endif
 													@endif
+													
 
 													@if($v['is_send']==1)
 														已发货
@@ -92,8 +95,11 @@
 												@if($v['order_status']==2)
 														已取消订单
 												@else
-												<a href="/pay/?order_id={{$v['order_id']}}" class="but but-primary " order_id="{{$v['order_id']}}">立即付款</a>
-												<a href="JavaScript:;" class="but c3 kuan" order_id="{{$v['order_id']}}">取消订单</a>
+													@if($v['pay_status']==0)
+														<a href="/pay/?order_id={{$v['order_id']}}" class="but but-primary " order_id="{{$v['order_id']}}">立即付款</a>
+														<a href="JavaScript:;" class="but c3 kuan" order_id="{{$v['order_id']}}">取消订单</a>
+													@endif
+											
 												@endif
 											</td>
 										</tr>
