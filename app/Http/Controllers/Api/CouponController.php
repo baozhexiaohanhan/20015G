@@ -57,6 +57,14 @@ class CouponController extends Controller
         if($res){
             return $this->jsonResponse('0','收藏成功');
         }
-
+    }
+//    个人中心 收藏展示
+    public function udai_collect()
+    {
+        $data = DB::table('collect')->leftjoin('goods','goods.goods_id','=','collect.goods_id')->get();
+//        dd($data);
+        $collect = json_encode($data);
+        $collect = ["ok","data"=>$collect];
+        return $collect;
     }
 }

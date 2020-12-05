@@ -241,7 +241,7 @@
 			dataType:"json",
 			success:function(res){
 				if(res.code==0002){
-					location.href="/pay/?order_id="+res.order_id;
+					location.href="/pay/?order="+res.order;
 					// console.log(res);
 				}
 				
