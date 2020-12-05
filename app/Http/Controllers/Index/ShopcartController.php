@@ -144,18 +144,17 @@ class ShopcartController extends Controller
 
     // 沙箱支付
     public function pay(){
-        $orders = request()->order;
-        $ordera = explode(",",$orders);
-        // dd($ordera);
-        $info = Redis::hgetall($orders);
-        // dd($info);
+        // 普通订单
         $order_id = request()->order_id;
-       
-        // $order_id = 4;
         $order_id = explode(",",$order_id);
-        // dd($order_id);
+
+        $orders = request()->order;
+        if($orders){
+        $ordera = explode(",",$orders);
+        $info = Redis::hgetall($orders);
         $kk = "order_sn".$info['order_sn'];
         Redis::hmset($kk,$ordera);
+        }
         // $res = Redis::hgetall($kk);
         // dd($res);
         // $order_id = 1;
