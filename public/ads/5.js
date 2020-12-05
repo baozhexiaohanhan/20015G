@@ -1,1 +1,1 @@
-document.write('<img src="http://www.20015g.com/upload/photo/KdfC87jYLAgyPz5uyouUYnQrIpEt2pcSuPCufLKa.jpeg" width="300" height="560">');
+document.write('<a href="http://www.20015g.com/shops/shops?seller_id=1"><img src="http://www.20015g.com/upload/photo/KdfC87jYLAgyPz5uyouUYnQrIpEt2pcSuPCufLKa.jpeg" width="300" height="560"></a>');

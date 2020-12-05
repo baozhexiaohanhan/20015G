@@ -27,10 +27,10 @@
 				</div>
 			</div>
 			<div class="con-box">
-				<a class="left-img hot-img" href="">
+				<!-- <a class="left-img hot-img" href=""> -->
 					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
 					<script src="/ads/2.js"></script>
-				</a>
+				<!-- </a> -->
 				<div class="right-box">
 					@foreach($msg['goods'] as $k=>$v)
 					<a href="/details/?goods_id={{$v['goods_id']}}" class="floor-item">
@@ -51,10 +51,10 @@
 		<section class="scroll-floor floor-3">
 			
 			<div class="con-box">
-				<a class="left-img hot-img" href="">
+				<!-- <a class="left-img hot-img" href=""> -->
 					<!-- <img src="/static/images/floor_3.jpg" alt="" class="cover"> -->
 					<script src="/ads/3.js"></script>
-				</a>
+				<!-- </a> -->
 			
 			</div>
 		</section>

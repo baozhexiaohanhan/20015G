@@ -106,7 +106,7 @@
                 
                 <div class="picked-box">
                     @foreach($data['hot_goods'] as $k=>$v)
-                        <a href="" class="picked-item"><img src="{{$v['goods_img']}}" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+                        <a href="" class="picked-item"><img src="{{$v['goods_img']}}" alt="" class="cover"><span class="look_price">¥{{$v['goods_price']}}</span></a>
                         @endforeach
                         <!-- <a href="" class="picked-item"><img src="images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
                         <a href="" class="picked-item"><img src="images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
