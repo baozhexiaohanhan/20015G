@@ -57,6 +57,7 @@ class GoodsController extends Controller
         //    return $where;
         }
         $soncate_id = DB::table('cate')->where('pid',$cate_id)->pluck('cate_id')->toArray();
+        // return $soncate_id;
         array_push($soncate_id,$cate_id);
 //        根据分类查询商品
         $goods = DB::table('goods')->where('is_new',1)->where($where)->where('cate_id',$soncate_id)->get();

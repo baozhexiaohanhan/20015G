@@ -1,1 +1,1 @@
-<img src="{{$ads}}" width="{{$width}}" height="{{$height}}">
+<a href="{{$ads->ad_link}}"><img src="{{$ads->ad_imgs}}" width="{{$width}}" height="{{$height}}"></a>

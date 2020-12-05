@@ -1,1 +1,1 @@
-@foreach($ads as $k=>$v)<a href="/shops/shops/?seller_id={{$v}}"><li>{{$v}}</li></a>@endforeach
+@foreach($ads as $k=>$v)<li>{{$v}}</li>@endforeach

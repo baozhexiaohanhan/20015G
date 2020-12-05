@@ -5,20 +5,11 @@
 			<div class="search-box">
 			
 				<form class="input-group" action="/goods/search" method="post">
-					 <input type="text" name="goods_name" placeholder="请输入名称" autocomplete="off" class="layui-input">
+					 <input type="text" name="goods_name" placeholder="请输入商品名称" autocomplete="off" class="layui-input">
 					<span class="input-group-btn">
           			 <button class="layui-btn layui-btn-normal">搜索</button>
 					</span>
 				</form>
-				<!-- <p class="help-block text-nowrap">
-					<a href="">连衣裙</a>
-					<a href="">裤</a>
-					<a href="">衬衫</a>
-					<a href="">T恤</a>
-					<a href="">女包</a>
-					<a href="">家居服</a>
-					<a href="">2017新款</a>
-				</p> -->
 			</div>
 			<div class="cart-box">
 				<a href="udai_shopcart.html" class="cart-but">

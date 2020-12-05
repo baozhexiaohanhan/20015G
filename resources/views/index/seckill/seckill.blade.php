@@ -19,11 +19,11 @@
 				</div>
 			</div>
 			<div class="sort-box bgf5">
-				<div class="sort-text">排序：</div>
-				<a href=""><div class="sort-text">销量 <i class="iconfont icon-sortDown"></i></div></a>
-				<a href=""><div class="sort-text">评价 <i class="iconfont icon-sortUp"></i></div></a>
-				<a href=""><div class="sort-text">价格 <i class="iconfont"></i></div></a>
-				<div class="sort-total pull-right">共1688个商品</div>
+				<div class="sort-text"></div>
+				<!-- <a href=""><div class="sort-text"> <i class="iconfont icon-sortDown"></i></div></a> -->
+				<!-- <a href=""><div class="sort-text"> <i class="iconfont icon-sortUp"></i></div></a> -->
+				<!-- <a href=""><div class="sort-text"> <i class="iconfont"></i></div></a> -->
+				<div class="sort-total pull-right"></div>
 			</div>
 		</section>
 		<section class="item-show__div clearfix">
@@ -55,7 +55,7 @@
 				@endforeach
 				</div>
 				<!-- 分页 -->
-				<div class="page text-right clearfix">
+				<!-- <div class="page text-right clearfix">
 					<a class="disabled">上一页</a>
 					<a class="select">1</a>
 					<a href="">2</a>
@@ -64,7 +64,7 @@
 					<a href="">5</a>
 					<a class="" href="">下一页</a>
 					<a class="disabled">1/5页</a>
-				</div>
+				</div> -->
 			</div>
 			<div class="pull-right">
 				

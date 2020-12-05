@@ -22,7 +22,7 @@
                     @foreach($data as $k=>$v)
                     <div class="item-card">
 
-                        <a href="/details/?goods_id={{$v['goods_id']}}" class="photo">
+                        <a href="/details/?goods_id={{$v['goods_id}}" class="photo">
                             <img src="{{$v['goods_img']}}" class="cover">
                             <div class="name">{{$v['goods_name']}}</div>
                             <input type="hidden" name="goods_name">
