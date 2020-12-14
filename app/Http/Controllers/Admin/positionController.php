@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\PositionModel;
 use App\Model\AdModel;
+use App\Http\Requests\StorePositionPost;
+use Validator;
 
 class positionController extends Controller
 {
 	public function index(){
-		$position=PositionModel::where(['is_del'=>0])->paginate(2);
+		$position=PositionModel::where(['is_del'=>0])->paginate(20);
 		//dd($position);
         if(request()->ajax()){
             return view('admin.ad.position.ajapage',['position'=>$position]);
@@ -23,8 +25,19 @@ class positionController extends Controller
     public function store(Request $request){
     	$post=$request->except('_token');
     	// dd($post);
-        $request->validate([
-            'position_name' => 'required|unique:ad_position',
+        // $request->validate([
+        //     'position_name' => 'required|unique:ad_position',
+        //     'ad_width' => 'required',
+        //     'ad_height' => 'required',
+        //     ],[
+        //         'position_name.required'=>'广告位名称不能为空',
+        //         'position_name.unique'=>'广告位名称已存在',
+        //         'ad_width.required'=>'广告位宽度不能为空',
+        //         'ad_height.required'=>'广告位高度不能为空',
+        //     ]);
+        $validator = Validator::make($request->all(),
+            [
+            'position_name' => 'required|unique:brand',
             'ad_width' => 'required',
             'ad_height' => 'required',
             ],[
@@ -33,6 +46,11 @@ class positionController extends Controller
                 'ad_width.required'=>'广告位宽度不能为空',
                 'ad_height.required'=>'广告位高度不能为空',
             ]);
+        if ($validator->fails()) {
+            return redirect('ad/position/create')
+            ->withErrors($validator)
+            ->withInput();
+        }
     	$res=PositionModel::insert($post);
     	if($res){
             return redirect('ad/position');
@@ -40,8 +58,9 @@ class positionController extends Controller
     }
 
     public function showads(Request $request,$position_id){
-        $ad=AdModel::leftjoin('ad.position_id','=','ad_position.position_id')->orderBy('ad_id','desc')->where('ad.position_id',$position_id)->get();
-        // dd($ad);
+        // echo "123";die;
+        $ad=AdModel::leftjoin('ad_position','ad.position_id','=','ad_position.position_id')->orderBy('ad_id','desc')->where('ad.position_id',$position_id)->paginate(20);
+        return view('admin.ad.index',['ad'=>$ad]);
     }
 
     public function createhtml(Request $request,$position_id){
@@ -68,6 +87,11 @@ class positionController extends Controller
     //删除
     public function destroy($id=0){
         // dd($id);
+        $ad=AdModel::where('position_id',$id)->first();
+        // dd($ad);
+        if($ad){
+            return response()->json(['code'=>0,'msg'=>'此广告位下有广告,不能删除!']);
+        }
         $res=PositionModel::where('position_id',$id)->update(['is_del'=>1]);
         //dd($res);
         // $res=PositionModel::destroy($id);
@@ -83,19 +107,19 @@ class positionController extends Controller
         // dd($position);
         return view('admin.ad.position.edit',['position'=>$position]);
     }
-    public function update(Request $request,$id){
+    public function update(StorePositionPost $request,$id){
         $post=$request->except('_token');
         // dd($post);
-        $request->validate([
-            'position_name' => 'required|unique:ad_position',
-            'ad_width' => 'required',
-            'ad_height' => 'required',
-            ],[
-                'position_name.required'=>'广告位名称不能为空',
-                'position_name.unique'=>'广告位名称已存在',
-                'ad_width.required'=>'广告位宽度不能为空',
-                'ad_height.required'=>'广告位高度不能为空',
-            ]);
+        // $request->validate([
+        //     'position_name' => 'required|unique:ad_position',
+        //     'ad_width' => 'required',
+        //     'ad_height' => 'required',
+        //     ],[
+        //         'position_name.required'=>'广告位名称不能为空',
+        //         'position_name.unique'=>'广告位名称已存在',
+        //         'ad_width.required'=>'广告位宽度不能为空',
+        //         'ad_height.required'=>'广告位高度不能为空',
+        //     ]);
         $res=PositionModel::where('position_id',$id)->update($post);
         if($res){
             return redirect('ad/position');
