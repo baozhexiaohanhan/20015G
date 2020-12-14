@@ -150,13 +150,19 @@ Route::prefix("/admin")->group(function(){
     Route::any('/noticelist','Admin\AdminController@noticelist')->name('admin.noticelist');//公告列表
     Route::any('/createlist','Admin\AdminController@createlist')->name('admin.createlist');//公告添加方法
     Route::get('/destr/{id}','Admin\AdminController@destr')->name('admin.destr');//公告删除
+    Route::any('/edit/{admin_id}','Admin\AdminController@edit')->name('admin.edit');//公告删除
+    Route::any('/update/{admin_id}','Admin\AdminController@update')->name('admin.update');//公告删除
 });
 
 // 生日管理
 Route::prefix("/birthday")->group(function(){
     Route::get('/create','Admin\BirthdayController@create')->name('birthday.create');//生日添加
-    Route::get('/list','Admin\BirthdayController@list')->name('birthday.list');//生日列表
+    Route::any('/list','Admin\BirthdayController@list')->name('birthday.list');//生日列表
     Route::any('/store','Admin\BirthdayController@store')->name('birthday.store');//生日执行添加
+    Route::any('/edit/{birthday_id}','Admin\BirthdayController@edit')->name('birthday.edit');//生日执行添加
+    Route::any('/destroy/{birthday_id}','Admin\BirthdayController@destroy')->name('birthday.destroy');//生日执行添加
+    Route::any('/update/{birthday_id}','Admin\BirthdayController@update')->name('birthday.update');//生日执行添加
+
 });
 
 });
