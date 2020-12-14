@@ -194,7 +194,8 @@ class SkuController extends Controller
     }
 
     public function product_index(){
-        $data = Goods::get();
+        $data = Goods::leftjoin("")->paginate(5);
+        dump($data);
         return view("admin.sku.product_index",compact("data"));
     }
 

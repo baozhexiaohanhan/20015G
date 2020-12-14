@@ -83,7 +83,13 @@ class SeckillController extends Controller
     }
     public function miaosha_show_add(){
         $callback = request()->callback;
-
+        $user_id = Redis::hmget("admin",["user_id"]);
+        // dd($user_id);
+        $user_id = implode(",",$user_id);
+        if(!$user_id){
+            $result = json_encode(['code'=>1005,'msg'=>'登录']);
+            return $callback.'('.$result.')';die;
+        }
         $goods_id = request()->get("goods_id");
         $goods_attr_id = request()->get("goods_attr_id");
         $seckill_id = request()->get("seckill_id");

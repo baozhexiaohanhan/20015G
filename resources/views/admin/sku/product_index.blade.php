@@ -10,6 +10,42 @@
   <a href="/admin/index">首页</a>
   <a href="javascript:;">商品管理</a>
   <a><cite>商品展示</cite></a>
+  <style>
+        ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.pagination li {display: inline;}
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+        .pagination li:first-child a {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .pagination li:last-child a {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        ul.pagination li a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+
+        ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+</style>
 </span>
 
     <div class="layui-form">
@@ -49,7 +85,7 @@
                     </td>
                     <td>{{$v->goods_sn}}</td>
                     <td>{{$v->goods_price}}</td>
-                    <td>{{$v->goods_store}}</td>
+                    <td>库存{{$v->goods_number}}</td>
                     <td>{{$v->is_hot==1?'是':'否'}}</td>
                     <td align='center'>
                         <div class="layui-btn-group">
@@ -64,8 +100,13 @@
                 </tbody>
 
         </table>
-
-
+        <ul>
+            <li class="pagination">{{$data->links()}}</li>
+        </ul>
+ 
+<script>
+   
+</script>
 </script>
 
 

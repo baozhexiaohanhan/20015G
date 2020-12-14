@@ -12,6 +12,7 @@ use App\Model\Cart;
 use App\Model\Goods;
 use App\Model\Products;
 use DB;
+use App\Model\Order;
 use App\Model\Coupon;
 use Illuminate\Support\Facades\Redis;
 class ShopcartController extends Controller
@@ -172,8 +173,26 @@ class ShopcartController extends Controller
     public function pay(){
         // 普通订单
         $order_id = request()->order_id;
-        $order_id = explode(",",$order_id);
+        $or_id = request()->or_id;
+        // dump($or_id);
+        if($or_id){
+           $order =  Order::where("order_id",$or_id)->pluck("order_sn")->toArray();
+           $order_price =  Order::where("order_id",$or_id)->sum("order_price");
+            // dd($order_price);
+           $order_name = ['多商品支付'];
 
+        //    dd($order_name);
+        }
+        if($order_id){
+            // dd(11);
+            $order = Order_info::where("order_id",$order_id)->pluck("order_sn")->toArray();
+
+            $order_price = Order_info::where("order_id",$order_id)->sum("order_price");
+            $order_id = explode(",",$order_id);
+            $order_name = Order_goods::whereIn("order_id",$order_id)->pluck("goods_name")->toArray();
+            // dd($order_name);
+
+         }
         $orders = request()->order;
         if($orders){
             $ordera = explode(",",$orders);
@@ -182,34 +201,13 @@ class ShopcartController extends Controller
             Redis::hmset($kk,$ordera);
         }
         // $res = Redis::hgetall($kk);
-        // dd($res);
-        // $order_id = 1;
         $config = config("alipay");
         require_once app_path('Common/alipay/pagepay/service/AlipayTradeService.php');
         require_once app_path('Common/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php');
-        $order = Order_info::whereIn("order_id",$order_id)->pluck("order_sn")->toArray();
-        $order_price = Order_info::whereIn("order_id",$order_id)->sum("order_price");
+        
         // dd($order);
-        if($order){
-            // dd(11);
+        if($orders){
             //使用SQL查询订单信息
-           
-            // dd($order);
-           
-            // dd($order_name);
-            //商户订单号，商户网站订单系统中唯一订单号，必填
-            $out_trade_no = implode("\r\n",$order);
-        
-            //订单名称，必填
-           
-            $order_name = Order_goods::whereIn("order_id",$order_id)->pluck("goods_name")->toArray();
-            $subject = implode("\r\n",$order_name);
-        
-            //付款金额，必填
-            $total_amount = $order_price;
-        
-        }else{
-            // dd(22);
             //使用SQL查询订单信息
            
             // dd($order_name);
@@ -217,14 +215,21 @@ class ShopcartController extends Controller
             $out_trade_no = $info['order_sn'];
         
             //订单名称，必填
-           
             $subject = $info['name'];
         
             //付款金额，必填
             $total_amount = $info['order_price'];
+        }else{
+            //商户订单号，商户网站订单系统中唯一订单号，必填
+            $out_trade_no = implode("\r\n",$order);
         
+            //订单名称，必填
+           
+            $subject = implode("\r\n",$order_name);
+        
+            //付款金额，必填
+            $total_amount = $order_price;
         }
-            
             //商品描述，可空
             $body = "";
         
@@ -258,24 +263,11 @@ class ShopcartController extends Controller
         $out_trade_no = $arr['out_trade_no'];
         // trim($out_trade_no);
         // dump($out_trade_no);
-        if(strlen($out_trade_no)>=38){
-        $count = strlen($out_trade_no)/2;
-        $order1 = $count-1;
-        $order2 = $count+1;
-        // dd($order2);
-        // dd($count); 
-        $order_sn1 = substr($out_trade_no,0,$order1);
-        $order_sn2 = substr($out_trade_no,$order2);
-        $order_sns = [
-            $order_sn1,
-            $order_sn2,
-        ];
-        // dd(11);
-        }else{
+     
             $order_snss = $arr['out_trade_no'];
             $order_sns = explode(",",$order_snss);
             // dd($order_sns);
-        }
+        
         // dd($order_sns);
         // $out_trade_no = explode(",",$out_trade_no);
         // $out_trade_no = array_chunk($out_trade_no,2);
@@ -290,25 +282,34 @@ class ShopcartController extends Controller
                 "pay_status",1,
             );
         }
-        $data = Redis::hgetall($order_id);
-        unset($data['name']);
+        $datas = Redis::hgetall($order_id);
+        unset($datas['name']);
         // dd($data);
-        // dd($res2);
+        
         $aop = new \AlipayTradeService($config);
         $result = $aop->check($arr);
-        $count = Order_info::whereIn('order_sn',$order_sns)->count();
+        $id = Order::select("order_id")->where("order_sn",$order_sns)->first();
+        // dd($id);
+        if(!$id){
+            $hao = Order_info::select("order_id")->where("order_sn",$order_sns)->first();
+            if($hao){
+                $count = Order_info::whereIn('order_id',$hao)->count();
+            }
+            // dd(11);
+        }
+        if($id){
+            $count = Order::whereIn('order_id',$id)->count();
+        }
         
-        // dd($count);
-
                 /* 实际验证过程建议商户添加以下校验。
         1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
         2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），
         3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
         4、验证app_id是否为该商户本身。
         */
-        // dd($res);
+        // dd(11);
         if(!$res){
-            // dd(11);/
+            // dd(11);
             if($result) {//验证成功
                 if(!$count){
                     return '发生重大事故:订单号'.$arr['out_trade_no'].'和订单金额'.$arr['total_amount'].'不在当前系统中！请联系客服';
@@ -325,7 +326,12 @@ class ShopcartController extends Controller
                     "pay_status"=>1,
                 ];
                 // dd(11);
-                $update = Order_info::whereIn('order_sn',$order_sns)->update($data);
+            //   $order_id = implode(",",$order_id);
+              if($id['order_id']){
+                    $update = Order_info::where('or_id',$id['order_id'])->update($data);
+              }else{
+                $update = Order_info::where('order_id',$hao['order_id'])->update($data);
+              }
                 // dd($update);
                 if($update){
                     return redirect("/udai_order");
@@ -339,7 +345,7 @@ class ShopcartController extends Controller
         }else{
             // dd(22);
             if($result) {//验证成功
-                if(!$data){
+                if(!$datas){
                     return '发生重大事故:订单号'.$arr['out_trade_no'].'和订单金额'.$arr['total_amount'].'不在当前系统中！请联系客服';
                 }
                 // if($arr['seller_id']!=config('alipay.seller_id')){
@@ -348,7 +354,26 @@ class ShopcartController extends Controller
                 if($arr['app_id']!=config('alipay.app_id')){
                     return '发生重大事故:应用ID'.$arr['app_id'].'和系统商家不符！请联系客服';
                 }
-                $res2 = Order_info::insert($data);
+                // dump($datas);
+                $a['seller_id'] = $datas['seller_id'];
+                $a['goods_id'] = $datas['goods_id'];
+                $a['goods_sn'] = $datas['goods_sn'];
+                $a['buy_number'] = $datas['buy_number'];
+                $a['goods_name'] = $datas['goods_name'];
+                $a['shop_price'] = $datas['order_price'];
+                // dd($a);
+
+                // $a[''] = $datas[''];
+                unset($datas['goods_id']);
+                unset($datas['goods_sn']);
+                unset($datas['buy_number']);
+                unset($datas['goods_name']);
+                $order_ida = Order_info::insertGetId($datas);
+                $a['order_id'] = $order_ida;
+                $res2 = Order_goods::insert($a);
+
+                
+                
                 // dd($res2);
                 if($res2){
                     return redirect("/udai_order");
@@ -360,7 +385,6 @@ class ShopcartController extends Controller
                 echo "验证失败";
             }
         }
-        
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代码
             
@@ -379,147 +403,6 @@ class ShopcartController extends Controller
             
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
            
-        
-      
-       
     }
-    //订单商品 订单 数据入库order info goods
-    public function order_add(){
-        // $a = request()->all();
-        // dd($a);
-        // if($a==)
-        DB::beginTransaction();
-        try {
-        $da = request()->all();
-        // dd($da);
-        $order_sn['order_sn'] = $this->createOrderSn();
-        $order_sn = $order_sn['order_sn'];
-       
-        $user_id = Redis::hmget("admin",["user_id"]);
-        // dd($user_id);
-        $user_id = implode(",",$user_id);
-        if($user_id==""){
-            return redirect("/log");
-        }
-      
-        // 地址
-        $address = Address::where(["user_id"=>$user_id])->first();
-        // dd($address);
-        // 支付方式
-        $info = [1=>"微信",2=>"支付宝",3=>"货到付款"];
-        $mode['pay_type'] =$info[$da['pay_type']];
-        $mode = $mode['pay_type'];
-        // dd($mode);
-        // 总价价格
-        $rec_id = $da['rec_id'];
-        $rec_id = implode(",",$rec_id);
-        $order_price = \DB::select("select sum(goods_price*buy_number) as tot from cart where rec_id in($rec_id) ");
-
-        $order_price = $order_price[0]->tot;
-
-        $rec_id = request()->rec_id;
-        $seller_id = request()->seller_id;
-        $seller_id = array_unique($seller_id);
-        $arr = [];
-        foreach($seller_id as $key=>$v){
-            $cary = Cart::whereIn("rec_id",$rec_id)->leftjoin("coupon","cart.goods_id","=","coupon.range")->where("seller_id",$v)->get();
-            $arr[$v]=$cary;
-        }
-      
-        // dd($arr);
-        $order_ids = [];
-        foreach($arr as $k=>$v){
-            $data['seller_id'] = $k;
-            $data['order_sn'] = $this->createOrderSn();
-            $data['user_id'] = $user_id;
-            $data['consignee'] = $address['consignee'];
-            $data['country'] = $address['country'];
-            $data['email'] = $address['email'];
-            $data['province'] = $address['province'];
-            $data['city'] = $address['city'];
-            $data['district'] = $address['district'];
-            $data['address'] = $address['address'];
-            $data['mobile'] = $address['tel'];
-            $data['tel'] = $address['tel'];
-            $data['best_time'] = 0;
-            $data['sign_building'] = 0;
-            $data['pay_name'] = $mode;
-            $data['addtime'] = time();
-            // dd($data);
-            $order_id = Order_info::insertGetId($data);
-            // dd($order_id);
-            $order_ids[] = $order_id;
-            if($order_id){
-                $cart_id = [];
-                $order_price = 0;
-                foreach($v as $kk=>$val){
-                    // dd($val);
-                    $info = [];
-                    $info['goods_id'] = $val['goods_id'];
-                    $info['product_id'] = $val['product_id'];
-                    $info['goods_name'] = $val['goods_name'];
-                    if($val['name']){
-                       
-                        if($val['goods_price']>500){
-                            $info['shop_price'] = $val['goods_price']-$val['type_ext'];
-
-                        }else if($val['goods_price']>300){
-                            $info['shop_price'] = $val['goods_price']-$val['type_ext'];
-
-                        }
-                    }else{
-                        // dd(111);
-                        $info['shop_price'] = $val['goods_price'];
-                    }
-                   
-                    $info['buy_number'] = $val['buy_number'];
-                    $info['goods_attr_id'] = $val['goods_attr_id'];
-                    $info['goods_id'] = $val['goods_id'];
-                    $info['seller_id'] = $val['seller_id'];
-                    $info['order_id'] = $order_id;
-                    $order_price = $order_price+$info['shop_price'];
-                    // dd($order_price);
-                    $order_shop_id[] = Order_goods::insertGetId($info);
-                    if($order_shop_id){
-                        Cart::where("rec_id",$val['rec_id'])->update(['is_del'=>2]);
-                        if($val['goods_attr_id']){
-                            $product = Products::where(["product_id"=>$val['product_id']])->decrement('product_number',$val['buy_number']);
-                        }else{
-                            $product = Goods::where(["goods_id"=>$val['goods_id']])->decrement('goods_number',$val['buy_number']);
-                        }
-                    }
-              
-                Order_info::where("order_id",$order_id)->update(["order_price"=>$order_price]);
-
-                }
-
-            }
-        }
-        DB::commit();
-        } catch (Exception $e){
-            DB::rollBack();   
-            // dump($e->getMessage);
-        }
-            
-        //    $price = Order_info::whereIn("order_id",$order_ids)->sum("order_price");
-        //    dd($price);
-            
-            return $message = [
-                "code"=>0002,
-                "message"=>"添加成功",
-                "success"=>true,
-                "order_id"=>$order_ids,
-                ];
-    }
-    public function createOrderSn(){
-        $order_sn = date("Ymdhis").rand(1000,9999);
-        if($this->isHaveOrdersn($order_sn)){
-            $this->createOrderSn();
-        }
-        return $order_sn;
-    }
-    public function isHaveOrdersn($order_sn){
-        return Order_info::where("order_sn",$order_sn)->count();
-    }
-
+   
 }
