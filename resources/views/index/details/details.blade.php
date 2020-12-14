@@ -53,7 +53,7 @@
 					<div class="item-title">
 						<div class="name ep2">{{$data['goods']['goods_name']}}</div>
 						@foreach($data['coupon'] as $v)
-						<div class="sale cr coupon" id="{{$v['coupon_id']}}">{{$v['name']}}</div>
+						<div class="sale cr coupon item-action__basket" id="{{$v['coupon_id']}}">{{$v['name']}}</div>
 						@endforeach
 					</div>
 					<div class="item-price bgf5">

@@ -175,6 +175,23 @@ class AdminController extends Controller
           ob_clean();  
           
           }
+
+      public function edit($admin_id){
+          $role = Role::all();
+          $admin=Admin::find($admin_id)->toArray();
+
+        return view('admin.admin.edit',['admin'=>$admin,'role'=>$role]);
+      }
+
+      public function update(Request $request ,$admin_id){
+        $post=$request->except(['_token']);
+        // dd($post);
+       $res=Admin::where('admin_id',$admin_id)->update($post);
+
+        if($res){
+            return redirect('/admin/list');
+        }
+    }
     }
 
   

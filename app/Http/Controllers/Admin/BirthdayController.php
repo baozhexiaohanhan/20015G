@@ -91,5 +91,19 @@ class BirthdayController extends Controller
             return redirect('/birthday/list');
         }
     }
+
+    public function edit($birthday_id){
+        $birthday=Birthday::find($birthday_id)->toArray();
+
+        return view('admin.birthday.edit',['birthday'=>$birthday]);
+    }
+
+    public function update(Request $request ,$birthday_id){
+       $post=$request->except(['_token']);
+       $res=Birthday::where('birthday_id',$birthday_id)->update($post);
+        if($res){
+            return redirect('/birthday/list');
+        }
+    }
   }
     

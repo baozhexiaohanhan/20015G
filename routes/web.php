@@ -38,8 +38,8 @@ Route::prefix("/ad")->group(function(){
     Route::post('/upload','Admin\AdController@upload')->name('ad.upload');//广告图片
     Route::get("/destroy/{id}","Admin\AdController@destroy")->name('ad.destroy');//广告删除
     Route::get("change","Admin\AdController@change")->name('ad.change');//广告即点即改
-    Route::get("/edit/{id}","Admin\AdController@edit")->name('ad.edit');//广告修改
-    Route::post("/update/{id}","Admin\AdController@update")->name('ad.update');//广告执行修改
+    Route::get("/edit/{ad_id}","Admin\AdController@edit")->name('ad.edit');//广告修改
+    Route::post("/update/{ad_id}","Admin\AdController@update")->name('ad.update');//广告执行修改
     Route::get('/checkOnly',"Admin\AdController@checkOnly")->name('ad.checkOnly');//广告js验证
     //广告位
     Route::get("/position/create","Admin\PositionController@create")->name('ad.position.create');//广告位添加
@@ -47,10 +47,11 @@ Route::prefix("/ad")->group(function(){
     Route::get("/position","Admin\PositionController@index")->name('ad.position');//广告位展示
     Route::get("/position/createhtml/{position_id}","Admin\PositionController@createhtml")->name('ad.position.createhtml');//广告位生成
     Route::get("/position/destroy/{id}","Admin\PositionController@destroy")->name('ad.position.destroy');//广告位删除
-    Route::get("/position/edit/{id}","Admin\PositionController@edit")->name('ad.position.edit');//广告位修改
-    Route::post("/position/update/{id}","Admin\PositionController@update")->name('ad.position.update');//广告位执行修改
+    Route::get("/position/edit/{position_id}","Admin\PositionController@edit")->name('ad.position.edit');//广告位修改
+    Route::post("/position/update/{position_id}","Admin\PositionController@update")->name('ad.position.update');//广告位执行修改
     Route::get("/position/change","Admin\PositionController@change")->name('ad.position.change');//广告位即点即改
     Route::get('/position/checkOnly',"Admin\PositionController@checkOnly")->name('ad.position.checkOnly');//广告位js验证
+    Route::get('/position/showads/{position_id}',"Admin\PositionController@showads")->name('ad.position.showads');//查看广告
 });
 
 //品牌管理
@@ -149,13 +150,19 @@ Route::prefix("/admin")->group(function(){
     Route::any('/noticelist','Admin\AdminController@noticelist')->name('admin.noticelist');//公告列表
     Route::any('/createlist','Admin\AdminController@createlist')->name('admin.createlist');//公告添加方法
     Route::get('/destr/{id}','Admin\AdminController@destr')->name('admin.destr');//公告删除
+    Route::any('/edit/{admin_id}','Admin\AdminController@edit')->name('admin.edit');//公告删除
+    Route::any('/update/{admin_id}','Admin\AdminController@update')->name('admin.update');//公告删除
 });
 
 // 生日管理
 Route::prefix("/birthday")->group(function(){
     Route::get('/create','Admin\BirthdayController@create')->name('birthday.create');//生日添加
-    Route::get('/list','Admin\BirthdayController@list')->name('birthday.list');//生日列表
+    Route::any('/list','Admin\BirthdayController@list')->name('birthday.list');//生日列表
     Route::any('/store','Admin\BirthdayController@store')->name('birthday.store');//生日执行添加
+    Route::any('/edit/{birthday_id}','Admin\BirthdayController@edit')->name('birthday.edit');//生日执行添加
+    Route::any('/destroy/{birthday_id}','Admin\BirthdayController@destroy')->name('birthday.destroy');//生日执行添加
+    Route::any('/update/{birthday_id}','Admin\BirthdayController@update')->name('birthday.update');//生日执行添加
+
 });
 
 });
