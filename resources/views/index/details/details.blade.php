@@ -62,7 +62,7 @@
 								售价：<span class="price" id="price">￥{{$data['goods']['goods_price']}} <s class="fz16 c9">￥24.00</s></span>
 							</div>
 							<div class=" pull-right">
-								<h5>浏览量：{{$data['hits']}}</h5>
+								<h5></h5>
 								
 							</div>
 							<script>
@@ -87,7 +87,7 @@
 							<span class="ind-label c9">访问量</span>
 							<span class="ind-count cr">{{$data['hits']}}</span>
 						</li>
-						<li class="item-ind-item">
+						<!-- <li class="item-ind-item">
 							<span class="ind-label c9">累计销量</span>
 							<span class="ind-count cr">1688</span>
 						</li>
@@ -98,7 +98,7 @@
 						<li class="item-ind-item">
 							<a href=""><span class="ind-label c9">赠送积分</span>
 							<span class="ind-count cg">666</span></a>
-						</li>
+						</li> -->
 					</ul>
                     <div class="clearfix choose">
 						<div id="specification" class="summary-wrap clearfix">
@@ -136,7 +136,7 @@
                             </div>
 						</div>
 						<div class="item-action clearfix bgf5">
-							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
+							<!-- <a href="javascript:;" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy"></a> -->
 							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket addshopcart">
 								<i class="iconfont icon-shopcart"></i> 加入购物车
 							</a>

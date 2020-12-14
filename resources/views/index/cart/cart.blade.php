@@ -30,6 +30,7 @@
 						</thead>
 						
 						<tbody>
+							@if(isset($cart['info']))
 							@foreach($cart['info'] as $k=>$v)
 							<tr>
 								<td>
@@ -87,6 +88,7 @@
 							</tr>
 							@endforeach
 							@endforeach
+							@endif
 						</tbody>
 
 					</table>

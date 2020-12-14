@@ -32,8 +32,16 @@ class CartController extends Controller
         // dd($url);
         $cart = curl_get($url);
         // dd($cart);
-
-        $cart = json_decode($cart['data'],true);
+        
+        // if(!$cart['trace']){
+            $cart = json_decode($cart['data'],true);
+            // dd($cart);
+            if($cart['user']==0){
+                $cart = [];
+            }
+        // }else{
+            // $cart = [];
+        // }
         // dump($cart);
         // dump($cart['info']);
 

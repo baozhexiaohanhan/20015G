@@ -118,7 +118,9 @@ class CartController extends Controller
             ->leftjoin('seller','goods.seller_id','=','seller.seller_id')
             ->leftjoin('coupon','goods.goods_id','=','coupon.range')
     		->where(['user_id'=>$user,'cart.is_del'=>0])->orderBy('rec_id','desc')->get();
-    		
+            // dd($cart);
+            if(count($cart)>0){
+                // dd(11);
         // $cart=Cart::select('cart.*','goods.goods_img','goods.goods_name','goods.is_up')
         //     ->leftjoin('goods','cart.goods_id','=','goods.goods_id')
         //     ->where(['user_id'=>$user,'cart.is_del'=>0])->orderBy('rec_id','desc')->get();
@@ -149,7 +151,15 @@ class CartController extends Controller
     				$cart[$k]['goods_attr']=$goods_attr?$goods_attr->toArray():[];
     				
     			}
-    		}
+            }
+        }else{
+            $user = 0;
+            $cart = 0;
+            $goods_attr_id = 0;
+            $goods_attr = 0;
+            $info = 0;
+        }
+            // dd($goods_attr_id);
             // $total=0;
             // $total=number_format($total,2,'.','');
     		// return $cart;
@@ -158,9 +168,12 @@ class CartController extends Controller
     			'cart'=>$cart,
     			'goods_attr_id'=>$goods_attr_id,
     			'goods_attr'=>$goods_attr,
-                'info'=>$info
-    		];
-
+                'info'=>$info,
+            ];
+            // dd($cart);
+            // if($cart==""){
+            //     $cart=["cmd"=>"222"];
+            // }
     	$cart = json_encode($cart);
         $cart = ["ok","data"=>$cart];
         // dd($cart);
