@@ -197,6 +197,7 @@ class ShopcartController extends Controller
         if($orders){
             $ordera = explode(",",$orders);
             $info = Redis::hgetall($orders);
+            // dd($info);
             $kk = "order_sn".$info['order_sn'];
             Redis::hmset($kk,$ordera);
         }
@@ -215,7 +216,7 @@ class ShopcartController extends Controller
             $out_trade_no = $info['order_sn'];
         
             //订单名称，必填
-            $subject = $info['name'];
+            $subject = $info['goods_name'];
         
             //付款金额，必填
             $total_amount = $info['order_price'];
