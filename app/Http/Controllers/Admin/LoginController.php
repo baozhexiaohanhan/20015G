@@ -115,12 +115,12 @@ public function imageCode( Request $request){
       $codename = request()->input('codename');
       //        判断验证码是否为空
       if(empty($code)){
-          echo "<script>alert('验证码不能为空');location.href='/admin/login';</script>";die;
+          echo "<script>alert('验证码不能为空');location.href='/login';</script>";die;
       }
       //判断验证码是否正确
       if($code != $codename)
       {
-          echo "<script>alert('验证码不正确');location.href='/admin/login';</script>";die;
+          echo "<script>alert('验证码不正确');location.href='/login';</script>";die;
       }
 	  if(empty($admin_name) || empty($admin_pwd)){
           return redirect('login')->with('msg','用户名或密码不能为空');die;
