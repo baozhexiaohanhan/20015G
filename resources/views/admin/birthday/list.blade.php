@@ -51,7 +51,7 @@
             </td>
             <td>{{date("Y-m-d H:i:s",$v->birthday_time)}}</td>
             <td class="td-manage">
-            <button class="layui-btn">编辑</button>
+            <a href="{{url('/birthday/edit/'.$v->birthday_id)}}" class="layui-btn layui-btn-warm">修改</a>
             <a href="javascript:void(0);" id="{{$v->birthday_id}}" type="button" class="layui-btn layui-btn-danger">删除</a>
             </td>
           </tr>

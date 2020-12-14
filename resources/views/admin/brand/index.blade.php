@@ -1,12 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+@include('admin.lay.top')
+     @section('tops')
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/admin/css/font.css">
@@ -28,7 +21,7 @@
       </span></legend>
     </fieldset>
 
-    <!-- <form class="layui-form" action="">
+    <form class="layui-form" action="">
     <div class="layui-form-item">
     <div class="layui-inline">
       <div class="layui-input-inline" style="padding-left: 40px;">
@@ -45,8 +38,8 @@
        <button class="layui-btn layui-btn-warm">搜索</button>
       </div>
     </div>
-  </div> -->
-<!-- </form> -->
+  </div>
+</form>
     <div class="layui-form" style="padding: 15px;">
   <table class="layui-table">
     <colgroup>
@@ -89,7 +82,7 @@
       @endforeach
      <tr>
       <td colspan="7">
-        {{$brand->links('vendor.pagination.adminshop')}}
+        {{$brand->appends($query)->links('vendor.pagination.adminshop')}}
         <button type="button" class="layui-btn layui-btn-warm moredel">批量删除</button>
       </td>
       </tr>

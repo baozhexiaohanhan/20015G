@@ -14,10 +14,17 @@ class CateController extends Controller
      */
     public function index()
     {
-        $res = DB::table('cate')->get();
-//        dd($res);
+        $cate_name=request()->cate_name;
+        // dd($cate_name);
+        $where=[];
+        if($cate_name){
+            $where[]=["cate_name","like","%$cate_name%"];
+        }
+        $res = DB::table('cate')->where($where)->get();
+    //    dd($res);
+        // $query = request()->all();
         $Category=$this->list_level($res);
-        return view('admin/cate/cateindex',['res'=>$Category]);
+        return view('admin/cate/cateindex',['res'=>$Category,'cate_name'=>$cate_name]);
     }
 
     /**
@@ -84,11 +91,12 @@ class CateController extends Controller
      */
     public function edit($id)
     {
-        $data = DB::table('cate')->where(['cate_id'=>$id])->get()->toArray();
-//        dd($data);
-        $cate = DB::table('cate')->where(['pid'=>$id])->get();
-//        dd($cate);
-        return view('admin/cate/cateedit',['data1'=>$data],['cate'=>$cate]);
+        // echo 12312;die;
+        $data = DB::table('cate')->where(['cate_id'=>$id])->first();
+        // dd($data);
+        $cate = DB::table('cate')->get();
+        $Category=self::list_level($cate);
+        return view('admin/cate/cateedit',['data'=>$data,'Category'=>$Category]);
     }
 
     /**
@@ -157,5 +165,17 @@ class CateController extends Controller
             }
         }
         return $array;
+    }
+    // 即点即改
+    public function change(Request $request){
+        $cate_name=$request->cate_name;
+        $id=$request->id;
+        if(!$cate_name || !$id){
+            return response()->json(['code'=>3,'msg'=>'缺少参数']);
+        }
+        $res=DB::table('cate')->where('cate_id',$id)->update(['cate_name'=>$cate_name]);
+        if($res){
+            return response()->json(['code'=>0,'msg'=>'修改成功']);
+        }
     }
 }

@@ -20,7 +20,7 @@
       @endforeach
      <tr>
       <td colspan="7">
-        {{$brand->links('vendor.pagination.adminshop')}}
+        {{$brand->appends($query)->links('vendor.pagination.adminshop')}}
         <button type="button" class="layui-btn layui-btn-warm moredel">批量删除</button>
       </td>
       </tr>

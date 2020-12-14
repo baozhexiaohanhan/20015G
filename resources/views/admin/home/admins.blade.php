@@ -14,8 +14,7 @@
           <ul class="layui-tab-title">
             <li class="home"><i class="layui-icon">&#xe68e;</i>我的桌面</li>
           </ul>
-          
-            <img src="\admin\images\123.png">
+            <img src="\admin\images\123.png" style="width:1059px;heigth=244px;">
 
         </div>
     </div>

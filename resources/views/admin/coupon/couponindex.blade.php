@@ -13,12 +13,8 @@
 </head>
 
 <body>
-<div class="x-nav">
-    <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
-</div>
+
 <div class="x-body">
-    {{--<blockquote class="layui-elem-quote">每个tr 上有两个属性 cate-id='1' 当前分类id fid='0' 父级id ,顶级分类为 0，有子分类的前面加收缩图标<i class="layui-icon x-show" status='true'>&#xe623;</i></blockquote>--}}
     <table class="layui-table layui-form">
         <thead>
         <tr>
@@ -31,8 +27,8 @@
             <th>金额上限</th>
             <th>优惠方式</th>
             <th>优惠范围</th>
-            <th>优惠金额或折扣</th>
-            {{--<th>操作</th>--}}
+            <th>优惠金额</th>
+            <th>操作</th>
         </tr>
         </thead>
         @foreach($data as $v)
@@ -45,13 +41,13 @@
             <td>@if($v->user_rank==0)非会员 @elseif($v->user_rank==1)VIP @elseif($v->user_rank==2)注册用户 @elseif($v->user_rank==3)代销用户@endif</td>
             <td>{{$v->min_amount}}</td>
             <td>{{$v->max_amount}}</td>
-            <td>@if($v->type==0)非会员享受赠品（特惠品) @elseif($v->type==1)享受现金减免 @elseif($v->type==2)享受价格折扣@endif</td>
+            <td>@if($v->type==0)享受现金减免@endif</td>
             <td>{{$v->range}}</td>
             <td>{{$v->type_ext}}</td>
-            {{--<th width="280">--}}
-                {{--<a href="{{url('coupon/edit/'.$v->coupon_id)}}"><i class="layui-icon">&#xe642;</i>编辑</a>--}}
-                {{--<a href="{{url('coupon/destroy/'.$v->coupon_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>--}}
-            {{--</th>--}}
+            <td>
+                <a href="{{url('coupon/edit/'.$v->coupon_id)}}"><i class="layui-icon">&#xe642;</i>编辑</a>
+                <a href="{{url('coupon/destroy/'.$v->coupon_id)}}"><i class="layui-icon">&#xe640;</i>删除</a>
+            </td>
         </tr>
         </thead>
         @endforeach

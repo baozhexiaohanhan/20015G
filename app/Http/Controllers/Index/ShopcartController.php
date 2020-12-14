@@ -58,6 +58,19 @@ class ShopcartController extends Controller
         // dd($user_id);
         $post = $request->except('_token');
         // dd($post);
+        
+        $request->validate([
+            'consignee' => 'required|unique:shopcart',
+            'address' => 'required',
+            'tel' => 'required',
+            'email' => 'required',
+            ],[
+            'consignee.required'=>'收货人名称不能为空',
+            'address.required'=>'详细地址不能为空',
+            'tel.required'=>'手机号不能为空',
+            'email.required'=>'邮箱不能为空',
+        ]);
+
         $user_id = implode(",",$user_id);
         $post['user_id'] = $user_id;
         // dd($post);

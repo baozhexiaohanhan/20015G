@@ -5,15 +5,29 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\BrandModel;
+use App\Model\Goods;
+use App\Http\Requests\StoreBrandPost;
+use Validator;
+
 class BrandController extends Controller
 {
 
 	public function index(){
-		$brand=BrandModel::paginate(2);
+        $brand_name=request()->brand_name;
+        $where=[];
+        if($brand_name){
+            $where[]=['brand_name','like',"%$brand_name%"];
+        }
+        $brand_url=request()->brand_url;
+        if($brand_url){
+            $where[]=['brand_url','like',"%$brand_url%"];
+        }
+
+		$brand=BrandModel::where($where,['is_del'=>0])->paginate(2);
         if(request()->ajax()){
             return view('admin.brand.ajaxpage',['brand'=>$brand]);
         }
-		return view('admin.brand.index',['brand'=>$brand]);
+		return view('admin.brand.index',['brand'=>$brand,'query'=>request()->all()]);
 	}
     public function create(){
     	return view('admin.brand.create');
@@ -21,7 +35,8 @@ class BrandController extends Controller
     public function store(Request $request){
     	$post=$request->except(['_token','file']);
 
-        $request->validate([
+        $validator = Validator::make($request->all(),
+            [
             'brand_name' => 'required|unique:brand',
             'brand_url' => 'required',
             ],[
@@ -29,6 +44,11 @@ class BrandController extends Controller
                 'brand_name.unique'=>'品牌名称已存在',
                 'brand_url.required'=>'品牌网址不能为空',
             ]);
+        if ($validator->fails()) {
+            return redirect('brand/create')
+            ->withErrors($validator)
+            ->withInput();
+        }
     	
     	if($request->hasFile('brand_logo')){
             $post['brand_logo']=$this->upload('brand_logo');
@@ -53,12 +73,25 @@ class BrandController extends Controller
 
     // 删除
     public function destroy($id=0){
+        $goods=Goods::where('brand_id',$id)->first();
+        // dd($goods);
+        if($goods){
+            return response()->json(['code'=>0,'msg'=>'此品牌下有商品,不能删除!']);
+        }
         $id=request()->id?:$id;
         //dd($id);
+        if($id){
+            return response()->json(['code'=>0,'msg'=>'此品牌下有商品,不能删除!']);
+        }
         if(!$id){
             return;
         }
-        $res=BrandModel::destroy($id);
+
+
+        
+        $res=BrandModel::where('brand_id',$id)->update(['is_del'=>1]);
+        // dd($res);
+        // $res=BrandModel::destroy($id);
         if(request()->ajax()){
             // return $this->success('删除成功');
             return response()->json(['code'=>0,'msg'=>'删除成功!']);
@@ -90,19 +123,11 @@ class BrandController extends Controller
         return view('admin.brand.edit',['brand'=>$brand]);
     }
     //修改执行
-    public function update(Request $request,$id){
+    public function update(StoreBrandPost $request,$id){
         $post=$request->except(['_token','file']);
         // dd($post);
-        $request->validate([
-            'brand_name' => 'required|unique:brand',
-            'brand_url' => 'required',
-            ],[
-                'brand_name.required'=>'品牌名称不能为空',
-                'brand_name.unique'=>'品牌名称已存在',
-                'brand_url.required'=>'品牌网址不能为空',
-            ]);
         $res=BrandModel::where('brand_id',$id)->update($post);
-        if($res){
+        if($res!==false){
             return redirect('/brand');
         }
     }
