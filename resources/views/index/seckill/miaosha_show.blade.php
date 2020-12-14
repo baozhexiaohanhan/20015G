@@ -56,16 +56,7 @@
 							<div class="price-panel pull-left">
 								售价：<span class="price" id="price">￥{{$data['seckill']['price']}} <s class="fz16 c9">￥24.00</s></span>
 							</div>
-							<div class="vip-price-panel pull-right">
-								会员等级价格 <i class="iconfont icon-down"></i>
-								<ul class="all-price__box">
-									<!-- 登陆后可见 -->
-									<li><span class="text-justify">普通：</span>40.00元</li>
-									<li><span class="text-justify">银牌：</span>38.00元</li>
-									<li><span class="text-justify">超级：</span>28.00元</li>
-									<li><span class="text-justify">V I P：</span>19.20元</li>
-								</ul>
-							</div>
+							
 							<script>
 								// 会员价格折叠展开
 								$(function () {
@@ -82,9 +73,9 @@
 								});
 							</script>
 						</div>
-						<div class="c6">普通会员限购 2 件，想要<u class="cr"><a href="">购买更多</a></u>？</div>
+						<div class="c6"><u class="cr"><a href=""></a></u></div>
 					</div>
-					<ul class="item-ind-panel clearfix">
+					<!-- <ul class="item-ind-panel clearfix">
 						<li class="item-ind-item">
 							<span class="ind-label c9">累计销量</span>
 							<span class="ind-count cr">1688</span>
@@ -97,7 +88,7 @@
 							<a href=""><span class="ind-label c9">赠送积分</span>
 							<span class="ind-count cg">666</span></a>
 						</li>
-					</ul>
+					</ul> -->
                     <div class="clearfix choose">
 						<div id="specification" class="summary-wrap clearfix">
 						@if(isset($data['attrs_new_key']))
@@ -140,8 +131,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="pull-right picked-div">
-				<div class="lace-title">
+			 <div class="pull-right picked-div">
+				<!-- <div class="lace-title">
 					<span class="c6">爆款推荐</span>
 				</div>
 				<div class="swiper-container picked-swiper">
@@ -230,15 +221,15 @@
 							nextButton:'.picked-button-next',
 						});
 					});
-				</script>
-			</div>
+				</script> -->
+			</div> 
 		</section>
 		<section class="item-show__div item-show__body posr clearfix">
 			<div class="item-nav-tabs">
 				<ul class="nav-tabs nav-pills clearfix" role="tablist" id="item-tabs">
 					<li role="presentation" class="active"><a href="#detail" role="tab" data-toggle="tab" aria-controls="detail" aria-expanded="true">商品详情</a></li>
-					<li role="presentation"><a href="#evaluate" role="tab" data-toggle="tab" aria-controls="evaluate">累计评价 <span class="badge">1314</span></a></li>
-					<li role="presentation"><a href="#service" role="tab" data-toggle="tab" aria-controls="service">售后服务</a></li>
+					<!-- <li role="presentation"><a href="#evaluate" role="tab" data-toggle="tab" aria-controls="evaluate">累计评价 <span class="badge">1314</span></a></li> -->
+					<!-- <li role="presentation"><a href="#service" role="tab" data-toggle="tab" aria-controls="service">售后服务</a></li> -->
 				</ul>
 			</div>
 			<div class="pull-left">
@@ -1097,7 +1088,7 @@
 						</div>
 					</div>
 			    </div>
-				<div class="recommends">
+				<!-- <div class="recommends">
 					<div class="lace-title type-2">
 						<span class="cr">爆款推荐</span>
 					</div>
@@ -1219,7 +1210,7 @@
 							});
 						});
 					</script>
-				</div>
+				</div> -->
 			</div>
 			<div class="pull-right">
 				<div class="tab-content" id="descCate">
@@ -1242,7 +1233,7 @@
 							</dd>
 						</div>
 					</div>
-					<div role="tabpanel" class="tab-pane fade" id="evaluate-tab" aria-labelledby="evaluate-tab">
+					<!-- <div role="tabpanel" class="tab-pane fade" id="evaluate-tab" aria-labelledby="evaluate-tab">
 						<div class="descCate-content posr bgf5">
 							<div class="lace-title">
 								<span class="c6">相关推荐</span>
@@ -1270,7 +1261,7 @@
 								</a>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div role="tabpanel" class="tab-pane fade" id="service-tab" aria-labelledby="service-tab">
 						<div class="descCate-content posr bgf5">
 							<div class="lace-title">
@@ -1409,6 +1400,9 @@
             goods_attr_id.push($(this).attr('goods_attr_id'));
         });
 		$.getJSON("http://www.2001api.com/miaosha_show_add?callback=?", {"goods_id":goods_id,"goods_attr_id":goods_attr_id,"seckill_id":seckill_id},function(obj){
+			if(obj.code==1005){
+				location.href="/log"
+			}
 			if(obj.code==1110){
 				alert("抢购成功");
         		location.href="/miaosha_show_add?goods_id="+goods_id+"&goods_attr_id="+goods_attr_id;

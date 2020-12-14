@@ -55,9 +55,10 @@
 													<div class="card" style="border:2px solid #ddd;border-top:none;margin-top:10px;border-right:none;">
 													
 														<div class="img"><img src="{{$vv['goods_img']}}" alt="" class="cover"></div>
-														<div class="name ep2">{{$vv['goods_name']}}   X{{$vv['buy_number']}}</div>
-														<div class="format">颜色分类：深棕色  尺码：均码</div>
+															<div class="name ep2">{{$vv['goods_name']}}   X{{$vv['buy_number']}}</div>
+															<div class="format">颜色分类：深棕色  尺码：均码</div>
 														<div class="favour"></div>
+
 													</div>
 													@endforeach
 												</label>

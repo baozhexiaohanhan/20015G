@@ -50,16 +50,16 @@
 				<div class="shop-title">收货地址</div>
 					<div class="addr-radio">
 					@foreach($address as $k=>$v)
-						<div class="radio-line radio-box active" >
-						
-							<label class="radio-label ep">
-								<input name="addr" checked="" value="0" autocomplete="off" type="radio"></a><i class="iconfont icon-radio"></i>
-								{{$v['consignee']}} &nbsp {{$v['tel']}} &nbsp {{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}} &nbsp {{$v['address']}} 
-							</label>
-							<a href="javascript:;" class="default">默认地址</a>
-							<a href="udai_address_edit.html" class="edit">修改</a>
-						
-						</div>
+							<div  @if($v['mo']==2) class="radio-line radio-box active" @else  class="radio-line radio-box" @endif>
+								
+								<label class="radio-label ep">
+									<input name="country" @if($v['mo']==2) checked @endif value="" autocomplete="off" type="radio"></a><i class="iconfont icon-radio" ></i>
+									{{$v['consignee']}} &nbsp {{$v['tel']}} &nbsp {{$v['country']}}{{$v['province']}}{{$v['city']}}{{$v['district']}} &nbsp {{$v['address']}} 
+								</label>
+								<a href="javascript:;" address_id="{{$v['address_id']}}" class="default">点击默认地址</a>
+								<a href="/address" class="edit">修改</a>
+							
+							</div>
 						@endforeach
 					</div> 
 					<div class="add_addr"><a href="/address">添加新地址</a></div>
@@ -115,12 +115,12 @@
 					<div class="shop-title">确认订单</div>
 					<div class="pay-mode__box">
 						
-						<div class="radio-line radio-box">
-							<label class="radio-label ep">
-								<input name="pay-mode" value="1" autocomplete="off" type="radio" class="selected pay"><i class="iconfont icon-radio"></i>
+						<div class="radio-line radio-box active">
+							<label class="radio-label ep ">
+								<input name="pay-mode" value="1" checked autocomplete="off" type="radio" class="pay"><i class="iconfont icon-radio "></i>
 								<img src="static/images/icons/alipay.png" alt="支付宝支付">
 							</label>
-							<div class="pay-value">支付<b class="fz16 crpayType" pay_type="2">{{$attr_goods}}</b>元</div>
+							<div class="pay-value">支付<b class="fz16 crpayType" pay_type="2"  selected>{{$attr_goods}}</b>元</div>
 						</div>
 						
 						<div class="radio-line radio-box">
@@ -147,25 +147,16 @@
 								$(this).parents('.radio-box').addClass('active').siblings().removeClass('active');
 							})
 						});
-						//  //点击提交订单
-		    			// $(document).on('click','.btn',function(){
-	    				//     var data={};
-	    				// 	data.address_id=$('input[name="address_id"]').val();
-	    				// 	data.payname=$("input[name='payname']").val();
-	    				// 	data.cart_id=$("input[name='cart_id']").val();
-	    				// 	$.ajax({
-	    				// 	    url:'/index/order',
-	    				// 	    data:data,
-	    				// 	    type:'post',
-	    				// 		dataType:'json',
-	    				// 		success:function(reg){
+					
+					
+						$(document).on("click",".default",function(){
+							var address_id = $(this).attr('address_id');
+							// console.log(address_id);return
+							$.getJSON("http://www.2001api.com/shop/address_up?callback=?", {"address_id":address_id},function(obj){
 								
-            			//             if(reg.code=='0000'){
-            			//                 location.href='/index/pay/'+reg.data;
-	    				// 			}
-	    				// 		}
-	    				// 	})
-		    			// })
+								console.log(obj);
+							});
+						});
 					</script>
 			</div>
 		</section>

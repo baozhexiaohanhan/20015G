@@ -201,25 +201,32 @@
 		$(".cary").each(function(){
 			cary_id.push($(this).attr("cary_id"))
 		})
-		var data = {};
-		data.price = price;
-		data.pay_type = pay_type;
-		data.rec_id = cary_id;
-		data.seller_id = seller_id;
-		// console.log(data);return;
-		var url = "{{url('/order_add')}}";
-		$.ajax({
-			type:"post",
-			url:url,
-			data:data,
-			dataType:"json",
-			success:function(res){
-				if(res.code==0002){
+		// var data = {};
+		// data.price = price;
+		// data.pay_type = pay_type;
+		// data.rec_id = cary_id;
+		// data.seller_id = seller_id;
+		// // console.log(data);return;
+		// var url = "{{url('/order_add')}}";
+		// $.ajax({
+		// 	type:"post",
+		// 	url:url,
+		// 	data:data,
+		// 	dataType:"json",
+		// 	success:function(res){
+				
+		// 	}
+		// })
+		$.getJSON("http://www.2001api.com/shop/order_add?callback=?", {"price":price,"pay_type":pay_type,"rec_id":cary_id,"seller_id":seller_id},function(res){
+			if(res.code==0002){
 					location.href="/pay/?order_id="+res.order_id;
+			// 		// console.log(res);
+				}
+				if(res.code==1003){
+					location.href="/pay/?or_id="+res.or_id;
 					// console.log(res);
 				}
-			}
-		})
+		});
 		// console.log(cary_id);
 	})
 	
