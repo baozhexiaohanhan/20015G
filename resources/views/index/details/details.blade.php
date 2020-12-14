@@ -39,7 +39,7 @@
 						<a href="javascript:;" class="btn btn-default btn-next"></a>
 					</div>
                     <div>
-                        <input type="button" value="收藏" class="collect item-action__basket ">
+                        <input type="button" value="收藏" class="collect item-action__basket">
                     </div>
 					<div class="big-box"><img src="{{$data['goods']['goods_img']}}" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
 				</div>
@@ -152,7 +152,7 @@
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
 							@foreach($data['hot_goods'] as $v)
-							<a class="picked-item" href="">
+							<a class="picked-item" href="/details/?goods_id={{$v['goods_id']}}">
 								<img src="{{$v['goods_img']}}" alt="" class="cover">
 								<div class="look_price">¥{{$v['goods_price']}}</div>
 							</a>

@@ -14,6 +14,15 @@
 
 <body>
 <form action="{{url('/coupon/store')}}" method="post">
+@if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <script>alert('{{ $error }}')</script>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="layui-card">
         <div class="layui-card-body">
             <form class="layui-form" action="" lay-filter="component-form-element">
@@ -28,8 +37,6 @@
                 <div class="layui-card-body layui-row layui-col-space10">
                     <label class="layui-form-label">优惠范围：</label>
                     <div class="layui-col-md6">
-                        {{--<input type="radio" name="range" id="" value="1">全部商品--}}
-                        {{--<input type="radio" name="range" id="" value="2">指定商品--}}
                         <select name="range" lay-verify="">
                             <option value="">   </option>
                             @foreach($goods as $v)
@@ -42,7 +49,7 @@
                     <div class="layui-card-body layui-row layui-col-space10">
                         <div class="layui-col-md12">
                             <label class="layui-form-label">享受优惠的会员等级：</label>
-                            <input type="radio" name="user_rank" title="非会员" value="0">
+                            <input type="radio" name="user_rank" title="非会员" value="0" checked>
                             <input type="radio" name="user_rank" title="vip" value="1">
                             <input type="radio" name="user_rank" title="注册用户" value="2">
                             <input type="radio" name="user_rank" title="代销用户" value="3">
@@ -68,14 +75,12 @@
                 <div class="layui-card-body layui-row layui-col-space10">
                     <label class="layui-form-label">优惠方式：</label>
                     <div class="layui-col-md6">
-                        <input type="radio" name="type" id="" value="0">享受赠品
-                        <input type="radio" name="type" id="" value="1">享受现金减免
-                        <input type="radio" name="type" id="" value="2">享受价格折扣
+                        <input type="radio" name="type" id="" value="0" checked>享受现金减免
                     </div>
                 </div>
                 <div class="layui-row layui-col-space10 layui-form-item">
                     <div class="layui-col-lg6">
-                        <label class="layui-form-label">优惠金额或折扣：</label>
+                        <label class="layui-form-label">优惠金额</label>
                         <div class="layui-input-block">
                             <input type="text" name="type_ext" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>

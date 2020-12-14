@@ -18,9 +18,7 @@ class CouponController extends Controller
     public function index()
     {
         $data = DB::table('coupon')->get();
-//        dd($data);
-
-        return view('admin/coupon/couponindex', ['data' => $data]);
+        return view('admin/coupon/couponindex', ['data'=>$data]);
     }
 
     /**
@@ -48,6 +46,27 @@ class CouponController extends Controller
     {
         $data = $request->all();
 //        dd($data);
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'range' => 'required',
+            'user_rank' => 'required',
+            'max_amount' => 'required',
+            'min_amount' => 'required',
+            'type' => 'required',
+            'type_ext' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ],[
+            'name.required'=>'优惠券名称必填',
+            'range.required'=>'优惠范围必填',
+            'user_rank.required'=>'会员等级必填',
+            'max_amount.required'=>'金额上限必填',
+            'min_amount.required'=>'金额下限必填',
+            'type.required'=>'优惠方式必填',
+            'type_ext.required'=>'优惠金额必填',
+            'start_time.required'=>'开始时间必填',
+            'end_time.required'=>'结束时间必填',
+        ]);
         $res = DB::table('coupon')->insert([$data]);
         if ($res) {
             echo "<script>alert('添加成功,跳转至列表页');location.href='/coupon/index';</script>";
@@ -73,12 +92,14 @@ class CouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-//    public function edit($id)
-//    {
-//        $data = DB::table('coupon')->where(['coupon_id'=>$id])->get();
-////        dd($data);
-//        return view('/admin/coupon/couponedit',['data'=>$data]);
-//    }
+   public function edit($id)
+   {
+    //    dd($id);
+       $data = DB::table('coupon')->where(['coupon_id'=>$id])->first();
+    //    dd($data);
+       $goods = DB::table('goods')->get();
+       return view('/admin/coupon/couponedit',['data'=>$data,'goods'=>$goods]);
+   }
 
     /**
      * Update the specified resource in storage.
@@ -87,30 +108,27 @@ class CouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-//    public function update(Request $request)
-//    {
-//        $data = $request->all();
-////        dd($data);
-//        $res = DB::table('coupon')->where('coupon_id',$data['coupon_id'])->update([
-//            'name' => $data['name'],
-//            'condition' => $data['condition'],
-//            'condition_pic' => $data['condition_pic'],
-//            'number' => $data['number'],
-//            'total' => $data['total'],
-//            'start_time' => $data['start_time'],
-//            'end_time' => $data['end_time'],
-//            'state' => $data['state'],
-//            'explain'=>$data['explain'],
-//            'shape'=>$data['shape'],
-//            'shape_pic'=>$data['shape_pic'],
-//            'range'=>$data['range']
-//        ]);
-//        if($res){
-//            echo "<script>alert('修改成功');location.href='/coupon/index';</script>";
-//        }else{
-//            echo "<script>alert('修改失败');location.href='/coupon/index';</script>";
-//        }
-//    }
+   public function update(Request $request)
+   {
+       $data = $request->all();
+//        dd($data);
+       $res = DB::table('coupon')->where('coupon_id',$data['coupon_id'])->update([
+           'name' => $data['name'],
+           'start_time' => $data['start_time'],
+           'end_time' => $data['end_time'],
+           'range'=>$data['range'],
+           'user_rank'=>$data['user_rank'],
+           'max_amount'=>$data['max_amount'],
+           'min_amount'=>$data['min_amount'],
+           'type'=>$data['type'],
+           'type_ext'=>$data['type_ext'],
+       ]);
+       if($res){
+           echo "<script>alert('修改成功');location.href='/coupon/index';</script>";
+       }else{
+           echo "<script>alert('修改失败');location.href='/coupon/index';</script>";
+       }
+   }
 
     /**
      * Remove the specified resource from storage.

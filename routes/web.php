@@ -106,6 +106,7 @@ Route::prefix('/cate')->group(function (){
     Route::get('/destroy/{cate_id}','Admin\cateController@destroy')->name('cate.destroy');//删除
     Route::get('/edit/{cate_id}','Admin\cateController@edit')->name('cate.edit');//修改
     Route::post('/update','Admin\cateController@update')->name('cate.update');//修改执行
+    Route::get('/change','Admin\cateController@change')->name('cate.change');//即点即改
 });
 //优惠券管理
 Route::prefix('/coupon')->group(function(){

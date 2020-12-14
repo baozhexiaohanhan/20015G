@@ -48,14 +48,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">是否显示：</label>
                 <div class="layui-input-block">
-                    是：<input type="radio" name="cate_show" value="1" title="" >
+                    是：<input type="radio" name="cate_show" value="1" title="" checked>
                     否：<input type="radio" name="cate_show" value="2" title="">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">是否显示在导航栏：</label>
                 <div class="layui-input-block">
-                    是：<input type="radio" name="cate_new_show" value="1" title="是" >
+                    是：<input type="radio" name="cate_new_show" value="1" title="是" checked>
                     否：<input type="radio" name="cate_new_show" value="2" title="否">
                 </div>
             </div>
