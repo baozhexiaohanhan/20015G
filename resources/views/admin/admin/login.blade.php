@@ -38,14 +38,10 @@
                     </label>
                     <input type="password" lay-verify="required" name="admin_pwd" autocomplete="off" placeholder="这里输入密码" class="layui-input" lay-verType="tips">
                 </div>
-                <div class="layui-form-item div-reg"  >
-                    <div class="layui-input-block">
-                        
-                        <img id="imageUrl" src="{{$code['image_url']}}" >
-                        <input  type="text" name="code" lay-verify="required"  autocomplete="off" class="layui-input codes" style="width:60px; border-radius:10px; float: left;"/>
-                        <input type="hidden" id="sid" value="{{$code['sid']}}">
-                        <a href="javascript:;" id="code" ><u class="ad">换一张</u></a>
-                    </div>
+                <div class="layui-form-item div-reg">
+                    <input type="input" lay-verify="required" name="code" autocomplete="off" placeholder="验证码"  class="layui-input" lay-verType="tips">
+                    <input type="hidden" value="" id="codename" name="codename" lay-verify="required" autocomplete="off" class="layui-input" lay-verType="tips">
+                    <input type="button" id="code" class="form-control" onclick="createCode()" style="width:60%" value='点击更换验证码'>
                 </div>
                 <div class="layui-form-item">
                     <div class="beg-pull">
@@ -66,26 +62,32 @@
     <script type="text/javascript" src="/admin/login/javascript/login.js"></script>
 </body>
 </html>
-<script>
-
- //图片验证
- $(document).ready(function(){
-    $(document).on('click','.ad',function(){
-        window.location.reload();
-        })
-
-      $('.codes').blur(function(){
-           
-           var code = $('input[name="code"]').val();
-           if(code==''){
-               $('span[name="code"]').html('<span style="color: red;">验证码不能为空</span>')
-               $('button[type="submit"]').prop('disabled','disabled');
-               return false;
-           }else{
-               $('span[name="code"]').html('<span style="color:green;">已填写</span>')
-               $('button[type="submit"]').prop('disabled',''); 
-           }
-
-       })
- })
+<title>纯字验证码</title>
+<meta http-equiv='content-type' content='text/html;charset=utf-8'/>
+<script type='text/javascript'>
+    var code ; //在全局定义验证码
+    function createCode(){
+        code = "";
+        var codeLength = 4;//验证码的长度
+        var checkCode = document.getElementById("code");
+        var codename = document.getElementById("codename");
+        var random = new Array(0,1,2,3,4,5,6,7,8,9,);//随机数
+        for(var i = 0; i < codeLength; i++) {//循环操作
+            var index = Math.floor(Math.random()*10);//取得随机数的索引（0~35）
+            code += random[index];//根据索引取得随机数加到code上
+        }
+        checkCode.value = code;//把code值赋给验证码
+        codename.value = code;//把code值赋给验证码
+    }
 </script>
+<style type='text/css'>
+    #code{
+        font-family:Arial,宋体;
+        font-style:normal;
+        color:red;
+        border:0;
+        padding:2px 3px;
+        letter-spacing:3px;
+        font-weight:bolder;
+    }
+</style>
