@@ -18,6 +18,7 @@ class HistoryController extends Controller
         $history=unserialize($history);
         // dd($history);
         if($history){
+            // echo 123;die;
             // dd(1);
             $goods_id=array_column($history,'goods_id');
             $goods=Goods::whereIn('goods_id',$goods_id)->get();

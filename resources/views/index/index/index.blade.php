@@ -38,7 +38,7 @@
 	<!-- 顶部轮播 -->
     <div class="swiper-container banner-box">
         <div class="swiper-wrapper">
-        	<script src="/ads/7.js"></script>
+        	<script src="/ads/7.js?=107"></script>
         </div>
         <div class="swiper-pagination"></div>
     </div>
@@ -61,7 +61,7 @@
 				</div>
 				<div class="con-box">
 					<!-- <a class="left-img hot-img" href=""> -->
-						<script src="/ads/1.js"></script>
+						<script src="/ads/1.js?=101"></script>
 						<!-- <img src="/static/images/floor_1.jpg" alt="" class="cover"> -->
 					<!-- </a> -->
 					<div class="right-box hot-box">
@@ -141,7 +141,7 @@
 			</div>
 			<div class="con-box">
 				<!-- <a class="left-img hot-img" href=""> -->
-					<script src="/ads/2.js"></script>
+					<script src="/ads/2.js?=100"></script>
 					<!-- <img src="/static/images/floor_2.jpg" alt="" class="cover"> -->
 				<!-- </a> -->
 				<div class="right-box">
@@ -179,7 +179,7 @@
 			</div>
 			<div class="con-box">
 				<!-- <a class="left-img hot-img" href=""> -->
-					<script src="/ads/3.js"></script>
+					<script src="/ads/3.js?=102"></script>
 					<!-- <img src="/static/images/floor_3.jpg" alt="" class="cover"> -->
 				<!-- </a> -->
 				<div class="right-box">
@@ -217,7 +217,7 @@
 			</div>
 			<div class="con-box">
 				<!-- <a class="left-img hot-img" href=""> -->
-					<script src="/ads/4.js"></script>
+					<script src="/ads/4.js?=104"></script>
 					<!-- <img src="/static/images/floor_4.jpg" alt="" class="cover"> -->
 				<!-- </a> -->
 				<div class="right-box">
@@ -255,7 +255,7 @@
 			</div>
 			<div class="con-box">
 				<!-- <a class="left-img hot-img" href=""> -->
-					<script src="/ads/5.js"></script>
+					<script src="/ads/5.js?=105"></script>
 					<!-- <img src="/static/images/floor_5.jpg" alt="" class="cover"> -->
 				<!-- </a> -->
 				<div class="right-box">
@@ -293,7 +293,7 @@
 			</div>
 			<div class="con-box">
 				<!-- <a class="left-img hot-img" href=""> -->
-					<script src="/ads/6.js"></script>
+					<script src="/ads/6.js?s=106"></script>
 					<!-- <img src="/static/images/floor_6.jpg" alt="" class="cover"> -->
 				<!-- </a> -->
 				<div class="right-box">

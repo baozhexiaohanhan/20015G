@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\PositionModel;
 use App\Model\AdModel;
-
+use App\Http\Requests\StoreAdPost;
+use Validator;
 class AdController extends Controller
 {
 	public function index()
     {
-        $ad=AdModel::where(['is_del'=>0])->orderBy('ad_id','desc')->paginate(2);
+        $ad=AdModel::where(['is_del'=>0])->orderBy('ad_id','desc')->paginate(50);
         // dd($ad);
         if(request()->ajax()){
             return view('admin.ad.ajaxpage',['ad'=>$ad]);
@@ -26,18 +27,32 @@ class AdController extends Controller
     }
      public function store(Request $request){
     	$post=$request->except('_token');
-    	dd($post);
-        $request->validate([
+    	// dd($post);
+        // $request->validate([
+        //     'ad_name' => 'required|unique:ad',
+        //     'link_phone'=>'digits_between:10,11',
+        //     'link_email' => 'required',
+        //     ],[
+        //         'ad_name.required'=>'广告名称不能为空',
+        //         'ad_name.unique'=>'广告名称已存在',
+        //         'link_phone.required'=>'联系电话不能为空',
+        //         'link_email.required'=>'管理员邮箱不能为空',
+        //         'link_phone.digits_between'=>'联系电话11位',
+        //     ]);
+        $validator = Validator::make($request->all(),
+            [
             'ad_name' => 'required|unique:ad',
-            'link_phone'=>'digits_between:10,11',
-            'link_email' => 'required',
+            'ad_link' => 'required',
             ],[
                 'ad_name.required'=>'广告名称不能为空',
                 'ad_name.unique'=>'广告名称已存在',
-                'link_phone.required'=>'联系电话不能为空',
-                'link_email.required'=>'管理员邮箱不能为空',
-                'link_phone.digits_between'=>'联系电话11位',
+                'ad_link.required'=>'广告网址不能为空',
             ]);
+        if ($validator->fails()) {
+            return redirect('ad/create')
+            ->withErrors($validator)
+            ->withInput();
+        }
         if($request->hasFile('ad_imgs')){
             $post['ad_imgs']=$this->upload('ad_imgs');
         }
@@ -63,9 +78,11 @@ class AdController extends Controller
     //删除
     public function destroy($id=0){
        //  dd($id);
+       
        $res=AdModel::where('ad_id',$id)->update(['is_del'=>1]);
        // dd($res);
         // $res=AdModel::destroy($id);
+        
        if($res){
             return response()->json(['code'=>0,'msg'=>'删除成功!']);
         }
@@ -93,19 +110,8 @@ class AdController extends Controller
         return view('admin.ad.edit',['ad'=>$ad,'position'=>$position]);
     }
     //执行修改
-    public function update(Request $request,$id){
+    public function update(StoreAdPost $request,$id){
         $post=$post=$request->except('_token');
-        $request->validate([
-            'ad_name' => 'required|unique:ad',
-            'link_phone'=>'digits_between:10,11',
-            'link_email' => 'required',
-            ],[
-                'ad_name.required'=>'广告名称不能为空',
-                'ad_name.unique'=>'广告名称已存在',
-                'link_phone.required'=>'联系电话不能为空',
-                'link_email.required'=>'管理员邮箱不能为空',
-                'link_phone.digits_between'=>'联系电话11位',
-            ]);
         $post['ad_code']=time();
         $post['start_time']=strtotime($post['start_time'])??'';
         $post['end_time']=strtotime($post['end_time'])??'';

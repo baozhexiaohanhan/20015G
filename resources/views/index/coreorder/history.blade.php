@@ -28,6 +28,9 @@
 								<div class="price"><small>￥</small>{{$v['goods_price']}}</div>
 								<div class="sale"><a href="">浏览历史</a></div>
 							</div>
+							
+								<div class="price">{{date('Y-m-d H:i:s',$v['look_time'])}}</div>
+							
 						</div>
 						@endforeach
 					</div>
