@@ -24,10 +24,10 @@ Route::middleware('islog')->group(function(){
 
     Route::any('/admins','Admin\HomeController@admins')->name('aindex');//后台首页
     Route::get('/loginapp','Admin\LoginController@loginapp')->name('loginapp');//退出
-    Route::any('/user/user_index','Admin\UserindexController@user_index');//后台管理商家
-    Route::any('/user/user_index_up','Admin\UserindexController@user_index_up');//后台管理商家
-    Route::any('/user/user_index_up','Admin\UserindexController@user_index_up');//后台管理商家
-    Route::any('/user/user_index_del','Admin\UserindexController@user_index_del');//后台管理商家
+    Route::any('/user/user_index','Admin\UserindexController@user_index')->name('user_index');//商家审核
+    Route::any('/user/user_index_up','Admin\UserindexController@user_index_up')->name('user_index_up');//后台管理商家修改
+    // Route::any('/user/user_index_up','Admin\UserindexController@user_index_up');//后台管理商家
+    Route::any('/user/user_index_del','Admin\UserindexController@user_index_del')->name('user_index_del');//后台管理商家删除
 
 //广告管理
 Route::prefix("/ad")->group(function(){
