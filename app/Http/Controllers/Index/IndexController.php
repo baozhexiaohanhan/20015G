@@ -12,7 +12,7 @@ class IndexController extends Controller
     public function index(){
 		$user_name = Redis::hmget("admin",["user_name"]);
 		$user_name = implode("|",$user_name);
-		// $user_name = ["user_name"=>$user_name];
+		//1 $user_name = ["user_name"=>$user_name];
 		session(['name'=>$user_name]);
 		// $res = session()->get("name");
 		// dd($res);

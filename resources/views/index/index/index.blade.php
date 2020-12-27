@@ -3,6 +3,7 @@
 @section('tops2')
 @include('index.lay.top')
 @section('tops')
+    
 	<!-- 首页导航栏 -->
 	<div class="top-nav bg3">
 		<div class="nav-box inner">
@@ -35,6 +36,25 @@
 			</div>
 		</div>
 	</div>
+<img src="/static/images/1.jpg" class="jump_img">
+<style type="text/css">
+	.jump_img
+		 {position:absolute;
+			 z-index:9999;
+			 width:80%;
+			 height:80%;
+			 top:120%;
+			 left:50%;
+			 margin:-20% 0 0 -40%;
+		 }
+</style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//倒计时消失      使用 毫秒值
+		$(".jump_img").delay(5000).fadeOut();
+	})
+</script>
+
 	<!-- 顶部轮播 -->
     <div class="swiper-container banner-box">
         <div class="swiper-wrapper">
@@ -332,6 +352,7 @@
 	<script>
 		$(document).ready(function(){ 
 			// 顶部banner轮播
+			
 			var banner_swiper = new Swiper('.banner-box', {
 				autoplayDisableOnInteraction : false,
 				pagination: '.banner-box .swiper-pagination',
@@ -392,6 +413,8 @@
 			</li>
 		</ul>
 	</div>
+
+
 	<!-- 底部信息 -->
 @include('index.lay.bottom')
 @section('bottom')

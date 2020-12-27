@@ -14,6 +14,7 @@
 	<script src="/static/js/swiper.min.js" charset="UTF-8"></script>
 	<script src="/static/js/global.js" charset="UTF-8"></script>
 	<script src="/static/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="/admin/login/javascript/login.js"></script>
 	<title>@yield('title')</title>
 </head>
 <body>

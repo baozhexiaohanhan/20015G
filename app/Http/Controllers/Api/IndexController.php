@@ -15,7 +15,7 @@ class IndexController extends Controller
    
     public function index(){
 
-	
+	   
 		//dd($data);
 		$cate=Cate::get();
 		$cate=self::createTree($cate,'cate_id');
