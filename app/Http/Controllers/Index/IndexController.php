@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Goods;
 use App\Model\Cate;
+use App\Model\User;
 use Illuminate\Support\Facades\Redis;
 class IndexController extends Controller
 {
@@ -16,7 +17,8 @@ class IndexController extends Controller
 		session(['name'=>$user_name]);
 		// $res = session()->get("name");
 		// dd($res);
-
+$user = User::where("user_name",$user_name)->first();
+// dd($user);
     	//首页推荐位
     	$url='http://www.2001api.com/domain/index';
     	$url2 ='http://www.2001api.com/domain/notice';
@@ -33,7 +35,7 @@ class IndexController extends Controller
        // dd($goods);
 
 		$goods = json_decode($goods['ret']);
-    	return view('index.index.index',compact('goods','notice','catedata'));
+    	return view('index.index.index',compact('goods','notice','catedata','user'));
 	}
 
 
@@ -74,3 +76,4 @@ class IndexController extends Controller
 
 
 }
+

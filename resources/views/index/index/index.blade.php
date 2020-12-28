@@ -36,7 +36,9 @@
 			</div>
 		</div>
 	</div>
+	@if($user['code']==1)
 <img src="/static/images/1.jpg" class="jump_img">
+@endif
 <style type="text/css">
 	.jump_img
 		 {position:absolute;

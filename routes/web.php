@@ -13,6 +13,8 @@
 
 Route::get('/','Index\IndexController@index')->name('.index');//前台首页
 Route::get('indexdo','Index\IndexController@indexdo')->name('.index');//静态前台首页
+Route::get('sheng','Index\IndexController@sheng')->name('.index');//静态前台首页
+
 Route::get('/udai_notice/{notice_id}','Index\NoticeController@udai_notice')->name('.udai_notice');//前台首页
 
 
